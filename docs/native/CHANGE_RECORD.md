@@ -1,7 +1,7 @@
 # DW0 change record
 
 Change title: Native workstation decision and baseline package.
-Date and author/agent: 2026-09-10, Codex acting on the project owner's continuation request.
+Date and author: 2026-09-10, Rayla May. Rayla May directed the continuation request.
 Status: **proposed** architecture/documentation changes; preparation and baseline
 checks completed. DW0 acceptance remains pending.
 
@@ -10,7 +10,7 @@ checks completed. DW0 acceptance remains pending.
 Objective: make the first native-workstation decision gate concrete and reviewable
 without beginning a production UI or solver migration.
 
-Owner instruction addressed: continue the native action plan using the README and
+Instruction from Rayla May addressed: continue the native action plan using the README and
 repository authority; absent a narrower task, prepare DW0 and await its reviewed
 gate before migration. References: action-plan Sections 2, 11–17 and Appendix A;
 ADR-001–009 and proposed ADR-010; GATE-001–009, CORE-002/008/009/010, PFD-001–005,
@@ -29,14 +29,14 @@ artifacts, audio/provider access, browser removal or industrial qualification.
 
 Affected architectural boundaries: proposed interaction↔application↔worker and
 application↔repository/provider contracts. Their running implementations are
-unchanged. Assumptions: no approval absent a durable owner/steward record; current
+unchanged. Assumptions: no approval absent a durable Rayla May/steward record; current
 host is evidence, not a selected support target. Existing behaviour and desired
 behaviour must remain distinct. Constraints: preserve user files and ADR history,
 immutable hashes and independent statuses; keep typed text fully capable.
 
 ## Evidence and sources
 
-Read all 13 governing documents named by the owner completely, plus root/web
+Rayla May named all 13 governing documents; the review read each completely, plus root/web
 READMEs, model register/cards, relevant source and tests listed in the
 [parity inventory](BROWSER_PARITY.md). Repository status/tree inspection found an
 unborn `main` branch with no commits and untracked content. No applicable nonempty
@@ -134,7 +134,7 @@ do not imply full advertised behaviour.
 
 Rollback of this work: the patch records only changes to the 12 existing documents
 and can be reversed after checking for later edits; the nine newly added files in
-`docs/native/` can be removed only after confirming they contain no later owner
+`docs/native/` can be removed only after confirming they contain no later Rayla May
 work. Do not use a broad clean/reset on this untracked repository. The original
 pre-edit hashes make exact review possible; a temporary local snapshot is an aid,
 not a durable project backup. Native-product rollback is separately specified in
@@ -144,9 +144,9 @@ Known limitations: no new schema implementation or golden native fixtures; some
 documentation/implementation discrepancies require steward choices; Qt source
 pages are time-sensitive and must be checked against the selected version.
 
-Required owner decisions now: primary development and first-release platforms
+Required decisions from Rayla May now: primary development and first-release platforms
 (P-01), licence route and distribution posture (L-01), and DW0 boundary/versioning/
 parity disposition including outstanding historical gate records. Later provider,
 retention, participant, rendering and packaging choices have separate due gates
 in [decision points](DECISION_POINTS.md). DW1 is remaining implementation work;
-approval is an owner decision, not a task silently completed by this record.
+approval is a decision for Rayla May, not a task silently completed by this record.

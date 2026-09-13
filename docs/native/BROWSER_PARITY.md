@@ -49,10 +49,10 @@ witnessed UI result. Phase assignments are proposals under ADR-010.
 
 ## Material discrepancies and follow-up work
 
-These are review findings, not repairs or new scientific approvals. An owner may
+These are review findings, not repairs or new scientific approvals. Rayla May may
 sequence fixes, but accepted requirements cannot be silently waived.
 
-| Gap | Evidence and implication | Proposed owner / next gate |
+| Gap | Evidence and implication | Proposed Rayla May decision / next gate |
 |---|---|---|
 | GAP-01 — Validation identity | UI Run ignores `validation`; no engineering hash/receipt in HTTP. Local preflight can pass while server validation fails; no response/current-draft identity check. Contradicts PFD-002's enablement rule. | Application/UI maintainer; DW1 identity contract then DW3/DW4 workflow tests |
 | GAP-02 — Presentation separation | UI movement clears validation; adapter copies label into `UnitDefinition.name`, so renaming changes canonical case hash. Probe: movement hash unchanged, label hash changed. Do not silently redefine canonical hashing. | Contract steward; DW1 hash/presentation design, DW3 mapping |
@@ -103,8 +103,8 @@ its completion and authorize retirement.
 - Test native update/rollback on clean supported machines with installers and
   manifests. Returning to the retained browser/API must recover the last compatible
   immutable revision/run; newer incompatible artifacts remain retained separately.
-- Record owner decisions on HTTP's installed role, signing/update/rollback policy,
+- Record Rayla May's decisions on HTTP's installed role, signing/update/rollback policy,
   renderer targets, acceptance evidence and exact releasable source/build hashes.
-- Only after the steward/owner signs that evidence may browser retirement be
+- Only after Rayla May and the steward sign that evidence may browser retirement be
   proposed as a separate reviewable change. No automatic deletion follows from
   installing the native application.

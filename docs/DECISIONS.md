@@ -1,7 +1,7 @@
 # Architecture Decision Record
 
 ADR-001 through ADR-009 are the accepted `v1alpha` history. ADR-010 was accepted
-with owner annotations on 2026-09-11 and supersedes the browser-primary direction
+with annotations Rayla May supplied on 2026-09-11 and supersedes the browser-primary direction
 of ADR-008 and the limited desktop-distribution policy identified below. The
 existing browser implementation remains the migration/rollback baseline.
 
@@ -101,7 +101,7 @@ improve recovery.
 
 ## ADR-010 — Native workstation and independent UIX/solver boundary
 
-**Status:** ACCEPTED WITH OWNER ANNOTATIONS, 2026-09-11; proposed 2026-09-10.
+**Status:** ACCEPTED WITH ANNOTATIONS FROM RAYLA MAY, 2026-09-11; proposed 2026-09-10.
 **Supersedes:** ADR-008's browser-primary direction through the staged native
 migration. Introduces a desktop-distribution exception to ADR-006's
 user-installed-only policy for the approved LGPLv3 Qt/PySide route, subject to
@@ -109,16 +109,16 @@ exact payload/compliance review before adoption and distribution. ADR-006's
 permissive default kernel rule is retained. Accepted ADR-001–009 bodies are kept
 unchanged as history; no browser/API removal is authorized by this decision.
 
-**Owner annotations.** First development/release target is macOS/arm64; design for
+**Annotations from Rayla May.** First development/release target is macOS/arm64; design for
 eventual Windows/x86_64 and BH solver Linux. future release Linux remains pending. Minimum
 OS/runtime/hardware versions will be decided as the build becomes deployable.
 BH-owned code is non-commercial and source-available under the repository's
 BH Non-Commercial Source-Available License; Qt/PySide uses LGPLv3, with no
 commercial Qt licence route at this stage. Third-party and externally owned
 material retain their own terms. See the attributable
-[owner disposition](native/DW0_OWNER_DISPOSITION.md).
+[Rayla May's disposition](native/DW0_OWNER_DISPOSITION.md).
 
-**Context.** The owner requests an installed engineering workstation requiring no
+**Context.** Rayla May requests an installed engineering workstation requiring no
 browser, terminal, developer runtime installation, or manual server startup in
 normal graphical use. The current React/FastAPI slice works but its endpoints own
 application orchestration. Its observed limitations are recorded in the
@@ -144,10 +144,10 @@ alone would not demonstrate native parity or the required failure behaviour.
    last-valid behaviour. Restart, reconnect and presentation recovery never replay
    Run or approve a case. Presentation edits do not stale engineering validation.
 5. Evaluate PySide6/Qt 6 Widgets, a custom design system and QGraphicsView under
-   the owner's platform and LGPLv3 decisions. This decision selects no Qt release,
+   Rayla May's platform and LGPLv3 decisions. This decision selects no Qt release,
    accelerator, benchmark target, packaging tool, AI provider or speech provider.
 6. Retain React/FastAPI through native parity, compatibility, migration and rollback
-   acceptance. HTTP's eventual installed-product role is a separate owner choice.
+   acceptance. HTTP's eventual installed-product role is a separate choice for Rayla May.
 7. Preserve AI profile/ChangeSet authority, typed-text capability and separate
    optional audio, transcription and conversation ports. This ADR grants no new
    scientific approval, industrial fitness, data-upload or training authority.
@@ -163,7 +163,7 @@ changes require a new schema version, migration fixtures and steward review.
 Large-array storage requires a separate ADR under ADR-009.
 
 **Rationale and alternatives.** An adapter/service/worker separation supports the
-owner's native workflow and independent replacement without changing model
+Rayla May's native workflow and independent replacement without changing model
 equations. Continuing browser-only delivery does not meet the stated interaction
 goal. Embedding the current browser may aid rollback but does not establish the
 requested native workflow. Putting the solver in widgets violates independence
@@ -177,7 +177,7 @@ explicitly. Bundling a desktop runtime changes distribution obligations even
 though kernel dependencies remain permissive. Reference fixtures remain
 `BLOCKED_EVIDENCE / TEST FIXTURE ONLY`.
 
-**Acceptance and rollout.** The owner approved the boundary, contract-versioning
+**Acceptance and rollout.** Rayla May approved the boundary, contract-versioning
 plan and [parity/retirement checklist](native/BROWSER_PARITY.md) with the
 annotations in the [decision register](native/DECISION_POINTS.md), and authorized
 DW1 on 2026-09-11. DW1 first introduces ports and an in-process implementation
@@ -187,6 +187,6 @@ requires witnessed workflows and a tested rollback, not this ADR's acceptance.
 
 **Review record:** [DW0 preparation package](native/DW0_REVIEW.md), its dated
 [Appendix A record](native/CHANGE_RECORD.md), and the
-[2026-09-11 owner disposition](native/DW0_OWNER_DISPOSITION.md). This architecture
+[2026-09-11 disposition by Rayla May](native/DW0_OWNER_DISPOSITION.md). This architecture
 approval does not mark unimplemented software requirements VERIFIED or approve
 scientific models, industrial use or an unbuilt distribution.

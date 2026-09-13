@@ -6,12 +6,12 @@ Purpose: provide an execution-ready plan for replacing the browser-first Process
 Studio with a native, all-in-one engineering workstation while preserving the
 scientific and governance boundaries already established for BH.
 
-This document records project-owner intent and staged implementation work.
+This document records Rayla May's intent and staged implementation work.
 ADR-010 records the accepted architecture direction; this plan does not approve
 scientific models or industrial use. Technology benchmarks, exact dependency
 payloads, providers and later release decisions retain their stated gates.
 
-DW0 was prepared on 2026-09-10 and [approved with owner annotations](native/DW0_OWNER_DISPOSITION.md)
+DW0 was prepared on 2026-09-10 and [approved with annotations from Rayla May](native/DW0_OWNER_DISPOSITION.md)
 on 2026-09-11, authorizing DW1. The working name is BH solver. First release is
 macOS/arm64; architecture anticipates Windows/x86_64 and Linux support. Minimums
 are deferred to deployable-build review. Qt/PySide follows LGPLv3; BH-owned source-available,
@@ -25,7 +25,7 @@ The receiving chat or implementation agent shall:
 
 1. Read this plan and the normative documents listed in Section 16 before editing
    architecture or code.
-2. Treat Section 2 as project-owner constraints unless the owner explicitly changes
+2. Treat Section 2 as constraints Rayla May set unless she explicitly changes
    them.
 3. Treat rendering technologies, numerical performance figures, provider choices,
    and deployment frequencies as proposals requiring the stated research or review
@@ -36,10 +36,10 @@ The receiving chat or implementation agent shall:
    slice until native parity, artifact compatibility, and rollback requirements pass.
 6. Keep each change small enough to review and accompany it with the change record
    in Appendix A.
-7. Stop at an owner decision gate rather than selecting licensing, supported
+7. Stop at a decision gate rather than selecting licensing, supported
    platforms, retention policy, or AI data policy without authority.
 
-## 2. Binding project-owner constraints
+## 2. Binding constraints set by Rayla May
 
 ### 2.1 Product and interaction
 
@@ -201,7 +201,7 @@ failures. It is not permission to create an undocumented distributed system.
 
 ## 4. Proposed implementation technologies
 
-ADR-010 accepts the native direction and the owner has selected the Qt LGPLv3
+ADR-010 accepts the native direction and Rayla May has selected the Qt LGPLv3
 route. Exact dependency payloads and the technology-specific evidence below remain
 subject to review:
 
@@ -219,7 +219,7 @@ subject to review:
 | AI and STT | Provider interfaces with local and/or remote adapters | Avoid provider lock-in and permit restricted industrial profiles |
 | Packaging | Signed platform application/installer containing runtime and workers | No terminal or dependency installation for normal use |
 
-The owner selected the LGPLv3 route for Qt/PySide and excludes dependencies
+Rayla May selected the LGPLv3 route for Qt/PySide and excludes dependencies
 requiring commercial licence terms at this stage. Verify the exact selected
 modules, binaries, third-party notices and applicable obligations before adoption
 and distribution. If the payload cannot satisfy that route, return the concrete
@@ -403,7 +403,7 @@ Benchmark small, representative and stress scenes. Record:
 - Visual correctness, text quality, hit testing, printing/export and accessibility.
 - Behaviour on each supported OS/GPU class.
 
-Choose the simplest renderer that passes the owner-approved reference workload.
+Choose the simplest renderer that passes the reference workload Rayla May approved.
 Keep rendering behind a presentation interface so the choice does not affect case or
 solver contracts.
 
@@ -456,7 +456,7 @@ case mutation.
 
 ### 9.3 Multiple participants
 
-- Configure a small owner-approved maximum participant count.
+- Configure a small maximum participant count approved by Rayla May.
 - Give each participant a declared role or heuristic lens.
 - Run participants independently where possible.
 - Preserve each response before any synthesis step.
@@ -519,7 +519,7 @@ This section applies to human- and AI-authored changes.
 
 Every material change shall identify:
 
-1. The requirement, defect, model card, ADR or owner instruction that motivates it.
+1. The requirement, defect, model card, ADR or instruction from Rayla May that motivates it.
 2. The affected architectural boundary.
 3. Assumptions and constraints.
 4. The selected design and concise rationale.
@@ -650,12 +650,12 @@ Deliverables:
 Accept when the shell can create/open/save a draft and all essential actions are
 keyboard reachable using mock services.
 
-Execution record, 2026-09-11: the owner requested work on this milestone. The
+Execution record, 2026-09-11: Rayla May requested work on this milestone. The
 [DW2 shell](native/DW2_SHELL.md) implements the draft workflow, shared action
 registry, docking, layout preferences and accessibility baseline over mock
 engineering ports. [Original software verification](native/DW2_CHANGE_RECORD.md)
 is recorded separately from the [local Qt adoption](native/DW2_QT_ADOPTION.md)
-and later installer/compliance gates. The owner's requested
+and later installer/compliance gates. Rayla May's requested
 [native macOS verification follow-up](native/DW2_MACOS_VERIFICATION.md) corrects
 the development launcher and witnesses New/Save/Open, unsaved Cancel, panel
 recovery, unavailable calculation controls and presentation persistence across
@@ -673,6 +673,14 @@ Deliverables:
 
 Accept when all current `PFD-*` behaviours pass in the native client and reference
 flowsheets round-trip without presentation data entering engineering state.
+
+DW3's [editor implementation](native/DW3_PFD.md),
+[measurement/selection record](native/DW3_BENCHMARK.md) and
+[native witness](native/DW3_NATIVE_VERIFICATION.md) now record the 2026-09-13 work
+unit. Rayla May accepted the initial P-02 targets. Editor-only parity is distinguished
+from worker/results acceptance, which remains at DW4/DW5/DW9. See the
+[change record](native/DW3_CHANGE_RECORD.md) and qualified
+[public baseline](native/PUBLIC_BASELINE_TRANSITION.md).
 
 ### DW4 — Solver worker and resilient run control
 
@@ -878,14 +886,14 @@ Normative reading order before implementation:
 - `docs/MILESTONES.md`
 - `docs/INDUSTRY_DEVELOPMENT_STREAM.md`
 
-## 17. Owner decision gates
+## 17. Decision gates for Rayla May
 
-The [owner disposition](native/DW0_OWNER_DISPOSITION.md) has already settled the
+Rayla May's [disposition](native/DW0_OWNER_DISPOSITION.md) has already settled the
 primary/first-release platform direction and Qt LGPLv3 route. Do not request those
 decisions again. Platform minimums are deferred until a deployable build; exact
 Qt payload/compliance evidence remains required before adoption/distribution.
 
-The implementation agent shall obtain an explicit project-owner decision for the
+The implementation agent shall obtain an explicit decision from Rayla May for the
 remaining applicable gates:
 
 - Confirm any future license exceptions or commercial permissions in writing with
@@ -926,7 +934,7 @@ The native-workstation transition is complete only when:
 - Code and documentation trace from requirements and model evidence to tests and
   released artifacts.
 - The original browser path has either been retired through the approved gate or is
-  explicitly retained as an optional adapter with an owner-approved use case.
+  explicitly retained as an optional adapter with a use case Rayla May approves.
 - No document or UI claims operational suitability without completion of the
   applicable validation and release gates.
 
@@ -955,12 +963,12 @@ Use this template in implementation handoffs and substantive reviews.
 
 ```text
 Change title:
-Date and author/agent:
+Date and author:
 Status: proposed | implemented | verified | blocked
 
 Objective:
 Requirement/ADR/model/defect references:
-Owner instruction addressed:
+Instruction from Rayla May addressed:
 
 Scope:
 Out of scope:
@@ -988,14 +996,14 @@ Checks not run and reason:
 Risks:
 Rollback/recovery:
 Known limitations:
-Open questions and required owner decisions:
+Open questions and decisions Rayla May must make:
 ```
 
 ## Appendix B — Receiving-chat execution prompt
 
 ```text
 Read docs/NATIVE_WORKSTATION_ACTION_PLAN.md and every normative document listed in
-its Section 16. Treat Section 2 as project-owner constraints and distinguish those
+its Section 16. Treat Section 2 as constraints Rayla May set and distinguish those
 constraints from research proposals. Begin with DW0 only: prepare the superseding
 ADR, architecture/document impact set, proposed requirement updates, licence and
 platform decision points, and the existing browser-parity inventory. Do not remove

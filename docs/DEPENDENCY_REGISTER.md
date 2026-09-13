@@ -24,7 +24,7 @@ software-bill-of-materials data. “Data licence” is assessed separately from 
 | Ruff / Pyright | Lint, format, type checks | MIT / MIT | Development only |
 
 The repository's root licence file and package metadata specify the BH
-Non-Commercial Source-Available License, owned by Rayla May. Qt/PySide follows
+Non-Commercial Source-Available License; Rayla May owns the BH material. Qt/PySide follows
 the selected LGPLv3 route. Third-party dependencies and externally owned
 material retain their own terms and are not relicensed by this repository.
 Scientific papers, extracted tables, fitted coefficients, property
@@ -49,7 +49,7 @@ adapters produce capability diagnostics, not fallback to unlabelled correlations
 
 ## Property and evidence data register
 
-Every dataset record contains owner/publisher, citation, retrieved date, version,
+Every dataset record contains its dataset owner or publisher, citation, retrieved date, version,
 hash, permitted uses, redistribution status, modified/unmodified status, and models
 that consume it. Public accessibility is not evidence of redistribution permission.
 Generated coefficients retain links to the source dataset and fitting procedure.
@@ -67,7 +67,7 @@ Generated coefficients retain links to the source dataset and fitting procedure.
 No packages or lock files change in DW0. The following are candidates, not adopted
 dependencies. The [decision brief](native/DECISION_POINTS.md) records primary
 sources checked on 2026-09-10; the
-[2026-09-11 disposition](native/DW0_OWNER_DISPOSITION.md) resolves the platform
+[2026-09-11 disposition by Rayla May](native/DW0_OWNER_DISPOSITION.md) resolves the platform
 direction and Qt LGPLv3 route. The following table retains DW0's candidate review;
 DW2's bounded local adoption is recorded below. Distribution compliance remains open.
 
@@ -77,11 +77,11 @@ DW2's bounded local adoption is recorded below. Distribution compliance remains 
 | Qt OpenGLWidgets / optional Qt Quick | Rendering spike only | Separate module/plugin inventory and renderer evidence; no default acceleration claim |
 | `pyside6-deploy` / Nuitka toolchain | Build/distribution only | Review tool, bundled runtime/plugin licences and generated payload; do not infer signing, worker packaging or compliant library replacement from executable creation |
 | Spellcheck adapter | Desktop text port | Select code separately from technical dictionaries, dictionaries' redistribution terms and user additions |
-| Audio capture adapter | Desktop device port | Package/platform permissions and code licence; retention is a separate owner policy |
+| Audio capture adapter | Desktop device port | Package/platform permissions and code licence; retention is a separate policy for Rayla May |
 | AI and transcription adapters | Optional provider ports | SDK code licences, model weights/service terms, context policy and audio/transcript retention; no provider selected |
 
 ADR-006 still excludes non-permissive dependencies from the default kernel.
-The owner accepted ADR-010's scoped desktop-distribution exception on 2026-09-11
+Rayla May accepted ADR-010's scoped desktop-distribution exception on 2026-09-11
 and selected the LGPLv3 Qt/PySide route. Exact payload/compliance review remains
 required; placing Qt in an extra is not sufficient evidence. Dependencies requiring
 a commercial licence purchase are excluded at this stage. Exact component
@@ -111,3 +111,18 @@ DW9 must review the actual distributable closure, source/notices,
 replacement/relinking, signing and platform requirements. No commercially
 licensed library is selected. The root BH license remains separate from all
 third-party dependency terms.
+
+### DW3 renderer research and CI
+
+The production editor continues to use Core/Gui/Widgets, with no lockfile change.
+The local benchmark additionally imports QtOpenGLWidgets/QtOpenGL from the already
+installed PySide6 Essentials 6.11.2 wheel. This is research-only use, not inclusion
+in an approved distributable. The [Qt OpenGL licensing documentation](https://doc.qt.io/qt-6/qtopengl-index.html)
+identifies its LGPLv3 option; actual release notices/source/replacement obligations
+remain DW9. No commercially licensed library or new binary package was added.
+OpenGL visual acceptance was not established; [raster is selected](native/DW3_BENCHMARK.md).
+
+GitHub Actions use official checkout/setup-python/setup-node actions and the existing
+locked Python and npm dependencies. They build and test; they do not publish,
+deploy, acquire signing credentials or approve the application licence. Hosted
+runner results remain unobserved until this local workflow is pushed and runs.

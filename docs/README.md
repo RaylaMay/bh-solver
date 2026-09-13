@@ -21,15 +21,15 @@ Supporting records:
 
 - [Model register](MODEL_REGISTER.md)
 - [Native workstation and auditable AI action plan](NATIVE_WORKSTATION_ACTION_PLAN.md)
-  — staged plan; DW0 direction approved through ADR-010 with owner annotations;
+  — staged plan; DW0 direction approved through ADR-010 with annotations from Rayla May;
   later technology/provider and release gates remain applicable.
 - [Reusable project continuation prompt](PROJECT_CONTINUATION_PROMPT.md)
   — bootstrap context for a new BH development chat.
 - [DW0 native workstation review package](native/DW0_REVIEW.md)
   — dated preparation evidence and browser parity inventory.
 - [Accepted ADR-010](DECISIONS.md#adr-010--native-workstation-and-independent-uixsolver-boundary)
-  — native direction accepted 2026-09-11 with owner annotations; ADR history retained.
-- [DW0 owner disposition](native/DW0_OWNER_DISPOSITION.md)
+  — native direction accepted 2026-09-11 with annotations from Rayla May; ADR history retained.
+- [DW0 disposition by Rayla May](native/DW0_OWNER_DISPOSITION.md)
   — BH solver platform direction, Qt LGPLv3 and DW1 authorization.
 - [BH Non-Commercial Source-Available License](../LICENSE)
   — project-wide terms for BH-owned material; copyright © 2026 Rayla May.
@@ -45,6 +45,17 @@ Supporting records:
   — launcher correction, witnessed draft workflow and remaining accessibility limits.
 - [DW2 Qt development adoption](native/DW2_QT_ADOPTION.md)
   — exact optional dependencies and inventory; distribution compliance remains DW9.
+
+- [2026-09-13 public verification baseline](native/PUBLIC_BASELINE_TRANSITION.md)
+  — renamed root tree and qualification of sanitized historical evidence.
+- [DW3 native PFD editor](native/DW3_PFD.md)
+  — editing, stream naming, units, settings/templates and immutable native snapshots.
+- [DW3 renderer measurements](native/DW3_BENCHMARK.md)
+  — P-02 targets accepted by Rayla May; raster selected for the measured Mac reference.
+- [DW3 native walkthrough](native/DW3_NATIVE_VERIFICATION.md)
+  — observed native editing/save/reopen and remaining witness limitations.
+- [DW3 change record](native/DW3_CHANGE_RECORD.md)
+  — command/contract scope, verification, CI, risks and rollback.
 
 ## Governance
 

@@ -1,7 +1,7 @@
 # DW1 change record — neutral application boundary
 
-Date: 2026-09-11. Author: Codex implementation team, on the project owner's
-instruction. Status: **IMPLEMENTED; DW1 SOFTWARE CHECKS PASSED**.
+Date: 2026-09-11. Author: Rayla May. Rayla May directed this implementation.
+Status: **IMPLEMENTED; DW1 SOFTWARE CHECKS PASSED**.
 
 DW1 now routes the retained browser and CLI behavior through application use
 cases, with a neutral command boundary available for the later native shell.
@@ -11,9 +11,9 @@ This is software-boundary evidence, not scientific V&V or native release accepta
 
 Continue the approved native plan's DW1 stage by separating use-case orchestration
 from FastAPI/CLI ownership, preserving the current browser and scientific outputs.
-The owner approved DW0 with annotations and requested open questions/suggestions
+Rayla May approved DW0 with annotations and requested open questions/suggestions
 before building. The licence ambiguity was raised and clarified; the resulting
-[owner disposition](DW0_OWNER_DISPOSITION.md) records names, platforms, Qt LGPLv3,
+[disposition by Rayla May](DW0_OWNER_DISPOSITION.md) records names, platforms, Qt LGPLv3,
 the adopted BH non-commercial license and DW1 authorization.
 
 References: ADR-010; action-plan DW1 and Appendix A; UIX-ARCH-001/002,
@@ -27,7 +27,7 @@ events, application use cases through declared ports, concrete in-process
 engineering/storage/demo adapters, composition wiring, thin HTTP/CLI adapters,
 golden compatibility fixtures and boundary/admission/result tests.
 
-Record the BH solver working name and owner decisions in documentation. Product
+Record the BH solver working name and Rayla May's decisions in documentation. Product
 names do not rename `bh_sim`, existing executables, models or schemas.
 
 Out of scope: Qt installation/shell, worker supervision/cancellation, binary
@@ -45,7 +45,7 @@ Live external changes were observed in `.obsidian/workspace.json` and
 workstream, and both are excluded from its patch/integrity assertions.
 
 Previously read governing documents and DW0 evidence remain the authority, updated
-only by the explicit 2026-09-11 owner decisions. Source/test inspection identified
+only by the explicit decisions Rayla May made on 2026-09-11. Source/test inspection identified
 endpoint-owned orchestration, eager root-package imports and a presentation versus
 engineering identity conflict. [DW1 contracts](DW1_BOUNDARY.md) explain the selected
 scope. The code implementation and compatibility-fixture work were delegated to
@@ -55,7 +55,7 @@ and reviews the outcome. No independent scientific V&V is claimed.
 The actual release/testing target is macOS/arm64. Neutral contracts avoid platform
 APIs; eventual Windows/x86_64 and BH Linux support remain testable obligations,
 not capabilities demonstrated on the current host. Minimum platform versions
-are deliberately deferred by owner instruction.
+are deliberately deferred by instruction from Rayla May.
 
 ## Selected design, alternatives and tradeoffs
 
@@ -100,10 +100,10 @@ The review units are:
 | `src/bh_sim/adapters/`, `composition.py` | Concrete reference-engine, retained storage and prototype adapters; explicit wiring |
 | Package/API `__init__.py`, `api/adapter.py`, `api/app.py`, `cli.py` | Lazy compatible exports and thin existing interaction adapters |
 | `tests/test_boundaries.py`, `tests/test_application.py`, `tests/test_dw1_compatibility.py` and DW1 fixture directories | Isolation, admission/failure, regression and frozen legacy/neutral command compatibility evidence |
-| Root README, governing docs and `docs/native/` records | Owner annotations, adopted direction, exact DW1 scope and dated review evidence |
+| Root README, governing docs and `docs/native/` records | Annotations from Rayla May, adopted direction, exact DW1 scope and dated review evidence |
 
 Changes are confined to these source/test families and governing documentation;
-unrelated owner files remain outside the patch. Adapter conversion/demo fixture
+unrelated Rayla May files remain outside the patch. Adapter conversion/demo fixture
 code is a mechanical relocation with compatibility wrappers, not new equations.
 
 Canonical `v1alpha` artifacts/codec and old HTTP envelopes are preserved. The new
@@ -149,7 +149,7 @@ request rejection, oversized/non-finite numbers, the context/persistence race,
 SQLite error sanitization and loss of legacy presentation/parameter fields.
 No confirmed review defect remained at handoff. This reviewer did not repair
 source or conduct scientific V&V. A separate documentation review identified
-stale platform/licence approval wording, now corrected to the owner's decision.
+stale platform/licence approval wording, now corrected to Rayla May's decision.
 
 Intermediate checks were not all green: initial compatibility testing caught a
 CLI Python-helper return-type regression, resolved while preserving command
@@ -171,11 +171,11 @@ current prototype fixture semantics are not scientific approval; final distribut
 compliance and provenance review remain required before publication.
 
 Rollback will restore only the changed baseline files and remove only this work
-unit's added files after checking for newer owner edits. Do not use broad Git
+unit's added files after checking for newer edits by Rayla May. Do not use broad Git
 clean/reset against this untracked repository. Canonical user artifacts are not
 migrated, so no engineering-artifact rollback should be necessary.
 
-Remaining owner decisions: ownership and prior-distribution facts for any
+Remaining decisions for Rayla May: ownership and prior-distribution facts for any
 externally sourced material, contribution/reuse rights, and final distribution
 compliance. They do not reopen DW0 or block Qt-free DW1.
 Later renderer, AI/speech, participant-budget, packaging/signing and platform

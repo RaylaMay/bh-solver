@@ -1,12 +1,12 @@
 # DW1 neutral application boundary
 
 Date: 2026-09-11. Authority: accepted ADR-010 and
-[DW0 owner disposition](DW0_OWNER_DISPOSITION.md).
+[DW0 disposition by Rayla May](DW0_OWNER_DISPOSITION.md).
 Scope: the existing reference-fixture steady flowsheet and legacy demonstrations.
 This boundary does not introduce Qt, a worker, new model physics or an industrial
 profile. Implementation evidence is recorded in [DW1's change record](DW1_CHANGE_RECORD.md).
 
-## Version and ownership
+## Version and responsibility
 
 The synchronous command schema is `bh-command-v1alpha`. It is independent of the
 existing HTTP envelope `apiVersion: v1alpha` and canonical artifact

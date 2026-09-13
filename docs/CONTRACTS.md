@@ -326,3 +326,27 @@ never calculated values. The repository port gains a read-only `summaries`
 operation. No new worker protocol or engineering artifact format is implied.
 Qt workspace settings use a separate local layout version and never enter the
 neutral command or engineering hashes. No case/artifact migration is required.
+
+## DW3 native PFD document contract (2026-09-13)
+
+`PfdDocumentDto` (`bh-pfd-document-v1`) is an additive neutral envelope around
+`DraftDto`. `PfdObjectDto` carries a permanent object reference, visible tag,
+logical position, orthogonal manual route, expanded/pinned state, input notation
+and explicit branch-tag lineage. `PfdSettingsDto` (`bh-pfd-settings-v1`) contains
+case presentation/workflow preferences; it cannot carry engineering inputs.
+`InputNotationDto` must agree with the submitted finite quantity and unit; original
+text is retained for editing, never used to infer result accuracy.
+
+New commands: `pfd.catalog`, `pfd.list`, `pfd.import`, `pfd.open`, `pfd.save`,
+`pfd.restore`, `pfd.edit` and `quantity.display`. Commands use the existing versioned
+request/outcome family and are advertised only by compositions providing the native
+service. The strict codec rejects unknown tagged types/fields. Existing DW1 command
+fixtures and scientific canonical schemas retain their exact bytes and semantics.
+
+Save publishes an immutable native revision after complete local persistence;
+identical snapshots are idempotent. Open/restore/save never validate or Run.
+Presentation-only edits preserve equipment and connection fields and the established
+engineering-hash projection; canonical source artifacts still retain labels.
+Native-only fields do not claim round-trip compatibility with old browser readers.
+See [document/storage behavior](native/DW3_PFD.md) and
+[verification scope](native/DW3_CHANGE_RECORD.md).

@@ -186,7 +186,7 @@ failure behaviour.
 
 Status: **ACCEPTED TARGET DIRECTION**, under
 [ADR-010](DECISIONS.md#adr-010--native-workstation-and-independent-uixsolver-boundary)
-and the owner's 2026-09-11 annotations. The diagrams above record the original
+and the annotations Rayla May supplied on 2026-09-11. The diagrams above record the original
 `v1alpha` browser baseline; the target below governs staged migration. Target
 components do not imply completed implementation or a passed desktop gate.
 
@@ -270,3 +270,18 @@ Recursive import checks and a fresh-process create/save/open test with scientifi
 and FastAPI imports blocked enforce this scope. The
 [DW2 evidence](native/DW2_CHANGE_RECORD.md) distinguishes those software checks
 from native OS interaction, worker process separation and standalone distribution.
+
+## DW3 native document and editing boundary
+
+The [native PFD editor](native/DW3_PFD.md) extends the retained shell through
+neutral catalogue, edit, save/open and unit-display commands. `PfdService` owns
+atomic editing policy through declared repository and quantity ports. Qt owns
+geometric routing, selection, input focus and session undo history. Kernel graph
+compilation, quantities and numerical implementations remain below the adapter
+boundary; no Qt type enters application policy or kernel code.
+
+The additive `bh-pfd-document-v1` envelope persists native presentation and original
+input notation separately from engineering fields, in an immutable native snapshot
+store. Legacy drafts import without overwrite; native metadata does not silently
+become browser-compatible. The [change record](native/DW3_CHANGE_RECORD.md) records
+tradeoffs, schema-cache optimization and explicit worker/result limitations.

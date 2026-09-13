@@ -1,13 +1,13 @@
-# DW0 owner disposition and DW1 authorization
+# DW0 disposition by Rayla May and DW1 authorization
 
-Date: **2026-09-11**. Status: **OWNER APPROVED WITH THE ANNOTATIONS BELOW**.
-Authority: project owner's decision in the continuing BH project
+Date: **2026-09-11**. Status: **RAYLA MAY APPROVED WITH THE ANNOTATIONS BELOW**.
+Authority: Rayla May's decision in the continuing BH project
 conversation. This records that decision; it is not a scientific approval or a
 claim that unimplemented requirements have passed verification.
 
 ## Approval scope
 
-The owner approved the DW0 proposal with platform and licensing annotations and
+Rayla May approved the DW0 proposal with platform and licensing annotations and
 instructed continuation into DW1, with questions and suggestions flagged before
 building. This accepts ADR-010's architecture direction, neutral boundary and
 versioning plan, staged migration, documentation impacts and parity/rollback
@@ -16,7 +16,7 @@ All software acceptance rows remain at their evidence-supported status.
 
 This explicit authorization permits DW1's Qt-free boundary/service extraction.
 The uncompleted historical M0 review records are not silently marked VERIFIED,
-and are not used to ask the owner to approve this same DW1 work again. Exact
+and do not ask Rayla May to approve this same DW1 work again. Exact
 toolkit payload, new wire contracts, rendering, worker, packaging and scientific
 promotion still follow their applicable implementation/review gates.
 
@@ -28,7 +28,7 @@ hashes or stored cases. BH solver has not been verified for operational use.
 
 ## P-01 — Accepted platform direction
 
-| Concern | Owner decision |
+| Concern | Rayla May's decision |
 |---|---|
 | Primary development and first release | macOS/arm64; this is the currently available development/test hardware |
 | End-state design | Expect deployment to both macOS/arm64 and Windows/x86_64 |
@@ -42,14 +42,14 @@ in neutral contracts or kernel policy. Required release minimums and supported
 configurations must be recorded before their release gate; their deferral does
 not prevent DW1.
 
-## L-01 — Accepted route and license ownership
+## L-01 — Accepted route and licence ownership
 
-The owner selected the **LGPLv3 route for Qt/PySide**, without commercial Qt terms
+Rayla May selected the **LGPLv3 route for Qt/PySide**, without commercial Qt terms
 or dependencies requiring a commercial licence purchase at this stage. The
 existing permissive scientific dependencies remain permitted. A library allowing
 commercial use is not the same as a library requiring commercial licensing.
 
-The owner then clarified the application-code intention explicitly:
+Rayla May then clarified the application-code intention explicitly:
 **non-commercial, source-available BH-owned code, with Qt/PySide under LGPLv3.**
 The repository now records that policy in its root license. More proprietary packages may
 remain separately closed, subject to their actual ownership and licence terms.
@@ -61,7 +61,7 @@ rights and applicable installation information must be preserved in the actual
 distribution. Proprietary adapter separation does not by itself establish licence
 compatibility.
 
-The root `LICENSE` and package metadata now identify Rayla May as owner and apply
+The root `LICENSE` and package metadata now identify Rayla May as the project owner and apply
 the BH Non-Commercial Source-Available License to BH-owned project material.
 Prior distribution and rights ownership must still be checked for any material
 whose provenance is not Rayla May's. Local DW1 implementation does not alter
@@ -73,7 +73,7 @@ unbuilt installer meets its obligations. The default kernel remains Qt-free.
 
 ## Before-build questions and suggestions recorded
 
-The application-versus-library licence ambiguity was raised and the owner selected
+The application-versus-library licence ambiguity was raised and Rayla May selected
 the source-available option above. Before implementation, the agent recommended:
 
 1. Freeze browser HTTP, canonical artifact and legacy CLI compatibility fixtures.
@@ -82,19 +82,19 @@ the source-available option above. Before implementation, the agent recommended:
    compatibility use case; do not silently tighten its existing API semantics.
 4. Keep working product names separate from persisted and package identities.
 
-No further owner decision is required for that focused DW1 extraction. The adopted
+No further decision by Rayla May is required for that focused DW1 extraction. The adopted
 license defines commercial-use restrictions; renderer targets, AI/speech policies
 and packaging remain at their later gates.
 
 ## Change record
 
-Objective/owner instruction: record the approved DW0 annotations and prepare DW1.
+Objective and instruction from Rayla May: record the approved DW0 annotations and prepare DW1.
 References: ADR-010, P-01/L-01, action-plan DW0/DW1 and Appendix A.
 Scope: product terminology, platform/licence posture and approval status; no
 scientific model, artifact schema or licence-file change from this record.
 Selected design: preserve dated DW0 evidence and accepted ADR-001–009 bodies; add
 this attributable disposition and update current status pointers.
-Alternative: treating all approval as pending would contradict the owner's
+Alternative: treating all approval as pending would contradict Rayla May's
 decision; silently interpreting LGPL as non-commercial would misstate its terms.
 Risks/limitations: unavailable cross-platform hardware and later toolkit payload
 review. No current industrial qualification.

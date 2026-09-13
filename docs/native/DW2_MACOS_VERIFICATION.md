@@ -1,6 +1,6 @@
 # DW2 native macOS verification and launcher correction
 
-Date: 2026-09-11. Author/witness: Codex, using the computer-use tool and the local
+Date: 2026-09-11. Author/witness: Rayla May. The record uses the computer-use tool and the local
 development environment. Status: **NATIVE DRAFT WORKFLOW WITNESSED ON THIS HOST**.
 
 The native BH solver window now launches and passes the bounded New/Save/Open,
@@ -11,7 +11,7 @@ accessibility behavior, the renderer or scientific models.
 
 ## Objective, authority and scope
 
-Owner request: “Shall we verify this one?”, referring to the previously unwitnessed
+Rayla May requested: “Shall we verify this one?”, referring to the previously unwitnessed
 macOS walkthrough and intentionally unavailable calculation controls, followed by
 “continue with what you were doing before”. References: ADR-010; DW2;
 UIX-DIST-001, UIX-CMD-001, UIX-A11Y-001 and UIX-DOC-001; CORE-008;
@@ -174,13 +174,13 @@ A missing/moved Python library or changed signing/access policy can still requir
 rebuild or normal OS consent. Build/sign failures must be resolved before treating
 a newly generated `.app` as runnable. This is not a transferable release artifact.
 
-Rollback only this follow-up's recorded files after checking for newer owner edits.
+Rollback only this follow-up's recorded files after checking for newer edits by Rayla May.
 The saved before-state and reversible text patch support source rollback; regenerate
 the development launcher afterward. Reverting to the earlier shell wrapper also
-restores its known startup limitation. Preserve all draft JSON and unrelated owner
+restores its known startup limitation. Preserve all draft JSON and unrelated Rayla May
 notes; do not perform a broad Git reset/clean in this untracked workspace.
 
-No new owner decision is needed to use the corrected local preview. The existing
+No new decision by Rayla May is needed to use the corrected local preview. The existing
 the adopted BH project license, final platform minimums, release signing/packaging,
 renderer targets and later scientific/provider gates remain separate decisions.
 The next desktop implementation stage remains DW3's renderer research and PFD

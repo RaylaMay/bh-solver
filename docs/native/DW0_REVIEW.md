@@ -1,8 +1,8 @@
 # DW0 — Native workstation decision and baseline review
 
-Prepared: 2026-09-10. Disposition: **OWNER APPROVED WITH ANNOTATIONS, 2026-09-11**.
+Prepared: 2026-09-10. Disposition: **APPROVED BY RAYLA MAY WITH ANNOTATIONS, 2026-09-11**.
 
-The [owner disposition](DW0_OWNER_DISPOSITION.md) records approval of the BH solver
+Rayla May's [disposition](DW0_OWNER_DISPOSITION.md) records approval of the BH solver
 name, macOS-first cross-platform direction, Qt LGPLv3 and the adopted BH
 non-commercial source-available license. DW1 is authorized. The preparation
 inventory below records the state submitted on 2026-09-10; its pending-decision
@@ -21,11 +21,11 @@ React PFD. Prototype CLI demonstrations remain separate. Reference liquid and
 radiator cards are `BLOCKED_EVIDENCE / TEST FIXTURE ONLY`; software checks are not
 model approval or industrial qualification.
 
-The owner requested continuation of the native action plan using the repository
+Rayla May requested continuation of the native action plan using the repository
 as authority. No narrower approved implementation task or completed DW0 record
 was found. This work therefore prepares DW0: proposed superseding ADR, document
 and requirement impacts, licence/platform choices, browser parity and retirement
-criteria. Owner intent for a native product is distinct from approval of a toolkit,
+criteria. Rayla May's intent for a native product is distinct from approval of a toolkit,
 licence, platform matrix or new wire contract.
 
 At inspection, `main` had no commits and all repository content was untracked.
@@ -40,7 +40,7 @@ configuration/document bytes without relying on a nonexistent commit.
 |---|---|---|
 | Superseding decision | [ADR-010](../DECISIONS.md#adr-010--native-workstation-and-independent-uixsolver-boundary) | Proposed; ADR-008 and ADR-006 remain in force |
 | Current behaviour and acceptance debt | [Browser parity inventory](BROWSER_PARITY.md) | Source/test evidence recorded; no witnessed UI acceptance |
-| Licence/platform choices | [Decision points](DECISION_POINTS.md) | Primary-source review prepared; owner selections pending |
+| Licence/platform choices | [Decision points](DECISION_POINTS.md) | Primary-source review prepared; Rayla May's selections pending |
 | Architecture and contract impact | Proposed sections in [architecture](../ARCHITECTURE.md#dw0-proposed-native-architecture) and [contracts](../CONTRACTS.md#dw0-proposed-boundary-contract-work) | No deployed schema change |
 | Requirements | [Matrix](../REQUIREMENTS_VERIFICATION.md#native-requirements) | 16 plan IDs reserved as PLANNED at submission; evidence claims corrected |
 | Verification/rollback of this work | [Appendix A record](CHANGE_RECORD.md) and [documentation patch](evidence/existing-documents.patch) | Review evidence; not an approval signature |
@@ -65,19 +65,19 @@ browser implementation through DW9.
 | [Dependencies](../DEPENDENCY_REGISTER.md) | Candidate desktop/build/provider entries and explicit ADR-006 distribution impact |
 | [Requirements](../REQUIREMENTS_VERIFICATION.md) | Correct unsupported browser evidence and add proposed UIX rows; no VERIFIED promotions |
 | [Milestones](../MILESTONES.md) | DW0–DW9 cross-links and DW3 mock versus DW5 integrated acceptance |
-| [Action plan](../NATIVE_WORKSTATION_ACTION_PLAN.md) | Link this preparation record; phase and owner constraints retained |
+| [Action plan](../NATIVE_WORKSTATION_ACTION_PLAN.md) | Link this preparation record; phase and Rayla May's constraints retained |
 
 ## Gate review checklist
 
 Preparation is complete when the linked artifacts are reviewable. **DW0 passes
-only when the owner/steward records decisions and approval**, not when this table
+only when Rayla May and the steward record decisions and approval**, not when this table
 exists or software tests pass.
 
 | Gate item | Prepared evidence | Required disposition |
 |---|---|---|
-| Boundary and interaction direction | ADR-010; source/runtime distinctions; current implementation gaps | Owner/steward approve or amend |
-| Licence posture | Decision L-01 with upstream sources, obligations and desktop policy impact | Select licence route; review exact adoption scope and compliance ownership; no production Qt while unresolved |
-| Primary development and release platforms | Decision P-01; observed host distinguished from product support | Owner specify OS versions/architectures and first-release targets |
+| Boundary and interaction direction | ADR-010; source/runtime distinctions; current implementation gaps | Rayla May/steward approve or amend |
+| Licence posture | Decision L-01 with upstream sources, obligations and desktop policy impact | Rayla May selects the licence route; review exact adoption scope and compliance ownership; no production Qt while unresolved |
+| Primary development and release platforms | Decision P-01; observed host distinguished from product support | Rayla May specifies OS versions/architectures and first-release targets |
 | Contract versioning and migration plan | Proposed contract inventory, identity gap, lifecycle/manifest choice and fixture plan | Steward approve staged plan; exact new schemas still require their own review |
 | Browser parity and retirement/rollback | PAR-01–PAR-18; GAP-01–GAP-11; acceptance checklist | Steward adopt checklist and disposition of known gaps; no requirement waived by silence |
 | Historical architecture gate | GATE-001–GATE-009 still IMPLEMENTED | Record existing M0 review disposition; DW0 is not a substitute for missing approval |

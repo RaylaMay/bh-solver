@@ -1,0 +1,102 @@
+Historical snapshot checker against renamed checkout (expected mismatch).
+Exit: 1
+Checked 32 Markdown files, 209 local links/fragments and balanced fences
+Checked DW2 macOS inventory: {'preserved': 160, 'modified': 10, 'added': 6}; historical captures included by hash
+Checked 25 retained browser files
+Checked 10 preserved ADR bodies and 44 unique requirements
+Excluded owner notes, live app state, generated metadata/runtime and recursive outputs
+DW2 macOS text review patch changed
+Dated DW2 macOS file changed or missing: .gitignore
+Dated DW2 macOS file changed or missing: LICENSE
+Dated DW2 macOS file changed or missing: README.md
+Dated DW2 macOS file changed or missing: docs/ARCHITECTURE.md
+Dated DW2 macOS file changed or missing: docs/DECISIONS.md
+Dated DW2 macOS file changed or missing: docs/DEPENDENCY_REGISTER.md
+Dated DW2 macOS file changed or missing: docs/MILESTONES.md
+Dated DW2 macOS file changed or missing: docs/MODEL_LIFECYCLE.md
+Dated DW2 macOS file changed or missing: docs/NATIVE_WORKSTATION_ACTION_PLAN.md
+Dated DW2 macOS file changed or missing: docs/PROJECT_CONTINUATION_PROMPT.md
+Dated DW2 macOS file changed or missing: docs/README.md
+Dated DW2 macOS file changed or missing: docs/REQUIREMENTS_VERIFICATION.md
+Dated DW2 macOS file changed or missing: docs/VOCABULARY.md
+Dated DW2 macOS file changed or missing: docs/model_cards/REFERENCE_LIQUID_V1ALPHA.md
+Dated DW2 macOS file changed or missing: docs/native/BH_APPLICATION_LICENCE_PROPOSAL.md
+Dated DW2 macOS file changed or missing: docs/native/BROWSER_PARITY.md
+Dated DW2 macOS file changed or missing: docs/native/CHANGE_RECORD.md
+Dated DW2 macOS file changed or missing: docs/native/DECISION_POINTS.md
+Dated DW2 macOS file changed or missing: docs/native/DW0_OWNER_DISPOSITION.md
+Dated DW2 macOS file changed or missing: docs/native/DW0_REVIEW.md
+Dated DW2 macOS file changed or missing: docs/native/DW1_CHANGE_RECORD.md
+Dated DW2 macOS file changed or missing: docs/native/DW2_CHANGE_RECORD.md
+Dated DW2 macOS file changed or missing: docs/native/DW2_MACOS_VERIFICATION.md
+Dated DW2 macOS file changed or missing: docs/native/DW2_QT_ADOPTION.md
+Dated DW2 macOS file changed or missing: docs/native/DW2_SHELL.md
+Dated DW2 macOS file changed or missing: docs/native/evidence/baseline.json
+Dated DW2 macOS file changed or missing: docs/native/evidence/dw1-changes.patch
+Dated DW2 macOS file changed or missing: docs/native/evidence/dw1-file-inventory.json
+Dated DW2 macOS file changed or missing: docs/native/evidence/dw1-verification.txt
+Dated DW2 macOS file changed or missing: docs/native/evidence/dw2-macos/original-startup.stderr.txt
+Dated DW2 macOS file changed or missing: docs/native/evidence/dw2-macos/witness.json
+Dated DW2 macOS file changed or missing: docs/native/evidence/dw2/render_shell.py
+Dated DW2 macOS file changed or missing: docs/native/evidence/existing-documents.patch
+Dated DW2 macOS file changed or missing: docs/native/evidence/probe_baseline.py
+Dated DW2 macOS file changed or missing: docs/native/evidence/verification.txt
+Dated DW2 macOS file changed or missing: pyproject.toml
+Dated DW2 macOS file changed or missing: src/bh_sim/adapters/browser_format.py
+Dated DW2 macOS file changed or missing: src/bh_sim/adapters/demonstrations.py
+Dated DW2 macOS file changed or missing: src/bh_sim/adapters/desktop_preview.py
+Dated DW2 macOS file changed or missing: src/bh_sim/adapters/drafts.py
+Dated DW2 macOS file changed or missing: src/bh_sim/adapters/engineering.py
+Dated DW2 macOS file changed or missing: src/bh_sim/adapters/reference.py
+Dated DW2 macOS file changed or missing: src/bh_sim/adapters/storage.py
+Dated DW2 macOS file changed or missing: src/bh_sim/api/adapter.py
+Dated DW2 macOS file changed or missing: src/bh_sim/api/app.py
+Dated DW2 macOS file changed or missing: src/bh_sim/application/commands.py
+Dated DW2 macOS file changed or missing: src/bh_sim/application/ports.py
+Dated DW2 macOS file changed or missing: src/bh_sim/application/services.py
+Dated DW2 macOS file changed or missing: src/bh_sim/cli.py
+Dated DW2 macOS file changed or missing: src/bh_sim/composition.py
+Dated DW2 macOS file changed or missing: src/bh_sim/core/json_codec.py
+Dated DW2 macOS file changed or missing: src/bh_sim/desktop_launcher.py
+Dated DW2 macOS file changed or missing: src/bh_sim/engine/catalog.py
+Dated DW2 macOS file changed or missing: src/bh_sim/engine/compiler.py
+Dated DW2 macOS file changed or missing: src/bh_sim/engine/models.py
+Dated DW2 macOS file changed or missing: src/bh_sim/engine/properties.py
+Dated DW2 macOS file changed or missing: src/bh_sim/engine/runner.py
+Dated DW2 macOS file changed or missing: src/bh_sim/persistence/json_codec.py
+Dated DW2 macOS file changed or missing: src/bh_sim/persistence/store.py
+Dated DW2 macOS file changed or missing: src/bh_sim/solvers/scipy_solver.py
+Dated DW2 macOS file changed or missing: src/bh_sim/uix/window.py
+Dated DW2 macOS file changed or missing: tests/__init__.py
+Dated DW2 macOS file changed or missing: tests/fixtures/dw1/public_exports.json
+Dated DW2 macOS file changed or missing: tests/test_ai_profiles.py
+Dated DW2 macOS file changed or missing: tests/test_api.py
+Dated DW2 macOS file changed or missing: tests/test_application.py
+Dated DW2 macOS file changed or missing: tests/test_boundaries.py
+Dated DW2 macOS file changed or missing: tests/test_contracts.py
+Dated DW2 macOS file changed or missing: tests/test_core.py
+Dated DW2 macOS file changed or missing: tests/test_desktop.py
+Dated DW2 macOS file changed or missing: tests/test_dw1_compatibility.py
+Dated DW2 macOS file changed or missing: tests/test_dw2_contracts.py
+Dated DW2 macOS file changed or missing: tests/test_engine.py
+Dated DW2 macOS file changed or missing: tests/test_macos_launcher.py
+Dated DW2 macOS file changed or missing: tests/test_persistence.py
+Dated DW2 macOS file changed or missing: tools/macos_developer_main.m
+Dated DW2 macOS file changed or missing: tools/make_macos_launcher.py
+Dated DW2 macOS file changed or missing: uv.lock
+Dated DW2 macOS file changed or missing: web/README.md
+Dated DW2 macOS file changed or missing: web/index.html
+Dated DW2 macOS file changed or missing: web/package-lock.json
+Dated DW2 macOS file changed or missing: web/package.json
+Dated DW2 macOS file changed or missing: web/src/App.tsx
+Historical evidence output changed or missing: docs/native/evidence/dw2/changes.patch
+Historical evidence output changed or missing: docs/native/evidence/dw2/file-inventory.json
+Historical evidence output changed or missing: docs/native/evidence/dw2/verification.txt
+Recorded startup trace changed
+Retained browser file changed or missing: web/README.md
+Retained browser file changed or missing: web/index.html
+Retained browser file changed or missing: web/package-lock.json
+Retained browser file changed or missing: web/package.json
+Retained browser file changed or missing: web/src/App.tsx
+Accepted ADR body changed: ADR-006
+Accepted ADR body changed: ADR-010

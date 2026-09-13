@@ -3,18 +3,19 @@
 An auditable, local-first thermofluid simulator for BH technical
 development. The current `v1alpha` is a modular monolith: immutable scientific
 contracts and a Python kernel sit behind neutral application services and a
-versioned FastAPI adapter. The retained React PFD and a DW2 native draft-workspace
-preview are peer presentation clients.
+versioned FastAPI adapter. The retained React PFD and the DW3 native PFD editor
+are peer presentation clients.
 
-BH solver is the working name for this non-commercial project, owned by Rayla May.
-The owner-approved
+BH solver is the working name for this non-commercial project. Rayla May owns it.
+The Rayla May-approved
 native-workstation direction targets development and first release on macOS/arm64,
 with the architecture designed for eventual Windows/x86_64 and Linux support.
-See the [owner disposition](docs/native/DW0_OWNER_DISPOSITION.md).
+See [Rayla May's disposition](docs/native/DW0_OWNER_DISPOSITION.md).
 
 BH-owned project material is licensed under the [BH Non-Commercial
-Source-Available License](LICENSE), copyright © 2026 Rayla May. It may be used,
-modified, and shared only for non-commercial purposes. Third-party dependencies,
+Source-Available License](LICENSE), copyright © 2026 Rayla May. Rayla May permits
+non-commercial users to use, modify, and share it only for non-commercial purposes.
+Third-party dependencies,
 datasets, and other externally owned material retain their own licenses; Qt/PySide
 is tracked separately under the selected LGPLv3 route.
 
@@ -49,9 +50,11 @@ verification lifecycle in [docs/MODEL_LIFECYCLE.md](docs/MODEL_LIFECYCLE.md).
 - Guarded review, exploration, and narrative AI change-set profiles.
 - Native Qt Widgets shell with keyboard-accessible draft creation/open/save,
   shared actions and command palette, docking, themes and workspace preferences.
-  Calculation services are explicitly unavailable in this mock-service preview;
-  see the [DW2 shell guide](docs/native/DW2_SHELL.md) and
-  [native macOS verification](docs/native/DW2_MACOS_VERIFICATION.md).
+  The [DW3 editor](docs/native/DW3_PFD.md) adds typed-port connections, orthogonal
+  routes, parameter editing, unique stream tags, undo/redo, settings/templates and
+  immutable native save/reopen. Calculation services remain explicitly unavailable
+  pending the worker stage. See [renderer measurements](docs/native/DW3_BENCHMARK.md)
+  and the [scoped native walkthrough](docs/native/DW3_NATIVE_VERIFICATION.md).
 
 The older modules `thermo.py`, `stream.py`, `unit_ops.py`, `radiators.py`,
 `transients.py`, and `audit.py` remain prototype reference calculations. They are
@@ -89,8 +92,9 @@ After the setup above, on macOS:
 Open `.bh/BH solver.app`. Building this local native
 launcher requires Apple's installed developer tools. It references the checkout
 and its environment; standalone distribution is a later gate.
-The GUI entry point is `bh-workstation`. The [shell guide](docs/native/DW2_SHELL.md)
-records data locations, shortcuts and the witnessed macOS draft workflow.
+The GUI entry point is `bh-workstation`. The [editor guide](docs/native/DW3_PFD.md)
+records interaction defaults, settings, native data format and acceptance limits.
+The [shell guide](docs/native/DW2_SHELL.md) retains workspace/data-root instructions.
 Qt remains optional: omit `--extra desktop` for kernel/browser work.
 
 ## Run the retained local PFD
@@ -126,3 +130,12 @@ This slice supports acyclic, pure, single-phase steady flowsheets. Recycles,
 mixtures, phase equilibrium, pressure-changing equipment, pinch/exergy studies,
 dynamics, combat surges, HAZOP-style envelopes, and P&ID semantics remain governed
 future milestones. See [docs/MILESTONES.md](docs/MILESTONES.md).
+
+## Current verification baseline
+
+The [2026-09-13 public transition](docs/native/PUBLIC_BASELINE_TRANSITION.md)
+authenticates the renamed root tree and qualifies sanitized historical evidence.
+Run `.venv/bin/python tools/check_project.py` to verify that baseline and current
+public file links. [DW3 verification](docs/native/DW3_CHANGE_RECORD.md) records the
+editor checks. The GitHub Actions workflow prepares Python/browser CI; hosted-run
+results and release acceptance are separate evidence.

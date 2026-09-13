@@ -99,7 +99,8 @@ independently approved. This milestone does not itself certify any operational u
 
 ## Backlog control
 
-Each work item records requirement IDs, model-card IDs, owner, evidence inputs,
+Each work item records requirement IDs, model-card IDs, Rayla May's decision,
+evidence inputs,
 files owned, dependency changes, tests, and rollback plan. New features cannot be
 smuggled into a refactor milestone; architecture-affecting discoveries create an
 ADR proposal before implementation.
@@ -109,25 +110,26 @@ ADR proposal before implementation.
 The [native action plan](NATIVE_WORKSTATION_ACTION_PLAN.md#12-phased-execution-plan)
 complements M0–M9; it does not renumber or approve scientific milestones.
 [DW0's review package](native/DW0_REVIEW.md) was approved with
-[owner annotations](native/DW0_OWNER_DISPOSITION.md) on 2026-09-11, authorizing
+[annotations Rayla May supplied](native/DW0_OWNER_DISPOSITION.md) on 2026-09-11,
+authorizing
 DW1. Later DW gates and software verification remain evidence-dependent.
 
 DW1's neutral application extraction is implemented as of 2026-09-11, with
 [software verification and compatibility evidence](native/DW1_CHANGE_RECORD.md).
 DW2's [mock-service shell](native/DW2_SHELL.md) is implemented with
-[software verification](native/DW2_CHANGE_RECORD.md), following the owner's
+[software verification](native/DW2_CHANGE_RECORD.md), following Rayla May's
 instruction to start the milestone and the
 [exact local toolkit review](native/DW2_QT_ADOPTION.md). A
 [native macOS follow-up](native/DW2_MACOS_VERIFICATION.md) corrects the local
 launcher and witnesses the keyboard draft workflow, unavailable calculation
 controls, panel recovery and theme/layout persistence across restart. Full
 assistive-technology and installer acceptance remain. The next implementation
-phase is DW3's renderer research/PFD slice after review of DW2 evidence; no worker,
+phase was DW3's renderer research/PFD slice after review of DW2 evidence; no worker,
 cross-platform execution or release acceptance is inferred from the shell tests.
 
 | Phase | Dependency and required exit evidence |
 |---|---|
-| DW0 | Review ADR-010, licence/platform posture, boundary versioning and browser parity/retirement checklist; record owner/steward disposition |
+| DW0 | Review ADR-010, licence/platform posture, boundary versioning and browser parity/retirement checklist; record Rayla May/steward disposition |
 | DW1 | After DW0: neutral commands/services, thin HTTP/CLI adapters, golden compatibility fixtures and import tests; preserve legacy demo CLI behaviour |
 | DW2 | After DW1 and toolkit approval: native shell/shared commands, mock run port and keyboard-accessible draft workflow |
 | DW3 | After DW2: renderer evidence, native PFD, presentation round-trip, undo/redo and PFD acceptance; reconcile full run tests with DW4/DW5 integration |
@@ -144,3 +146,15 @@ PFD acceptance dependency on later run/result work without claiming early parity
 Dynamics, binary trajectories, controls and signal diagrams remain gated by M7/M9
 and ADR-009 regardless of desktop progress. M0's existing `GATE-*` review records
 remain outstanding and are not silently completed by DW0 preparation.
+
+### DW3 editor work unit — 2026-09-13
+
+[Public baseline transition](native/PUBLIC_BASELINE_TRANSITION.md),
+[native editor](native/DW3_PFD.md), [measured raster selection](native/DW3_BENCHMARK.md)
+and [scoped native walkthrough](native/DW3_NATIVE_VERIFICATION.md) are recorded.
+Initial P-02 timing targets were accepted by Rayla May and passed for the 50-equipment
+raster reference. The editor's local command, persistence and widget checks are
+implemented; full worker/result parity remains DW4/DW5/DW9. CI is prepared locally
+but has not been run on GitHub in this work unit. No release/migration gate is closed
+merely by these tests. Review [DW3 change record](native/DW3_CHANGE_RECORD.md) before
+starting the supervised worker stage.

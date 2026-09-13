@@ -1,7 +1,8 @@
 # PFD Interaction Specification
 
 The first PFD is a local engineering editor, not an illustration tool and not a
-P&ID. It edits a `DraftRevision` through FastAPI and contains no equations.
+P&ID. It edits a draft through application commands (the retained browser uses FastAPI)
+and contains no equations.
 
 ## Screen layout
 
@@ -73,8 +74,8 @@ solve failure, and preservation of the last valid result.
 
 ## DW0 proposed native interpretation
 
-Status: **ACCEPTED TARGET DIRECTION**, under ADR-010 and the 2026-09-11 owner
-disposition. The action, state and accessibility
+Status: **ACCEPTED TARGET DIRECTION**, under ADR-010 and the disposition Rayla May
+made on 2026-09-11. The action, state and accessibility
 requirements above are the behaviour baseline for either client. The current
 FastAPI/React implementation is retained. Native-specific presentation shall use
 a dockable navigator/catalogue, flowsheet, inspector, workbooks, diagnostics and
@@ -93,3 +94,19 @@ rendering choice and performance remain subject to the DW3 benchmark gate.
 Full dynamics, controls, signal diagrams and HAZOP overlays stay unavailable until
 their underlying contracts and scientific milestones pass. AI/speech panels use
 the same proposal authority as typed commands and cannot fabricate overlays.
+
+## DW3 implemented native editor
+
+The [native editor guide](native/DW3_PFD.md) records the decisions Rayla May made
+on 2026-09-13
+and implemented interaction defaults. Orthogonal routes, vertical-gap/bridge
+crossings, adjustable snapping, unique editable stream tags and explicit splitters
+are presentation/application behavior. Original input notation is preserved alongside
+quantities; case units and individual display overrides do not round calculation
+inputs. Copy/paste defaults to equipment and parameters without connections.
+Preferences can be previewed, edited and imported/exported as local templates.
+
+The [benchmark](native/DW3_BENCHMARK.md) uses the accepted 50-equipment reference
+and p95 targets. [Native witness](native/DW3_NATIVE_VERIFICATION.md) and automated
+widget tests cover the implemented editor slice. Complete run/results parity
+remains at DW4/DW5; these records do not mark every PFD acceptance requirement complete.

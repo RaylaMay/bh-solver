@@ -1,7 +1,7 @@
 # DW2 Qt development adoption record
 
-Date/reviewer: 2026-09-11, Codex. Scope: local development and testing of the
-authorized DW2 shell under ADR-010 and the owner's selected LGPLv3 route.
+Date/reviewer: 2026-09-11, Rayla May. Scope: local development and testing of the
+authorized DW2 shell under ADR-010 and the LGPLv3 route Rayla May selected.
 This is not clearance to redistribute an installer or the complete wheel payload.
 
 ## Selected dependency and observed artifacts
@@ -61,7 +61,7 @@ release evidence, not an assumed result of package installation.
 
 The DW2 macOS launcher is a local developer wrapper around this repository's
 environment. It does not redistribute Qt or bundle a standalone runtime. This
-bounded development adoption follows the existing owner decision; no additional
+bounded development adoption follows Rayla May's existing decision; no additional
 platform/licence-route approval is needed. The root BH license remains separate
 from Qt's upstream LGPLv3 terms.
 

@@ -1,6 +1,6 @@
 # DW2 change record — native shell and command system
 
-Date: 2026-09-11. Author: Codex, single implementation agent.
+Date: 2026-09-11. Author: Rayla May. Rayla May directed the implementation agent.
 Status: **IMPLEMENTED; SOFTWARE CHECKS RECORDED; NATIVE WITNESS OUTSTANDING**.
 
 BH solver now has a Qt Widgets draft workspace over neutral application commands.
@@ -10,12 +10,12 @@ supply no results. The browser and scientific baseline remain available.
 
 ## Objective and authority
 
-Owner instruction: “Right. Start work on this milestone then.” This continues
-DW2 after DW1's completed extraction. The preceding owner decisions select the BH
+Instruction from Rayla May: “Right. Start work on this milestone then.” This continues
+DW2 after DW1's completed extraction. The preceding decisions by Rayla May select the BH
 solver working name, macOS/arm64 first with future Windows/BH Linux design,
 Qt/PySide's LGPLv3 route, and the adopted non-commercial source-available BH
 project license. They are not reopened in this work unit.
-[Owner disposition](DW0_OWNER_DISPOSITION.md).
+[Disposition by Rayla May](DW0_OWNER_DISPOSITION.md).
 
 References: ADR-010; native action-plan DW2 and Appendix A;
 UIX-ARCH-001/002, UIX-DIST-001, UIX-CMD-001, UIX-A11Y-001, UIX-DOC-001;
@@ -48,7 +48,7 @@ DW1 integrity check supplied the review baseline. The governing document set had
 been read in the preceding continuation; relevant DW2, boundary, licence, platform,
 UIX and recovery sections, source and tests were re-inspected for this stage.
 
-The owner's UI notes were read as design/research context, including quoted
+Rayla May's UI notes were read as design/research context, including quoted
 third-party rendering claims. They were not edited, adopted as instructions, or
 treated as proof of acceleration, frame rate, 4K performance, controls or HAZOP
 capability. Those claims require the plan's later research/scientific gates.
@@ -107,7 +107,7 @@ the [text review patch](evidence/dw2/changes.patch) is relative to the pre-DW2
 snapshot. PNG captures are separately hashed binary review assets, outside the
 text patch. Old DW0/DW1 evidence is preserved as historical evidence, not regenerated
 to claim it describes the new tree. Generated environment metadata, runtime/build
-files and unrelated owner notes are excluded from the patch.
+files and unrelated Rayla May notes are excluded from the patch.
 
 | Files/contracts | Change |
 |---|---|
@@ -128,7 +128,7 @@ unchanged. No engineering-artifact migration or ad hoc binary authority is added
 Qt layout version 1 is separate presentation-only data. The precise additions and
 recovery semantics are in the [shell guide](DW2_SHELL.md).
 
-Dependency/licence: LGPLv3 is the selected Qt route under the existing owner
+Dependency/licence: LGPLv3 is the selected Qt route under Rayla May's existing
 instruction. The actual wheel inventory does not supply a complete binary SBOM or
 standalone notice/source bundle. Distribution closure remains an explicit DW9
 obligation. `LICENSE` and package metadata identify Rayla May and the adopted BH
@@ -196,7 +196,7 @@ local wrapper is tied to the checkout; native OS behavior and release packaging
 remain unwitnessed. The optional desktop dependency is now installed in the local
 development environment; the source import boundary is independently enforced.
 
-Rollback: inspect the DW2 inventory and newer owner edits first, then reverse only
+Rollback: inspect the DW2 inventory and newer edits by Rayla May first, then reverse only
 this work unit's text patch (binary captures may be removed only if their hashes
 still match). Restore only the original modified files and remove only DW2-added
 files that have no newer changes. Regenerate the environment from the restored
@@ -206,8 +206,8 @@ No canonical case/run migration needs reversal; browser/CLI paths remain availab
 
 Remaining work: native macOS interaction witness and review of this DW2 evidence;
 then DW3 renderer research/PFD implementation, DW4 worker and DW5 workbooks before
-full application parity. Outstanding owner decisions remain ownership/provenance
+full application parity. Outstanding decisions for Rayla May remain ownership/provenance
 review for externally sourced material, contribution/reuse questions, later
 benchmark fixture and target approval, final platform minimums, and later provider/privacy/release
-choices. No new owner decision is needed to review this implemented mock shell;
+choices. No new decision by Rayla May is needed to review this implemented mock shell;
 the existing Qt route and platform direction stand.

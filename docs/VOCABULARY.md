@@ -48,7 +48,8 @@ validity.
 
 ## DW0 proposed additions
 
-These terms accompany ADR-010, adopted with the owner's 2026-09-11 annotations.
+These terms accompany ADR-010, which Rayla May adopted with annotations on
+2026-09-11.
 Implementation status is recorded separately; terminology does not create a
 persisted contract or certify a capability.
 

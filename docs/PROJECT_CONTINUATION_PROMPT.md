@@ -3,7 +3,7 @@
 Status: **REUSABLE CHAT HANDOFF PROMPT**  
 Purpose: start a new project chat with sufficient operating context to continue the
 BH solver without silently changing its architecture, scientific
-authority, documentation standard, or user-owned work.
+authority, documentation standard, or work Rayla May owns.
 
 Copy the prompt below into a new chat whose working directory is the BH
 Technical Docs repository.
@@ -54,7 +54,7 @@ FIRST ACTIONS
    assume the documentation and code are already synchronized; report material
    discrepancies.
 4. State the current project boundary, the exact task you are continuing, the
-   evidence you inspected, and any owner decision that is genuinely required.
+   evidence you inspected, and any decision Rayla May must make.
 5. Continue from the latest completed state. Do not restart completed work or
    perform a broad rewrite merely because a different structure would be possible.
 
@@ -116,7 +116,7 @@ NATIVE WORKSTATION DIRECTION
 
 - Treat docs/NATIVE_WORKSTATION_ACTION_PLAN.md as the comprehensive proposed
   implementation plan.
-- Its Section 2 records project-owner constraints. Technology selections,
+- Its Section 2 records constraints Rayla May set. Technology selections,
   performance figures, provider choices and update frequencies remain proposals
   until their stated research or decision gates pass.
 - Preserve accepted ADR history. Supersede ADR-008 through a new ADR rather than
@@ -124,7 +124,7 @@ NATIVE WORKSTATION DIRECTION
 - The recommended baseline for evaluation is PySide6/Qt 6 Widgets, a modern custom
   design system, QGraphicsView for the PFD, a shared application-command registry,
   and a supervised solver worker. Qt licensing and supported platforms require
-  explicit owner decisions before adoption.
+  explicit decisions by Rayla May before adoption.
 - Rendering claims such as OpenGL acceleration, 4K/144-Hz operation, 10,000 visual
   items, Qt Quick, or native Metal are benchmark hypotheses, not established facts.
 - Solver integration frequency and UI refresh frequency remain independent. The
@@ -162,7 +162,7 @@ Everything material must be understandable and maintainable by a human reviewer.
 For each substantive change, use Appendix A of
 docs/NATIVE_WORKSTATION_ACTION_PLAN.md and record:
 
-- Objective and owner instruction.
+- Objective and instruction from Rayla May.
 - Requirement, ADR, model-card, evidence or defect references.
 - Scope and affected boundaries.
 - Assumptions and constraints.
@@ -172,7 +172,7 @@ docs/NATIVE_WORKSTATION_ACTION_PLAN.md and record:
 - Files and contracts changed.
 - Schema, migration, dependency, licence, security, privacy and scientific impact.
 - Exact tests and checks run, observed results, and checks not run.
-- Risks, rollback, known limitations and unresolved owner decisions.
+- Risks, rollback, known limitations and unresolved decisions for Rayla May.
 
 AI-generated code is held to the same standard as human code:
 
@@ -222,7 +222,7 @@ migration or remove React/FastAPI until the DW0 gate is reviewed and approved.
 
 At the end of each completed work unit, report the outcome first, provide links to
 changed artifacts, list verification performed, distinguish remaining work from
-owner decisions, and leave the repository in a reviewable state.
+decisions for Rayla May, and leave the repository in a reviewable state.
 ```
 
 ## Optional session-specific suffix
@@ -234,6 +234,6 @@ CURRENT TASK
 
 [Describe the exact objective for this chat. Identify the phase, requirement,
 model, defect or files in scope where known. State whether the chat should plan,
-implement, verify or independently review. Add any explicit exclusions or owner
+implement, verify or independently review. Add any explicit exclusions or decisions
 decisions.]
 ```

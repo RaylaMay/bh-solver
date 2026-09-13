@@ -18,7 +18,7 @@ flowchart LR
 
 ## Required artifacts
 
-| Gate | Owner | Required content | Exit condition |
+| Gate | Rayla May / responsible steward | Required content | Exit condition |
 |---|---|---|---|
 | Evidence pack | Evidence analyst | Intended question; original sources; extracted equations/data with units; uncertainty; contradictions; licence; established/extrapolated/speculative classification | Sources are traceable and evidence gaps explicit |
 | Model card | Architecture steward + domain reviewer | Model ID/version; equations; inputs/outputs; assumptions; validity domain; extrapolation policy; failure behaviour; provenance; test cases; exclusions | Card approved before production implementation |
@@ -27,7 +27,8 @@ flowchart LR
 | Catalogue | Architecture steward | Approved card, evidence and V&V hashes; profile permissions; deprecation status | Registration is explicit and immutable |
 
 The implementer cannot be the sole V&V reviewer. Reviewers report discrepancies
-rather than repairing implementation under review. One owner controls each file
+rather than repairing implementation under review. Rayla May assigns one steward
+to control each file
 family during a work package.
 
 ## Model status

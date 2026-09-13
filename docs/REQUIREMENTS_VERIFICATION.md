@@ -51,7 +51,7 @@ tests. Existing GATE approval records remain pending.
 
 ## Native requirements
 
-These plan IDs were adopted with ADR-010 by the owner on 2026-09-11. DW1/DW2
+Rayla May adopted these plan IDs with ADR-010 on 2026-09-11. DW1/DW2
 advance only the implemented portions listed below; no full staged native
 requirement is newly VERIFIED. See the
 [native macOS witness](native/DW2_MACOS_VERIFICATION.md),
@@ -65,8 +65,8 @@ requirement is newly VERIFIED. See the
 | UIX-ARCH-002 | Peers communicate only through versioned neutral contracts. | DW1 immutable codec and legacy golden fixtures; DW2 neutral gateway and fixed additive create/list fixtures; worker negotiation remains, DW4 | IMPLEMENTED |
 | UIX-DIST-001 | Normal use needs no browser, terminal or manual server startup. | DW2 native developer launcher and macOS draft workflow witnessed without a terminal/server. Standalone packaging and clean-machine supported-platform workflow remain, DW9 | IMPLEMENTED |
 | UIX-CMD-001 | Buttons, menus, hotkeys, palette, AI and CLI share application commands. | DW1 shared policy; DW2 reuse/enablement tests plus native keyboard draft and unavailable Run palette witness pass. AI authority integration remains, DW6 | IMPLEMENTED |
-| UIX-PFD-001 | Native PFD satisfies browser parity and outstanding PFD requirements. | All parity rows disposed and PFD suite plus witnessed workflow, DW3/DW5/DW9 | PLANNED |
-| UIX-PERF-001 | Select rendering from representative measured workloads. | Owner-approved fixture/targets, latency/frame/correctness report on required OS/GPU classes, DW3 | PLANNED |
+| UIX-PFD-001 | Native PFD satisfies browser parity and outstanding PFD requirements. | [DW3 editor](native/DW3_PFD.md), command/widget tests, measured 50-equipment raster target and scoped native witness. Worker/results, printing/export and full accessibility remain DW4/DW5/DW9. | IMPLEMENTED |
+| UIX-PERF-001 | Select rendering from representative measured workloads. | Rayla May-approved fixture/targets, latency/frame/correctness report on required OS/GPU classes, DW3 | PLANNED |
 | UIX-RUN-001 | Runs execute in a supervised independent worker. | Admission, crash/cancel/timeout, persistence fault and no-replay fixtures, DW4 | PLANNED |
 | UIX-RUN-002 | Solver stepping and display refresh are independent. | Bounded queue tests and complete-artifact comparison with decimated display; binary format gate for dynamic arrays, DW4/M7 | PLANNED |
 | UIX-A11Y-001 | Essential operations are keyboard reachable and colour independent. | DW2 offscreen checks plus native macOS New/Open/Save, unsaved Cancel, panel focus and layout recovery witnessed; dynamic status values now exposed in AX. Full VoiceOver/list announcements, scaling and PFD/results actions remain, DW2/DW3/DW5 | IMPLEMENTED |
@@ -77,3 +77,18 @@ requirement is newly VERIFIED. See the
 | UIX-AUDIT-001 | Material AI actions link input, context, proposal, run and human disposition. | Reconstruction from retained artifacts without private reasoning, DW6–DW8 | PLANNED |
 | UIX-DOC-001 | Material changes include editable intent/rationale and verification records. | DW0/DW1/DW2 Appendix A records and dated integrity checks; continuing review and CI enforcement where practical remain, all phases | IMPLEMENTED |
 | UIX-DOC-002 | Numerical implementations link to cards, equations, units and V&V. | Existing model lifecycle and independent traceability review; DW work cannot grant promotion | PLANNED |
+
+## DW3 evidence disposition — 2026-09-13
+
+PFD-001 now has native application/widget tests for add/move/typed connect/input edit,
+connected-delete confirmation, undo/redo and copy/paste, plus a
+[scoped Mac walkthrough](native/DW3_NATIVE_VERIFICATION.md). PFD-003 has native
+immutable save/reopen tests for layout, routes, viewport, preferences and original
+input notation. [Public baseline transition](native/PUBLIC_BASELINE_TRANSITION.md)
+qualifies historical evidence; no old hash is silently updated.
+
+These rows remain IMPLEMENTED rather than globally VERIFIED: full PFD worker/run,
+result overlays, compare, last-valid recovery, browser migration, accessibility and
+export gates are still open. P-02's accepted initial timing targets pass for the
+50-equipment raster reference, as scoped in the [benchmark](native/DW3_BENCHMARK.md).
+Passing software checks is not scientific model approval.

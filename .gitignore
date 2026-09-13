@@ -1,0 +1,21 @@
+.DS_Store
+.coverage
+.hypothesis/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.venv/
+.bh/
+.agents/
+.obsidian/workspace.json
+Project leader's notes/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+htmlcov/
+run-artifacts/
+web/dist/
+web/node_modules/
+*.tsbuildinfo

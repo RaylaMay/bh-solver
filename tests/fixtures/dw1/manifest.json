@@ -1,0 +1,29 @@
+{
+  "captured_from": "Pre-DW1 source snapshot; 2026-09-11",
+  "normalization": "Only generated run IDs and wall-clock timestamps. Canonical run ID/time replaced with documented fixed values; other bytes untouched.",
+  "canonical_sha256": {
+    "baseline.case.canonical.json": "cbfe4c31d67bd0106753341cf1ec560471cb29a2b1131a62f9d16bc809cb009a",
+    "baseline.revision.canonical.json": "b59ed1fb8dd318b6a5a5879c4aa3b21c5ee3fdd4cbd6cd630ff4b3570befde35",
+    "baseline.compiled.canonical.json": "2f6f1e8bcd080ccf9fae1dae9da171027d7856d305d9f7ab709527f3679ac447",
+    "baseline.run.canonical.json": "fc2aa12bbf2c5f86037ffc23c95f63fcf984abc0770711242b5bedb19d6f67bf",
+    "units_extensions.case.canonical.json": "d011983184d1edd304db93962209db75faa18c997d7ef7178c110b95f76c4091",
+    "units_extensions.revision.canonical.json": "810d88573198d76aff071b39f022a4d22f77d0621c9a7bf2eac0a189114a1670",
+    "units_extensions.compiled.canonical.json": "5f7a8a1d17715d3962eadf2026c99c8c89e97637ff02b097755bd1205767fdea",
+    "units_extensions.run.canonical.json": "065a8345aceb586d59d83b7f7448b281656c70222fb90036c7e7c8a33a4c2d9c",
+    "splitter.case.canonical.json": "2f9030452f509611ca884d858ad851a1d5903a452bccf62382b8faabd9cb6184",
+    "splitter.revision.canonical.json": "79d4bda7ae81612b9cf61b791b1a696df6912e580ab201468f3f6d6cb2facd30",
+    "splitter.compiled.canonical.json": "44592a8e113896bd5f963558251c91107d7eba390ab8c0bba837d5b19f561e1e",
+    "splitter.run.canonical.json": "26fa2bde54ccaef68c4aa8db22caa854b04c62c1b8a09ea384d42fe67f480201"
+  },
+  "baseline_source_sha256": {
+    "api/app.py": "5e126ecf490468d2d8e9678fbfdec09c83606bbd3af48d9212ba1bf120352fd0",
+    "api/adapter.py": "7b21c83f08d67553807372042b91e11b2e20c69f81eb703e153e1e5d40ba7095",
+    "api/schemas.py": "63fae417c778aa362922c2f9db4a6f55fb16a81847e28551bec7349d436a3da7",
+    "cli.py": "2c0bbb0899a0b79d8baab52e1e07508b5f574b442fd155c4da2ffefe2f9fe4f3",
+    "__init__.py": "ddbca8cae0235f8a56d7c540522969fb6af056c8d31351280ee021c7f995f987",
+    "core/json_codec.py": "4837eb8d1164cfbd8c59a239b8876c0b4f6f7463822bfc3780a876cf47784189",
+    "core/contracts.py": "f68ab9035e3aba2c1fdd1598315742b2a42fd6a171a47c88077c8186420ce31f",
+    "engine/compiler.py": "f6c8d3a551c5a35d7fe0423133188d830e6ffac0c262a1efed08e5060f6928f9",
+    "engine/runner.py": "c54371ffa16c2fdf24edaa046892e987e7b9ebfe927980899bf224c80263899f"
+  }
+}

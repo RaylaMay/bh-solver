@@ -1,0 +1,43 @@
+{
+  "model": "optically_thin_droplet_radiator",
+  "outputs": {
+    "duty_w": 14400000.000021037,
+    "outlet_temperature_k": 600.0,
+    "flight_time_s": 25.0,
+    "in_flight_inventory_kg": 2500.0,
+    "exposed_droplet_area_m2": 23076.923076923074,
+    "evaporated_fraction_per_pass": 0.0,
+    "uncaptured_fraction_per_pass": 9.999999999998899e-05,
+    "makeup_flow_kg_s": 0.009999999999998899
+  },
+  "equations": [
+    "A_droplets / m = 3 / (rho * r)",
+    "d(h)/dt = -(A/m) * emissivity * escape_factor * sigma * (T^4 - T_sink^4)",
+    "flight_time = spray_length / droplet_velocity",
+    "mass_remaining/mass_initial = exp[-j_evap*(A/m)*flight_time]"
+  ],
+  "assumptions": [
+    "Steady monodisperse spray",
+    "Single liquid phase throughout the flight",
+    "Uniform spherical droplets",
+    "Negligible conductive and convective heat transfer",
+    "Property provenance: illustrative placeholder; not approved tin property data"
+  ],
+  "warnings": [
+    "Optically thin monodisperse approximation; mutual droplet shielding is represented only by the supplied escape factor",
+    "Constant droplet radius is assumed despite evaporation",
+    "Collector dynamics, electrostatic charging, breakup, collision, and spacecraft acceleration are not modelled",
+    "Evaporation mass flux is a user input; the model does not infer vapour pressure",
+    "Droplets reached the fluid model's minimum temperature; extend the property model or shorten the flight before using this endpoint"
+  ],
+  "checks": [
+    {
+      "name": "radiative_enthalpy_balance",
+      "residual": 2.103671431541443e-05,
+      "tolerance": 0.14400000000021038,
+      "units": "W",
+      "passed": true
+    }
+  ],
+  "valid": true
+}

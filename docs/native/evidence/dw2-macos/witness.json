@@ -1,0 +1,162 @@
+{
+  "record_type": "DW2 native macOS software witness ledger",
+  "date": "2026-09-11",
+  "timezone": "Australia/Adelaide",
+  "witness": "Codex using native computer-use tools; not an independent scientific verifier",
+  "provenance": "Editable transcription of observations made during the task. This JSON is not a raw UI tool export. Native screenshots were inspected inline in the task and are not attached as repository image files. Historical dw2/shell-*.png files are offscreen captures, not this witness.",
+  "scope": "Development checkout, mock engineering ports, bounded native draft workflow. No full requirement/release/scientific approval.",
+  "environment": {
+    "os": "macOS 26.4.1",
+    "architecture": "arm64",
+    "python": "3.13.12",
+    "qt_pyside": "6.11.2",
+    "bundle_id": "org.boundhorizons.solver.preview",
+    "application": ".bh/BH solver.app",
+    "launcher": "Native Mach-O, local ad-hoc signature, dynamically loaded existing CPython; no bundled runtime"
+  },
+  "initial_failure": {
+    "tool": "cua.getApp",
+    "result": "timeoutReached",
+    "startup_capture_command": "open -n --stdout /tmp/bh-native-startup.out --stderr /tmp/bh-native-startup.err '.bh/BH solver.app'",
+    "capture": "original-startup.stderr.txt",
+    "capture_sha256": "c8cf34f6b6750cdab1e0c2027fd6caf3288616989c8f4b4c091d355aa01facac",
+    "diagnosis": "Python could not read Documents checkout .venv/pyvenv.cfg before Qt loaded. Responsible-app attribution loss is consistent with Apple guidance; internal TCC attribution was not traced."
+  },
+  "steps": [
+    {
+      "id": "native-launch",
+      "action": "App selected first by .app path, subsequently by bundle ID",
+      "observed": "Native BH solver window rendered, with toolbar, docks and welcome view. No terminal window or server startup.",
+      "evidence": [
+        "native accessibility tree",
+        "native screenshot"
+      ],
+      "result": "PASS"
+    },
+    {
+      "id": "create",
+      "action": "Command+N; enter DW2 native walkthrough 2026-09-11; Return",
+      "observed": "Named Unsaved draft, zero equipment/connections, Review profile.",
+      "evidence": [
+        "native accessibility tree"
+      ],
+      "result": "PASS"
+    },
+    {
+      "id": "unsaved-close-cancel",
+      "action": "Command+W; Escape",
+      "observed": "Save / Cancel / Don't Save dialog appeared; Escape retained the same unsaved draft.",
+      "evidence": [
+        "native accessibility tree"
+      ],
+      "result": "PASS"
+    },
+    {
+      "id": "save",
+      "action": "Command+S",
+      "observed": "Saved locally, revision 1; Save disabled; navigator entry and saved activity appeared.",
+      "evidence": [
+        "native accessibility tree",
+        "persisted draft JSON"
+      ],
+      "result": "PASS"
+    },
+    {
+      "id": "reopen",
+      "action": "Command+W; Command+O; Return on selected named draft",
+      "observed": "Picker visibly selected the named draft; revision 1 reopened with Open activity.",
+      "evidence": [
+        "native screenshot",
+        "native accessibility tree"
+      ],
+      "result": "PASS"
+    },
+    {
+      "id": "panel-focus",
+      "action": "Close Inspector; Command+2",
+      "observed": "Inspector restored; accessibility focus on Submitted input quantities table.",
+      "evidence": [
+        "native accessibility tree"
+      ],
+      "result": "PASS"
+    },
+    {
+      "id": "unavailable-run",
+      "action": "Command+Shift+P; search run.start; Return",
+      "observed": "Run — unavailable visible; Return left palette open; no command executed. Toolbar Validate and Run disabled with unavailable-service description.",
+      "evidence": [
+        "native screenshot",
+        "native accessibility tree"
+      ],
+      "result": "PASS"
+    },
+    {
+      "id": "theme-layout-restart",
+      "action": "Choose Light via palette; hide Inspector; Command+Q; reopen app by bundle ID",
+      "observed": "Light and hidden Inspector persisted. Welcome had no selected draft, no automatically replayed Run.",
+      "evidence": [
+        "native screenshot",
+        "native accessibility tree"
+      ],
+      "result": "PASS"
+    },
+    {
+      "id": "restore-layout",
+      "action": "Choose Restore default layout via palette",
+      "observed": "Navigator, Inspector and Activity visible again.",
+      "evidence": [
+        "native accessibility tree"
+      ],
+      "result": "PASS"
+    },
+    {
+      "id": "restore-original-theme",
+      "action": "Choose Dark; Command+Q; reopen by bundle ID",
+      "observed": "Dark and all panels visible; saved drafts still listed; no selected draft. App left open.",
+      "evidence": [
+        "native screenshot",
+        "native accessibility tree"
+      ],
+      "result": "PASS"
+    },
+    {
+      "id": "presentation-integrity",
+      "action": "Compare saved JSON hash before/after theme/layout/restart checks; enumerate preview files",
+      "observed": "Named revision bytes unchanged. Only workspace.ini and two draft JSON files present, no run artifacts.",
+      "evidence": [
+        "filesystem hashes",
+        "runtime file inventory"
+      ],
+      "result": "PASS"
+    }
+  ],
+  "accessible_labels": {
+    "before": "Selection details / Independent engineering states generic accessible names replaced changing label values.",
+    "correction": "Use accessible descriptions, retaining default label value exposure.",
+    "after": "Native AX exposed selected draft and: Not validated | Convergence: not run | Closure: not checked | Physical: unknown | Correlation: unknown"
+  },
+  "draft_integrity": {
+    "path": ".bh/native-preview/drafts/DW2-native-walkthrough-2026-09-11.r000001.json",
+    "revision": 1,
+    "before_sha256": "8d715b0fe33987315f8fa111bc74644e090f0c7ca06585b804a5fc0fb183e81d",
+    "after_sha256": "8d715b0fe33987315f8fa111bc74644e090f0c7ca06585b804a5fc0fb183e81d",
+    "result": "unchanged",
+    "runtime_files_at_close": [
+      ".bh/native-preview/drafts/DW2-native-walkthrough-2026-09-11.r000001.json",
+      ".bh/native-preview/drafts/Untitled-draft.r000001.json",
+      ".bh/native-preview/workspace.ini"
+    ]
+  },
+  "preserved_activity": "An initial Untitled draft was saved after a tool external-change guard. Both saved drafts are retained; no owner work was discarded.",
+  "privacy": "Read-only inspection of macOS Files & Folders found Documents enabled for an existing Python entry, no BH entry. No OS privacy toggle, Full Disk Access grant, TCC reset/database change, or permission prompt was accepted by the agent. Native launch succeeded on this host after the launcher correction.",
+  "tool_constraints": "External-change guards were handled by re-reading current UI state. Picker/palette rows were not consistently enumerated in AX; screenshot selections and keyboard behavior provided the bounded witness.",
+  "not_verified": [
+    "VoiceOver announcements and full focus/accessibility matrix",
+    "Windows/Linux execution",
+    "Clean-machine or standalone installation",
+    "Developer ID/notarization/release SBOM or LGPL distribution compliance",
+    "Renderer performance or editable PFD",
+    "Worker execution and scientific V&V"
+  ],
+  "final_state": "App open at Dark welcome, Navigator/Inspector/Activity visible, saved drafts retained, no selected draft, Validate/Run disabled."
+}

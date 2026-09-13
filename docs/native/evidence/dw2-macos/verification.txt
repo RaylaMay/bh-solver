@@ -1,0 +1,197 @@
+DW2 native macOS verification follow-up — 2026-09-11
+Commands executed from the repository root unless noted. This log retains observed failures and corrected invocations.
+Native UI actions and limitations are recorded in witness.json; they are not pytest results.
+
+Earlier diagnostic/build steps (summaries of observed tool results, not raw stdout):
+$ open -n --stdout /tmp/bh-native-startup.out --stderr /tmp/bh-native-startup.err '.bh/BH solver.app'
+Launch request accepted; Python startup failed before Qt. Raw stderr retained in original-startup.stderr.txt.
+$ .venv/bin/python tools/make_macos_launcher.py
+First native build compiled successfully but signing rejected a generated ownership marker in Contents. Moving the generated marker into Contents/Resources corrected that layout. Repeated build completed successfully; native walkthrough used the resulting app.
+$ .venv/bin/python -m pytest tests/test_desktop.py -q
+11 passed in 1.27s (targeted accessible-label regression check, before final full suite).
+$ .venv/bin/python -m pytest tests/test_macos_launcher.py -q
+2 passed in 1.41s (targeted launcher identity/startup/ownership checks, before final full suite).
+
+Final software verification (captured tool outputs):
+
+$ .venv/bin/python -m pytest -q
+........................................................................ [ 72%]
+............................                                             [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+100 passed, 1 warning in 6.54s
+Exit code: 0
+
+$ .venv/bin/ruff check src tests tools docs/native/evidence/dw2-macos/check_review.py
+E501 Line too long (105 > 100)
+   --> docs/native/evidence/dw2-macos/check_review.py:119:101
+    |
+117 |         raise SystemExit("\n".join(errors))
+118 |     print(
+119 |         "PASS: DW2 macOS review integrity; no full accessibility, scientific or release approval implied"
+    |                                                                                                     ^^^^^
+120 |     )
+    |
+
+Found 1 error.
+Exit code: 1
+
+$ .venv/bin/ruff format --check src tests tools docs/native/evidence/dw2-macos/check_review.py
+72 files already formatted
+Exit code: 0
+
+$ .venv/bin/pyright
+/Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/api/app.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/api/app.py:13:8 - error: Import "uvicorn" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/api/app.py:14:6 - error: Import "fastapi" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/core/quantity.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/core/quantity.py:8:8 - error: Import "pint" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/desktop_launcher.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/desktop_launcher.py:23:14 - error: Import "PySide6.QtCore" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/desktop_launcher.py:24:14 - error: Import "PySide6.QtWidgets" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/engine/compiler.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/engine/compiler.py:7:8 - warning: Import "networkx" could not be resolved from source (reportMissingModuleSource)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/solvers/scipy_solver.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/solvers/scipy_solver.py:5:8 - error: Import "numpy" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/solvers/scipy_solver.py:6:6 - error: Import "scipy.optimize" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/uix/actions.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/uix/actions.py:10:6 - error: Import "PySide6.QtCore" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/uix/actions.py:11:6 - error: Import "PySide6.QtGui" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/uix/actions.py:12:6 - error: Import "PySide6.QtWidgets" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/uix/design.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/uix/design.py:10:6 - error: Import "PySide6.QtGui" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/uix/design.py:11:6 - error: Import "PySide6.QtWidgets" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/uix/window.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/uix/window.py:11:6 - error: Import "PySide6.QtCore" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/uix/window.py:12:6 - error: Import "PySide6.QtGui" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/uix/window.py:13:6 - error: Import "PySide6.QtWidgets" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/uix/workspace.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/uix/workspace.py:10:6 - error: Import "PySide6.QtCore" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/uix/workspace.py:11:6 - error: Import "PySide6.QtWidgets" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_ai_profiles.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_ai_profiles.py:6:8 - error: Import "pytest" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_api.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_api.py:5:6 - error: Import "fastapi.testclient" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_application.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_application.py:12:8 - error: Import "pytest" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_application.py:494:10 - error: Import "fastapi.testclient" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_boundaries.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_boundaries.py:10:8 - error: Import "pytest" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_desktop.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_desktop.py:13:8 - error: Import "pytest" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_desktop.py:18:6 - error: Import "PySide6.QtCore" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_desktop.py:19:6 - error: Import "PySide6.QtGui" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_desktop.py:20:6 - error: Import "PySide6.QtTest" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_desktop.py:21:6 - error: Import "PySide6.QtWidgets" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_dw1_compatibility.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_dw1_compatibility.py:21:8 - error: Import "pytest" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_dw1_compatibility.py:22:6 - error: Import "fastapi.testclient" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_dw2_contracts.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_dw2_contracts.py:7:8 - error: Import "pytest" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_engine.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_engine.py:5:8 - error: Import "pytest" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_macos_launcher.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_macos_launcher.py:13:8 - error: Import "pytest" could not be resolved (reportMissingImports)
+32 errors, 1 warning, 0 informations
+Exit code: 1
+
+$ codesign --verify --strict --verbose=2 '.bh/BH solver.app'
+.bh/BH solver.app: valid on disk
+.bh/BH solver.app: satisfies its Designated Requirement
+Exit code: 0
+
+$ file '.bh/BH solver.app/Contents/MacOS/bh-workstation'
+.bh/BH solver.app/Contents/MacOS/bh-workstation: Mach-O 64-bit executable arm64
+Exit code: 0
+
+$ .venv/bin/pyright --pythonpath .venv/bin/python
+0 errors, 0 warnings, 0 informations
+Exit code: 0
+
+$ .venv/bin/ruff check src tests tools docs/native/evidence/dw2-macos/check_review.py
+All checks passed!
+Exit code: 0
+
+$ .venv/bin/ruff format --check src tests tools docs/native/evidence/dw2-macos/check_review.py
+72 files already formatted
+Exit code: 0
+
+Unchanged browser checks were not rerun. Previous DW2 evidence records 5 browser tests, lint and TypeScript/Vite build; this follow-up hashes all 25 retained browser files. No worker, full VoiceOver, Windows/Linux or release installer verification is claimed.
+
+Review package validation (captured outputs; checks do not apply the patch):
+
+Working directory: repository root
+$ .venv/bin/python docs/native/evidence/dw2-macos/check_review.py
+Checked 32 Markdown files, 217 local links/fragments and balanced fences
+Checked DW2 macOS inventory: {'preserved': 160, 'modified': 10, 'added': 6}; historical captures included by hash
+Checked 25 retained browser files
+Checked 10 preserved ADR bodies and 44 unique requirements
+Excluded owner notes, live app state, generated metadata/runtime and recursive outputs
+PASS: DW2 macOS review integrity; no full accessibility, scientific or release approval implied
+Exit code: 0
+
+Working directory: repository root
+$ git apply --reverse --check docs/native/evidence/dw2-macos/changes.patch
+Exit code: 0
+
+Working directory: /var/folders/_f/q0xm23gd0xggjh64s2zz10sw0000gn/T/bh-native-witness-yweimpah/original
+$ git apply --check '/Users/mira/Documents/ChatGPT/BH Technical Docs/docs/native/evidence/dw2-macos/changes.patch'
+error: dev/null: No such file or directory
+error: dev/null: No such file or directory
+error: dev/null: No such file or directory
+error: dev/null: No such file or directory
+error: dev/null: No such file or directory
+error: dev/null: No such file or directory
+Exit code: 1
+The initial forward dry-run exposed missing Git new-file metadata. Added new file mode 100644 for the six added text files and regenerated the patch checksum before repeating both dry-runs.
+
+Working directory: repository root
+$ git diff --no-index -- '/var/folders/_f/q0xm23gd0xggjh64s2zz10sw0000gn/T/bh-native-witness-yweimpah/original/src/bh_sim/uix/window.py' src/bh_sim/uix/window.py
+diff --git a/var/folders/_f/q0xm23gd0xggjh64s2zz10sw0000gn/T/bh-native-witness-yweimpah/original/src/bh_sim/uix/window.py b/src/bh_sim/uix/window.py
+index 754915d..49f1f11 100644
+--- a/var/folders/_f/q0xm23gd0xggjh64s2zz10sw0000gn/T/bh-native-witness-yweimpah/original/src/bh_sim/uix/window.py
++++ b/src/bh_sim/uix/window.py
+@@ -199,7 +199,7 @@ class WorkstationWindow(QMainWindow):
+         form.setContentsMargins(16, 18, 16, 18)
+         form.addWidget(label("SELECTION", "eyebrow"))
+         self.selection_title = label("No draft selected")
+-        self.selection_title.setAccessibleName("Selection details")
++        self.selection_title.setAccessibleDescription("Selection details")
+         self.selection_details = label("Open or create a draft to inspect it.", "muted")
+         form.addWidget(self.selection_title)
+         form.addWidget(self.selection_details)
+@@ -317,7 +317,7 @@ class WorkstationWindow(QMainWindow):
+             "Not validated  |  Convergence: not run  |  Closure: not checked  |  "
+             "Physical: unknown  |  Correlation: unknown"
+         )
+-        self.scientific_status.setAccessibleName("Independent engineering states")
++        self.scientific_status.setAccessibleDescription("Independent engineering states")
+         self.scientific_status.setWordWrap(False)
+         self.scientific_status.setStyleSheet("font-size: 11px;")
+         self.statusBar().addPermanentWidget(self.scientific_status)
+Exit code: 1
+The no-index diff exit code 1 means the two intended label assignments differ; this is expected review output.
+
+Working directory: repository root
+$ .venv/bin/python docs/native/evidence/dw2-macos/check_review.py
+Checked 32 Markdown files, 217 local links/fragments and balanced fences
+Checked DW2 macOS inventory: {'preserved': 160, 'modified': 10, 'added': 6}; historical captures included by hash
+Checked 25 retained browser files
+Checked 10 preserved ADR bodies and 44 unique requirements
+Excluded owner notes, live app state, generated metadata/runtime and recursive outputs
+PASS: DW2 macOS review integrity; no full accessibility, scientific or release approval implied
+Exit code: 0
+
+Working directory: repository root
+$ git apply --reverse --check docs/native/evidence/dw2-macos/changes.patch
+Exit code: 0
+
+Working directory: /var/folders/_f/q0xm23gd0xggjh64s2zz10sw0000gn/T/bh-native-witness-yweimpah/original
+$ git apply --check '/Users/mira/Documents/ChatGPT/BH Technical Docs/docs/native/evidence/dw2-macos/changes.patch'
+Exit code: 0
+
+Final result: 100 Python tests passed; one previously recorded upstream deprecation warning. Ruff lint/format passed. Pyright with .venv interpreter: 0 errors, 0 warnings. Native signature/architecture checks passed. Review integrity and forward/reverse patch dry-runs passed. No Git staging, commit or patch application performed.

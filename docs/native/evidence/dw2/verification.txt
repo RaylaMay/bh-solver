@@ -1,0 +1,68 @@
+DW2 verification — 2026-09-11
+Host: macOS-26.4.1-arm64-arm-64bit-Mach-O / arm64 / Python 3.13.12
+Repository root: /Users/mira/Documents/ChatGPT/BH Technical Docs
+
+$ .venv/bin/python -m pytest -q
+........................................................................ [ 73%]
+..........................                                               [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+98 passed, 1 warning in 4.94s
+Exit: 0
+
+$ .venv/bin/ruff check src tests tools docs/native/evidence/dw2
+All checks passed!
+Exit: 0
+
+$ .venv/bin/ruff format --check src tests tools docs/native/evidence/dw2
+72 files already formatted
+Exit: 0
+
+$ .venv/bin/pyright --pythonpath .venv/bin/python
+0 errors, 0 warnings, 0 informations
+Exit: 0
+
+$ '.bh/BH solver.app/Contents/MacOS/bh-workstation' --help
+usage: desktop_launcher.py [-h] [--data-root DATA_ROOT]
+
+BH solver native workstation preview
+
+options:
+  -h, --help            show this help message and exit
+  --data-root DATA_ROOT
+                        Local draft and workspace directory
+Exit: 0
+
+Earlier observed checks in the same DW2 work unit (summarized from tool outputs):
+uv lock: resolved 145 packages; added pyside6-essentials 6.11.2 and shiboken6 6.11.2.
+uv sync --extra api --extra desktop --group dev --inexact: passed; local project rebuilt and two desktop packages installed.
+Lock comparison against pre-DW2 snapshot: only these two names added; zero removals or existing version changes.
+.venv/bin/python tools/make_macos_launcher.py: created the local developer wrapper.
+From web/: npm run test — 5 passed in 2 files (Vitest 2.1.9); npm run lint — passed; npm run build — TypeScript/Vite 6.4.3 passed, 1746 modules transformed.
+.venv/bin/python docs/native/evidence/dw2/render_shell.py: four Qt offscreen captures created; visually inspected. Missing Sans Serif family alias warning (22 ms), no rendering failure.
+Wheel SHA256 and metadata inspection: both hashes match PyPI; exact inventory is qt-wheel-inventory.json.
+Computer-use getApp by local app path and bundle ID: timeoutReached; no returned UI/AX state and no native interaction witness.
+Read-only process-list diagnostic: ps denied by sandbox; not used as evidence of native launch or failure.
+No Windows/Linux, assistive-technology, standalone installer, worker, renderer benchmark or scientific V&V results are claimed.
+
+Working directory: /Users/mira/Documents/ChatGPT/BH Technical Docs
+$ .venv/bin/python docs/native/evidence/dw2/check_review.py
+Checked 31 Markdown files, 200 local links/fragments and balanced fences
+Checked DW2 inventory: {'preserved': 104, 'modified': 17, 'added': 24}; binary captures included by hash
+Checked 25 retained browser files
+Checked 10 preserved ADR bodies and 44 unique requirements
+Excluded owner notes, live app state, generated metadata/runtime and recursive outputs
+PASS: DW2 review integrity; no native witness, scientific or release approval implied
+Exit: 0
+
+Working directory: /var/folders/_f/q0xm23gd0xggjh64s2zz10sw0000gn/T/bh-dw2-wwfwvzff/original
+$ git apply --check '/Users/mira/Documents/ChatGPT/BH Technical Docs/docs/native/evidence/dw2/changes.patch'
+Exit: 0
+
+Working directory: /Users/mira/Documents/ChatGPT/BH Technical Docs
+$ git apply --reverse --check docs/native/evidence/dw2/changes.patch
+Exit: 0

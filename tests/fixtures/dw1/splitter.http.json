@@ -1,0 +1,890 @@
+{
+  "health": {
+    "status": 200,
+    "body": {
+      "apiVersion": "v1alpha",
+      "data": {
+        "status": "ok"
+      }
+    }
+  },
+  "missing": {
+    "status": 404,
+    "body": {
+      "detail": "draft not found"
+    }
+  },
+  "save": {
+    "status": 200,
+    "body": {
+      "apiVersion": "v1alpha",
+      "data": {
+        "schemaVersion": "v1alpha",
+        "draftId": "splitter-compatibility",
+        "revision": 1,
+        "baseCaseId": null,
+        "updatedAt": "2026-08-27T00:00:00+00:00",
+        "nodes": [
+          {
+            "id": "source-1",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "source-1",
+              "kind": "source",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {
+                "temperature": {
+                  "label": "Temperature",
+                  "quantity": {
+                    "value": 300.0,
+                    "unit": "K"
+                  },
+                  "description": null
+                },
+                "pressure": {
+                  "label": "Pressure",
+                  "quantity": {
+                    "value": 101325.0,
+                    "unit": "Pa"
+                  },
+                  "description": null
+                },
+                "massFlow": {
+                  "label": "Mass flow",
+                  "quantity": {
+                    "value": 1.0,
+                    "unit": "kg/s"
+                  },
+                  "description": null
+                }
+              },
+              "metrics": null
+            }
+          },
+          {
+            "id": "splitter-1",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "Splitter",
+              "kind": "splitter",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {
+                "splitFraction": {
+                  "label": "Fraction",
+                  "quantity": {
+                    "value": 0.25,
+                    "unit": "fraction"
+                  },
+                  "description": null
+                }
+              },
+              "metrics": null
+            }
+          },
+          {
+            "id": "sink-1",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "sink-1",
+              "kind": "sink",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {},
+              "metrics": null
+            }
+          },
+          {
+            "id": "sink-2",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "Second sink",
+              "kind": "sink",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {},
+              "metrics": null
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge-1",
+            "source": "source-1",
+            "target": "splitter-1",
+            "sourceHandle": "out-0",
+            "targetHandle": "in-0",
+            "animated": null
+          },
+          {
+            "id": "edge-2",
+            "source": "splitter-1",
+            "target": "sink-1",
+            "sourceHandle": "out-0",
+            "targetHandle": "in-0",
+            "animated": null
+          },
+          {
+            "id": "edge-3",
+            "source": "splitter-1",
+            "target": "sink-2",
+            "sourceHandle": "out-1",
+            "targetHandle": "in-0",
+            "animated": null
+          }
+        ]
+      }
+    }
+  },
+  "open": {
+    "status": 200,
+    "body": {
+      "apiVersion": "v1alpha",
+      "data": {
+        "schemaVersion": "v1alpha",
+        "draftId": "splitter-compatibility",
+        "revision": 1,
+        "baseCaseId": null,
+        "updatedAt": "2026-08-27T00:00:00+00:00",
+        "nodes": [
+          {
+            "id": "source-1",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "source-1",
+              "kind": "source",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {
+                "temperature": {
+                  "label": "Temperature",
+                  "quantity": {
+                    "value": 300.0,
+                    "unit": "K"
+                  },
+                  "description": null
+                },
+                "pressure": {
+                  "label": "Pressure",
+                  "quantity": {
+                    "value": 101325.0,
+                    "unit": "Pa"
+                  },
+                  "description": null
+                },
+                "massFlow": {
+                  "label": "Mass flow",
+                  "quantity": {
+                    "value": 1.0,
+                    "unit": "kg/s"
+                  },
+                  "description": null
+                }
+              },
+              "metrics": null
+            }
+          },
+          {
+            "id": "splitter-1",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "Splitter",
+              "kind": "splitter",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {
+                "splitFraction": {
+                  "label": "Fraction",
+                  "quantity": {
+                    "value": 0.25,
+                    "unit": "fraction"
+                  },
+                  "description": null
+                }
+              },
+              "metrics": null
+            }
+          },
+          {
+            "id": "sink-1",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "sink-1",
+              "kind": "sink",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {},
+              "metrics": null
+            }
+          },
+          {
+            "id": "sink-2",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "Second sink",
+              "kind": "sink",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {},
+              "metrics": null
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge-1",
+            "source": "source-1",
+            "target": "splitter-1",
+            "sourceHandle": "out-0",
+            "targetHandle": "in-0",
+            "animated": null
+          },
+          {
+            "id": "edge-2",
+            "source": "splitter-1",
+            "target": "sink-1",
+            "sourceHandle": "out-0",
+            "targetHandle": "in-0",
+            "animated": null
+          },
+          {
+            "id": "edge-3",
+            "source": "splitter-1",
+            "target": "sink-2",
+            "sourceHandle": "out-1",
+            "targetHandle": "in-0",
+            "animated": null
+          }
+        ]
+      }
+    }
+  },
+  "validate": {
+    "status": 200,
+    "body": {
+      "apiVersion": "v1alpha",
+      "data": {
+        "valid": true,
+        "degreesOfFreedom": 0,
+        "diagnostics": []
+      }
+    }
+  },
+  "run": {
+    "status": 200,
+    "body": {
+      "apiVersion": "v1alpha",
+      "data": {
+        "runId": "run:00000000-0000-4000-8000-000000000000",
+        "draftId": "splitter-compatibility",
+        "revision": 1,
+        "converged": true,
+        "conservationClosed": true,
+        "diagnostics": [
+          {
+            "severity": "warning",
+            "code": "REFERENCE_FIXTURE_ONLY",
+            "message": "The reference liquid and radiator are BLOCKED_EVIDENCE test fixtures; VALID means inside the fixture domain, not scientifically approved.",
+            "subjectId": null
+          }
+        ],
+        "nodeResults": [
+          {
+            "nodeId": "source-1",
+            "status": "warning",
+            "validity": "VALID",
+            "metrics": [
+              {
+                "label": "Temperature",
+                "displayValue": "300 K"
+              },
+              {
+                "label": "Pressure",
+                "displayValue": "101325 Pa"
+              },
+              {
+                "label": "Mass Flow",
+                "displayValue": "1 kg/s"
+              }
+            ]
+          },
+          {
+            "nodeId": "splitter-1",
+            "status": "valid",
+            "validity": "VALID",
+            "metrics": [
+              {
+                "label": "Outlet A Mass Flow",
+                "displayValue": "0.25 kg/s"
+              },
+              {
+                "label": "Outlet B Mass Flow",
+                "displayValue": "0.75 kg/s"
+              }
+            ]
+          },
+          {
+            "nodeId": "sink-1",
+            "status": "valid",
+            "validity": "VALID",
+            "metrics": [
+              {
+                "label": "Temperature",
+                "displayValue": "300 K"
+              },
+              {
+                "label": "Pressure",
+                "displayValue": "101325 Pa"
+              },
+              {
+                "label": "Mass Flow",
+                "displayValue": "0.25 kg/s"
+              }
+            ]
+          },
+          {
+            "nodeId": "sink-2",
+            "status": "valid",
+            "validity": "VALID",
+            "metrics": [
+              {
+                "label": "Temperature",
+                "displayValue": "300 K"
+              },
+              {
+                "label": "Pressure",
+                "displayValue": "101325 Pa"
+              },
+              {
+                "label": "Mass Flow",
+                "displayValue": "0.75 kg/s"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-08-27T00:00:00+00:00"
+      }
+    }
+  },
+  "save_transient": {
+    "status": 200,
+    "body": {
+      "apiVersion": "v1alpha",
+      "data": {
+        "schemaVersion": "v1alpha",
+        "draftId": "splitter-compatibility",
+        "revision": 1,
+        "baseCaseId": null,
+        "updatedAt": "2026-08-27T00:00:00+00:00",
+        "nodes": [
+          {
+            "id": "source-1",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "source-1",
+              "kind": "source",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {
+                "temperature": {
+                  "label": "Temperature",
+                  "quantity": {
+                    "value": 300.0,
+                    "unit": "K"
+                  },
+                  "description": null
+                },
+                "pressure": {
+                  "label": "Pressure",
+                  "quantity": {
+                    "value": 101325.0,
+                    "unit": "Pa"
+                  },
+                  "description": null
+                },
+                "massFlow": {
+                  "label": "Mass flow",
+                  "quantity": {
+                    "value": 1.0,
+                    "unit": "kg/s"
+                  },
+                  "description": null
+                }
+              },
+              "metrics": null
+            }
+          },
+          {
+            "id": "splitter-1",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "Splitter",
+              "kind": "splitter",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {
+                "splitFraction": {
+                  "label": "Fraction",
+                  "quantity": {
+                    "value": 0.25,
+                    "unit": "fraction"
+                  },
+                  "description": null
+                }
+              },
+              "metrics": null
+            }
+          },
+          {
+            "id": "sink-1",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "sink-1",
+              "kind": "sink",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {},
+              "metrics": null
+            }
+          },
+          {
+            "id": "sink-2",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "Second sink",
+              "kind": "sink",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {},
+              "metrics": null
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge-1",
+            "source": "source-1",
+            "target": "splitter-1",
+            "sourceHandle": "out-0",
+            "targetHandle": "in-0",
+            "animated": null
+          },
+          {
+            "id": "edge-2",
+            "source": "splitter-1",
+            "target": "sink-1",
+            "sourceHandle": "out-0",
+            "targetHandle": "in-0",
+            "animated": null
+          },
+          {
+            "id": "edge-3",
+            "source": "splitter-1",
+            "target": "sink-2",
+            "sourceHandle": "out-1",
+            "targetHandle": "in-0",
+            "animated": null
+          }
+        ]
+      }
+    }
+  },
+  "repeat_run": {
+    "status": 200,
+    "body": {
+      "apiVersion": "v1alpha",
+      "data": {
+        "runId": "run:00000000-0000-4000-8000-000000000000",
+        "draftId": "splitter-compatibility",
+        "revision": 1,
+        "converged": true,
+        "conservationClosed": true,
+        "diagnostics": [
+          {
+            "severity": "warning",
+            "code": "REFERENCE_FIXTURE_ONLY",
+            "message": "The reference liquid and radiator are BLOCKED_EVIDENCE test fixtures; VALID means inside the fixture domain, not scientifically approved.",
+            "subjectId": null
+          }
+        ],
+        "nodeResults": [
+          {
+            "nodeId": "source-1",
+            "status": "warning",
+            "validity": "VALID",
+            "metrics": [
+              {
+                "label": "Temperature",
+                "displayValue": "300 K"
+              },
+              {
+                "label": "Pressure",
+                "displayValue": "101325 Pa"
+              },
+              {
+                "label": "Mass Flow",
+                "displayValue": "1 kg/s"
+              }
+            ]
+          },
+          {
+            "nodeId": "splitter-1",
+            "status": "valid",
+            "validity": "VALID",
+            "metrics": [
+              {
+                "label": "Outlet A Mass Flow",
+                "displayValue": "0.25 kg/s"
+              },
+              {
+                "label": "Outlet B Mass Flow",
+                "displayValue": "0.75 kg/s"
+              }
+            ]
+          },
+          {
+            "nodeId": "sink-1",
+            "status": "valid",
+            "validity": "VALID",
+            "metrics": [
+              {
+                "label": "Temperature",
+                "displayValue": "300 K"
+              },
+              {
+                "label": "Pressure",
+                "displayValue": "101325 Pa"
+              },
+              {
+                "label": "Mass Flow",
+                "displayValue": "0.25 kg/s"
+              }
+            ]
+          },
+          {
+            "nodeId": "sink-2",
+            "status": "valid",
+            "validity": "VALID",
+            "metrics": [
+              {
+                "label": "Temperature",
+                "displayValue": "300 K"
+              },
+              {
+                "label": "Pressure",
+                "displayValue": "101325 Pa"
+              },
+              {
+                "label": "Mass Flow",
+                "displayValue": "0.75 kg/s"
+              }
+            ]
+          }
+        ],
+        "completedAt": "2026-08-27T00:00:00+00:00"
+      }
+    }
+  },
+  "save_presentation_edit": {
+    "status": 200,
+    "body": {
+      "apiVersion": "v1alpha",
+      "data": {
+        "schemaVersion": "v1alpha",
+        "draftId": "splitter-compatibility",
+        "revision": 2,
+        "baseCaseId": null,
+        "updatedAt": "2026-08-27T00:00:00+00:00",
+        "nodes": [
+          {
+            "id": "source-1",
+            "type": "equipment",
+            "position": {
+              "x": 50.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "source-1",
+              "kind": "source",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {
+                "temperature": {
+                  "label": "Temperature",
+                  "quantity": {
+                    "value": 300.0,
+                    "unit": "K"
+                  },
+                  "description": null
+                },
+                "pressure": {
+                  "label": "Pressure",
+                  "quantity": {
+                    "value": 101325.0,
+                    "unit": "Pa"
+                  },
+                  "description": null
+                },
+                "massFlow": {
+                  "label": "Mass flow",
+                  "quantity": {
+                    "value": 1.0,
+                    "unit": "kg/s"
+                  },
+                  "description": null
+                }
+              },
+              "metrics": null
+            }
+          },
+          {
+            "id": "splitter-1",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "Splitter",
+              "kind": "splitter",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {
+                "splitFraction": {
+                  "label": "Fraction",
+                  "quantity": {
+                    "value": 0.25,
+                    "unit": "fraction"
+                  },
+                  "description": null
+                }
+              },
+              "metrics": null
+            }
+          },
+          {
+            "id": "sink-1",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "sink-1",
+              "kind": "sink",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {},
+              "metrics": null
+            }
+          },
+          {
+            "id": "sink-2",
+            "type": "equipment",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "data": {
+              "label": "Second sink",
+              "kind": "sink",
+              "status": "draft",
+              "validity": "UNKNOWN",
+              "parameters": {},
+              "metrics": null
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge-1",
+            "source": "source-1",
+            "target": "splitter-1",
+            "sourceHandle": "out-0",
+            "targetHandle": "in-0",
+            "animated": null
+          },
+          {
+            "id": "edge-2",
+            "source": "splitter-1",
+            "target": "sink-1",
+            "sourceHandle": "out-0",
+            "targetHandle": "in-0",
+            "animated": null
+          },
+          {
+            "id": "edge-3",
+            "source": "splitter-1",
+            "target": "sink-2",
+            "sourceHandle": "out-1",
+            "targetHandle": "in-0",
+            "animated": null
+          }
+        ]
+      }
+    }
+  },
+  "mismatch_PUT_": {
+    "status": 400,
+    "body": {
+      "detail": "path and body draft IDs differ"
+    }
+  },
+  "mismatch_POST_/validate": {
+    "status": 400,
+    "body": {
+      "detail": "path and body draft IDs differ"
+    }
+  },
+  "mismatch_POST_/runs": {
+    "status": 400,
+    "body": {
+      "detail": "path and body draft IDs differ"
+    }
+  },
+  "unconnected_validate": {
+    "status": 200,
+    "body": {
+      "apiVersion": "v1alpha",
+      "data": {
+        "valid": false,
+        "degreesOfFreedom": 1,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "UNCONNECTED_INPUT",
+            "message": "Second sink input Inlet is not connected",
+            "subjectId": "sink-2"
+          }
+        ]
+      }
+    }
+  },
+  "unconnected_run": {
+    "status": 200,
+    "body": {
+      "apiVersion": "v1alpha",
+      "data": {
+        "runId": "run:00000000-0000-4000-8000-000000000000",
+        "draftId": "splitter-compatibility",
+        "revision": 3,
+        "converged": false,
+        "conservationClosed": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "UNCONNECTED_INPUT",
+            "message": "Second sink input Inlet is not connected",
+            "subjectId": "sink-2"
+          },
+          {
+            "severity": "warning",
+            "code": "REFERENCE_FIXTURE_ONLY",
+            "message": "The reference liquid and radiator are BLOCKED_EVIDENCE test fixtures; VALID means inside the fixture domain, not scientifically approved.",
+            "subjectId": null
+          }
+        ],
+        "nodeResults": [
+          {
+            "nodeId": "source-1",
+            "status": "failed",
+            "validity": "INVALID",
+            "metrics": []
+          },
+          {
+            "nodeId": "splitter-1",
+            "status": "failed",
+            "validity": "INVALID",
+            "metrics": []
+          },
+          {
+            "nodeId": "sink-1",
+            "status": "failed",
+            "validity": "INVALID",
+            "metrics": []
+          },
+          {
+            "nodeId": "sink-2",
+            "status": "failed",
+            "validity": "INVALID",
+            "metrics": []
+          }
+        ],
+        "completedAt": "2026-08-27T00:00:00+00:00"
+      }
+    }
+  },
+  "invalid_handle_validate": {
+    "status": 200,
+    "body": {
+      "apiVersion": "v1alpha",
+      "data": {
+        "valid": false,
+        "degreesOfFreedom": 0,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "INVALID_DRAFT",
+            "message": "edge edge-1 references a nonexistent equipment port",
+            "subjectId": null
+          }
+        ]
+      }
+    }
+  },
+  "invalid_handle_run": {
+    "status": 422,
+    "body": {
+      "detail": "edge edge-1 references a nonexistent equipment port"
+    }
+  }
+}

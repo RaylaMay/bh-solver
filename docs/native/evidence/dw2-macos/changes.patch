@@ -1,0 +1,980 @@
+diff --git a/README.md b/README.md
+--- a/README.md
++++ b/README.md
+@@ -51,7 +51,7 @@
+   shared actions and command palette, docking, themes and workspace preferences.
+   Calculation services are explicitly unavailable in this mock-service preview;
+   see the [DW2 shell guide](docs/native/DW2_SHELL.md) and
+-  [verification record](docs/native/DW2_CHANGE_RECORD.md).
++  [native macOS verification](docs/native/DW2_MACOS_VERIFICATION.md).
+ 
+ The older modules `thermo.py`, `stream.py`, `unit_ops.py`, `radiators.py`,
+ `transients.py`, and `audit.py` remain prototype reference calculations. They are
+@@ -86,10 +86,11 @@
+ .venv/bin/python tools/make_macos_launcher.py
+ ```
+ 
+-Open `.bh/BH solver.app`. This local wrapper references
+-the checkout and its environment; standalone distribution is a later gate.
++Open `.bh/BH solver.app`. Building this local native
++launcher requires Apple's installed developer tools. It references the checkout
++and its environment; standalone distribution is a later gate.
+ The GUI entry point is `bh-workstation`. The [shell guide](docs/native/DW2_SHELL.md)
+-records data locations, shortcuts and the current native-launch verification gap.
++records data locations, shortcuts and the witnessed macOS draft workflow.
+ Qt remains optional: omit `--extra desktop` for kernel/browser work.
+ 
+ ## Run the retained local PFD
+diff --git a/docs/DEPENDENCY_REGISTER.md b/docs/DEPENDENCY_REGISTER.md
+--- a/docs/DEPENDENCY_REGISTER.md
++++ b/docs/DEPENDENCY_REGISTER.md
+@@ -103,6 +103,11 @@
+ Essentials includes more modules/tools than this shell uses. Its installation
+ does not adopt those modules or clear the complete wheel for redistribution.
+ The local macOS launcher references the existing environment and bundles no
+-runtime. DW9 must review the actual distributable closure, source/notices,
++runtime. Its [native startup correction](native/DW2_MACOS_VERIFICATION.md) uses
++the already installed Apple developer tools to compile a small AppKit entry point
++and apply an ad-hoc signature. It dynamically loads the selected environment's
++CPython library; no Python/Qt binary is copied or modified. This local build
++prerequisite does not select a final packager or approve a release platform.
++DW9 must review the actual distributable closure, source/notices,
+ replacement/relinking, signing and platform requirements. No commercially
+ licensed library is selected; the BH application-licence proposal remains separate.
+diff --git a/docs/MILESTONES.md b/docs/MILESTONES.md
+--- a/docs/MILESTONES.md
++++ b/docs/MILESTONES.md
+@@ -117,9 +117,11 @@
+ DW2's [mock-service shell](native/DW2_SHELL.md) is implemented with
+ [software verification](native/DW2_CHANGE_RECORD.md), following the owner's
+ instruction to start the milestone and the
+-[exact local toolkit review](native/DW2_QT_ADOPTION.md). Offscreen Qt tests cover
+-the keyboard draft workflow and presentation recovery. Native macOS interaction
+-remains unwitnessed because UI automation timed out. The next implementation
++[exact local toolkit review](native/DW2_QT_ADOPTION.md). A
++[native macOS follow-up](native/DW2_MACOS_VERIFICATION.md) corrects the local
++launcher and witnesses the keyboard draft workflow, unavailable calculation
++controls, panel recovery and theme/layout persistence across restart. Full
++assistive-technology and installer acceptance remain. The next implementation
+ phase is DW3's renderer research/PFD slice after review of DW2 evidence; no worker,
+ cross-platform execution or release acceptance is inferred from the shell tests.
+ 
+diff --git a/docs/NATIVE_WORKSTATION_ACTION_PLAN.md b/docs/NATIVE_WORKSTATION_ACTION_PLAN.md
+--- a/docs/NATIVE_WORKSTATION_ACTION_PLAN.md
++++ b/docs/NATIVE_WORKSTATION_ACTION_PLAN.md
+@@ -654,10 +654,13 @@
+ Execution record, 2026-09-11: the owner requested work on this milestone. The
+ [DW2 shell](native/DW2_SHELL.md) implements the draft workflow, shared action
+ registry, docking, layout preferences and accessibility baseline over mock
+-engineering ports. [Software verification and remaining witness limits](native/DW2_CHANGE_RECORD.md)
+-are recorded separately from the [local Qt adoption](native/DW2_QT_ADOPTION.md)
+-and later installer/compliance gates. Native macOS interaction has not been
+-witnessed; Qt offscreen widget tests do not substitute for that evidence.
++engineering ports. [Original software verification](native/DW2_CHANGE_RECORD.md)
++is recorded separately from the [local Qt adoption](native/DW2_QT_ADOPTION.md)
++and later installer/compliance gates. The owner's requested
++[native macOS verification follow-up](native/DW2_MACOS_VERIFICATION.md) corrects
++the development launcher and witnesses New/Save/Open, unsaved Cancel, panel
++recovery, unavailable calculation controls and presentation persistence across
++restart. Full assistive-technology and clean-machine acceptance remain outstanding.
+ 
+ ### DW3 — PFD vertical slice and rendering decision
+ 
+diff --git a/docs/README.md b/docs/README.md
+--- a/docs/README.md
++++ b/docs/README.md
+@@ -41,7 +41,9 @@
+ - [DW2 native shell guide](native/DW2_SHELL.md)
+   — draft workflow, launcher, shortcuts, layout and mock-service limits.
+ - [DW2 change and verification record](native/DW2_CHANGE_RECORD.md)
+-  — software evidence, preserved baseline and native interaction verification gap.
++  — historical implementation evidence and preserved baseline.
++- [DW2 native macOS verification](native/DW2_MACOS_VERIFICATION.md)
++  — launcher correction, witnessed draft workflow and remaining accessibility limits.
+ - [DW2 Qt development adoption](native/DW2_QT_ADOPTION.md)
+   — exact optional dependencies and inventory; distribution compliance remains DW9.
+ 
+diff --git a/docs/REQUIREMENTS_VERIFICATION.md b/docs/REQUIREMENTS_VERIFICATION.md
+--- a/docs/REQUIREMENTS_VERIFICATION.md
++++ b/docs/REQUIREMENTS_VERIFICATION.md
+@@ -53,7 +53,9 @@
+ 
+ These plan IDs were adopted with ADR-010 by the owner on 2026-09-11. DW1/DW2
+ advance only the implemented portions listed below; no full staged native
+-requirement is newly VERIFIED. See [DW2 evidence](native/DW2_CHANGE_RECORD.md),
++requirement is newly VERIFIED. See the
++[native macOS witness](native/DW2_MACOS_VERIFICATION.md),
++[DW2 evidence](native/DW2_CHANGE_RECORD.md),
+ [DW1 evidence](native/DW1_CHANGE_RECORD.md) and the
+ [DW0 package](native/DW0_REVIEW.md) for migration/rollback acceptance and staging.
+ 
+@@ -61,13 +63,13 @@
+ |---|---|---|---|
+ | UIX-ARCH-001 | UIX and solver have no direct dependency in either direction. | DW1 neutral isolation plus DW2 recursive UIX checks and fresh-process New/Save/Open with scientific/FastAPI imports blocked; separate installed environments and worker execution remain, DW4/DW9 | IMPLEMENTED |
+ | UIX-ARCH-002 | Peers communicate only through versioned neutral contracts. | DW1 immutable codec and legacy golden fixtures; DW2 neutral gateway and fixed additive create/list fixtures; worker negotiation remains, DW4 | IMPLEMENTED |
+-| UIX-DIST-001 | Normal use needs no browser, terminal or manual server startup. | DW2 GUI entry and local macOS wrapper implemented; native launch was not witnessed due to automation timeouts. Standalone packaging and clean-machine supported-platform workflow remain, DW9 | IMPLEMENTED |
+-| UIX-CMD-001 | Buttons, menus, hotkeys, palette, AI and CLI share application commands. | DW1 shared policy; DW2 menu/toolbar/hotkey/palette reuse, enablement and keyboard draft tests pass. AI authority integration remains, DW6 | IMPLEMENTED |
++| UIX-DIST-001 | Normal use needs no browser, terminal or manual server startup. | DW2 native developer launcher and macOS draft workflow witnessed without a terminal/server. Standalone packaging and clean-machine supported-platform workflow remain, DW9 | IMPLEMENTED |
++| UIX-CMD-001 | Buttons, menus, hotkeys, palette, AI and CLI share application commands. | DW1 shared policy; DW2 reuse/enablement tests plus native keyboard draft and unavailable Run palette witness pass. AI authority integration remains, DW6 | IMPLEMENTED |
+ | UIX-PFD-001 | Native PFD satisfies browser parity and outstanding PFD requirements. | All parity rows disposed and PFD suite plus witnessed workflow, DW3/DW5/DW9 | PLANNED |
+ | UIX-PERF-001 | Select rendering from representative measured workloads. | Owner-approved fixture/targets, latency/frame/correctness report on required OS/GPU classes, DW3 | PLANNED |
+ | UIX-RUN-001 | Runs execute in a supervised independent worker. | Admission, crash/cancel/timeout, persistence fault and no-replay fixtures, DW4 | PLANNED |
+ | UIX-RUN-002 | Solver stepping and display refresh are independent. | Bounded queue tests and complete-artifact comparison with decimated display; binary format gate for dynamic arrays, DW4/M7 | PLANNED |
+-| UIX-A11Y-001 | Essential operations are keyboard reachable and colour independent. | DW2 offscreen keyboard New/Open/Save, panel focus, high-contrast textual states and shortcut conflict/restore checks pass. Native OS/assistive-technology witness and full PFD/results actions remain, DW2/DW3/DW5 | IMPLEMENTED |
++| UIX-A11Y-001 | Essential operations are keyboard reachable and colour independent. | DW2 offscreen checks plus native macOS New/Open/Save, unsaved Cancel, panel focus and layout recovery witnessed; dynamic status values now exposed in AX. Full VoiceOver/list announcements, scaling and PFD/results actions remain, DW2/DW3/DW5 | IMPLEMENTED |
+ | UIX-AI-001 | AI is an attributable participant with bounded authority. | Profile, stale-context, ChangeSet approval and budget tests, DW6/DW8 | PLANNED |
+ | UIX-AI-002 | Multiple participants preserve individual output and dissent. | Partial-failure, independent-output and non-consensus fixtures, DW8 | PLANNED |
+ | UIX-VOICE-001 | Optional conversation mode uses normal AI authority. | Voice-to-proposal test plus typed-only equivalence, DW7 | PLANNED |
+diff --git a/docs/native/DW2_MACOS_VERIFICATION.md b/docs/native/DW2_MACOS_VERIFICATION.md
+new file mode 100644
+--- /dev/null
++++ b/docs/native/DW2_MACOS_VERIFICATION.md
+@@ -0,0 +1,186 @@
++# DW2 native macOS verification and launcher correction
++
++Date: 2026-09-11. Author/witness: Codex, using the computer-use tool and the local
++development environment. Status: **NATIVE DRAFT WORKFLOW WITNESSED ON THIS HOST**.
++
++The native BH solver window now launches and passes the bounded New/Save/Open,
++unsaved Cancel, keyboard panel recovery, command palette and workspace-restart
++walkthrough. This closes the earlier native-launch/walkthrough evidence gap for
++this development checkout. It does not approve a standalone release, every
++accessibility behavior, the renderer or scientific models.
++
++## Objective, authority and scope
++
++Owner request: “Shall we verify this one?”, referring to the previously unwitnessed
++macOS walkthrough and intentionally unavailable calculation controls, followed by
++“continue with what you were doing before”. References: ADR-010; DW2;
++UIX-DIST-001, UIX-CMD-001, UIX-A11Y-001 and UIX-DOC-001; CORE-008;
++[original DW2 implementation record](DW2_CHANGE_RECORD.md).
++
++Scope: diagnose native startup, correct the local developer entry point and
++accessible status labels, conduct a native software walkthrough, add regression
++checks, and update current documentation. No kernel, application policy, neutral
++contract, storage schema, licence file, dependency lock or browser code changes.
++No Qt/solver process coupling is introduced: the development host embeds Python,
++which still wires only the existing mock-service desktop composition.
++
++## Observed startup failure and selected correction
++
++The original shell-script `.app` again returned `timeoutReached` from computer
++use and left no BH process running. Launch Services startup-output capture exposed
++Python failing before Qt initialization:
++
++```text
++Fatal Python error: init_import_site: Failed to import the site module
++PermissionError: [Errno 1] Operation not permitted: '<project>/.venv/pyvenv.cfg'
++```
++
++The repository is inside Documents. Read-only System Settings inspection found
++Documents access enabled for an existing Python entry but no BH solver entry.
++That entry does not establish permission for this uv runtime or shell launcher.
++No privacy toggle, Full Disk Access grant, TCC database or global protection was
++changed by the agent.
++
++Apple describes how loss of responsible-app attribution can suppress both the
++permission prompt and the Files & Folders entry, and identifies a shell-script
++`CFBundleExecutable` followed by `exec` as a possible cause. This is consistent
++with the observed failure; internal TCC attribution was not independently traced.
++[Apple developer guidance](https://developer.apple.com/forums/thread/125438).
++Apple also documents the optional Documents usage-description key and normal
++user-consent behavior. [Documents usage description](https://developer.apple.com/documentation/bundleresources/information-property-list/nsdocumentsfolderusagedescription).
++
++`tools/macos_developer_main.m` supplies a small native Mach-O entry point. It reads
++explicit Python/library/data-root paths from its generated Info.plist, dynamically
++loads the selected environment's existing CPython library, and calls `Py_BytesMain`
++in the same process. It contains no engineering calculation, UI command policy or
++solver import. Python still selects this checkout's virtual environment. Qt and
++Python are unmodified dynamic dependencies, not copied into the application.
++
++`tools/make_macos_launcher.py` now builds that entry point with the installed
++Apple clang/AppKit toolchain and applies a local ad-hoc signature. It supplies the
++BH bundle identity and a Documents usage explanation. The helper retains its
++refusal to replace an unmarked application. The generated ownership marker moves
++into `Contents/Resources`, because its former loose Contents location caused the
++first signing check to fail. Rebuilding with the corrected resource placement
++passed strict signature verification and native launch.
++
++This is a development-launcher correction, not selection of the final packager,
++Developer ID certificate, notarization, OS minimum or distribution architecture.
++It is built for the current host architecture and must be rebuilt after changing
++the checkout/environment. Ad-hoc signing is not a release identity guarantee.
++A future host may still require normal user-approved folder access; this result
++does not promise that every machine will grant access automatically.
++
++Material alternatives: retaining the shell wrapper preserves the reproduced
++failure; launching through a terminal would not witness the requested app path;
++broad permission grants would exceed the access needed for this diagnosis; a full
++standalone runtime bundle would prematurely enter DW9. The native development
++entry point supplies an identifiable app without changing the scientific stack.
++
++## Native observations
++
++The following outcomes were observed through the actual macOS application using
++computer-use keyboard, accessibility-tree and screenshot APIs. Native screenshots
++were inspected in the task; they are distinct from the historical offscreen PNGs.
++The [witness ledger](evidence/dw2-macos/witness.json) records the bounded steps and
++persisted draft identity for reconstruction.
++
++| Check | Native observed result |
++|---|---|
++| Launch `.app` by path, then by bundle ID | Window titled BH solver; toolbar, docks and welcome view rendered; no terminal window or server needed |
++| Command+N, enter a distinct name, Return | `DW2 native walkthrough 2026-09-11` displayed as Unsaved, with zero equipment/connections |
++| Command+W while unsaved | Save / Cancel / Don't Save prompt appeared |
++| Escape from that prompt | Same unsaved draft remained selected |
++| Command+S | Saved locally, revision 1; Save became disabled; immutable JSON file appeared |
++| Command+W, Command+O, Return on selected saved item | Named draft reopened at revision 1; Open activity message appeared |
++| Close Inspector, Command+2 | Inspector returned and accessibility focus moved to its input table |
++| Command+Shift+P, search `run.start`, Return | Palette showed Run — unavailable; Return left it open and did not execute |
++| Toolbar calculation controls | Validate and Run exposed disabled state with an unavailable-service explanation |
++| Light theme via palette; hide Inspector; Command+Q; reopen app | Light theme and hidden Inspector survived; welcome view had no selected draft or automatic Run |
++| Restore default layout via palette | Navigator, Inspector and Activity visible again |
++| Restore Dark theme; quit/reopen | Original theme and visible panels restored; saved draft remained listed |
++| Compare saved draft before/after presentation and restart checks | Exact SHA-256 unchanged; runtime contained only workspace INI and draft JSON, with no run artifacts |
++
++The tool occasionally required a fresh observation after reporting external UI
++changes; actions resumed only after re-reading the current state. An initial
++`Untitled draft` was saved and preserved before the separately named walkthrough
++continued. Neither saved draft was deleted or used as scientific evidence.
++
++One real accessibility defect was corrected: setting a generic accessible name
++on dynamic status and selection labels caused macOS to expose the generic name
++instead of their values. These labels now use accessible descriptions. The
++restarted app's accessibility tree exposed the actual selected draft and the
++independent state text:
++
++```text
++Not validated | Convergence: not run | Closure: not checked |
++Physical: unknown | Correlation: unknown
++```
++
++Remaining accessibility limit: computer-use trees did not consistently enumerate
++the saved-draft picker's rows or palette item text. Their visible selections and
++keyboard behavior were witnessed with native screenshots and actions. This does
++not establish how VoiceOver announces those lists. Full screen-reader, focus,
++scaling and all-platform accessibility acceptance remains outstanding; no full
++UIX requirement is promoted to VERIFIED from this walkthrough.
++
++## Verification, files and impacts
++
++Exact software checks and build commands are in
++[verification.txt](evidence/dw2-macos/verification.txt). The
++[dated file inventory](evidence/dw2-macos/file-inventory.json) and
++[review patch](evidence/dw2-macos/changes.patch) distinguish this follow-up from the
++original DW2 package. The previous DW0/DW1/DW2 evidence and the original DW2 change
++record remain historical and unchanged.
++
++The final Python suite passed **100 tests**, with the same upstream Starlette
++deprecation warning recorded in DW2. Ruff lint and format checks passed; Pyright
++with the explicit project interpreter reported zero errors or warnings. An initial
++Pyright invocation selected the wrong interpreter and reported missing imports;
++the corrected command is retained in the log alongside that failure. An initial
++line-length issue in the new review helper was corrected before its final check.
++The local app passed strict signature verification and was identified as Mach-O
++arm64. These software results complement the native observations above.
++
++Changed implementation: [launcher helper](../../tools/make_macos_launcher.py) and
++[native entry point](../../tools/macos_developer_main.m);
++[two accessible-label assignments](../../src/bh_sim/uix/window.py);
++[desktop assertions](../../tests/test_desktop.py) and
++[native-launcher tests](../../tests/test_macos_launcher.py). The
++launcher tests build a separate temporary app, verify its Mach-O identity and
++signature, invoke its embedded Python `--help` path without a GUI, and verify that
++an unowned application is preserved. UI regression tests retain mock calculation
++ports. Python lint/type/contract/boundary tests are rerun after the correction.
++Browser source/fixtures and scientific files are checked against the dated baseline;
++unchanged browser build/test checks from DW2 are not repeatedly re-run.
++
++Schema/migration: none. Dependency/licence: no package or lock changes; the existing
++Apple developer toolchain is required to rebuild this local macOS launcher.
++AppKit is an operating-system framework; CPython remains dynamically loaded from
++the existing environment. Qt/BH licence decisions are unchanged. Privacy/security:
++no provider, upload, permission reset or expanded-access setting; the usage string
++supports normal OS consent. Scientific impact: none; no calculation was performed.
++
++Checks not run: VoiceOver, complete native accessibility matrix, Windows/Linux,
++clean-machine installation, final runtime packaging, Developer ID/notarization,
++release SBOM/library-replacement validation, performance benchmarks, worker tests
++or independent scientific V&V. The latter stages remain governed by their own gates.
++
++## Risks, rollback and next work
++
++The launcher remains tied to this development environment and current architecture.
++A missing/moved Python library or changed signing/access policy can still require a
++rebuild or normal OS consent. Build/sign failures must be resolved before treating
++a newly generated `.app` as runnable. This is not a transferable release artifact.
++
++Rollback only this follow-up's recorded files after checking for newer owner edits.
++The saved before-state and reversible text patch support source rollback; regenerate
++the development launcher afterward. Reverting to the earlier shell wrapper also
++restores its known startup limitation. Preserve all draft JSON and unrelated owner
++notes; do not perform a broad Git reset/clean in this untracked workspace.
++
++No new owner decision is needed to use the corrected local preview. The existing
++application-licence proposal, final platform minimums, release signing/packaging,
++renderer targets and later scientific/provider gates remain separate decisions.
++The next desktop implementation stage remains DW3's renderer research and PFD
++slice, with calculation controls staying unavailable until the worker integration.
+diff --git a/docs/native/DW2_SHELL.md b/docs/native/DW2_SHELL.md
+--- a/docs/native/DW2_SHELL.md
++++ b/docs/native/DW2_SHELL.md
+@@ -1,10 +1,11 @@
+ # DW2 native shell
+ 
+-Date: 2026-09-11. Status: **IMPLEMENTED; SOFTWARE VERIFICATION RECORDED**.
++Date: 2026-09-11. Status: **IMPLEMENTED; NATIVE macOS DRAFT WORKFLOW WITNESSED**.
+ This local development preview provides New/Open/Save and workspace controls
+ through the neutral application boundary. The full flowsheet editor, calculation
+ worker, workbooks and packaged release retain their later gates.
+-[Change record and verification limits](DW2_CHANGE_RECORD.md).
++[Original implementation record](DW2_CHANGE_RECORD.md) and
++[native verification follow-up](DW2_MACOS_VERIFICATION.md).
+ 
+ ## Launch and local data
+ 
+@@ -15,12 +16,18 @@
+ .venv/bin/python tools/make_macos_launcher.py
+ ```
+ 
+-On macOS, the helper creates `.bh/BH solver.app` pointing
+-to this checkout's `.venv`. Open that application to request a window without a
+-terminal or server. This wrapper bundles no runtime, requires this checkout and
+-environment, and must be regenerated after moving them. It is not a standalone,
+-signed/notarized DW9 installer. GUI automation could not witness macOS launch in
+-this work unit; see the recorded timeout in the change record.
++On macOS, the helper uses the installed Apple developer tools (`xcrun clang` and
++`codesign`) to create `.bh/BH solver.app`. Its native entry
++point dynamically hosts this checkout's existing Python, preserving the app's
++process identity. Open that application for a window without a terminal or server.
++Native launch and the draft walkthrough passed on the development macOS/arm64 host;
++the follow-up record documents the former shell launcher's startup failure.
++
++This developer application bundles no runtime, requires this checkout and
++environment, and must be regenerated after moving them. It has a local ad-hoc
++signature, not a Developer ID/notarized DW9 installer. Normal OS folder consent
++may be required on another host. Build/sign failure requires correction before
++the generated application can be treated as runnable.
+ 
+ The optional GUI entry point is `bh-workstation`. Developer invocation:
+ 
+@@ -61,8 +68,9 @@
+ | Shortcuts, themes, density, restore layout | Workspace menu or command palette | Presentation-only changes |
+ 
+ Qt's platform bindings determine displayed modifier names. The defaults above
+-are implemented intent, with offscreen keyboard evidence on this macOS host;
+-Windows/Linux and native OS assistive-technology behavior remain unwitnessed.
++have offscreen test evidence and a bounded native macOS keyboard walkthrough for
++New/Open/Save, unsaved Cancel, palette, panel focus and layout recovery.
++Windows/Linux and full native assistive-technology behavior remain unwitnessed.
+ Shortcut edits reject ambiguous or multi-stroke bindings. A valid saved swap is
+ restored atomically; an invalid map retains the existing/default map and reports
+ why. Native dock toggles and focus controls are also discoverable in the palette.
+@@ -118,6 +126,10 @@
+ 
+ ## Visual evidence and remaining gates
+ 
++The [native follow-up](DW2_MACOS_VERIFICATION.md) records actual macOS screenshots
++and accessibility-tree observations inspected in the task, including theme/layout
++persistence across app restarts. Full VoiceOver/list announcement checks remain.
++
+ The following are actual Qt widget captures from temporary fixture storage using
+ Qt's offscreen plugin. They are not macOS screen captures or performance evidence.
+ 
+diff --git a/docs/native/evidence/dw2-macos/check_review.py b/docs/native/evidence/dw2-macos/check_review.py
+new file mode 100644
+--- /dev/null
++++ b/docs/native/evidence/dw2-macos/check_review.py
+@@ -0,0 +1,125 @@
++"""Read-only integrity and document checks for the dated DW2 native macOS follow-up.
++
++The manifest records this uncommitted workspace's before/after hashes. Historical
++DW0/DW1/DW2 evidence remains unchanged; later work must create its own evidence instead
++of rewriting these files. This checker grants no scientific or release approval.
++"""
++
++from __future__ import annotations
++
++import hashlib
++import json
++import re
++from pathlib import Path
++from urllib.parse import unquote, urlsplit
++
++ROOT = Path(__file__).resolve().parents[4]
++EVIDENCE = Path(__file__).resolve().parent
++
++
++def heading_ids(content: str) -> set[str]:
++    """Match the existing review helper's bounded GitHub-style heading convention."""
++    result: set[str] = set()
++    counts: dict[str, int] = {}
++    for heading in re.findall(r"^#{1,6} (.+)$", content, flags=re.MULTILINE):
++        slug = re.sub(r"[^\w\- ]", "", heading.lower()).replace(" ", "-")
++        count = counts.get(slug, 0)
++        counts[slug] = count + 1
++        result.add(f"{slug}-{count}" if count else slug)
++    return result
++
++
++def digest(path: Path) -> str:
++    """Hash exact on-disk bytes, including binary visual review assets."""
++    return hashlib.sha256(path.read_bytes()).hexdigest()
++
++
++def main() -> None:
++    """Check recorded files, old decisions, Markdown links and requirement statuses."""
++    inventory = json.loads((EVIDENCE / "file-inventory.json").read_text())
++    errors: list[str] = []
++    if digest(EVIDENCE / "changes.patch") != inventory["patch_sha256"]:
++        errors.append("DW2 macOS text review patch changed")
++    for name, record in inventory["files"].items():
++        path = ROOT / name
++        if not path.is_file() or digest(path) != record["after_sha256"]:
++            errors.append("Dated DW2 macOS file changed or missing: " + name)
++    for name, expected in inventory["historical_output_sha256"].items():
++        path = ROOT / name
++        if not path.is_file() or digest(path) != expected:
++            errors.append("Historical evidence output changed or missing: " + name)
++    witness = json.loads((EVIDENCE / "witness.json").read_text())
++    if (
++        digest(EVIDENCE / witness["initial_failure"]["capture"])
++        != witness["initial_failure"]["capture_sha256"]
++    ):
++        errors.append("Recorded startup trace changed")
++    if witness["draft_integrity"]["before_sha256"] != witness["draft_integrity"]["after_sha256"]:
++        errors.append("Witness does not record unchanged draft bytes")
++    for name, expected in inventory["browser_baseline_sha256"].items():
++        path = ROOT / name
++        if not path.is_file() or digest(path) != expected:
++            errors.append("Retained browser file changed or missing: " + name)
++
++    paths = [
++        ROOT / "README.md",
++        *sorted((ROOT / "docs").rglob("*.md")),
++        *sorted((ROOT / "tests/fixtures").rglob("README.md")),
++    ]
++    links = 0
++    for path in paths:
++        content = path.read_text()
++        if len(re.findall(r"^```", content, re.MULTILINE)) % 2:
++            errors.append("Unbalanced fences: " + str(path.relative_to(ROOT)))
++        for target in re.findall(r"\[[^\]\n]+\]\(([^)\n]+)\)", content):
++            parsed = urlsplit(target.strip("<>"))
++            if parsed.scheme:
++                continue
++            links += 1
++            destination = (path.parent / unquote(parsed.path)).resolve() if parsed.path else path
++            if not destination.exists():
++                errors.append(f"Missing link from {path.relative_to(ROOT)}: {target}")
++            elif (
++                parsed.fragment
++                and destination.suffix == ".md"
++                and unquote(parsed.fragment) not in heading_ids(destination.read_text())
++            ):
++                errors.append(f"Missing heading from {path.relative_to(ROOT)}: {target}")
++
++    decisions = (ROOT / "docs/DECISIONS.md").read_text()
++    sections = re.findall(r"^## ADR-\d{3} .*?(?=^## ADR-|\Z)", decisions, re.MULTILINE | re.DOTALL)
++    for section in sections:
++        identifier = section.split()[1]
++        if hashlib.sha256(section.rstrip().encode()).hexdigest() != inventory[
++            "accepted_adr_sha256"
++        ].get(identifier):
++            errors.append("Accepted ADR body changed: " + identifier)
++    if len(sections) != 10 or "ACCEPTED WITH OWNER ANNOTATIONS" not in sections[-1]:
++        errors.append("Expected ten accepted decisions including annotated ADR-010")
++
++    matrix = (ROOT / "docs/REQUIREMENTS_VERIFICATION.md").read_text()
++    identifiers = re.findall(r"^\| ([A-Z]+(?:-[A-Z]+)*-\d{3}) \|", matrix, re.MULTILINE)
++    if len(identifiers) != len(set(identifiers)):
++        errors.append("Duplicate requirement IDs")
++    for row in matrix.splitlines():
++        if row.startswith("| UIX-") and row.endswith("| VERIFIED |"):
++            errors.append("DW2 software evidence cannot complete a full staged native requirement")
++    counts = {
++        state: sum(item["status"] == state for item in inventory["files"].values())
++        for state in ("preserved", "modified", "added")
++    }
++    print(f"Checked {len(paths)} Markdown files, {links} local links/fragments and balanced fences")
++    print(f"Checked DW2 macOS inventory: {counts}; historical captures included by hash")
++    print(f"Checked {len(inventory['browser_baseline_sha256'])} retained browser files")
++    print(f"Checked 10 preserved ADR bodies and {len(identifiers)} unique requirements")
++    print("Excluded owner notes, live app state, generated metadata/runtime and recursive outputs")
++    if errors:
++        raise SystemExit("\n".join(errors))
++    print(
++        "PASS: DW2 macOS review integrity; "
++        "no full accessibility, scientific or release approval implied"
++    )
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/docs/native/evidence/dw2-macos/original-startup.stderr.txt b/docs/native/evidence/dw2-macos/original-startup.stderr.txt
+new file mode 100644
+--- /dev/null
++++ b/docs/native/evidence/dw2-macos/original-startup.stderr.txt
+@@ -0,0 +1,11 @@
++Fatal Python error: init_import_site: Failed to import the site module
++Python runtime state: initialized
++Traceback (most recent call last):
++  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
++  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
++  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
++  File "<frozen importlib._bootstrap>", line 1176, in exec_module
++  File "<frozen site>", line 716, in <module>
++  File "<frozen site>", line 699, in main
++  File "<frozen site>", line 617, in venv
++PermissionError: [Errno 1] Operation not permitted: '/Users/mira/Documents/ChatGPT/BH Technical Docs/.venv/pyvenv.cfg'
+diff --git a/docs/native/evidence/dw2-macos/witness.json b/docs/native/evidence/dw2-macos/witness.json
+new file mode 100644
+--- /dev/null
++++ b/docs/native/evidence/dw2-macos/witness.json
+@@ -0,0 +1,162 @@
++{
++  "record_type": "DW2 native macOS software witness ledger",
++  "date": "2026-09-11",
++  "timezone": "Australia/Adelaide",
++  "witness": "Codex using native computer-use tools; not an independent scientific verifier",
++  "provenance": "Editable transcription of observations made during the task. This JSON is not a raw UI tool export. Native screenshots were inspected inline in the task and are not attached as repository image files. Historical dw2/shell-*.png files are offscreen captures, not this witness.",
++  "scope": "Development checkout, mock engineering ports, bounded native draft workflow. No full requirement/release/scientific approval.",
++  "environment": {
++    "os": "macOS 26.4.1",
++    "architecture": "arm64",
++    "python": "3.13.12",
++    "qt_pyside": "6.11.2",
++    "bundle_id": "org.boundhorizons.solver.preview",
++    "application": ".bh/BH solver.app",
++    "launcher": "Native Mach-O, local ad-hoc signature, dynamically loaded existing CPython; no bundled runtime"
++  },
++  "initial_failure": {
++    "tool": "cua.getApp",
++    "result": "timeoutReached",
++    "startup_capture_command": "open -n --stdout /tmp/bh-native-startup.out --stderr /tmp/bh-native-startup.err '.bh/BH solver.app'",
++    "capture": "original-startup.stderr.txt",
++    "capture_sha256": "c8cf34f6b6750cdab1e0c2027fd6caf3288616989c8f4b4c091d355aa01facac",
++    "diagnosis": "Python could not read Documents checkout .venv/pyvenv.cfg before Qt loaded. Responsible-app attribution loss is consistent with Apple guidance; internal TCC attribution was not traced."
++  },
++  "steps": [
++    {
++      "id": "native-launch",
++      "action": "App selected first by .app path, subsequently by bundle ID",
++      "observed": "Native BH solver window rendered, with toolbar, docks and welcome view. No terminal window or server startup.",
++      "evidence": [
++        "native accessibility tree",
++        "native screenshot"
++      ],
++      "result": "PASS"
++    },
++    {
++      "id": "create",
++      "action": "Command+N; enter DW2 native walkthrough 2026-09-11; Return",
++      "observed": "Named Unsaved draft, zero equipment/connections, Review profile.",
++      "evidence": [
++        "native accessibility tree"
++      ],
++      "result": "PASS"
++    },
++    {
++      "id": "unsaved-close-cancel",
++      "action": "Command+W; Escape",
++      "observed": "Save / Cancel / Don't Save dialog appeared; Escape retained the same unsaved draft.",
++      "evidence": [
++        "native accessibility tree"
++      ],
++      "result": "PASS"
++    },
++    {
++      "id": "save",
++      "action": "Command+S",
++      "observed": "Saved locally, revision 1; Save disabled; navigator entry and saved activity appeared.",
++      "evidence": [
++        "native accessibility tree",
++        "persisted draft JSON"
++      ],
++      "result": "PASS"
++    },
++    {
++      "id": "reopen",
++      "action": "Command+W; Command+O; Return on selected named draft",
++      "observed": "Picker visibly selected the named draft; revision 1 reopened with Open activity.",
++      "evidence": [
++        "native screenshot",
++        "native accessibility tree"
++      ],
++      "result": "PASS"
++    },
++    {
++      "id": "panel-focus",
++      "action": "Close Inspector; Command+2",
++      "observed": "Inspector restored; accessibility focus on Submitted input quantities table.",
++      "evidence": [
++        "native accessibility tree"
++      ],
++      "result": "PASS"
++    },
++    {
++      "id": "unavailable-run",
++      "action": "Command+Shift+P; search run.start; Return",
++      "observed": "Run — unavailable visible; Return left palette open; no command executed. Toolbar Validate and Run disabled with unavailable-service description.",
++      "evidence": [
++        "native screenshot",
++        "native accessibility tree"
++      ],
++      "result": "PASS"
++    },
++    {
++      "id": "theme-layout-restart",
++      "action": "Choose Light via palette; hide Inspector; Command+Q; reopen app by bundle ID",
++      "observed": "Light and hidden Inspector persisted. Welcome had no selected draft, no automatically replayed Run.",
++      "evidence": [
++        "native screenshot",
++        "native accessibility tree"
++      ],
++      "result": "PASS"
++    },
++    {
++      "id": "restore-layout",
++      "action": "Choose Restore default layout via palette",
++      "observed": "Navigator, Inspector and Activity visible again.",
++      "evidence": [
++        "native accessibility tree"
++      ],
++      "result": "PASS"
++    },
++    {
++      "id": "restore-original-theme",
++      "action": "Choose Dark; Command+Q; reopen by bundle ID",
++      "observed": "Dark and all panels visible; saved drafts still listed; no selected draft. App left open.",
++      "evidence": [
++        "native screenshot",
++        "native accessibility tree"
++      ],
++      "result": "PASS"
++    },
++    {
++      "id": "presentation-integrity",
++      "action": "Compare saved JSON hash before/after theme/layout/restart checks; enumerate preview files",
++      "observed": "Named revision bytes unchanged. Only workspace.ini and two draft JSON files present, no run artifacts.",
++      "evidence": [
++        "filesystem hashes",
++        "runtime file inventory"
++      ],
++      "result": "PASS"
++    }
++  ],
++  "accessible_labels": {
++    "before": "Selection details / Independent engineering states generic accessible names replaced changing label values.",
++    "correction": "Use accessible descriptions, retaining default label value exposure.",
++    "after": "Native AX exposed selected draft and: Not validated | Convergence: not run | Closure: not checked | Physical: unknown | Correlation: unknown"
++  },
++  "draft_integrity": {
++    "path": ".bh/native-preview/drafts/DW2-native-walkthrough-2026-09-11.r000001.json",
++    "revision": 1,
++    "before_sha256": "8d715b0fe33987315f8fa111bc74644e090f0c7ca06585b804a5fc0fb183e81d",
++    "after_sha256": "8d715b0fe33987315f8fa111bc74644e090f0c7ca06585b804a5fc0fb183e81d",
++    "result": "unchanged",
++    "runtime_files_at_close": [
++      ".bh/native-preview/drafts/DW2-native-walkthrough-2026-09-11.r000001.json",
++      ".bh/native-preview/drafts/Untitled-draft.r000001.json",
++      ".bh/native-preview/workspace.ini"
++    ]
++  },
++  "preserved_activity": "An initial Untitled draft was saved after a tool external-change guard. Both saved drafts are retained; no owner work was discarded.",
++  "privacy": "Read-only inspection of macOS Files & Folders found Documents enabled for an existing Python entry, no BH entry. No OS privacy toggle, Full Disk Access grant, TCC reset/database change, or permission prompt was accepted by the agent. Native launch succeeded on this host after the launcher correction.",
++  "tool_constraints": "External-change guards were handled by re-reading current UI state. Picker/palette rows were not consistently enumerated in AX; screenshot selections and keyboard behavior provided the bounded witness.",
++  "not_verified": [
++    "VoiceOver announcements and full focus/accessibility matrix",
++    "Windows/Linux execution",
++    "Clean-machine or standalone installation",
++    "Developer ID/notarization/release SBOM or LGPL distribution compliance",
++    "Renderer performance or editable PFD",
++    "Worker execution and scientific V&V"
++  ],
++  "final_state": "App open at Dark welcome, Navigator/Inspector/Activity visible, saved drafts retained, no selected draft, Validate/Run disabled."
++}
+diff --git a/src/bh_sim/uix/window.py b/src/bh_sim/uix/window.py
+--- a/src/bh_sim/uix/window.py
++++ b/src/bh_sim/uix/window.py
+@@ -199,7 +199,7 @@
+         form.setContentsMargins(16, 18, 16, 18)
+         form.addWidget(label("SELECTION", "eyebrow"))
+         self.selection_title = label("No draft selected")
+-        self.selection_title.setAccessibleName("Selection details")
++        self.selection_title.setAccessibleDescription("Selection details")
+         self.selection_details = label("Open or create a draft to inspect it.", "muted")
+         form.addWidget(self.selection_title)
+         form.addWidget(self.selection_details)
+@@ -317,7 +317,7 @@
+             "Not validated  |  Convergence: not run  |  Closure: not checked  |  "
+             "Physical: unknown  |  Correlation: unknown"
+         )
+-        self.scientific_status.setAccessibleName("Independent engineering states")
++        self.scientific_status.setAccessibleDescription("Independent engineering states")
+         self.scientific_status.setWordWrap(False)
+         self.scientific_status.setStyleSheet("font-size: 11px;")
+         self.statusBar().addPermanentWidget(self.scientific_status)
+diff --git a/tests/test_desktop.py b/tests/test_desktop.py
+--- a/tests/test_desktop.py
++++ b/tests/test_desktop.py
+@@ -147,6 +147,10 @@
+     assert "Closure: not checked" in window.scientific_status.text()
+     assert "Physical: unknown" in window.scientific_status.text()
+     assert "Correlation: unknown" in window.scientific_status.text()
++    # On macOS an explicit accessible name replaces the label's changing value.
++    assert not window.scientific_status.accessibleName()
++    assert not window.selection_title.accessibleName()
++    assert window.scientific_status.accessibleDescription() == "Independent engineering states"
+     assert isinstance(window.gateway, RecordingGateway)
+     assert not any(item.command_name == "run.start" for item in window.gateway.calls)
+ 
+diff --git a/tests/test_macos_launcher.py b/tests/test_macos_launcher.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_macos_launcher.py
+@@ -0,0 +1,51 @@
++"""Native developer launcher identity and CPython startup checks, without a GUI.
++
++The witnessed Launch Services/Qt interaction is recorded separately. These tests
++require the current macOS developer toolchain; they do not certify an installer.
++"""
++
++import plistlib
++import shutil
++import subprocess
++import sys
++from pathlib import Path
++
++import pytest
++
++from tools.make_macos_launcher import build_launcher
++
++ROOT = Path(__file__).parents[1]
++pytestmark = pytest.mark.skipif(
++    sys.platform != "darwin" or shutil.which("xcrun") is None,
++    reason="local macOS launcher verification requires Apple's developer tools",
++)
++
++
++def test_native_launcher_hosts_the_configured_python(tmp_path: Path) -> None:
++    destination = tmp_path / "BH developer test.app"
++    build_launcher(destination, ROOT)
++    info = plistlib.loads((destination / "Contents/Info.plist").read_bytes())
++    binary = destination / "Contents/MacOS" / info["CFBundleExecutable"]
++    # Mach-O identity must survive startup; a shell exec wrapper caused the defect.
++    assert "Mach-O" in subprocess.check_output(["file", str(binary)], text=True)
++    assert info["CFBundleIdentifier"] == "org.boundhorizons.solver.preview"
++    assert info["BHDevelopmentPythonExecutable"] == str(ROOT / ".venv/bin/python")
++    assert Path(info["BHDevelopmentPythonLibrary"]).is_file()
++    subprocess.run(["codesign", "--verify", "--strict", str(destination)], check=True)
++    result = subprocess.run(
++        [str(binary), "--help"], capture_output=True, text=True, check=False, timeout=20
++    )
++    assert result.returncode == 0, result.stderr
++    assert "BH solver native workstation preview" in result.stdout
++    assert "--data-root" in result.stdout
++
++
++def test_launcher_refuses_an_unowned_application(tmp_path: Path) -> None:
++    destination = tmp_path / "Existing app.app"
++    destination.mkdir()
++    owner_file = destination / "owner-work.txt"
++    owner_file.write_text("Preserve this existing application")
++    with pytest.raises(ValueError, match="Refusing to replace"):
++        build_launcher(destination, ROOT)
++    assert owner_file.read_text() == "Preserve this existing application"
++    assert not (destination / "Contents").exists()
+diff --git a/tools/macos_developer_main.m b/tools/macos_developer_main.m
+new file mode 100644
+--- /dev/null
++++ b/tools/macos_developer_main.m
+@@ -0,0 +1,65 @@
++/* Local macOS developer entry point; not a standalone distribution runtime.
++ *
++ * Keep the application's Mach-O executable alive while hosting CPython in this
++ * process. The former shell/exec entry failed to read the venv in Documents,
++ * consistent with macOS folder-permission attribution loss before Qt could load.
++ * Paths are supplied by the generated bundle; nothing is downloaded or granted.
++ * CPython and Qt remain dynamic, unmodified libraries in the existing checkout.
++ */
++#import <AppKit/AppKit.h>
++#include <dlfcn.h>
++#include <stdio.h>
++#include <stdlib.h>
++
++typedef int (*PythonBytesMain)(int, char **);
++
++static int startupFailure(NSString *message) {
++    fprintf(stderr, "BH_DESKTOP_STARTUP_FAILED: %s\n", message.UTF8String);
++    [NSApplication sharedApplication];
++    NSAlert *alert = [[NSAlert alloc] init];
++    alert.messageText = @"BH solver could not start";
++    alert.informativeText = message;
++    [alert addButtonWithTitle:@"Close"];
++    [alert runModal];
++    return EXIT_FAILURE;
++}
++
++int main(int argc, char **argv) {
++    @autoreleasepool {
++        NSDictionary *info = NSBundle.mainBundle.infoDictionary;
++        NSString *python = info[@"BHDevelopmentPythonExecutable"];
++        NSString *library = info[@"BHDevelopmentPythonLibrary"];
++        NSString *dataRoot = info[@"BHDevelopmentDataRoot"];
++        if (![python isKindOfClass:NSString.class] || !python.isAbsolutePath ||
++            ![library isKindOfClass:NSString.class] || !library.isAbsolutePath ||
++            ![dataRoot isKindOfClass:NSString.class] || !dataRoot.isAbsolutePath) {
++            return startupFailure(@"The development launcher configuration is invalid. "
++                                  @"Rebuild it from this project's launcher helper.");
++        }
++        // Extension modules resolve Python symbols from the shared interpreter.
++        void *runtime = dlopen(library.fileSystemRepresentation, RTLD_NOW | RTLD_GLOBAL);
++        PythonBytesMain runPython = runtime ? (PythonBytesMain)dlsym(runtime, "Py_BytesMain") : NULL;
++        if (!runPython) {
++            return startupFailure(@"The configured Python runtime is unavailable. "
++                                  @"Restore the project environment and rebuild the launcher.");
++        }
++        char **arguments = calloc((size_t)argc + 5, sizeof(char *));
++        if (!arguments) {
++            return startupFailure(@"There is not enough memory to start the application.");
++        }
++        // argv[0] selects this checkout's venv, retaining its installed packages.
++        arguments[0] = (char *)python.fileSystemRepresentation;
++        arguments[1] = "-m";
++        arguments[2] = "bh_sim.desktop_launcher";
++        arguments[3] = "--data-root";
++        arguments[4] = (char *)dataRoot.fileSystemRepresentation;
++        for (int index = 1; index < argc; ++index) {
++            arguments[index + 4] = argv[index];
++        }
++        int result = runPython(argc + 4, arguments);
++        free(arguments);
++        // Keep the library loaded through process teardown: extension destructors
++        // may still reference Python symbols after Py_BytesMain returns.
++        return result;
++    }
++}
+diff --git a/tools/make_macos_launcher.py b/tools/make_macos_launcher.py
+--- a/tools/make_macos_launcher.py
++++ b/tools/make_macos_launcher.py
+@@ -1,30 +1,82 @@
+ """Create a local developer .app wrapper, not a distributable BH installer.
+ 
+-The launcher references this checkout and its existing environment; it bundles no
+-Qt, Python or scientific libraries. Re-run after moving the checkout. DW9 owns
+-standalone packaging, signing, notices, library replacement and release minimums.
++The native entry point hosts this checkout's existing Python in the app process;
++it bundles no Qt, Python or scientific libraries. Re-run after moving the checkout.
++DW9 owns standalone packaging, signing, notices, library replacement and release minimums.
+ """
+ 
+ from __future__ import annotations
+ 
+ import argparse
++import json
+ import plistlib
+-import shlex
++import subprocess
+ import sys
++import tempfile
+ from pathlib import Path
+ 
+ 
+ def build_launcher(destination: Path, repository: Path) -> Path:
+-    """Write only a newly selected/previously generated development wrapper."""
++    """Build an app tied to an absolute checkout path and its existing venv.
++
++    Return the generated app path. Only a new destination or one marked by this
++    helper may be written; drafts are untouched. Missing runtime/ownership raises
++    ValueError. Tool or filesystem failures propagate; compilation precedes app
++    writes, but a later write/sign failure can require a rebuild. See the DW2
++    native macOS verification record for scope, consent and release limitations.
++    """
+     executable = repository / ".venv/bin/python"
+     if not executable.is_file():
+         raise ValueError("Repository environment is missing")
+-    marker = destination / "Contents/bh-developer-launcher"
+-    if destination.exists() and not marker.is_file():
++    marker = destination / "Contents/Resources/bh-developer-launcher"
++    legacy_marker = destination / "Contents/bh-developer-launcher"
++    if destination.exists() and not (marker.is_file() or legacy_marker.is_file()):
+         raise ValueError("Refusing to replace an application not created by this helper")
++    # Read the selected environment's metadata, not the helper's interpreter.
++    probe = subprocess.run(
++        [
++            str(executable),
++            "-c",
++            "import json,sysconfig; "
++            "print(json.dumps([sysconfig.get_config_var('LIBDIR'), "
++            "sysconfig.get_config_var('LDLIBRARY')]))",
++        ],
++        check=True,
++        capture_output=True,
++        text=True,
++    )
++    library_directory, library_name = json.loads(probe.stdout)
++    library = Path(library_directory) / library_name
++    if not library.is_file():
++        raise ValueError("The selected environment has no dynamic Python runtime")
++    # Compile before touching a previous wrapper. Compiler failure leaves it intact.
++    source = Path(__file__).with_name("macos_developer_main.m")
++    with tempfile.TemporaryDirectory(prefix="bh-launcher-build-") as scratch:
++        built = Path(scratch) / "bh-workstation"
++        subprocess.run(
++            [
++                "xcrun",
++                "clang",
++                "-fobjc-arc",
++                "-Wall",
++                "-Wextra",
++                "-Werror",
++                "-framework",
++                "AppKit",
++                str(source),
++                "-o",
++                str(built),
++            ],
++            check=True,
++        )
++        executable_bytes = built.read_bytes()
+     macos = destination / "Contents/MacOS"
+     macos.mkdir(parents=True, exist_ok=True)
+-    marker.write_text("DW2 local developer wrapper; no bundled runtime\n")
++    marker.parent.mkdir(parents=True, exist_ok=True)
++    marker.write_text("DW2 native developer entry point; no bundled runtime\n")
++    if legacy_marker.is_file():
++        # The old generated marker sat in a code location and blocks bundle signing.
++        legacy_marker.unlink()
+     info = {
+         "CFBundleName": "BH solver",
+         "CFBundleDisplayName": "BH solver",
+@@ -33,19 +85,19 @@
+         "CFBundlePackageType": "APPL",
+         "CFBundleVersion": "0.1.0",
+         "NSHighResolutionCapable": True,
++        "NSDocumentsFolderUsageDescription": (
++            "BH solver loads its development project and local drafts from Documents."
++        ),
++        "BHDevelopmentPythonExecutable": str(executable),
++        "BHDevelopmentPythonLibrary": str(library),
++        "BHDevelopmentDataRoot": str(repository / ".bh/native-preview"),
+     }
+     (destination / "Contents/Info.plist").write_bytes(plistlib.dumps(info))
+-    data_root = repository / ".bh/native-preview"
+     launcher = macos / "bh-workstation"
+-    launcher.write_text(
+-        "#!/bin/sh\n"
+-        + "exec "
+-        + shlex.quote(str(executable))
+-        + " -m bh_sim.desktop_launcher --data-root "
+-        + shlex.quote(str(data_root))
+-        + ' "$@"\n'
+-    )
++    launcher.write_bytes(executable_bytes)
+     launcher.chmod(0o755)
++    # Local ad-hoc identity only. No Developer ID, notarization or permission grant.
++    subprocess.run(["codesign", "--force", "--sign", "-", str(destination)], check=True)
+     return destination
+ 
+ 

@@ -1,0 +1,5 @@
+{
+  "create": {"$type":"CommandRequest","actor_id":"fixture-owner","command_name":"draft.create","parameters":{"$type":"CreateDraftParameters","draft_id":"Fixture draft"},"profile":"REVIEW","request_id":"dw2:create:1","schema_version":"bh-command-v1alpha"},
+  "list": {"$type":"CommandRequest","actor_id":"fixture-owner","command_name":"draft.list","parameters":{"$type":"ListDraftsParameters"},"profile":"REVIEW","request_id":"dw2:list:1","schema_version":"bh-command-v1alpha"},
+  "catalog": {"$type":"DraftListDto","drafts":[{"$type":"DraftSummaryDto","draft_id":"Fixture draft","revision":1,"updated_at":"2026-09-11T00:00:00+00:00"}]}
+}

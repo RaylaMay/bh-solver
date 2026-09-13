@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bh-sim"
+version = "0.1.0"
+description = "Auditable thermofluid calculation foundations for BH"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "LicenseRef-BH-NonCommercial-1.0"
+license-files = ["LICENSE"]
+authors = [{name = "Rayla May"}]
+dependencies = [
+  "networkx>=3.4,<4",
+  "numpy>=2.2,<3",
+  "pint>=0.24,<1",
+  "pydantic>=2.10,<3",
+  "scipy>=1.15,<2",
+]
+
+[project.optional-dependencies]
+desktop = [
+  "PySide6-Essentials==6.11.2; python_version < '3.15'",
+  "shiboken6==6.11.2; python_version < '3.15'",
+]
+api = [
+  "fastapi>=0.115,<1",
+  "httpx>=0.28,<1",
+  "uvicorn>=0.34,<1",
+]
+analysis = [
+  "jupyterlab>=4.3,<5",
+  "matplotlib>=3.10,<4",
+  "pandas>=2.2,<3",
+  "salib>=1.5,<2",
+]
+optimization = [
+  "highspy>=1.9,<2",
+  "pyomo>=6.9,<7",
+]
+thermo = [
+  "cantera>=3.1,<4",
+  "coolprop>=6.8,<8",
+  "thermo>=0.4,<1",
+]
+
+[project.scripts]
+bh-sim = "bh_sim.cli:main"
+bh-api = "bh_sim.api.app:main"
+
+[project.gui-scripts]
+bh-workstation = "bh_sim.desktop_launcher:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-config --strict-markers"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.pyright]
+include = ["src", "tests"]
+pythonVersion = "3.11"
+typeCheckingMode = "standard"
+
+[dependency-groups]
+dev = [
+  "hypothesis>=6.125,<7",
+  "pyright>=1.1,<2",
+  "pytest>=8.3,<9",
+  "pytest-cov>=6,<7",
+  "ruff>=0.9,<1",
+]

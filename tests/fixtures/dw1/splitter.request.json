@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "v1alpha",
+  "draftId": "splitter-compatibility",
+  "revision": 1,
+  "baseCaseId": null,
+  "updatedAt": "2026-08-27T00:00:00Z",
+  "nodes": [
+    {
+      "id": "source-1",
+      "type": "equipment",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "source-1",
+        "kind": "source",
+        "status": "draft",
+        "validity": "UNKNOWN",
+        "parameters": {
+          "temperature": {
+            "label": "Temperature",
+            "quantity": {
+              "value": 300,
+              "unit": "K"
+            }
+          },
+          "pressure": {
+            "label": "Pressure",
+            "quantity": {
+              "value": 101325,
+              "unit": "Pa"
+            }
+          },
+          "massFlow": {
+            "label": "Mass flow",
+            "quantity": {
+              "value": 1,
+              "unit": "kg/s"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "splitter-1",
+      "type": "equipment",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "Splitter",
+        "kind": "splitter",
+        "status": "draft",
+        "validity": "UNKNOWN",
+        "parameters": {
+          "splitFraction": {
+            "label": "Fraction",
+            "quantity": {
+              "value": 0.25,
+              "unit": "fraction"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "sink-1",
+      "type": "equipment",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "sink-1",
+        "kind": "sink",
+        "status": "draft",
+        "validity": "UNKNOWN",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "sink-2",
+      "type": "equipment",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "Second sink",
+        "kind": "sink",
+        "status": "draft",
+        "validity": "UNKNOWN",
+        "parameters": {}
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "source": "source-1",
+      "sourceHandle": "out-0",
+      "target": "splitter-1",
+      "targetHandle": "in-0"
+    },
+    {
+      "id": "edge-2",
+      "source": "splitter-1",
+      "sourceHandle": "out-0",
+      "target": "sink-1",
+      "targetHandle": "in-0"
+    },
+    {
+      "id": "edge-3",
+      "source": "splitter-1",
+      "sourceHandle": "out-1",
+      "target": "sink-2",
+      "targetHandle": "in-0"
+    }
+  ]
+}

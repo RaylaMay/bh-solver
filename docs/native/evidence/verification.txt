@@ -1,0 +1,108 @@
+DW0 verification observations — 2026-09-10
+These are dated execution outputs, not owner approval or scientific verification.
+
+$ .venv/bin/python -m pytest -q && .venv/bin/ruff check src tests && .venv/bin/pyright
+.........................................                                [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+41 passed, 1 warning in 1.42s
+All checks passed!
+/Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/api/app.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/api/app.py:11:8 - error: Import "uvicorn" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/api/app.py:12:6 - error: Import "fastapi" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/core/quantity.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/core/quantity.py:8:8 - error: Import "pint" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/engine/compiler.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/engine/compiler.py:7:8 - warning: Import "networkx" could not be resolved from source (reportMissingModuleSource)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/solvers/scipy_solver.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/solvers/scipy_solver.py:5:8 - error: Import "numpy" could not be resolved (reportMissingImports)
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/src/bh_sim/solvers/scipy_solver.py:6:6 - error: Import "scipy.optimize" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_ai_profiles.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_ai_profiles.py:6:8 - error: Import "pytest" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_api.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_api.py:5:6 - error: Import "fastapi.testclient" could not be resolved (reportMissingImports)
+/Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_engine.py
+  /Users/mira/Documents/ChatGPT/BH Technical Docs/tests/test_engine.py:5:8 - error: Import "pytest" could not be resolved (reportMissingImports)
+8 errors, 1 warning, 0 informations
+
+$ .venv/bin/pyright --pythonpath .venv/bin/python
+0 errors, 0 warnings, 0 informations
+
+$ (working directory: web) npm run test && npm run lint && npm run build
+
+> bh-pfd@0.1.0 test
+> vitest run
+
+
+ RUN  v2.1.9 /Users/mira/Documents/ChatGPT/BH Technical Docs/web
+
+ ✓ src/api/client.test.ts (3 tests) 4ms
+ ✓ src/validation.test.ts (2 tests) 1ms
+
+ Test Files  2 passed (2)
+      Tests  5 passed (5)
+   Start at  21:45:49
+   Duration  733ms (transform 56ms, setup 132ms, collect 73ms, tests 5ms, environment 688ms, prepare 153ms)
+
+
+> bh-pfd@0.1.0 lint
+> eslint .
+
+
+> bh-pfd@0.1.0 build
+> tsc -b && vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 1746 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:   0.30 kB
+dist/assets/index-BKLWnf4b.css   23.09 kB │ gzip:   4.89 kB
+dist/assets/index-trF2HPiz.js   352.48 kB │ gzip: 113.48 kB
+✓ built in 736ms
+
+Environment and CLI help:
+macOS-26.4.1-arm64-arm-64bit-Mach-O
+arm64
+3.13.12
+pytest=8.4.2 ruff=0.16.4 pyright=1.1.411 fastapi=0.141.1 pydantic=2.13.4 pint=0.25.3 numpy=2.5.2 scipy=1.18.1 networkx=3.6.1
+v22.23.0
+10.9.8
+usage: __main__.py [-h] {solid-radiator,droplet-radiator,surge-buffer}
+
+Small JSON command-line interface for calculation demonstrations.
+
+positional arguments:
+  {solid-radiator,droplet-radiator,surge-buffer}
+
+options:
+  -h, --help            show this help message and exit
+
+$ .venv/bin/python -m docs.native.evidence.probe_baseline
+/Users/mira/Documents/ChatGPT/BH Technical Docs/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+move_changes_case_hash=False
+label_changes_case_hash=True
+run_without_prior_validate_http=200
+run_response_fields=['completedAt', 'conservationClosed', 'converged', 'diagnostics', 'draftId', 'nodeResults', 'revision', 'runId']
+unadaptable_run_http=422, new_core_artifacts=0
+
+$ .venv/bin/ruff check docs/native/evidence
+Initial helper lint: 4 style findings (three line lengths and one nested condition).
+Corrected in the newly added review helpers; no production source change.
+Final: All checks passed!
+
+$ .venv/bin/python docs/native/evidence/check_review.py
+Checked 22 Markdown files and 127 local links/fragments
+Checked 91 preserved baseline files and 9 accepted ADR bodies
+Excluded unrelated live changes: ['.obsidian/workspace.json']
+Checked 44 unique requirement IDs and proposed UIX states
+PASS: document integrity and baseline preservation; no approval implied
+
+$ git apply --reverse --check docs/native/evidence/existing-documents.patch
+Exit 0, no output. Read-only check; rollback was not executed.

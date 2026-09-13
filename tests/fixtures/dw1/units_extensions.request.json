@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "v1alpha",
+  "draftId": "units-and-extensions",
+  "revision": 1,
+  "baseCaseId": "existing-case",
+  "updatedAt": "2026-08-27T00:00:00Z",
+  "nodes": [
+    {
+      "id": " source / 1 ",
+      "type": "equipment",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "Coolant α",
+        "kind": "source",
+        "status": "draft",
+        "validity": "UNKNOWN",
+        "parameters": {
+          "temperature": {
+            "label": "Temperature",
+            "quantity": {
+              "value": 26.85,
+              "unit": "degC"
+            },
+            "description": "Affine temperature preserved"
+          },
+          "pressure": {
+            "label": "Pressure",
+            "quantity": {
+              "value": 101.325,
+              "unit": "kPa"
+            }
+          },
+          "massFlow": {
+            "label": "Mass flow",
+            "quantity": {
+              "value": 3600,
+              "unit": "kg/h"
+            }
+          }
+        }
+      },
+      "selected": true,
+      "width": 180,
+      "measured": {
+        "width": 180,
+        "height": 120
+      }
+    },
+    {
+      "id": "heater-1",
+      "type": "equipment",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "heater-1",
+        "kind": "heater",
+        "status": "draft",
+        "validity": "UNKNOWN",
+        "parameters": {
+          "duty": {
+            "label": "Duty",
+            "quantity": {
+              "value": 0.5,
+              "unit": "MW"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "radiator-1",
+      "type": "equipment",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "radiator-1",
+        "kind": "radiator",
+        "status": "draft",
+        "validity": "UNKNOWN",
+        "parameters": {
+          "targetTemperature": {
+            "label": "Target",
+            "quantity": {
+              "value": 500,
+              "unit": "K"
+            }
+          },
+          "emissivity": {
+            "label": "Emissivity",
+            "quantity": {
+              "value": 0.9,
+              "unit": "fraction"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "sink-1",
+      "type": "equipment",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "sink-1",
+        "kind": "sink",
+        "status": "draft",
+        "validity": "UNKNOWN",
+        "parameters": {}
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "source": " source / 1 ",
+      "sourceHandle": null,
+      "target": "heater-1",
+      "targetHandle": null,
+      "label": "Feed α",
+      "style": {
+        "stroke": "#123456"
+      },
+      "animated": true
+    },
+    {
+      "id": "edge-2",
+      "source": "heater-1",
+      "sourceHandle": "out-0",
+      "target": "radiator-1",
+      "targetHandle": "in-0"
+    },
+    {
+      "id": "edge-3",
+      "source": "radiator-1",
+      "sourceHandle": "out-0",
+      "target": "sink-1",
+      "targetHandle": "in-0"
+    }
+  ]
+}

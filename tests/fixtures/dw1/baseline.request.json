@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "v1alpha",
+  "draftId": "thermal-loop-concept",
+  "revision": 1,
+  "baseCaseId": null,
+  "updatedAt": "2026-08-27T00:00:00Z",
+  "nodes": [
+    {
+      "id": "source-1",
+      "type": "equipment",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "source-1",
+        "kind": "source",
+        "status": "draft",
+        "validity": "UNKNOWN",
+        "parameters": {
+          "temperature": {
+            "label": "Temperature",
+            "quantity": {
+              "value": 300,
+              "unit": "K"
+            }
+          },
+          "pressure": {
+            "label": "Pressure",
+            "quantity": {
+              "value": 101325,
+              "unit": "Pa"
+            }
+          },
+          "massFlow": {
+            "label": "Mass flow",
+            "quantity": {
+              "value": 1,
+              "unit": "kg/s"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "heater-1",
+      "type": "equipment",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "heater-1",
+        "kind": "heater",
+        "status": "draft",
+        "validity": "UNKNOWN",
+        "parameters": {
+          "duty": {
+            "label": "Duty",
+            "quantity": {
+              "value": 500000,
+              "unit": "W"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "radiator-1",
+      "type": "equipment",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "radiator-1",
+        "kind": "radiator",
+        "status": "draft",
+        "validity": "UNKNOWN",
+        "parameters": {
+          "targetTemperature": {
+            "label": "Target",
+            "quantity": {
+              "value": 500,
+              "unit": "K"
+            }
+          },
+          "emissivity": {
+            "label": "Emissivity",
+            "quantity": {
+              "value": 0.9,
+              "unit": "1"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "sink-1",
+      "type": "equipment",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "sink-1",
+        "kind": "sink",
+        "status": "draft",
+        "validity": "UNKNOWN",
+        "parameters": {}
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "source": "source-1",
+      "sourceHandle": "out-0",
+      "target": "heater-1",
+      "targetHandle": "in-0"
+    },
+    {
+      "id": "edge-2",
+      "source": "heater-1",
+      "sourceHandle": "out-0",
+      "target": "radiator-1",
+      "targetHandle": "in-0"
+    },
+    {
+      "id": "edge-3",
+      "source": "radiator-1",
+      "sourceHandle": "out-0",
+      "target": "sink-1",
+      "targetHandle": "in-0"
+    }
+  ]
+}

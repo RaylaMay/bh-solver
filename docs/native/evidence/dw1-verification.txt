@@ -1,0 +1,88 @@
+Date: 2026-09-11
+Scope: DW1 software boundary; no scientific V&V, native UI or release approval.
+Host: macOS 26.4.1 arm64; CPython 3.13.12.
+Repository has no initial commit; no staging/commit/reset/clean performed.
+
+Final Python verification, reported from the implementation agent's successful
+final execution in the repository root (compact stdout):
+$ .venv/bin/python -m pytest -q
+82 passed, 1 warning in 3.07s
+Exit code: 0
+Warning: existing Starlette/httpx deprecation.
+
+$ .venv/bin/python -m ruff check src tests
+All checks passed!
+Exit code: 0
+
+$ .venv/bin/python -m pyright --pythonpath .venv/bin/python
+0 errors, 0 warnings, 0 informations
+Exit code: 0
+
+Root-observed browser verification (working directory: web):
+$ npm run test
+
+> bh-pfd@0.1.0 test
+> vitest run
+
+
+ RUN  v2.1.9 /Users/mira/Documents/ChatGPT/BH Technical Docs/web
+
+ ✓ src/api/client.test.ts (3 tests) 4ms
+ ✓ src/validation.test.ts (2 tests) 2ms
+
+ Test Files  2 passed (2)
+      Tests  5 passed (5)
+   Start at  08:03:14
+   Duration  692ms (transform 39ms, setup 101ms, collect 58ms, tests 6ms, environment 661ms, prepare 143ms)
+
+
+Exit code: 0
+
+$ npm run lint
+
+> bh-pfd@0.1.0 lint
+> eslint .
+
+
+Exit code: 0
+
+$ npm run build
+
+> bh-pfd@0.1.0 build
+> tsc -b && vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 1746 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:   0.30 kB
+dist/assets/index-BKLWnf4b.css   23.09 kB │ gzip:   4.89 kB
+dist/assets/index-trF2HPiz.js   352.48 kB │ gzip: 113.48 kB
+✓ built in 693ms
+
+Exit code: 0
+
+Additional root verification:
+$ .venv/bin/ruff check docs/native/evidence/check_dw1_review.py
+All checks passed! (exit 0)
+
+$ .venv/bin/python docs/native/evidence/check_dw1_review.py
+Checked 27 Markdown files, 168 local links/fragments and balanced fences
+Checked dated inventory: {'preserved': 90, 'modified': 21, 'added': 52}
+Checked 9 preserved ADR bodies, annotated ADR-010 and 44 unique requirements
+Excluded unrelated live state: ['.obsidian/workspace.json', "Project leader's notes/User Interface/UI.md"]
+PASS: DW1 review integrity; no scientific or release approval implied
+Exit code: 0
+
+Review patch check, working directory:
+/var/folders/_f/q0xm23gd0xggjh64s2zz10sw0000gn/T/bh-dw1-qiumihcm/original
+$ git apply --check '/Users/mira/Documents/ChatGPT/BH Technical Docs/docs/native/evidence/dw1-changes.patch'
+Exit code: 0; no output. Dry-run check against the isolated pre-DW1 snapshot;
+no patch applied and no workspace Git state changed.
+
+Not run: Windows/Linux execution; native GUI/worker/crash/cancel tests; installers,
+licence ownership/compliance audit, scientific V&V, production or industrial validation.
+
+Intermediate failures and their disposition are retained in DW1_CHANGE_RECORD.md.
+Historical DW0 evidence is unchanged and is not substituted for DW1 results.

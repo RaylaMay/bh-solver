@@ -1,0 +1,60 @@
+BH NON-COMMERCIAL SOURCE-AVAILABLE LICENSE
+Version 1.0 — 2026-09-13
+
+Copyright © 2026 Rayla May. All rights reserved.
+
+1. Scope
+
+This license applies to the BH solver repository and to the source code,
+documentation, tests, scripts, web client, and other project material in it that
+is owned or controlled by Rayla May (the “BH Project”). It does not replace or
+alter the license of a third-party dependency, dataset, font, image, or other
+material whose own terms are identified in that material or in the repository's
+dependency records.
+
+2. Non-commercial permission
+
+Subject to this license, Rayla May grants permission to use, study, copy, modify,
+and share the BH Project, including modified source code, solely for
+non-commercial purposes. Copies and substantial portions must retain this
+license and the copyright notice. Modified files must be marked as modified.
+
+“Non-commercial purposes” include personal use, teaching, nonprofit activity,
+academic research, and evaluation that is not directed toward commercial
+advantage or monetary compensation.
+
+3. Commercial-use restriction
+
+You may not sell, sublicense for payment, deploy for payment, provide the BH
+Project as a paid service, host it for payment, resell it, bundle it into a paid
+product, or use it or a derivative for commercial advantage or monetary
+compensation. This includes internal production, engineering, design,
+operational, or decision-making use by a commercial organization; paid
+consulting, support, training, or hosted services; and use in the operation of a
+commercial facility.
+
+Any commercial use requires prior written permission from Rayla May.
+
+4. No implied rights
+
+This license grants no patent license and no right to use Rayla May's name,
+likeness, trademarks, service marks, or project branding except as needed to
+preserve attribution. A contribution or submission does not expand these terms
+unless Rayla May agrees in writing.
+
+5. Disclaimer
+
+THE BH PROJECT IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE, AND NONINFRINGEMENT. The BH Project is not qualified or approved for
+industrial, safety-critical, plant-operation, regulatory, or other consequential
+use.
+
+6. Limitation of liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, RAYLA MAY SHALL NOT BE LIABLE FOR ANY
+CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH
+THE BH PROJECT OR ITS USE.
+
+This is a source-available, non-commercial license and is not an OSI-approved
+open-source license.

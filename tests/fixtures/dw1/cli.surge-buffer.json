@@ -1,0 +1,33 @@
+{
+  "model": "lumped_thermal_buffer",
+  "outputs": {
+    "capacity_j": 3920000000.0,
+    "excess_power_w": 800000000.0,
+    "absorbed_energy_j": 2400000000.0,
+    "capacity_margin_j": 1520000000.0,
+    "maximum_surge_duration_s": 4.9,
+    "sensible_equivalent_final_temperature_k": 700.0
+  },
+  "equations": [
+    "E_capacity = m*cp*(T_max-T_initial) + m*latent_heat*usable_fraction",
+    "E_absorbed = max(Q_load-Q_rejection, 0) * duration",
+    "duration_max = E_capacity / max(Q_load-Q_rejection, 0)"
+  ],
+  "assumptions": [
+    "Lumped uniform buffer temperature",
+    "Constant average heat capacity",
+    "Constant thermal load and heat rejection during the assessed interval",
+    "No heat-transfer-rate limitation between the process loop and buffer"
+  ],
+  "warnings": [],
+  "checks": [
+    {
+      "name": "capacity_margin",
+      "residual": 0.0,
+      "tolerance": 0.0,
+      "units": "J",
+      "passed": true
+    }
+  ],
+  "valid": true
+}

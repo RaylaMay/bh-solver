@@ -1,0 +1,461 @@
+--- a/docs/ARCHITECTURE.md
++++ b/docs/ARCHITECTURE.md
+@@ -181,3 +181,44 @@
+ in the verification matrix complete and another engineer can implement the first
+ vertical slice without choosing formats, interfaces, dependency directions, or
+ failure behaviour.
++
++## DW0 proposed native architecture
++
++Status: **PROPOSED**, subject to [ADR-010](DECISIONS.md#adr-010--native-workstation-and-independent-uixsolver-boundary).
++The diagrams above remain the accepted `v1alpha` baseline. This target becomes
++normative only after DW0 approval and is not a description of current code.
++
++```mermaid
++flowchart LR
++    UI[Native UIX] -->|commands and result views| APP[Application services]
++    CLI[CLI adapter] --> APP
++    HTTP[Retained HTTP adapter] --> APP
++    APP -->|run port| HOST[Worker supervisor]
++    HOST -->|versioned messages| WORK[Compiler and solver worker]
++    WORK --> PROP[Model and property adapters]
++    APP -->|repository port| STORE[Immutable JSON and rebuildable index]
++    HOST -->|events and artifact references| APP
++    APP -->|context and proposals| AI[Optional AI port]
++    APP -->|explicit capture and transcription| AUDIO[Optional speech ports]
++```
++
++These are runtime calls/messages, not permission for service policy to import
++concrete adapters. Source dependencies point inward:
++
++| Layer | Allowed dependencies | Enforcement planned |
++|---|---|---|
++| Neutral boundary | Standard library and individually reviewed schema/value types | Imports in an environment without Qt, Pint or numerical backends |
++| UIX | Neutral DTOs/commands and desktop-only presentation libraries | Recursive import and independent UI build tests |
++| Application policy | Neutral/domain contracts and declared repository/run/provider ports | Reject concrete Qt, solver, persistence and provider imports |
++| Worker host | Worker protocol and kernel composition | Version fixtures and malformed-message rejection |
++| Kernel and numerical/property adapters | Existing domain contracts and inward numerical ports | Tests in an environment without Qt, AI or speech dependencies |
++| Composition root | Concrete adapters needed to bind the declared ports | Small, explicitly enumerated wiring modules; no engineering policy |
++
++The UI process retains editing/layout state; application services own use-case
++policy; the worker owns compile/evaluate state. The full accepted calculation
++artifact is authoritative; bounded/decimated telemetry is presentation only.
++The current `core.quantity` imports Pint, so re-exporting `core` would not create
++the proposed neutral boundary. Move no source families until DW1 fixtures exist.
++
++See [DW0 impact and sequence](native/DW0_REVIEW.md) for the current discrepancies,
++the staged in-process run port, mock desktop services and later worker transition.
+--- a/docs/CONTRACTS.md
++++ b/docs/CONTRACTS.md
+@@ -242,3 +242,67 @@
+ Malformed HTTP shapes return `422`. A well-formed but incomplete flowsheet returns
+ `200` with engineering diagnostics. A run attempt produces an immutable core
+ `RunResult`, including validation or evaluation failures.
++
++## DW0 proposed boundary contract work
++
++Status: **PROPOSED design scope**, governed by ADR-010. No schema, codec, public
++type or persisted artifact changes in DW0. DW1 must supply exact typed schemas,
++golden JSON fixtures and review before these shapes become public contracts.
++
++| Family | Required proposed content | Freeze/implementation gate |
++|---|---|---|
++| Command envelope | Independently named command schema version, stable command name, request ID, actor/profile, target revision and hashes when relevant, typed parameters | DW1 |
++| Command outcome | Request ID, typed accepted/rejected/completed outcome, stable diagnostic codes and affected object/field, artifact references; no combined scientific success flag | DW1 |
++| Validation receipt | Exact engineering hash and hash-scheme version, revision identity, catalogue/property/configuration identities, diagnostics and DOF; changes to calculation inputs or capabilities stale it | DW1 |
++| Presentation document | Version, flowsheet object IDs, positions/routes/viewport/labels/layout; explicit mapping to existing React DTO extension fields | DW1/DW3 |
++| Worker negotiation | `WorkerHello`, protocol version, capabilities, backend/version availability, worker session identity | DW4 |
++| Run request/admission | `RunJob`, immutable case/revision references and verified hashes, run/request IDs, explicit solver configuration; `RunAccepted` acknowledges that exact job | DW4 |
++| Worker events | Run/session/request identity, ordered sequence, `RunProgress`, `RunDiagnostic`, `RunCompleted`, `RunFailed`, `RunCancelled`, immutable artifact references | DW4 |
++| Worker control | `CancelRun` with safe-boundary semantics; sanitized `WorkerFault`; mismatch, malformed, duplicate, late and out-of-order message handling | DW4 |
++| AI participant/session | Identity, provider/model/version, exact question/context hashes, profile, assumptions/evidence, proposed ChangeSet/scenario, uncertainty/dissent, tool/run ledger and human disposition | DW6/DW8 |
++| Transcript | Identity/mode/timestamps/locale, optional audio reference and retention state, provider/version, original/edited/submitted text and explicit submission links | DW7 |
++
++The command inventory covers case/draft create/open/save/clone/import/export,
++equipment add/remove/configure/connect/disconnect, presentation move/route,
++validate/start/cancel/inspect run, select/compare revision/run, propose/review/apply
++ChangeSet, attach AI context, and record/stop/transcribe/edit/submit transcript.
++Commands unavailable in an implemented phase return an explicit capability
++diagnostic; listing a command does not implement or authorize it.
++
++### Identity, versioning and compatibility constraints
++
++- Preserve the current canonical JSON codec and SHA-256 meaning. A current
++  `CaseDefinition` includes names/title in its artifact hash. DW1 must define an
++  explicit engineering-input projection or versioned presentation separation;
++  silently dropping fields from `contract_digest` is prohibited.
++- Preserve current `PfdDraftDto`, camel-case HTTP envelopes, stable ID/handle mapping,
++  supported extension fields, display-unit values and existing artifact readers.
++  Browser DTOs are not the shared neutral DTOs. Convert at the adapter boundary.
++- New command/worker version fields are independent of artifact `schema_version`
++  and HTTP `apiVersion`. Unsupported versions fail visibly before executing work.
++  Additive envelope definitions do not imply that existing strict domain schemas
++  accept new fields. Incompatible domain changes require a new version, migration
++  fixtures, provenance and approval; retain old artifacts byte-for-byte.
++- Do not import the Pint-backed `core.Quantity` into UIX. A neutral quantity DTO
++  carries finite value/unit text; reviewed application/domain conversion owns unit
++  semantics. Never implement engineering unit conversion equations in widgets.
++- Persist run admission before worker execution; retries of admission must not
++  create duplicate runs. A lost reply is reconciled by request/run identity and
++  never by replaying Run. Every allocated attempt needs an auditable terminal
++  outcome, including cancellation or worker loss.
++- Current `ConvergenceStatus` lacks cancellation and `RunResult` lacks a full run
++  manifest. Define an independently versioned lifecycle/manifest artifact or an
++  approved domain migration before DW4; do not insert `CANCELLED` into the old enum
++  or describe an interrupted run as converged. The four scientific dimensions
++  stay separate and may remain unknown/not checked.
++- Worker framing, byte/queue limits, supported-version negotiation, cancellation
++  races and artifact-write ownership require protocol fixtures before DW4. Do not
++  persist decimated telemetry as the full trajectory. Binary sidecars need ADR-009's
++  separate format decision before any large dynamic arrays become authoritative.
++
++Minimum compatibility fixtures: canonical case/revision/run byte round-trip;
++React draft with extension fields and units; DTO-to-core mapping; schema rejection;
++unchanged inputs with presentation-only movement; engineering edit and stale
++validation; four-status truth table; failed/cancelled attempt with last-valid
++preservation; duplicate command and version mismatch. Migration must write a new
++artifact with source identity and never overwrite the original.
+--- a/docs/DECISIONS.md
++++ b/docs/DECISIONS.md
+@@ -1,6 +1,8 @@
+ # Architecture Decision Record
+ 
+-All decisions are accepted for `v1alpha`. Reversal requires a superseding ADR.
++ADR-001 through ADR-009 are accepted for `v1alpha`. Reversal requires a
++superseding ADR. ADR-010 below is **PROPOSED**; its presence does not change the
++accepted baseline or record owner approval.
+ 
+ ## ADR-001 — Canonical units
+ 
+@@ -95,3 +97,83 @@
+ 
+ **Reason.** Human-inspectable artifacts and rebuildable indexes reduce lock-in and
+ improve recovery.
++
++## ADR-010 — Native workstation and independent UIX/solver boundary
++
++**Status:** PROPOSED, 2026-09-10. Owner/steward disposition: pending.
++**Would supersede:** ADR-008's browser-primary technology choice upon approval.
++If a bundled Qt desktop is selected, it would also introduce an explicitly
++reviewed desktop-distribution exception to ADR-006's user-installed-only policy
++for non-permissive adapters. ADR-006's permissive default kernel rule is retained.
++ADR-001 through ADR-009 remain effective until that disposition is recorded.
++
++**Context.** The owner requests an installed engineering workstation requiring no
++browser, terminal, developer runtime installation, or manual server startup in
++normal graphical use. The current React/FastAPI slice works but its endpoints own
++application orchestration. Its observed limitations are recorded in the
++[DW0 parity inventory](native/BROWSER_PARITY.md). Passing those existing tests
++alone would not demonstrate native parity or the required failure behaviour.
++
++**Proposed decision.**
++
++1. Make native UIX, CLI and any retained HTTP adapter peers over neutral, versioned
++   commands, result DTOs and typed events. UIX and solver implementations have no
++   dependency on one another. A composition root wires concrete adapters to ports;
++   application policy depends on contracts and ports only.
++2. Keep scientific calculations, graph compilation, properties and solving in the
++   kernel/worker. UIX displays returned quantities and statuses and owns only
++   interaction and presentation state. Shared DTOs contain no Qt, Pint, NumPy,
++   SciPy, NetworkX or concrete backend objects.
++3. Use application services for revisions, exact-content validation, run admission,
++   artifact persistence, last-valid selection and comparison. A supervised worker
++   performs compile/evaluate work; property calls within numerical loops stay in
++   that worker. A single installer may contain separate processes.
++4. Preserve explicit Validate and Run, immutable engineering artifacts, all four
++   independent scientific status dimensions, retained unsuccessful attempts and
++   last-valid behaviour. Restart, reconnect and presentation recovery never replay
++   Run or approve a case. Presentation edits do not stale engineering validation.
++5. Evaluate PySide6/Qt 6 Widgets, a custom design system and QGraphicsView after
++   the licence/platform decisions below. This proposal selects no Qt release,
++   accelerator, benchmark target, packaging tool, AI provider or speech provider.
++6. Retain React/FastAPI through native parity, compatibility, migration and rollback
++   acceptance. HTTP's eventual installed-product role is a separate owner choice.
++7. Preserve AI profile/ChangeSet authority, typed-text capability and separate
++   optional audio, transcription and conversation ports. This ADR grants no new
++   scientific approval, industrial fitness, data-upload or training authority.
++
++**Contract/versioning plan.** Keep current canonical `v1alpha` artifact bytes,
++hashing and HTTP meanings unchanged during extraction. Introduce independently
++named command and worker schema versions with golden fixtures and mismatch
++diagnostics. Do not alias the existing Pint-backed `core` package as the neutral
++boundary. The [contract proposal](CONTRACTS.md#dw0-proposed-boundary-contract-work)
++identifies the hash, cancellation, manifest and migration decisions required
++before their implementation; it is not a frozen wire schema. Incompatible artifact
++changes require a new schema version, migration fixtures and steward review.
++Large-array storage requires a separate ADR under ADR-009.
++
++**Rationale and alternatives.** An adapter/service/worker separation supports the
++owner's native workflow and independent replacement without changing model
++equations. Continuing browser-only delivery does not meet the stated interaction
++goal. Embedding the current browser may aid rollback but does not establish the
++requested native workflow. Putting the solver in widgets violates independence
++and fault containment. A broad source move adds risk before contract fixtures
++exist. Another native toolkit remains an option if the Qt licence or rendering
++gate fails; no comparative performance conclusion has been established.
++
++**Consequences.** Additional message, supervision and compatibility tests are
++required. Presentation persistence and engineering identity must be separated
++explicitly. Bundling a desktop runtime changes distribution obligations even
++though kernel dependencies remain permissive. Reference fixtures remain
++`BLOCKED_EVIDENCE / TEST FIXTURE ONLY`.
++
++**Acceptance and rollout.** Approve the boundary, contract-versioning plan and
++[parity/retirement checklist](native/BROWSER_PARITY.md), and record primary/release
++platforms and a reviewed licence posture in the [decision register](native/DECISION_POINTS.md).
++Only then start DW1. DW1 first introduces ports and an in-process implementation
++for browser compatibility; DW2 uses a mock run port; DW4 adds the supervised
++worker. No production Qt adoption occurs before its licence gate. DW9 retirement
++requires witnessed workflows and a tested rollback, not this ADR's acceptance.
++
++**Review record:** [DW0 package](native/DW0_REVIEW.md) and
++[Appendix A change record](native/CHANGE_RECORD.md). No approver, approval date or
++gate completion is inferred from this proposal.
+--- a/docs/DEPENDENCY_REGISTER.md
++++ b/docs/DEPENDENCY_REGISTER.md
+@@ -58,3 +58,26 @@
+ - Wolfram is deferred for independent symbolic/numerical checking.
+ - GitHub is deferred until a remote review workflow exists.
+ - Codex Security is deferred until API/UI and dependency surface warrant it.
++
++## DW0 proposed desktop dependency review
++
++No packages or lock files change in DW0. The following are candidates, not adopted
++dependencies. The [decision brief](native/DECISION_POINTS.md) records primary
++sources checked on 2026-09-10 and the unresolved owner licence/platform choices.
++
++| Candidate | Boundary | Licence/data review required before adoption |
++|---|---|---|
++| PySide6, Shiboken6, Qt Core/Gui/Widgets and platform plugins | Desktop only | Select exact versions, module/binary inventory, open-source compliance or commercial terms; inspect third-party notices and redistribution obligations |
++| Qt OpenGLWidgets / optional Qt Quick | Rendering spike only | Separate module/plugin inventory and renderer evidence; no default acceleration claim |
++| `pyside6-deploy` / Nuitka toolchain | Build/distribution only | Review tool, bundled runtime/plugin licences and generated payload; do not infer signing, worker packaging or compliant library replacement from executable creation |
++| Spellcheck adapter | Desktop text port | Select code separately from technical dictionaries, dictionaries' redistribution terms and user additions |
++| Audio capture adapter | Desktop device port | Package/platform permissions and code licence; retention is a separate owner policy |
++| AI and transcription adapters | Optional provider ports | SDK code licences, model weights/service terms, context policy and audio/transcript retention; no provider selected |
++
++ADR-006 still excludes non-permissive dependencies from the default kernel and
++requires explicit optional installation of such adapters. Bundling a required Qt
++desktop therefore needs the proposed ADR-010 distribution exception and a recorded
++licence posture; placing Qt in an extra is not sufficient approval. Exact component
++SPDX identifiers and hashes must be recorded for the chosen payload, separately
++from code, model weights, scientific data and dictionaries. No legal-compliance or
++release-platform approval is asserted by this register.
+--- a/docs/FAILURE_RECOVERY.md
++++ b/docs/FAILURE_RECOVERY.md
+@@ -47,3 +47,24 @@
+ cannot advance the last-valid pointer or claim reproducibility. Industrial profile
+ disallows ephemeral runs.
+ 
++## DW0 proposed desktop and worker additions
++
++Status: **PROPOSED**, pending ADR-010 and exact DW4/DW6/DW7 protocol contracts.
++These rows add required target behaviour; they do not certify current recovery.
++
++| Failure | Target containment and retained evidence | Recovery |
++|---|---|---|
++| Worker crash or heartbeat/IPC loss | Supervisor retains admitted run identity, immutable source and received diagnostics; terminal interruption/fault record cannot advance last-valid selection | Reconcile artifacts by identity/hash; restart worker capability negotiation, never replay Run |
++| Worker timeout or cancellation | Distinct lifecycle state with safe-boundary cancellation; preserve partial diagnostics separately from acceptable results | New explicit run only; define completion/cancellation race fixtures before implementation |
++| Malformed, incompatible, duplicate or late message | Reject/quarantine by version, session, run ID and sequence; bound queues/frames; preserve sanitized fault | Reconcile current job; no speculative completion or silent version/backend substitution |
++| Artifact commit/index failure after computation | Separate calculation completion from durable-save acknowledgement; preserve source and previous last-valid result | Reconcile exact artifact/hash; no rerun as a save retry |
++| Desktop crash or damaged workspace layout | Application artifacts retained; only schema-checked presentation recovery is restored | Reset layout independently; no automatic validation, run or approval |
++| AI participant/provider failure | Retain each completed contribution, individual failure and bounded-resource ledger; no invented consensus | Explicit retry within approved limits and context identity |
++| Microphone denial, device loss or audio cancellation | Visible capture state and retention disposition; typed input stays capable | Explicit device/capture retry; no unnoticed recording or upload |
++| Transcription failure or correction | Preserve original/edited/submitted distinctions where retention is enabled; no implicit AI send | User edits or explicitly retries with a permitted provider; no provider fallback without authorization |
++
++Current implementation gaps include run IDs allocated at result construction,
++absence of a pre-run manifest/worker lifecycle, non-atomic browser draft writes and
++no automatic index-rebuild path. The [parity inventory](native/BROWSER_PARITY.md)
++assigns these follow-up work; existing passing persistence tests do not establish
++crash recovery or cancellation support.
+--- a/docs/INDUSTRY_DEVELOPMENT_STREAM.md
++++ b/docs/INDUSTRY_DEVELOPMENT_STREAM.md
+@@ -45,3 +45,19 @@
+ not proof of validation. Until an intended-use statement, quality system, applicable
+ standards, independent V&V, security controls, and release authority exist, the
+ application must reject attempts to approve or execute industrial-profile cases.
++
++## DW0 proposed AI and speech extension
++
++Status: **PROPOSED**, pending ADR-010 and the separately governed governed release.
++Native packaging does not relax the excluded-use statement above. Before enabling
++AI/speech in an industrial profile, a separately approved policy must identify
++permitted context classes, local/remote providers, data residency where required,
++retention/deletion/export, access and incident responsibilities. Audio capture,
++transcription and AI submission are separate attributable actions.
++
++Participant records must preserve identity/model version, attached-context hashes,
++assumptions, tool and solver runs, uncertainty/dissent and human disposition.
++Neither participant agreement nor solver output constitutes validation data or
++training permission. Any corpus, fine-tuning or production-model update requires
++its own provenance, independent review and release decision. No default provider,
++upload policy, retention duration or update frequency is selected in DW0.
+--- a/docs/MILESTONES.md
++++ b/docs/MILESTONES.md
+@@ -103,3 +103,30 @@
+ files owned, dependency changes, tests, and rollback plan. New features cannot be
+ smuggled into a refactor milestone; architecture-affecting discoveries create an
+ ADR proposal before implementation.
++
++## Proposed desktop workstream and DW0 handoff
++
++The [native action plan](NATIVE_WORKSTATION_ACTION_PLAN.md#12-phased-execution-plan)
++complements M0–M9; it does not renumber or approve scientific milestones.
++[DW0's review package](native/DW0_REVIEW.md) is prepared, with owner/steward
++decisions pending. No DW gate is recorded as passed by this addition.
++
++| Phase | Dependency and required exit evidence |
++|---|---|
++| DW0 | Review ADR-010, licence/platform posture, boundary versioning and browser parity/retirement checklist; record owner/steward disposition |
++| DW1 | After DW0: neutral commands/services, thin HTTP/CLI adapters, golden compatibility fixtures and import tests; preserve legacy demo CLI behaviour |
++| DW2 | After DW1 and toolkit approval: native shell/shared commands, mock run port and keyboard-accessible draft workflow |
++| DW3 | After DW2: renderer evidence, native PFD, presentation round-trip, undo/redo and PFD acceptance; reconcile full run tests with DW4/DW5 integration |
++| DW4 | After DW3: worker negotiation/supervision, crash/cancel/timeout/malformed-message tests, full artifact and telemetry separation; no new phase physics |
++| DW5 | After DW4: workbooks, independent statuses, failed/last-valid/result comparison and complete draw-to-export acceptance |
++| DW6 | After DW5 and AI context/provider policy: text workspace and attributable ChangeSet review/authority tests |
++| DW7 | After DW6 and speech/retention policy: optional conversation/transcript-first workflows and failure/privacy tests |
++| DW8 | After DW7: bounded independent participants, dissent and audit reconstruction; engineered scenarios depend on M8's governed study contracts |
++| DW9 | After DW8: approved-platform installers, compatibility/migration/rollback and witnessed parity; browser retirement only on explicit acceptance |
++
++DW3 can verify PFD commands using mock services; final end-to-end run parity is
++repeated at DW5/DW9 with the worker. This proposed staging resolves the plan's DW3
++PFD acceptance dependency on later run/result work without claiming early parity.
++Dynamics, binary trajectories, controls and signal diagrams remain gated by M7/M9
++and ADR-009 regardless of desktop progress. M0's existing `GATE-*` review records
++remain outstanding and are not silently completed by DW0 preparation.
+--- a/docs/NATIVE_WORKSTATION_ACTION_PLAN.md
++++ b/docs/NATIVE_WORKSTATION_ACTION_PLAN.md
+@@ -10,6 +10,12 @@
+ not an accepted architecture decision, does not supersede an ADR by itself, and does
+ not approve scientific models or industrial use. The first execution gate is formal
+ review and approval of a superseding ADR.
++
++DW0 execution record (2026-09-10): the [review package](native/DW0_REVIEW.md),
++[proposed ADR-010](DECISIONS.md#adr-010--native-workstation-and-independent-uixsolver-boundary)
++and [browser parity inventory](native/BROWSER_PARITY.md) are prepared. Owner/steward
++approval, supported platforms and licence posture remain pending. This records
++preparation only; no production migration or desktop gate has been approved.
+ 
+ ## 1. How the receiving project chat should use this plan
+ 
+--- a/docs/PFD_SPECIFICATION.md
++++ b/docs/PFD_SPECIFICATION.md
+@@ -70,3 +70,25 @@
+ is visible; colour is never the only signal. Acceptance requires draw, connect,
+ edit, validate, run, save/reload, compare, deliberate validation failure, deliberate
+ solve failure, and preservation of the last valid result.
++
++## DW0 proposed native interpretation
++
++Status: **PROPOSED**, pending ADR-010. The action, state and accessibility
++requirements above are the behaviour baseline for either client. The current
++FastAPI/React implementation is retained. Native-specific presentation shall use
++a dockable navigator/catalogue, flowsheet, inspector, workbooks, diagnostics and
++separate active/failed/last-valid result views, through shared application commands.
++Menus, buttons, context menus, command palette and keyboard bindings invoke the
++same command and share its enablement/authority rules.
++
++The [browser parity inventory](native/BROWSER_PARITY.md) separates implemented
++features from missing evidence and noncompliant behaviour. In particular, native
++acceptance requires exact-content validation, presentation edit classification,
++unit-preserving display changes, connected-delete confirmation, four independent
++result statuses and inspectable failed attempts. Reproducing current gaps does not
++satisfy parity. Add undo/redo, keyboard-only acceptance and layout recovery in DW3;
++rendering choice and performance remain subject to the DW3 benchmark gate.
++
++Full dynamics, controls, signal diagrams and HAZOP overlays stay unavailable until
++their underlying contracts and scientific milestones pass. AI/speech panels use
++the same proposal authority as typed commands and cannot fabricate overlays.
+--- a/docs/README.md
++++ b/docs/README.md
+@@ -25,6 +25,11 @@
+   — proposed handoff plan; it is not an accepted ADR.
+ - [Reusable project continuation prompt](PROJECT_CONTINUATION_PROMPT.md)
+   — bootstrap context for a new BH development chat.
++- [DW0 native workstation review package](native/DW0_REVIEW.md)
++  — prepared proposal with browser parity, implementation gaps, licence/platform
++  decision points and verification evidence; DW0 approval remains pending.
++- [Proposed ADR-010](DECISIONS.md#adr-010--native-workstation-and-independent-uixsolver-boundary)
++  — proposed successor to ADR-008; accepted ADR history remains in force.
+ 
+ ## Governance
+ 
+--- a/docs/REQUIREMENTS_VERIFICATION.md
++++ b/docs/REQUIREMENTS_VERIFICATION.md
+@@ -23,13 +23,13 @@
+ | CORE-006 | Units close mass, components, and energy to declared tolerances. | First-slice mass/energy residuals and prototype hand fixtures pass; full catalogue V&V remains. | IMPLEMENTED |
+ | CORE-007 | Property backend can be swapped without unit or case change. | Polynomial provider substitution test passes unchanged case/unit contracts. | VERIFIED |
+ | CORE-008 | Convergence, closure, physical, and correlation statuses remain separate. | Contract truth table and valid/extrapolated/invalid property tests pass. | VERIFIED |
+-| CORE-009 | Solver failures return diagnostics and preserve the last-valid pointer. | Failed-run index and UI fallback tests pass; timeout/restart injection remains. | IMPLEMENTED |
++| CORE-009 | Solver failures return diagnostics and preserve the last-valid pointer. | Failed-run index test passes; browser retains an in-memory prior result but overwrites canvas overlays. No UI fallback test found; see DW0 GAP-03. Timeout/restart injection remains. | IMPLEMENTED |
+ | CORE-010 | Run artifacts and manifests are immutable and content-addressed. | Hash, corruption, duplicate and immutable-index tests pass; full environment manifest remains. | IMPLEMENTED |
+-| PFD-001 | User can add, move, connect, edit, and remove first-slice equipment. | Browser walkthrough, TypeScript build and component tests pass. | IMPLEMENTED |
+-| PFD-002 | Validate and Run are explicit, with stale validation blocking Run. | Explicit actions and local/server validation pass; complete stale-state machine remains. | IMPLEMENTED |
+-| PFD-003 | PFD and case round-trip without UI data entering engineering state. | PFD save/load and DTO-to-case mapping pass; canonical case-to-PFD export remains. | IMPLEMENTED |
+-| PFD-004 | Results overlay quantities, warnings, and all validity categories. | Typed overlays and colour-independent labels implemented; visual category matrix remains. | IMPLEMENTED |
+-| PFD-005 | Revision/run compare and last-valid fallback are visible. | In-session comparison and last-valid preservation implemented; persisted run picker remains. | IMPLEMENTED |
++| PFD-001 | User can add, move, connect, edit, and remove first-slice equipment. | Handlers inspected; TypeScript build passes. Available browser tests cover client/preflight only; no component or witnessed walkthrough record found. Connected-delete confirmation remains (DW0 GAP-04). | IMPLEMENTED |
++| PFD-002 | Validate and Run are explicit, with stale validation blocking Run. | Explicit actions/local and server checks exist, but Run is disabled only while busy and has no prior-validation hash guard (DW0 GAP-01). Presentation moves also clear validation. | IMPLEMENTED |
++| PFD-003 | PFD and case round-trip without UI data entering engineering state. | PFD save/load test passes; position excluded from case hash in DW0 probe, but label changes it. No standalone canonical PFD contract, viewport field or case-to-PFD export (GAP-02/GAP-07). | IMPLEMENTED |
++| PFD-004 | Results overlay quantities, warnings, and all validity categories. | UI displays formatted metrics and per-node validity; HTTP/UI omit run-level physical/correlation fields and full four-status presentation (DW0 GAP-03). Visual matrix remains. | IMPLEMENTED |
++| PFD-005 | Revision/run compare and last-valid fallback are visible. | In-memory prior-run displayed-string comparison exists; failed-attempt selection, persisted picker and protected last-valid canvas remain (DW0 GAP-03/GAP-07). | IMPLEMENTED |
+ | AI-001 | Review profile produces approval-required ChangeSets only. | Approval-required and immutable-baseline tests pass. | VERIFIED |
+ | AI-002 | Exploration changes isolated drafts and records rationale/runs. | Limit and isolated-revision tests pass; iterative run ledger remains. | IMPLEMENTED |
+ | AI-003 | Narrative placeholders remain speculative and cannot be promoted. | Hidden-profile rejection and visible run-warning behaviour implemented. | IMPLEMENTED |
+@@ -39,3 +39,37 @@
+ The architecture gate is not approved merely because `GATE-*` rows say
+ `IMPLEMENTED`; the steward must review them and change them to `VERIFIED`. New
+ requirements receive stable IDs and cannot replace failed evidence with prose.
++
++## DW0 evidence correction
++
++The 2026-09-10 [browser inventory](native/BROWSER_PARITY.md) and
++[change record](native/CHANGE_RECORD.md) identify the current automated evidence
++and source observations. The evidence corrections above do not mark any
++requirement newly VERIFIED or remove its acceptance obligation. In particular,
++five client/preflight tests are not component, accessibility or browser-parity
++tests. Existing GATE approval records remain pending.
++
++## Proposed native requirements
++
++These reserved plan IDs are recorded as **PLANNED**, pending steward adoption
++under ADR-010. No row is evidence of implementation or approval. See the
++[DW0 package](native/DW0_REVIEW.md) for migration/rollback acceptance and staging.
++
++| ID | Proposed requirement | Required evidence and phase | Status |
++|---|---|---|---|
++| UIX-ARCH-001 | UIX and solver have no direct dependency in either direction. | Recursive import checks and independent UI/kernel environments, DW1–DW4 | PLANNED |
++| UIX-ARCH-002 | Peers communicate only through versioned neutral contracts. | Golden DTO/command/worker fixtures, malformed/version mismatch and compatibility tests, DW1/DW4 | PLANNED |
++| UIX-DIST-001 | Normal use needs no browser, terminal or manual server startup. | Clean-machine witnessed workflow on every approved platform, DW9 | PLANNED |
++| UIX-CMD-001 | Buttons, menus, hotkeys, palette, AI and CLI share application commands. | Mapping, enablement, identity and authority tests, DW1/DW2/DW6 | PLANNED |
++| UIX-PFD-001 | Native PFD satisfies browser parity and outstanding PFD requirements. | All parity rows disposed and PFD suite plus witnessed workflow, DW3/DW5/DW9 | PLANNED |
++| UIX-PERF-001 | Select rendering from representative measured workloads. | Owner-approved fixture/targets, latency/frame/correctness report on required OS/GPU classes, DW3 | PLANNED |
++| UIX-RUN-001 | Runs execute in a supervised independent worker. | Admission, crash/cancel/timeout, persistence fault and no-replay fixtures, DW4 | PLANNED |
++| UIX-RUN-002 | Solver stepping and display refresh are independent. | Bounded queue tests and complete-artifact comparison with decimated display; binary format gate for dynamic arrays, DW4/M7 | PLANNED |
++| UIX-A11Y-001 | Essential operations are keyboard reachable and colour independent. | Keyboard/focus/status matrix and witnessed supported-platform checks, DW2/DW3/DW5 | PLANNED |
++| UIX-AI-001 | AI is an attributable participant with bounded authority. | Profile, stale-context, ChangeSet approval and budget tests, DW6/DW8 | PLANNED |
++| UIX-AI-002 | Multiple participants preserve individual output and dissent. | Partial-failure, independent-output and non-consensus fixtures, DW8 | PLANNED |
++| UIX-VOICE-001 | Optional conversation mode uses normal AI authority. | Voice-to-proposal test plus typed-only equivalence, DW7 | PLANNED |
++| UIX-VOICE-002 | Transcript mode supports editing before send and retention control. | Original/edited/submitted text, explicit-send, deletion/export and provider/device-loss tests, DW7 | PLANNED |
++| UIX-AUDIT-001 | Material AI actions link input, context, proposal, run and human disposition. | Reconstruction from retained artifacts without private reasoning, DW6–DW8 | PLANNED |
++| UIX-DOC-001 | Material changes include editable intent/rationale and verification records. | Appendix A review; CI artifact check where practical, all phases | PLANNED |
++| UIX-DOC-002 | Numerical implementations link to cards, equations, units and V&V. | Existing model lifecycle and independent traceability review; DW work cannot grant promotion | PLANNED |
+--- a/docs/VOCABULARY.md
++++ b/docs/VOCABULARY.md
+@@ -44,3 +44,17 @@
+ must state whether they mean schema, convergence, closure, physical, or correlation
+ validity.
+ 
++## DW0 proposed additions
++
++These terms accompany proposed ADR-010 and are not yet implemented contracts.
++
++| Term | Proposed meaning |
++|---|---|
++| UIX | Replaceable interaction/presentation adapter; contains no engineering calculations or solver objects. |
++| Application command | Versioned, attributable request for one use case, with explicit target identity and typed outcome. |
++| Worker | Supervised process executing compile/evaluate work through a negotiated protocol; not an engineering authority separate from the kernel. |
++| Engineering content hash | Versioned identity of calculation-affecting inputs; its projection must be specified before implementation and must not redefine existing artifact hashes. |
++| Telemetry | Bounded presentation samples/events; never a replacement for complete calculation artifacts. |
++| Run lifecycle state | Queued/accepted/running/terminal execution state, separate from convergence, closure and validity. |
++| Transcript-first | Record/transcribe/edit workflow whose text is sent to an AI participant only by explicit user action. |
++| Parity baseline | Observed browser behaviour plus separately recorded requirement gaps; defects are not desired native behaviour. |

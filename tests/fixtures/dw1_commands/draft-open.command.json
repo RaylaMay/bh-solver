@@ -1,0 +1,1 @@
+{"$type":"CommandRequest","actor_id":"owner:test","command_name":"draft.open","parameters":{"$type":"OpenDraftParameters","draft_id":"draft:example"},"profile":"REVIEW","request_id":"request:fixture","schema_version":"bh-command-v1alpha"}

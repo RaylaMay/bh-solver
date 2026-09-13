@@ -1,0 +1,32 @@
+{
+  "model": "segmented_solid_radiator",
+  "outputs": {
+    "duty_w": 7200000.0,
+    "required_planform_area_m2": 65.81178310696711,
+    "inlet_temperature_k": 1200.0,
+    "outlet_temperature_k": 900.0,
+    "average_heat_flux_w_m2": 109402.90112330626
+  },
+  "equations": [
+    "Q_dot = m_dot * (h_in - h_out)",
+    "q''_rad = N_sides * emissivity * sigma * (T_surface^4 - T_sink^4)",
+    "A = sum(Q_dot_segment / q''_segment)"
+  ],
+  "assumptions": [
+    "Coolant temperature equals local radiator surface temperature",
+    "Unobstructed view to a uniform radiative sink",
+    "No solar, planetary infrared, or reflected environmental load",
+    "No piping, header, armour, deployment, or structure mass model"
+  ],
+  "warnings": [],
+  "checks": [
+    {
+      "name": "segmented_enthalpy_balance",
+      "residual": 0.0,
+      "tolerance": 0.007200000000000001,
+      "units": "W",
+      "passed": true
+    }
+  ],
+  "valid": true
+}

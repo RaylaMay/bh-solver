@@ -87,6 +87,16 @@ Starlette/httpx warning. Ruff, formatting, Pyright, the project authority/link
 check, and the scoped diff check passed. Offline source and wheel builds included
 the new portable filename module.
 
+That hosted run passed the browser, Ubuntu and macOS jobs, and all 230 tests plus
+Ruff, formatting and Pyright on Windows. Its Windows project-authority step then
+detected that checkout line-ending conversion had changed byte-significant public
+evidence in the working tree. `.gitattributes` now marks `docs/native/evidence/**`
+as non-text so Git preserves those recorded bytes across checkout platforms. The
+baseline checker and its hashes remain unchanged.
+The independent [evidence-checkout review](evidence/dw4-dw5-github-sync-2026-09-23/windows-evidence-checkout-review.md)
+reports Standards PASS and Spec PASS with zero findings after a disposable Windows
+line-ending-policy checkout probe.
+
 ## Authorized sync operation
 
 Use `codex/dw4-dw5-remediation` from the existing main history, commit the reviewed

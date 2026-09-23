@@ -43,7 +43,8 @@ base commit; it does not publish the remediated candidate or validate hosted CI.
 Fresh verification after the guarded integration produced these results:
 
 - `QT_QPA_PLATFORM=offscreen .venv/bin/python -m pytest -q`: 228 passed in
-  40.63 seconds; one upstream Starlette/httpx deprecation warning.
+  39.19 seconds after the hosted-CI repair; one upstream Starlette/httpx
+  deprecation warning.
 - `.venv/bin/ruff check src tests tools`: passed.
 - `.venv/bin/ruff format --check src tests tools`: 114 files already formatted.
 - `.venv/bin/pyright`: zero errors, warnings or information messages.
@@ -62,6 +63,15 @@ Fresh verification after the guarded integration produced these results:
 The 171-file tested source manifest matched after integration. These are software
 checks. They do not close the native witness, ownership/reconnection, release,
 scientific V&V or engineering-approval gates listed in the remediation record.
+
+The first hosted branch run exposed two environment prerequisites: Ubuntu lacked
+`libEGL.so.1`, and the GitHub macOS Python toolcache did not provide the dynamic
+CPython library required by the checkout-bound developer launcher. The workflow now
+installs `libegl1` on Linux. The macOS launcher module skips when Apple's developer
+tools are absent; its startup test additionally skips when the exact checkout Python
+has no dynamic runtime. The ownership-protection test still runs in the hosted macOS
+environment, and supported local environments execute both tests. That skip does not
+count as a native workstation witness or close the DW9 packaging gate.
 
 ## Authorized sync operation
 

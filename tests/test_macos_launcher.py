@@ -4,6 +4,7 @@ The witnessed Launch Services/Qt interaction is recorded separately. These tests
 require the current macOS developer toolchain; they do not certify an installer.
 """
 
+import json
 import plistlib
 import shutil
 import subprocess
@@ -15,12 +16,45 @@ import pytest
 from tools.make_macos_launcher import build_launcher
 
 ROOT = Path(__file__).parents[1]
+
+
+def _configured_python_has_dynamic_runtime() -> bool:
+    """Return whether the launcher-selected environment supports dlopen."""
+    executable = ROOT / ".venv/bin/python"
+    if not executable.is_file():
+        return False
+    probe = subprocess.run(
+        [
+            str(executable),
+            "-c",
+            "import json,sysconfig; "
+            "print(json.dumps([sysconfig.get_config_var('LIBDIR'), "
+            "sysconfig.get_config_var('LDLIBRARY')]))",
+        ],
+        capture_output=True,
+        check=False,
+        text=True,
+    )
+    if probe.returncode != 0:
+        return False
+    library_directory, library_name = json.loads(probe.stdout)
+    if not library_directory or not library_name:
+        return False
+    return (Path(library_directory) / library_name).is_file()
+
+
 pytestmark = pytest.mark.skipif(
     sys.platform != "darwin" or shutil.which("xcrun") is None,
     reason="local macOS launcher verification requires Apple's developer tools",
 )
 
 
+@pytest.mark.skipif(
+    sys.platform == "darwin"
+    and shutil.which("xcrun") is not None
+    and not _configured_python_has_dynamic_runtime(),
+    reason="launcher startup verification requires a dynamic CPython runtime",
+)
 def test_native_launcher_hosts_the_configured_python(tmp_path: Path) -> None:
     destination = tmp_path / "BH developer test.app"
     build_launcher(destination, ROOT)

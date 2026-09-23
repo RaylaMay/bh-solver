@@ -5,6 +5,7 @@ from __future__ import annotations
 import io
 import sys
 import threading
+from pathlib import Path
 
 import pytest
 
@@ -135,7 +136,7 @@ def test_supervisor_child_process_e2e_lifecycle() -> None:
     progress_events: list[c.WorkerProgressEvent] = []
     job = c.RunJob(
         job_id="job-100",
-        run_id="run-100",
+        run_id="run:100",
         case_id="test-case",
         revision_id=1,
         engineering_hash="mock_engineering_hash",
@@ -144,8 +145,10 @@ def test_supervisor_child_process_e2e_lifecycle() -> None:
     )
     outcome = supervisor.execute_job(job, on_progress=progress_events.append, timeout=5.0)
     assert isinstance(outcome, c.WorkerCompletedEvent)
-    assert outcome.run_id == "run-100"
+    assert outcome.run_id == "run:100"
     assert outcome.convergence == "converged"
+    assert ":" not in Path(outcome.staged_path).name
+    assert len(Path(outcome.staged_path).stem) == 64
     assert len(progress_events) >= 1
 
     # 3. Clean shutdown

@@ -73,6 +73,20 @@ has no dynamic runtime. The ownership-protection test still runs in the hosted m
 environment, and supported local environments execute both tests. That skip does not
 count as a native workstation witness or close the DW9 packaging gate.
 
+The next hosted run passed those three jobs and exposed a Windows portability bug:
+colon-bearing attempt and run IDs had been used directly as manifest and staging
+filenames. The adapter now derives deterministic SHA-256 filenames and keeps the
+stable ID authoritative inside JSON. A compatibility path reads legacy raw-ID
+attempt manifests where the filesystem permits them. This is a storage naming
+change only; it does not alter public IDs, wire schemas or artifact hashes.
+The independent [follow-up review](evidence/dw4-dw5-github-sync-2026-09-23/windows-portability-review.md)
+reports Standards PASS and Spec PASS with zero remaining findings. Hosted Windows
+execution remains the platform confirmation gate for this correction.
+The final local suite after that correction passed 230 tests with the same upstream
+Starlette/httpx warning. Ruff, formatting, Pyright, the project authority/link
+check, and the scoped diff check passed. Offline source and wheel builds included
+the new portable filename module.
+
 ## Authorized sync operation
 
 Use `codex/dw4-dw5-remediation` from the existing main history, commit the reviewed

@@ -83,6 +83,14 @@ virtual environment and build exclusions. No runtime cases, credentials or priva
 personal skills are added. The old remediation handoff's identifying local root
 was normalized to `<checkout>`; its original bytes remain in the intake backup.
 
+Hosted Windows verification exposed a remaining adapter defect: attempt and staged
+result filenames embedded colon-bearing stable IDs. Adapter-private filenames now
+use a deterministic SHA-256 name while the authoritative ID remains unchanged in
+the JSON contract. Persistence still reads legacy raw-ID manifests on filesystems
+that support them. Wire schemas, stable IDs and artifact hashes remain unchanged.
+The independent [Windows portability review](evidence/dw4-dw5-github-sync-2026-09-23/windows-portability-review.md)
+reports zero remaining Standards or Spec findings after its compatibility probe.
+
 ## Verification and review
 
 Fresh commands, environment, outcomes and source hashes are recorded in

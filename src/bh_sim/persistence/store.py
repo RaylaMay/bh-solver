@@ -13,6 +13,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from bh_sim.boundary.contracts import RunAttemptRecord
+from bh_sim.boundary.file_names import identifier_json_filename, is_windows_safe_filename
 from bh_sim.boundary.json_codec import boundary_from_json, boundary_json
 from bh_sim.core import CaseDefinition, DraftRevision, RunResult, StableId
 
@@ -414,7 +415,17 @@ class PersistenceStore:
         self.index = RunIndex(root_path / "index.sqlite3")
 
     def _attempt_path(self, attempt_id: str) -> Path:
-        """Validate the local manifest name without changing the wire ID."""
+        """Map a validated wire ID to a portable adapter-private filename."""
+        self._validate_attempt_id(attempt_id)
+        return self.attempts_dir / identifier_json_filename(attempt_id)
+
+    def _legacy_attempt_path(self, attempt_id: str) -> Path:
+        """Return the pre-portability raw-ID path for backward-compatible reads."""
+        self._validate_attempt_id(attempt_id)
+        return self.attempts_dir / f"{attempt_id}.json"
+
+    @staticmethod
+    def _validate_attempt_id(attempt_id: str) -> None:
         if (
             not attempt_id
             or any(
@@ -424,16 +435,33 @@ class PersistenceStore:
             or attempt_id in (".", "..")
         ):
             raise ValueError("Invalid attempt identifier")
-        return self.attempts_dir / f"{attempt_id}.json"
+
+    def _read_attempt_path(self, path: Path, expected_id: str | None = None) -> RunAttemptRecord:
+        value = boundary_from_json(path.read_text(encoding="utf-8"))
+        if not isinstance(value, RunAttemptRecord):
+            raise TypeError(f"Attempt manifest {path.name} is not a RunAttemptRecord")
+        if expected_id is not None and value.attempt_id != expected_id:
+            raise ValueError("Attempt manifest identity mismatch")
+        valid_names = {
+            self._attempt_path(value.attempt_id).name,
+            self._legacy_attempt_path(value.attempt_id).name,
+        }
+        if path.name not in valid_names:
+            raise ValueError("Attempt manifest filename does not match its identity")
+        return value
 
     def _read_attempt_manifest(self, attempt_id: str) -> RunAttemptRecord | None:
-        path = self._attempt_path(attempt_id)
-        if not path.exists():
-            return None
-        value = boundary_from_json(path.read_text(encoding="utf-8"))
-        if not isinstance(value, RunAttemptRecord) or value.attempt_id != attempt_id:
-            raise ValueError("Attempt manifest identity mismatch")
-        return value
+        winner: RunAttemptRecord | None = None
+        paths = [self._attempt_path(attempt_id)]
+        legacy_path = self._legacy_attempt_path(attempt_id)
+        if os.name != "nt" or is_windows_safe_filename(legacy_path.name):
+            paths.append(legacy_path)
+        for path in dict.fromkeys(paths):
+            if path.exists():
+                winner = _attempt_winner(
+                    winner, self._read_attempt_path(path, expected_id=attempt_id)
+                )
+        return winner
 
     def _write_attempt_manifest(self, attempt: RunAttemptRecord) -> None:
         """Publish a flushed sibling file atomically; leave the old winner on failure."""
@@ -528,10 +556,11 @@ class PersistenceStore:
 
     def list_attempts(self, case_id: str | None = None) -> tuple[RunAttemptRecord, ...]:
         records = {item.attempt_id: item for item in self.index.list_attempts()}
+        manifests: dict[str, RunAttemptRecord] = {}
         for path in self.attempts_dir.glob("*.json"):
-            item = self._read_attempt_manifest(path.stem)
-            if item is not None:
-                records[item.attempt_id] = item
+            item = self._read_attempt_path(path)
+            manifests[item.attempt_id] = _attempt_winner(manifests.get(item.attempt_id), item)
+        records.update(manifests)
         case_ids = (
             None
             if case_id is None
@@ -587,16 +616,19 @@ class PersistenceStore:
         for run, digest in runs:
             self.index.index_run(run, digest)
 
+        attempts: dict[str, RunAttemptRecord] = {}
         for path in sorted(self.attempts_dir.glob("*.json")):
             try:
-                data = path.read_text(encoding="utf-8")
-                attempt = boundary_from_json(data)
-                if not isinstance(attempt, RunAttemptRecord):
-                    raise TypeError(f"Attempt manifest {path.name} is not a RunAttemptRecord")
-                self.index.index_attempt(attempt)
+                attempt = self._read_attempt_path(path)
+                attempts[attempt.attempt_id] = _attempt_winner(
+                    attempts.get(attempt.attempt_id), attempt
+                )
             except Exception as exc:
                 sys.stderr.write(
                     f"Recovery warning: failed to index attempt manifest {path}: {exc}\n"
                 )
+
+        for attempt in attempts.values():
+            self.index.index_attempt(attempt)
 
         return len(cases) + len(revisions) + len(runs)

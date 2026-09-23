@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any, BinaryIO, Literal, cast
 
 from bh_sim.boundary import contracts as c
+from bh_sim.boundary.file_names import identifier_json_filename
 from bh_sim.boundary.worker_framing import read_frame, write_frame
 
 
@@ -216,7 +217,7 @@ def run_worker_loop(
                 corr = calculated.view.correlation_validity.lower()
                 staged_dir = Path(".bh/runtime/staged")
                 staged_dir.mkdir(parents=True, exist_ok=True)
-                staged_file = staged_dir / f"{msg.run_id}.json"
+                staged_file = staged_dir / identifier_json_filename(msg.run_id)
                 staged_file.write_text(raw_json, encoding="utf-8")
                 staged_path: str | None = str(staged_file.resolve())
             else:
@@ -244,7 +245,7 @@ def run_worker_loop(
                 ).lower()
                 staged_dir = Path(".bh/runtime/staged")
                 staged_dir.mkdir(parents=True, exist_ok=True)
-                staged_file = staged_dir / f"{msg.run_id}.json"
+                staged_file = staged_dir / identifier_json_filename(msg.run_id)
                 staged_file.write_text(raw_json, encoding="utf-8")
                 staged_path = str(staged_file.resolve())
 

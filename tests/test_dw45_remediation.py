@@ -57,11 +57,12 @@ def test_manifest_failure_retry_and_index_loss(tmp_path: Path) -> None:
     assert store.index.get_attempt(running.attempt_id) == running
     assert store.get_attempt(running.attempt_id) == running
     assert store.record_attempt(completed) == completed
-    before = (store.attempts_dir / "att:fault.json").read_bytes()
+    manifest_path = store._attempt_path(running.attempt_id)
+    before = manifest_path.read_bytes()
     with pytest.raises(ValueError):
         store.record_attempt(replace(completed, engineering_hash="changed"))
     assert store.record_attempt(replace(completed, state="CANCELLED")) == completed
-    assert (store.attempts_dir / "att:fault.json").read_bytes() == before
+    assert manifest_path.read_bytes() == before
     (tmp_path / "index.sqlite3").unlink()
     restored = PersistenceStore(tmp_path)
     restored.rebuild_index_from_artifacts()

@@ -1,10 +1,15 @@
 from __future__ import annotations
 
+import json
+import os
 import tempfile
 import unittest
+from dataclasses import replace
 from pathlib import Path
+from unittest.mock import patch
 
 from bh_sim.boundary.contracts import RunAttemptRecord
+from bh_sim.boundary.json_codec import boundary_json
 from bh_sim.core import (
     CaseDefinition,
     ClosureStatus,
@@ -63,6 +68,10 @@ class AttemptPersistenceTests(unittest.TestCase):
                 admitted_at="2026-09-15T00:00:00Z",
             )
             store.record_attempt(admitted)
+            manifest_path = store._attempt_path(admitted.attempt_id)
+            self.assertTrue(manifest_path.exists())
+            self.assertNotIn(":", manifest_path.name)
+            self.assertEqual(len(manifest_path.stem), 64)
             fetched = store.get_attempt("att:101")
             assert fetched is not None
             self.assertEqual(fetched.state, "ADMITTED")
@@ -288,9 +297,8 @@ class AttemptPersistenceTests(unittest.TestCase):
             self.assertEqual(fetched.state, "COMPLETED")
 
             # Check manifest file on disk
-            manifest_path = store.attempts_dir / "att:501.json"
+            manifest_path = store._attempt_path("att:501")
             self.assertTrue(manifest_path.exists())
-            import json
 
             with open(manifest_path, encoding="utf-8") as f:
                 manifest_data = json.load(f)
@@ -332,10 +340,63 @@ class AttemptPersistenceTests(unittest.TestCase):
                 store.record_attempt(conflicting)
 
             # Manifest on disk must retain original eng_hash
-            manifest_path = store.attempts_dir / "att:601.json"
-            import json
+            manifest_path = store._attempt_path("att:601")
 
             with open(manifest_path, encoding="utf-8") as f:
                 manifest_data = json.load(f)
             self.assertEqual(manifest_data["engineering_hash"], "eng_hash_initial")
             self.assertEqual(manifest_data["state"], "ADMITTED")
+
+    @unittest.skipIf(os.name == "nt", "Windows cannot create the legacy colon filename")
+    def test_legacy_raw_id_manifest_remains_readable(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            store = PersistenceStore(temp_dir)
+            legacy = RunAttemptRecord(
+                attempt_id="att:legacy",
+                run_id="run:legacy",
+                case_id="case:1",
+                engineering_hash="eng_hash_legacy",
+                context_hash="ctx_hash_legacy",
+                state="COMPLETED",
+                admitted_at="2026-09-15T00:00:00Z",
+                terminal_at="2026-09-15T00:01:00Z",
+                persisted=True,
+            )
+            store._legacy_attempt_path(legacy.attempt_id).write_text(
+                boundary_json(legacy), encoding="utf-8"
+            )
+
+            self.assertEqual(store.get_attempt(legacy.attempt_id), legacy)
+            self.assertEqual(store.list_attempts(), (legacy,))
+            self.assertEqual(store.rebuild_index_from_artifacts(), 0)
+            self.assertEqual(store.index.get_attempt(legacy.attempt_id), legacy)
+
+    def test_windows_reads_supported_legacy_filename_before_terminal_update(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            store = PersistenceStore(temp_dir)
+            cancelled = RunAttemptRecord(
+                attempt_id="att-legacy",
+                run_id="run-legacy",
+                case_id="case-1",
+                engineering_hash="eng_hash_legacy",
+                context_hash="ctx_hash_legacy",
+                state="CANCELLED",
+                admitted_at="2026-09-15T00:00:00Z",
+                terminal_at="2026-09-15T00:01:00Z",
+                failure_reason="cancelled before migration",
+            )
+            store._legacy_attempt_path(cancelled.attempt_id).write_text(
+                boundary_json(cancelled), encoding="utf-8"
+            )
+            late_completion = replace(
+                cancelled,
+                state="COMPLETED",
+                artifact_hash="a" * 64,
+                persisted=True,
+            )
+
+            with patch("bh_sim.persistence.store.os.name", "nt"):
+                self.assertEqual(store.get_attempt(cancelled.attempt_id), cancelled)
+                self.assertEqual(store.record_attempt(late_completion), cancelled)
+
+            self.assertFalse(store._attempt_path(cancelled.attempt_id).exists())

@@ -1,0 +1,15 @@
+{
+  "receipt_had_worker_session": true,
+  "worker_alive": false,
+  "disposition": "COMPLETED",
+  "diagnostics": [],
+  "local_engine_calls": [
+    "in-process engine called"
+  ],
+  "attempts": [
+    {
+      "state": "COMPLETED",
+      "persisted": true
+    }
+  ]
+}

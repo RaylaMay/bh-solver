@@ -1,0 +1,2 @@
+{"supervised": false, "cancel_latency": 0.0017413750028936192, "still_running_after_300ms": true, "run_return_after_cancel_seconds": 1.878826708998531, "run_outcome": "COMPLETED", "diagnostics": [], "attempts": [["CANCELLED", true]], "last_valid": true}
+{"supervised": true, "cancel_latency": 0.003598249997594394, "still_running_after_300ms": true, "run_return_after_cancel_seconds": 1.8660440829989966, "run_outcome": "REJECTED", "diagnostics": ["RUN_CANCELLED"], "attempts": [["CANCELLED", false]], "last_valid": false}

@@ -285,3 +285,71 @@ input notation separately from engineering fields, in an immutable native snapsh
 store. Legacy drafts import without overwrite; native metadata does not silently
 become browser-compatible. The [change record](native/DW3_CHANGE_RECORD.md) records
 tradeoffs, schema-cache optimization and explicit worker/result limitations.
+
+## DW3.1 workspace and extension boundary
+
+The [DW3.1 change record](native/DW3_1_CHANGE_RECORD.md) adds presentation groups,
+engineering subsystems and artifact-gated visualization inputs without moving
+scientific authority into UIX. Qt renders base strokes, group halos, diagnostic
+patterns and markers; application policy validates immutable membership edits.
+
+Flowsheet, dynamic-model and control-diagram documents remain independently
+versioned and linked by a project manifest. The future dynamic plant engine and
+control engine remain replaceable peers. A later deterministic co-simulation
+coordinator will exchange typed, unit-aware signals and ordered events; no engine
+exists in DW3.1.
+
+Extensions depend on versioned neutral contracts. Isolated workers use a
+language-neutral message boundary. Explicitly enabled in-process C++ extensions use
+a stable C ABI and never exchange C++ or Qt types across it. Application admission
+policy rejects ungranted permissions or incompatible API versions before invoking
+an adapter and converts adapter failure into an attributable record. The current
+foundation loads no library and installs no code.
+
+## DW3.2 durable history and modular shell
+
+Under ADR-011, `WorkstationEditor` reuses the native PFD gestures while dispatching
+editing/history through neutral commands. `HistoryService` owns exact-head checks,
+checkpoint selection, revision references, alternatives and structural comparison.
+`JsonHistoryRepository` atomically publishes hash-verified JSON events/checkpoints;
+its index is reconstructible from those records. UIX does not import either service
+or adapter. The composition root supplies the optional history service.
+
+Local selection, pan/zoom, group highlighting, isolation and dock layout remain
+presentation preferences. Shared positions, routes, group definitions and styling
+remain undoable document content. The old session-history PFD editor stays available
+as the DW3 baseline; the desktop launcher selects the DW3.2 workstation. Scientific
+hashes, kernel implementations and React/FastAPI remain unchanged. See the
+[workstation guide](native/DW3_2_WORKSTATION.md) for storage and compatibility limits.
+
+## DW6 authorized target and test-first boundary — 2026-09-16
+
+Under ADR-012, native AI controls use shared application commands and neutral
+context/session/proposal/plan contracts. Application policy owns authority,
+isolation, reservations and audit; provider, credentials, document extraction and
+spellcheck are replaceable adapters. Scientific execution remains in the accepted
+DW4 worker. A provider response cannot invoke arbitrary application commands.
+
+The [DW6 handoff](native/DW6_DEVELOPER_HANDOFF.md) adds a reviewer-controlled test
+package before implementation. Its production factory seam permits replacement
+only of provider HTTP, time and credential boundaries. Real services, storage,
+worker and normal desktop wiring remain under test. This section describes the
+authorized target, not an implemented native AI capability.
+
+## DW4/DW5 remediation runtime — 2026-09-23
+
+The native launcher composes an application-owned `WorkerSupervisor`; the child
+owns compilation/evaluation. Its control loop reads while one execution thread
+runs the backend. Further work is rejected as busy, without an input backlog.
+Application policy serializes cancellation and final publication. The retained
+HTTP/CLI composition can explicitly use the in-process engineering port; losing
+a configured worker never selects that port implicitly.
+
+Canonical attempt JSON is published before SQLite is updated. The database write
+reservation serializes competing store writers, while JSON decides the durable
+winner. UI staleness compares each run's captured native engineering identity with
+the displayed document, independent of Save and presentation-only changes.
+
+See [remediation evidence](native/DW4_DW5_REMEDIATION_2026-09-23.md). This is the
+implemented process boundary, not completion of the separate UI-crash survival,
+reconnection, native witness or release gates.

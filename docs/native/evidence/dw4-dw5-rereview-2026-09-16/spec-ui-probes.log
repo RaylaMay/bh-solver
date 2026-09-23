@@ -1,0 +1,8 @@
+qt.qpa.fonts: Populating font family aliases took 20 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost. 
+{"probe": "explicit_validation", "before": null, "run_enabled": false, "run_return": false, "after": null}
+{"probe": "stale_receipt", "same_receipt": true, "run_enabled": true}
+{"probe": "flush_inspector", "validated": true, "duty": 125000.0}
+{"probe": "case_switch", "succeeded": true, "active": "B", "displayed_run_case": "case:A", "b_stored_case": "case:A", "b_workbook_case": "case:A", "timeline": [["start", 0.0], ["switch_begin", 0.033], ["finish", 0.416], ["switch_end", 0.425]]}
+{"probe": "cancel_request", "returned": true}
+{"probe": "cancel", "run_succeeded": true, "attempts": ["COMPLETED", "COMPLETED"], "timeline": [["start", 0.0], ["cancel_begin", 0.046], ["finish", 0.413], ["cancel_end", 0.423]]}
+{"probe": "last_valid", "validated": true, "run_return": true, "good_run": "run:ca5d7b2b-d575-48e4-aebf-81ba8f8f9e00", "latest_status": "FAILED", "selected_overlay_run": "run:18afa5c9-08d4-425e-a5d5-8efbcdbd09b2", "selected_workbook_run": "run:18afa5c9-08d4-425e-a5d5-8efbcdbd09b2", "repository_last_valid_run": "run:ca5d7b2b-d575-48e4-aebf-81ba8f8f9e00", "available_last_valid_actions": []}

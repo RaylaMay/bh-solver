@@ -1,0 +1,18 @@
+{
+  "label": "BLOCKED_EVIDENCE / TEST FIXTURE ONLY",
+  "equipment": [
+    {"id": "source-1", "model": "source", "parameters": {
+      "temperature": {"value": 300, "unit": "K"},
+      "pressure": {"value": 101325, "unit": "Pa"},
+      "massFlow": {"value": 1, "unit": "kg/s"}
+    }},
+    {"id": "heater-1", "model": "heater", "parameters": {
+      "duty": {"value": 500000, "unit": "W"}
+    }},
+    {"id": "sink-1", "model": "sink", "parameters": {}}
+  ],
+  "connections": [
+    {"id": "edge-1", "source": "source-1", "target": "heater-1"},
+    {"id": "edge-2", "source": "heater-1", "target": "sink-1"}
+  ]
+}

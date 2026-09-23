@@ -1,0 +1,93 @@
+........................................................................ [ 34%]
+............................................................FF.......... [ 69%]
+...............................................................          [100%]
+=================================== FAILURES ===================================
+_______________ test_native_launcher_hosts_the_configured_python _______________
+
+tmp_path = PosixPath('<temporary-root>/pytest-of-user/pytest-13/test_native_launcher_hosts_the0')
+
+    def test_native_launcher_hosts_the_configured_python(tmp_path: Path) -> None:
+        destination = tmp_path / "BH developer test.app"
+>       build_launcher(destination, ROOT)
+
+tests/test_macos_launcher.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+destination = PosixPath('<temporary-root>/pytest-of-user/pytest-13/test_native_launcher_hosts_the0/BH developer test.app')
+repository = PosixPath('<review-root>/candidate')
+
+    def build_launcher(destination: Path, repository: Path) -> Path:
+        """Build an app tied to an absolute checkout path and its existing venv.
+    
+        Return the generated app path. Only a new destination or one marked by this
+        helper may be written; drafts are untouched. Missing runtime/ownership raises
+        ValueError. Tool or filesystem failures propagate; compilation precedes app
+        writes, but a later write/sign failure can require a rebuild. See the DW2
+        native macOS verification record for scope, consent and release limitations.
+        """
+        executable = repository / ".venv/bin/python"
+        if not executable.is_file():
+>           raise ValueError("Repository environment is missing")
+E           ValueError: Repository environment is missing
+
+tools/make_macos_launcher.py:30: ValueError
+_________________ test_launcher_refuses_an_unowned_application _________________
+
+tmp_path = PosixPath('<temporary-root>/pytest-of-user/pytest-13/test_launcher_refuses_an_unown0')
+
+    def test_launcher_refuses_an_unowned_application(tmp_path: Path) -> None:
+        destination = tmp_path / "Existing app.app"
+        destination.mkdir()
+        owner_file = destination / "owner-work.txt"
+        owner_file.write_text("Preserve this existing application")
+        with pytest.raises(ValueError, match="Refusing to replace"):
+>           build_launcher(destination, ROOT)
+
+tests/test_macos_launcher.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+destination = PosixPath('<temporary-root>/pytest-of-user/pytest-13/test_launcher_refuses_an_unown0/Existing app.app')
+repository = PosixPath('<review-root>/candidate')
+
+    def build_launcher(destination: Path, repository: Path) -> Path:
+        """Build an app tied to an absolute checkout path and its existing venv.
+    
+        Return the generated app path. Only a new destination or one marked by this
+        helper may be written; drafts are untouched. Missing runtime/ownership raises
+        ValueError. Tool or filesystem failures propagate; compilation precedes app
+        writes, but a later write/sign failure can require a rebuild. See the DW2
+        native macOS verification record for scope, consent and release limitations.
+        """
+        executable = repository / ".venv/bin/python"
+        if not executable.is_file():
+>           raise ValueError("Repository environment is missing")
+E           ValueError: Repository environment is missing
+
+tools/make_macos_launcher.py:30: ValueError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('<temporary-root>/pytest-of-user/pytest-13/test_launcher_refuses_an_unown0')
+
+    def test_launcher_refuses_an_unowned_application(tmp_path: Path) -> None:
+        destination = tmp_path / "Existing app.app"
+        destination.mkdir()
+        owner_file = destination / "owner-work.txt"
+        owner_file.write_text("Preserve this existing application")
+>       with pytest.raises(ValueError, match="Refusing to replace"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E        Regex: 'Refusing to replace'
+E        Input: 'Repository environment is missing'
+
+tests/test_macos_launcher.py:48: AssertionError
+=============================== warnings summary ===============================
+../../../..<project-root>/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1
+  <project-root>/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_macos_launcher.py::test_native_launcher_hosts_the_configured_python
+FAILED tests/test_macos_launcher.py::test_launcher_refuses_an_unowned_application
+2 failed, 205 passed, 1 warning in 22.43s

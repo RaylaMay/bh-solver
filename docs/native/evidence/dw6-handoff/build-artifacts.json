@@ -1,0 +1,9 @@
+{
+  "backend": "setuptools.build_meta",
+  "version": "84.0.0",
+  "method": "Source copy; sdist; wheel built from extracted sdist; no network; generated artifacts discarded after hashing.",
+  "artifacts_sha256": {
+    "bh_sim-0.1.0.tar.gz": "78a731401014eedc4ae80b4024d48a98591ac2530616fcbc645cbb1cee0a8e40",
+    "bh_sim-0.1.0-py3-none-any.whl": "391ccc1feee212b2837d187674d95412d431c3b481b019cf776fabab44d8c0fa"
+  }
+}

@@ -6,6 +6,7 @@ settings fall back to the default layout. This is not an engineering artifact.
 
 import json
 from pathlib import Path
+from uuid import uuid4
 
 from PySide6.QtCore import QByteArray, QSettings
 from PySide6.QtWidgets import QMainWindow
@@ -20,6 +21,18 @@ class WorkspaceSettings:
     def __init__(self, path: Path) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         self.settings = QSettings(str(path), QSettings.Format.IniFormat)
+
+    def actor_id(self) -> str:
+        """Use a persistent local identity without exposing the OS account name.
+
+        This is attribution for a local editor, not authenticated collaboration.
+        """
+        value = str(self.settings.value("identity/actor", ""))
+        if not value:
+            value = "editor:" + uuid4().hex
+            self.settings.setValue("identity/actor", value)
+            self.settings.sync()
+        return value
 
     def appearance(self) -> tuple[str, bool]:
         """Return bounded appearance choices; no external provider or device use."""
@@ -78,3 +91,69 @@ class WorkspaceSettings:
             self.settings.setValue(key, value)
         self.settings.sync()
         return self.settings.status() == QSettings.Status.NoError
+
+    def ribbon(self) -> bool:
+        """Compact toolbar remains the default; this preference never enters a case."""
+        return str(self.settings.value("appearance/ribbon", "false")).lower() == "true"
+
+    def command_history(self) -> list[str]:
+        """Recall local text only; restoring preferences never executes commands."""
+        try:
+            values = json.loads(str(self.settings.value("commands/recall", "[]")))
+            if isinstance(values, list) and all(isinstance(v, str) for v in values):
+                return [v[:4096] for v in values[-100:]]
+        except ValueError:
+            pass
+        return []
+
+    def export_template(
+        self,
+        window: QMainWindow,
+        theme: str,
+        compact: bool,
+        shortcuts: dict[str, str],
+        ribbon: bool,
+    ) -> str:
+        """Serialize bounded workspace presentation only, excluding project/command text."""
+        return json.dumps(
+            {
+                "schema": "bh-workspace-template-v1",
+                "layout_version": LAYOUT_VERSION,
+                "layout": bytes(window.saveState(LAYOUT_VERSION).toBase64().data()).decode("ascii"),
+                "theme": theme,
+                "compact": compact,
+                "ribbon": ribbon,
+                "shortcuts": shortcuts,
+            },
+            sort_keys=True,
+            indent=2,
+        )
+
+    @staticmethod
+    def parse_template(text: str) -> dict:
+        """Reject unknown keys and oversized templates before any UI preference changes."""
+        import base64
+
+        if len(text.encode()) > 100_000:
+            raise ValueError("Workspace template exceeds 100 KB")
+        value = json.loads(text)
+        keys = {"schema", "layout_version", "layout", "theme", "compact", "ribbon", "shortcuts"}
+        if not isinstance(value, dict) or set(value) != keys:
+            raise ValueError("Unsupported workspace template fields")
+        if (
+            value["schema"] != "bh-workspace-template-v1"
+            or value["layout_version"] != LAYOUT_VERSION
+        ):
+            raise ValueError("Unsupported workspace template version")
+        if value["theme"] not in {"Dark", "Light", "High contrast"} or any(
+            type(value[key]) is not bool for key in ("compact", "ribbon")
+        ):
+            raise ValueError("Invalid appearance preference")
+        if not isinstance(value["shortcuts"], dict) or not all(
+            isinstance(k, str) and isinstance(v, str) for k, v in value["shortcuts"].items()
+        ):
+            raise ValueError("Invalid shortcut mapping")
+        data = base64.b64decode(value["layout"], validate=True)
+        if not 0 < len(data) <= MAX_LAYOUT_BYTES:
+            raise ValueError("Invalid workspace layout size")
+        return {**value, "layout": QByteArray(data)}

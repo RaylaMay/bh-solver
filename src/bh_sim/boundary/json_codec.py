@@ -9,8 +9,8 @@ from __future__ import annotations
 import json
 import math
 import types
-from dataclasses import fields, is_dataclass
-from typing import Any, Literal, Union, get_args, get_origin, get_type_hints
+from dataclasses import MISSING, fields, is_dataclass
+from typing import Any, Literal, Union, get_args, get_origin
 
 from . import contracts
 
@@ -73,11 +73,25 @@ def _decode(value: Any, hint: Any) -> Any:
     if isinstance(hint, type) and is_dataclass(hint):
         if not isinstance(value, dict) or value.get("$type") != hint.__name__:
             raise ValueError(f"expected tagged {hint.__name__}")
-        field_names = {field.name for field in fields(hint)}
-        if set(value) != field_names | {"$type"}:
+        declared = {field.name: field for field in fields(hint)}
+        supplied = set(value) - {"$type"}
+        if not supplied <= set(declared):
             raise ValueError(f"unknown or missing {hint.__name__} fields")
-        hints = get_type_hints(hint)
-        return hint(**{name: _decode(value[name], hints[name]) for name in field_names})
+        missing = set(declared) - supplied
+        # DW3.1 extends only the native PFD envelope with defaulted presentation and
+        # grouping fields. Older append-only local snapshots remain readable while
+        # every other contract and every unknown field retains strict decoding.
+        incompatible_missing = missing and (
+            hint is not contracts.PfdDocumentDto
+            or any(
+                declared[name].default is MISSING and declared[name].default_factory is MISSING
+                for name in missing
+            )
+        )
+        if incompatible_missing:
+            raise ValueError(f"unknown or missing {hint.__name__} fields")
+        hints = contracts._contract_hints(hint)
+        return hint(**{name: _decode(value[name], hints[name]) for name in supplied})
     raise ValueError("unsupported contract type")
 
 

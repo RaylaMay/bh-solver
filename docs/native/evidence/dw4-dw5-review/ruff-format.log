@@ -1,0 +1,706 @@
+unformatted: File would be reformatted
+   --> src/bh_sim/adapters/storage.py:233:30
+    |
+232 |                     )
+    -                     props = [
+    -                         StreamPropertyDto("enthalpy_flow", m_flow * h_j_kg, "W")
+    -                     ]
+233 +                     props = [StreamPropertyDto("enthalpy_flow", m_flow * h_j_kg, "W")]
+234 |                     for p in val.state.thermo.phases:
+--------------------------------------------------------------------------------
+529 |                 for idx, r in enumerate(run.solver_result.final_residuals):
+    -                     series_pts.append(
+    -                         SeriesDataPointDto(float(idx + 1), abs(r.value), r.name)
+    -                     )
+530 +                     series_pts.append(SeriesDataPointDto(float(idx + 1), abs(r.value), r.name))
+531 |             else:
+--------------------------------------------------------------------------------
+590 |                 if model_id == "heat_exchanger":
+    -                     hot_out_t = metrics_dict.get(
+    -                         "hot_outlet_temperature", Quantity(350.0, "K")
+    -                     ).to("K").value
+    -                     cold_out_t = metrics_dict.get(
+    -                         "cold_outlet_temperature", Quantity(320.0, "K")
+    -                     ).to("K").value
+591 +                     hot_out_t = (
+592 +                         metrics_dict.get("hot_outlet_temperature", Quantity(350.0, "K"))
+593 +                         .to("K")
+594 +                         .value
+595 +                     )
+596 +                     cold_out_t = (
+597 +                         metrics_dict.get("cold_outlet_temperature", Quantity(320.0, "K"))
+598 +                         .to("K")
+599 +                         .value
+600 +                     )
+601 |                     hot_in_t = hot_out_t + 40.0
+    |
+
+unformatted: File would be reformatted
+   --> src/bh_sim/adapters/worker_supervisor.py:228:29
+    |
+227 |                     self._on_diagnostic(event)
+    -             elif isinstance(event, (c.WorkerCompletedEvent, c.WorkerFailedEvent, c.WorkerCancelledEvent)):
+228 +             elif isinstance(
+229 +                 event, (c.WorkerCompletedEvent, c.WorkerFailedEvent, c.WorkerCancelledEvent)
+230 +             ):
+231 |                 with self._lock:
+--------------------------------------------------------------------------------
+284 |                     q.put(msg)
+    -             elif isinstance(msg, (c.RunAccepted, c.WorkerProgressEvent, c.WorkerDiagnosticEvent,
+    -                                   c.WorkerCompletedEvent, c.WorkerFailedEvent, c.WorkerCancelledEvent)):
+285 +             elif isinstance(
+286 +                 msg,
+287 +                 (
+288 +                     c.RunAccepted,
+289 +                     c.WorkerProgressEvent,
+290 +                     c.WorkerDiagnosticEvent,
+291 +                     c.WorkerCompletedEvent,
+292 +                     c.WorkerFailedEvent,
+293 +                     c.WorkerCancelledEvent,
+294 +                 ),
+295 +             ):
+296 |                 q = self._active_jobs.get(msg.run_id)
+    |
+
+unformatted: File would be reformatted
+   --> src/bh_sim/application/services.py:135:16
+    |
+134 |             context = self.engineering.context_hash()
+    -             if self.supervisor is not None and getattr(self.supervisor, "is_alive", lambda: False)():
+135 +             if (
+136 +                 self.supervisor is not None
+137 +                 and getattr(self.supervisor, "is_alive", lambda: False)()
+138 +             ):
+139 |                 resp = self.supervisor.validate(draft, prepared.engineering_hash, context)
+--------------------------------------------------------------------------------
+226 |
+    -             if self.supervisor is not None and getattr(self.supervisor, "is_alive", lambda: False)():
+227 +             if (
+228 +                 self.supervisor is not None
+229 +                 and getattr(self.supervisor, "is_alive", lambda: False)()
+230 +             ):
+231 |                 job = RunJob(
+--------------------------------------------------------------------------------
+265 |                             diagnostics=(),
+    -                             artifact=ArtifactReferenceDto("kernel_run", terminal.run_id, terminal.artifact_hash),
+266 +                             artifact=ArtifactReferenceDto(
+267 +                                 "kernel_run", terminal.run_id, terminal.artifact_hash
+268 +                             ),
+269 |                         )
+--------------------------------------------------------------------------------
+301 |                     raise CommandRejected(
+    -                         "UNKNOWN_DISPOSITION", f"Unexpected terminal event: {type(terminal).__name__}"
+302 +                         "UNKNOWN_DISPOSITION",
+303 +                         f"Unexpected terminal event: {type(terminal).__name__}",
+304 |                     )
+--------------------------------------------------------------------------------
+337 |         with self._lock:
+    -             if self.supervisor is not None and getattr(self.supervisor, "is_alive", lambda: False)():
+338 +             if (
+339 +                 self.supervisor is not None
+340 +                 and getattr(self.supervisor, "is_alive", lambda: False)()
+341 +             ):
+342 |                 self.supervisor.cancel(run_id)
+--------------------------------------------------------------------------------
+442 |
+    -     def select_display_run(
+    -         self, case_id: str, run_id: str | None = None
+    -     ) -> ResultSelectionDto:
+443 +     def select_display_run(self, case_id: str, run_id: str | None = None) -> ResultSelectionDto:
+444 |         """Select active display run and return selection and staleness status."""
+    |
+
+unformatted: File would be reformatted
+    --> src/bh_sim/boundary/contracts.py:1340:1
+     |
+1339 |
+     -
+     -
+1340 | # ---------------------------------------------------------------------------
+     |
+
+unformatted: File would be reformatted
+   --> src/bh_sim/persistence/store.py:254:39
+    |
+253 |                 existing_state = row[4]
+    -                 if existing_state in ("COMPLETED", "FAILED", "CANCELLED", "INTERRUPTED", "TIMED_OUT"):
+254 +                 if existing_state in (
+255 +                     "COMPLETED",
+256 +                     "FAILED",
+257 +                     "CANCELLED",
+258 +                     "INTERRUPTED",
+259 +                     "TIMED_OUT",
+260 +                 ):
+261 |                     # One authoritative terminal disposition; do not overwrite terminal state with late messages.
+    |
+
+unformatted: File would be reformatted
+   --> src/bh_sim/uix/graph_viewer.py:324:28
+    |
+323 |                 # Callout bubble
+    -                 hud_text = (
+    -                     f"{s_name}\n"
+    -                     f"X: {pt.x:.4g} {ux}\n"
+    -                     f"Y: {pt.y:.4g} {uy}"
+    -                 )
+324 +                 hud_text = f"{s_name}\nX: {pt.x:.4g} {ux}\nY: {pt.y:.4g} {uy}"
+325 |                 fm = QFontMetrics(painter.font())
+--------------------------------------------------------------------------------
+439 |             # Find all unique X coordinates across series
+    -             active_series = [
+    -                 s for s in self.plot_def.series if s.series_id in self.visible_series
+    -             ]
+440 +             active_series = [s for s in self.plot_def.series if s.series_id in self.visible_series]
+441 |             if not active_series:
+--------------------------------------------------------------------------------
+479 |             '<?xml version="1.0" encoding="UTF-8" standalone="no"?>',
+    -             '<!-- Bound Horizons Simulation Plot Export -->',
+    -             f'<!-- Plot ID: {self.plot_def.plot_id} -->',
+    -             f'<!-- Run ID: {self.plot_def.run_id or "None"} -->',
+    -             f'<!-- Unit ID: {self.plot_def.unit_id or "None"} -->',
+    -             f'<!-- Provenance Hash: {self.plot_def.provenance_hash or "None"} -->',
+    -             f'<!-- Plot Kind: {self.plot_def.plot_kind} -->',
+480 +             "<!-- Bound Horizons Simulation Plot Export -->",
+481 +             f"<!-- Plot ID: {self.plot_def.plot_id} -->",
+482 +             f"<!-- Run ID: {self.plot_def.run_id or 'None'} -->",
+483 +             f"<!-- Unit ID: {self.plot_def.unit_id or 'None'} -->",
+484 +             f"<!-- Provenance Hash: {self.plot_def.provenance_hash or 'None'} -->",
+485 +             f"<!-- Plot Kind: {self.plot_def.plot_kind} -->",
+486 |             f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
+    -             '<style>',
+    -             '  .bg { fill: #14212A; }',
+    -             '  .plot-bg { fill: #1A2630; stroke: #2E3D49; stroke-width: 1; }',
+    -             '  .grid { stroke: #23313D; stroke-width: 1; stroke-dasharray: 2,2; }',
+    -             '  .axis-text { fill: #A0AEC0; font-family: sans-serif; font-size: 11px; }',
+    -             '  .title-text { fill: #EDF3F5; font-family: sans-serif; font-size: 14px; font-weight: bold; }',
+    -             '  .trace { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }',
+    -             '</style>',
+487 +             "<style>",
+488 +             "  .bg { fill: #14212A; }",
+489 +             "  .plot-bg { fill: #1A2630; stroke: #2E3D49; stroke-width: 1; }",
+490 +             "  .grid { stroke: #23313D; stroke-width: 1; stroke-dasharray: 2,2; }",
+491 +             "  .axis-text { fill: #A0AEC0; font-family: sans-serif; font-size: 11px; }",
+492 +             "  .title-text { fill: #EDF3F5; font-family: sans-serif; font-size: 14px; font-weight: bold; }",
+493 +             "  .trace { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }",
+494 +             "</style>",
+495 |             f'<rect width="{w}" height="{h}" class="bg"/>',
+--------------------------------------------------------------------------------
+532 |             color = series.color_hex or PALETTE[s_idx % len(PALETTE)]
+    -             dash_attr = ' stroke-dasharray="4,4"' if series.line_style == "dashed" else (' stroke-dasharray="2,2"' if series.line_style == "dotted" else '')
+533 +             dash_attr = (
+534 +                 ' stroke-dasharray="4,4"'
+535 +                 if series.line_style == "dashed"
+536 +                 else (' stroke-dasharray="2,2"' if series.line_style == "dotted" else "")
+537 +             )
+538 |             pts_svg = []
+--------------------------------------------------------------------------------
+591 |         self.pinned_btn.setChecked(True)
+    -         self.pinned_btn.setToolTip("When pinned, plot retains its run data even if active selection changes")
+592 +         self.pinned_btn.setToolTip(
+593 +             "When pinned, plot retains its run data even if active selection changes"
+594 +         )
+595 |         header_layout.addWidget(self.pinned_btn)
+--------------------------------------------------------------------------------
+653 |         self.title_label.setText(plot_def.title)
+    -         self.source_badge.setText(
+    -             f"Run: {plot_def.run_id or 'Unsaved'}"
+    -         )
+654 +         self.source_badge.setText(f"Run: {plot_def.run_id or 'Unsaved'}")
+655 |         hash_str = (plot_def.provenance_hash or "")[:12]
+--------------------------------------------------------------------------------
+685 |                 self.plot_canvas.export_csv(filename)
+    -                 QMessageBox.information(self, "Export CSV", f"Successfully exported plot data to:\n{filename}")
+686 +                 QMessageBox.information(
+687 +                     self, "Export CSV", f"Successfully exported plot data to:\n{filename}"
+688 +                 )
+689 |             except Exception as ex:
+--------------------------------------------------------------------------------
+702 |                 self.plot_canvas.export_svg(filename)
+    -                 QMessageBox.information(self, "Export SVG", f"Successfully exported SVG image to:\n{filename}")
+703 +                 QMessageBox.information(
+704 +                     self, "Export SVG", f"Successfully exported SVG image to:\n{filename}"
+705 +                 )
+706 |             except Exception as ex:
+    |
+
+unformatted: File would be reformatted
+   --> src/bh_sim/uix/pfd_canvas.py:390:23
+    |
+389 |
+    -         stream_map = {
+    -             ov.stream_id.removeprefix("connection:"): ov
+    -             for ov in self.overlays.streams
+    -         }
+390 +         stream_map = {ov.stream_id.removeprefix("connection:"): ov for ov in self.overlays.streams}
+391 |         for conn_id, badge in self.stream_overlay_badges.items():
+--------------------------------------------------------------------------------
+411 |
+    -         equip_map = {
+    -             ov.unit_id.removeprefix("unit:"): ov
+    -             for ov in self.overlays.equipment
+    -         }
+412 +         equip_map = {ov.unit_id.removeprefix("unit:"): ov for ov in self.overlays.equipment}
+413 |         for node_id, badge in self.equipment_overlay_badges.items():
+--------------------------------------------------------------------------------
+727 |     def dragEnterEvent(self, event: QDragEnterEvent) -> None:
+    -         if not self.document or not event.mimeData().hasFormat("application/vnd.bh.equipment-model+json"):
+728 +         if not self.document or not event.mimeData().hasFormat(
+729 +             "application/vnd.bh.equipment-model+json"
+730 +         ):
+731 |             event.ignore()
+--------------------------------------------------------------------------------
+779 |         pos = self._snapped_scene_pos(event.position().toPoint())
+    -         self.edit_requested.emit(
+    -             c.AddEquipmentEdit(model_id, c.CanvasPointDto(pos.x(), pos.y()))
+    -         )
+780 +         self.edit_requested.emit(c.AddEquipmentEdit(model_id, c.CanvasPointDto(pos.x(), pos.y())))
+781 |         event.acceptProposedAction()
+    |
+
+unformatted: File would be reformatted
+   --> src/bh_sim/uix/window.py:260:22
+    |
+259 |         else:
+    -             reason = "Solver connection is unavailable in this preview; no calculation is performed."
+260 +             reason = (
+261 +                 "Solver connection is unavailable in this preview; no calculation is performed."
+262 +             )
+263 |             for identifier, title in (
+    |
+
+unformatted: File would be reformatted
+   --> src/bh_sim/uix/workbook_view.py:149:26
+    |
+148 |
+    -         def style_status(badge: QLabel, text: str, ok_val: str, warn_val: str | None = None) -> None:
+149 +         def style_status(
+150 +             badge: QLabel, text: str, ok_val: str, warn_val: str | None = None
+151 +         ) -> None:
+152 |             badge.setText(text)
+153 |             val = text.split(":")[-1].strip().upper()
+154 |             if val == ok_val:
+    -                 badge.setStyleSheet("background-color: #2D5A43; color: #A8E6CF; border-radius: 3px; padding: 2px 6px;")
+155 +                 badge.setStyleSheet(
+156 +                     "background-color: #2D5A43; color: #A8E6CF; border-radius: 3px; padding: 2px 6px;"
+157 +                 )
+158 |             elif warn_val and val == warn_val:
+    -                 badge.setStyleSheet("background-color: #614D24; color: #FFEAA7; border-radius: 3px; padding: 2px 6px;")
+159 +                 badge.setStyleSheet(
+160 +                     "background-color: #614D24; color: #FFEAA7; border-radius: 3px; padding: 2px 6px;"
+161 +                 )
+162 |             elif val in ("FAILED", "INVALID"):
+    -                 badge.setStyleSheet("background-color: #632C2C; color: #FFB8B8; border-radius: 3px; padding: 2px 6px;")
+163 +                 badge.setStyleSheet(
+164 +                     "background-color: #632C2C; color: #FFB8B8; border-radius: 3px; padding: 2px 6px;"
+165 +                 )
+166 |             else:
+    -                 badge.setStyleSheet("background-color: #23313D; color: #EDF3F5; border-radius: 3px; padding: 2px 6px;")
+167 +                 badge.setStyleSheet(
+168 +                     "background-color: #23313D; color: #EDF3F5; border-radius: 3px; padding: 2px 6px;"
+169 +                 )
+170 |
+171 |         style_status(self.badge_conv, f"Conv: {workbook.convergence}", "CONVERGED")
+172 |         style_status(self.badge_clos, f"Clos: {workbook.closure}", "PASSED")
+    -         style_status(self.badge_phys, f"Phys: {workbook.physical_validity}", "VALID", "EXTRAPOLATED")
+    -         style_status(self.badge_corr, f"Corr: {workbook.correlation_validity}", "VALID", "EXTRAPOLATED")
+173 +         style_status(
+174 +             self.badge_phys, f"Phys: {workbook.physical_validity}", "VALID", "EXTRAPOLATED"
+175 +         )
+176 +         style_status(
+177 +             self.badge_corr, f"Corr: {workbook.correlation_validity}", "VALID", "EXTRAPOLATED"
+178 +         )
+179 |
+    |
+
+unformatted: File would be reformatted
+    --> src/bh_sim/uix/workstation_editor.py:180:22
+     |
+179  |         self.activity_dock.setWindowTitle("Diagnostics")
+     -         for dock in (self.workbook_dock, self.graph_dock, self.history_dock, self.commands_dock, self.compare_dock):
+180  +         for dock in (
+181  +             self.workbook_dock,
+182  +             self.graph_dock,
+183  +             self.history_dock,
+184  +             self.commands_dock,
+185  +             self.compare_dock,
+186  +         ):
+187  |             self.addDockWidget(Qt.DockWidgetArea.BottomDockWidgetArea, dock)
+--------------------------------------------------------------------------------
+223  |         self.plot_button = QPushButton("Plot Object…")
+     -         self.plot_button.setToolTip("Plot T-Q, residual or spatial profile for the selected unit/stream")
+224  +         self.plot_button.setToolTip(
+225  +             "Plot T-Q, residual or spatial profile for the selected unit/stream"
+226  +         )
+227  |         self.plot_button.clicked.connect(self._on_inspector_plot_clicked)
+--------------------------------------------------------------------------------
+242  |             ("view.compare", "Compare versions", self.show_compare),
+     -             ("view.workbook", "Workbooks", lambda: self.focus_panel(self.workbook_dock, self.workbook_view.tabs)),
+     -             ("view.graph", "Graphs", lambda: self.focus_panel(self.graph_dock, self.graph_viewer.plot_canvas)),
+243  +             (
+244  +                 "view.workbook",
+245  +                 "Workbooks",
+246  +                 lambda: self.focus_panel(self.workbook_dock, self.workbook_view.tabs),
+247  +             ),
+248  +             (
+249  +                 "view.graph",
+250  +                 "Graphs",
+251  +                 lambda: self.focus_panel(self.graph_dock, self.graph_viewer.plot_canvas),
+252  +             ),
+253  |             ("graph.open_window", "Open graph in window", self.open_graph_window),
+--------------------------------------------------------------------------------
+333  |             ("View", ("pfd.fit", "pfd.zoom_reset", "pfd.layers", "view.commands", "view.history")),
+     -             ("Review", ("view.compare", "history.snapshot", "draft.validate", "run.start", "run.cancel")),
+334  +             (
+335  +                 "Review",
+336  +                 ("view.compare", "history.snapshot", "draft.validate", "run.start", "run.cancel"),
+337  +             ),
+338  |         ):
+--------------------------------------------------------------------------------
+1051 |         self.navigator_dock.raise_()
+     -         for dock in (self.workbook_dock, self.graph_dock, self.history_dock, self.commands_dock, self.compare_dock):
+1052 +         for dock in (
+1053 +             self.workbook_dock,
+1054 +             self.graph_dock,
+1055 +             self.history_dock,
+1056 +             self.commands_dock,
+1057 +             self.compare_dock,
+1058 +         ):
+1059 |             dock.setFloating(False)
+--------------------------------------------------------------------------------
+1463 |
+     -         outcome_wb = self.execute("workbook.inspect", c.InspectWorkbookParameters(case_id=case_id, run_id=run_id))
+1464 +         outcome_wb = self.execute(
+1465 +             "workbook.inspect", c.InspectWorkbookParameters(case_id=case_id, run_id=run_id)
+1466 +         )
+1467 |         if outcome_wb.disposition == "COMPLETED" and isinstance(outcome_wb.data, c.WorkbookDto):
+1468 |             self.session.workbook = outcome_wb.data
+1469 |             self.workbook_view.set_workbook(outcome_wb.data, is_stale=self.dirty)
+1470 |
+     -         outcome_ov = self.execute("result.overlays", c.GetOverlaysParameters(case_id=case_id, run_id=run_id))
+1471 +         outcome_ov = self.execute(
+1472 +             "result.overlays", c.GetOverlaysParameters(case_id=case_id, run_id=run_id)
+1473 +         )
+1474 |         if outcome_ov.disposition == "COMPLETED" and isinstance(outcome_ov.data, c.OverlaysDto):
+--------------------------------------------------------------------------------
+1517 |         dialog.finished.connect(
+     -             lambda: self._floating_graphs.remove(dialog) if dialog in self._floating_graphs else None
+1518 +             lambda: (
+1519 +                 self._floating_graphs.remove(dialog) if dialog in self._floating_graphs else None
+1520 +             )
+1521 |         )
+     |
+
+unformatted: File would be reformatted
+   --> src/bh_sim/worker/entry.py:224:36
+    |
+223 |                     artifact_hash = contract_digest(calculated.result)
+    -                     conv = getattr(calculated.result.convergence, "value", str(calculated.result.convergence)).lower()
+    -                     clos = getattr(calculated.result.closure, "value", str(calculated.result.closure)).lower()
+    -                     phys = getattr(calculated.result.physical_validity, "value", str(calculated.result.physical_validity)).lower()
+    -                     corr = getattr(calculated.result.correlation_validity, "value", str(calculated.result.correlation_validity)).lower()
+224 +                     conv = getattr(
+225 +                         calculated.result.convergence, "value", str(calculated.result.convergence)
+226 +                     ).lower()
+227 +                     clos = getattr(
+228 +                         calculated.result.closure, "value", str(calculated.result.closure)
+229 +                     ).lower()
+230 +                     phys = getattr(
+231 +                         calculated.result.physical_validity,
+232 +                         "value",
+233 +                         str(calculated.result.physical_validity),
+234 +                     ).lower()
+235 +                     corr = getattr(
+236 +                         calculated.result.correlation_validity,
+237 +                         "value",
+238 +                         str(calculated.result.correlation_validity),
+239 +                     ).lower()
+240 |
+    |
+
+unformatted: File would be reformatted
+  --> tests/fixtures/mock_worker_entry.py:36:39
+   |
+35 |
+   -             engine = AcyclicRunEngine(reference_model_catalog(), PropertyRegistry((reference_property_package(),)))
+36 +             engine = AcyclicRunEngine(
+37 +                 reference_model_catalog(), PropertyRegistry((reference_property_package(),))
+38 +             )
+39 |             adapter = InProcessEngineeringAdapter(engine, lambda e: "mock")
+--------------------------------------------------------------------------------
+55 |
+   -     def run(self, prepared: c.PreparedRevisionDto, expected_context_hash: str | None = None) -> object:
+   -         RunResultMock = namedtuple("RunResultMock", ["convergence", "closure", "physical_validity", "correlation_validity"])
+56 +     def run(
+57 +         self, prepared: c.PreparedRevisionDto, expected_context_hash: str | None = None
+58 +     ) -> object:
+59 +         RunResultMock = namedtuple(
+60 +             "RunResultMock", ["convergence", "closure", "physical_validity", "correlation_validity"]
+61 +         )
+62 |         StatusMock = namedtuple("StatusMock", ["value"])
+   |
+
+unformatted: File would be reformatted
+   --> tests/test_dw4_command_integration.py:77:38
+    |
+76  |             # 1. Validate
+    -             val_req = CommandRequest("draft.validate", "req:val:1", "engineer", DraftParameters(draft))
+77  +             val_req = CommandRequest(
+78  +                 "draft.validate", "req:val:1", "engineer", DraftParameters(draft)
+79  +             )
+80  |             val_outcome = gateway.dispatch(val_req)
+--------------------------------------------------------------------------------
+86  |             # 2. Run
+    -             run_req = CommandRequest("run.start", "req:run:1", "engineer", StartRunParameters(draft, receipt.receipt_id))
+87  +             run_req = CommandRequest(
+88  +                 "run.start", "req:run:1", "engineer", StartRunParameters(draft, receipt.receipt_id)
+89  +             )
+90  |             run_outcome = gateway.dispatch(run_req)
+--------------------------------------------------------------------------------
+97  |             # 3. List Attempts
+    -             list_att_req = CommandRequest("run.list_attempts", "req:att:list", "engineer", ListAttemptsParameters(case_id=draft.draft_id))
+98  +             list_att_req = CommandRequest(
+99  +                 "run.list_attempts",
+100 +                 "req:att:list",
+101 +                 "engineer",
+102 +                 ListAttemptsParameters(case_id=draft.draft_id),
+103 +             )
+104 |             list_att_outcome = gateway.dispatch(list_att_req)
+--------------------------------------------------------------------------------
+112 |             # 4. Inspect Attempt
+    -             insp_att_req = CommandRequest("run.inspect_attempt", "req:att:1", "engineer", InspectAttemptParameters(attempt.attempt_id))
+113 +             insp_att_req = CommandRequest(
+114 +                 "run.inspect_attempt",
+115 +                 "req:att:1",
+116 +                 "engineer",
+117 +                 InspectAttemptParameters(attempt.attempt_id),
+118 +             )
+119 |             insp_att_outcome = gateway.dispatch(insp_att_req)
+--------------------------------------------------------------------------------
+123 |             # 5. Inspect Run
+    -             insp_run_req = CommandRequest("run.inspect", "req:run:insp", "engineer", InspectRunParameters(run_view.run_id))
+124 +             insp_run_req = CommandRequest(
+125 +                 "run.inspect", "req:run:insp", "engineer", InspectRunParameters(run_view.run_id)
+126 +             )
+127 |             insp_run_outcome = gateway.dispatch(insp_run_req)
+--------------------------------------------------------------------------------
+135 |
+    -             val_req = CommandRequest("draft.validate", "req:val:1", "engineer", DraftParameters(draft))
+136 +             val_req = CommandRequest(
+137 +                 "draft.validate", "req:val:1", "engineer", DraftParameters(draft)
+138 +             )
+139 |             val_outcome = gateway.dispatch(val_req)
+--------------------------------------------------------------------------------
+159 |             stale_run_req = CommandRequest(
+    -                 "run.start", "req:run:stale", "engineer", StartRunParameters(modified_draft, receipt.receipt_id)
+160 +                 "run.start",
+161 +                 "req:run:stale",
+162 +                 "engineer",
+163 +                 StartRunParameters(modified_draft, receipt.receipt_id),
+164 |             )
+--------------------------------------------------------------------------------
+184 |
+    -             cancel_req = CommandRequest("run.cancel", "req:can:1", "engineer", CancelRunParameters(run_id="run:cancel:1", reason="User stopped"))
+185 +             cancel_req = CommandRequest(
+186 +                 "run.cancel",
+187 +                 "req:can:1",
+188 +                 "engineer",
+189 +                 CancelRunParameters(run_id="run:cancel:1", reason="User stopped"),
+190 +             )
+191 |             outcome = gateway.dispatch(cancel_req)
+--------------------------------------------------------------------------------
+199 |         with tempfile.TemporaryDirectory() as temp_dir:
+    -             supervisor = WorkerSupervisor(
+    -                 worker_command=[sys.executable, str(mock_worker_py)]
+    -             )
+200 +             supervisor = WorkerSupervisor(worker_command=[sys.executable, str(mock_worker_py)])
+201 |             supervisor.start(timeout=5.0)
+--------------------------------------------------------------------------------
+208 |                 # Validate over child process
+    -                 val_req = CommandRequest("draft.validate", "req:spv:val", "engineer", DraftParameters(draft))
+209 +                 val_req = CommandRequest(
+210 +                     "draft.validate", "req:spv:val", "engineer", DraftParameters(draft)
+211 +                 )
+212 |                 val_outcome = gateway.dispatch(val_req)
+--------------------------------------------------------------------------------
+217 |                 # Run over child process
+    -                 run_req = CommandRequest("run.start", "req:spv:run", "engineer", StartRunParameters(draft, receipt.receipt_id))
+218 +                 run_req = CommandRequest(
+219 +                     "run.start",
+220 +                     "req:spv:run",
+221 +                     "engineer",
+222 +                     StartRunParameters(draft, receipt.receipt_id),
+223 +                 )
+224 |                 run_outcome = gateway.dispatch(run_req)
+--------------------------------------------------------------------------------
+241 |
+    -             val_outcome = gateway.dispatch(CommandRequest("draft.validate", "r:v", "eng", DraftParameters(draft)))
+242 +             val_outcome = gateway.dispatch(
+243 +                 CommandRequest("draft.validate", "r:v", "eng", DraftParameters(draft))
+244 +             )
+245 |             receipt = val_outcome.data
+    -             run_outcome = gateway.dispatch(CommandRequest("run.start", "r:r", "eng", StartRunParameters(draft, receipt.receipt_id)))
+246 +             run_outcome = gateway.dispatch(
+247 +                 CommandRequest(
+248 +                     "run.start", "r:r", "eng", StartRunParameters(draft, receipt.receipt_id)
+249 +                 )
+250 +             )
+251 |             self.assertEqual(run_outcome.disposition, "COMPLETED")
+    |
+
+unformatted: File would be reformatted
+   --> tests/test_dw5_acceptance.py:75:39
+   |
+74 |     # 4. Validate and Run
+   -     assert studio.validate_current(), "Validation must succeed for fully configured heater flowsheet"
+75 +     assert studio.validate_current(), (
+76 +         "Validation must succeed for fully configured heater flowsheet"
+77 +     )
+78 |     assert studio.run_current(), "Supervised solver run must execute and converge"
+--------------------------------------------------------------------------------
+93 |     outlet = wb.streams[1]
+   -     assert inlet.mass_flow_kg_s is not None and pytest.approx(inlet.mass_flow_kg_s, abs=1e-3) == 12.5
+94 +     assert (
+95 +         inlet.mass_flow_kg_s is not None and pytest.approx(inlet.mass_flow_kg_s, abs=1e-3) == 12.5
+96 +     )
+97 |     assert inlet.temperature_k is not None and pytest.approx(inlet.temperature_k, abs=1e-2) == 360.0
+   |
+
+unformatted: File would be reformatted
+   --> tests/test_graph_viewer.py:89:43
+    |
+88  |
+    -     rev_x, rev_y = widget._screen_to_data(screen_pt.x(), screen_pt.y(), min_x, max_x, min_y, max_y, plot_rect)
+89  +     rev_x, rev_y = widget._screen_to_data(
+90  +         screen_pt.x(), screen_pt.y(), min_x, max_x, min_y, max_y, plot_rect
+91  +     )
+92  |     assert pytest.approx(rev_x, abs=1e-3) == 25000.0
+--------------------------------------------------------------------------------
+125 |         # Verify column headers and data rows
+    -         lines = [line.strip() for line in content.splitlines() if line.strip() and not line.startswith("#")]
+126 +         lines = [
+127 +             line.strip()
+128 +             for line in content.splitlines()
+129 +             if line.strip() and not line.startswith("#")
+130 +         ]
+131 |         assert len(lines) >= 4  # Header + 3 data points
+    |
+
+unformatted: File would be reformatted
+   --> tests/test_pfd_drag_drop.py:50:44
+    |
+49  |
+    - def test_equipment_palette_populates_items(qapp: QApplication, catalogue: c.PfdCatalogueDto) -> None:
+50  + def test_equipment_palette_populates_items(
+51  +     qapp: QApplication, catalogue: c.PfdCatalogueDto
+52  + ) -> None:
+53  |     palette = EquipmentPaletteList(catalogue)
+--------------------------------------------------------------------------------
+71  |
+    -     payload = json.dumps({"model_id": "heater", "title": "Duty heater", "version": "1.0"}).encode("utf-8")
+72  +     payload = json.dumps({"model_id": "heater", "title": "Duty heater", "version": "1.0"}).encode(
+73  +         "utf-8"
+74  +     )
+75  |     mime = QMimeData()
+--------------------------------------------------------------------------------
+147 |
+    -     key_event = QKeyEvent(QKeyEvent.Type.KeyPress, Qt.Key.Key_Escape, Qt.KeyboardModifier.NoModifier)
+148 +     key_event = QKeyEvent(
+149 +         QKeyEvent.Type.KeyPress, Qt.Key.Key_Escape, Qt.KeyboardModifier.NoModifier
+150 +     )
+151 |     canvas.keyPressEvent(key_event)
+    |
+
+unformatted: File would be reformatted
+   --> tests/test_workbook_results.py:109:38
+    |
+108 |             # Validate
+    -             val_req = CommandRequest("draft.validate", "req-1", "test-actor", c.DraftParameters(draft))
+109 +             val_req = CommandRequest(
+110 +                 "draft.validate", "req-1", "test-actor", c.DraftParameters(draft)
+111 +             )
+112 |             val_out = gateway.dispatch(val_req)
+--------------------------------------------------------------------------------
+117 |             # Run
+    -             run_req = CommandRequest("run.start", "req-2", "test-actor", StartRunParameters(draft, receipt.receipt_id))
+118 +             run_req = CommandRequest(
+119 +                 "run.start", "req-2", "test-actor", StartRunParameters(draft, receipt.receipt_id)
+120 +             )
+121 |             run_out = gateway.dispatch(run_req)
+--------------------------------------------------------------------------------
+195 |             run_out = gateway.dispatch(
+    -                 CommandRequest("run.start", "r-2", "a", StartRunParameters(draft, receipt.receipt_id))
+196 +                 CommandRequest(
+197 +                     "run.start", "r-2", "a", StartRunParameters(draft, receipt.receipt_id)
+198 +                 )
+199 |             )
+--------------------------------------------------------------------------------
+245 |             run_out = gateway.dispatch(
+    -                 CommandRequest("run.start", "r-2", "a", StartRunParameters(draft, receipt.receipt_id))
+246 +                 CommandRequest(
+247 +                     "run.start", "r-2", "a", StartRunParameters(draft, receipt.receipt_id)
+248 +                 )
+249 |             )
+--------------------------------------------------------------------------------
+258 |                     "a",
+    -                     PlotDataParameters(case_id=draft.draft_id, run_id=run_view.run_id, plot_kind="T_Q", unit_id="u:hx"),
+259 +                     PlotDataParameters(
+260 +                         case_id=draft.draft_id,
+261 +                         run_id=run_view.run_id,
+262 +                         plot_kind="T_Q",
+263 +                         unit_id="u:hx",
+264 +                     ),
+265 |                 )
+--------------------------------------------------------------------------------
+293 |                     "a",
+    -                     PlotDataParameters(case_id=draft.draft_id, run_id=run_view.run_id, plot_kind="RESIDUAL_CONVERGENCE"),
+294 +                     PlotDataParameters(
+295 +                         case_id=draft.draft_id,
+296 +                         run_id=run_view.run_id,
+297 +                         plot_kind="RESIDUAL_CONVERGENCE",
+298 +                     ),
+299 |                 )
+--------------------------------------------------------------------------------
+318 |             run_out = gateway.dispatch(
+    -                 CommandRequest("run.start", "r-2", "a", StartRunParameters(draft, receipt.receipt_id))
+319 +                 CommandRequest(
+320 +                     "run.start", "r-2", "a", StartRunParameters(draft, receipt.receipt_id)
+321 +                 )
+322 |             )
+--------------------------------------------------------------------------------
+346 |             self.assertIn(statuses["closure"], ("PASSED", "FAILED", "NOT_CHECKED"))
+    -             self.assertIn(statuses["physical_validity"], ("VALID", "EXTRAPOLATED", "INVALID", "UNKNOWN"))
+    -             self.assertIn(statuses["correlation_validity"], ("VALID", "EXTRAPOLATED", "INVALID", "UNKNOWN"))
+347 +             self.assertIn(
+348 +                 statuses["physical_validity"], ("VALID", "EXTRAPOLATED", "INVALID", "UNKNOWN")
+349 +             )
+350 +             self.assertIn(
+351 +                 statuses["correlation_validity"], ("VALID", "EXTRAPOLATED", "INVALID", "UNKNOWN")
+352 +             )
+353 |
+    |
+
+unformatted: File would be reformatted
+  --> tests/test_worker_supervisor.py:46:13
+   |
+45 |
+   -     def run(self, prepared: c.PreparedRevisionDto, expected_context_hash: str | None = None) -> object:
+46 +     def run(
+47 +         self, prepared: c.PreparedRevisionDto, expected_context_hash: str | None = None
+48 +     ) -> object:
+49 |         from collections import namedtuple
+50 |
+   -         RunResultMock = namedtuple("RunResultMock", ["convergence", "closure", "physical_validity", "correlation_validity"])
+51 +         RunResultMock = namedtuple(
+52 +             "RunResultMock", ["convergence", "closure", "physical_validity", "correlation_validity"]
+53 +         )
+54 |         StatusMock = namedtuple("StatusMock", ["value"])
+--------------------------------------------------------------------------------
+74 |     def worker_thread_target() -> None:
+   -         run_worker_loop(supervisor_to_worker, worker_to_supervisor, adapter_factory=DummyMockAdapter)
+75 +         run_worker_loop(
+76 +             supervisor_to_worker, worker_to_supervisor, adapter_factory=DummyMockAdapter
+77 +         )
+78 |
+   |
+
+18 files would be reformatted, 94 files already formatted

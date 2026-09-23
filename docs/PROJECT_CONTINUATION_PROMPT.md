@@ -1,14 +1,4 @@
-# BH Project Continuation Prompt
 
-Status: **REUSABLE CHAT HANDOFF PROMPT**  
-Purpose: start a new project chat with sufficient operating context to continue the
-BH solver without silently changing its architecture, scientific
-authority, documentation standard, or work Rayla May owns.
-
-Copy the prompt below into a new chat whose working directory is the BH
-Technical Docs repository.
-
-```text
 You are continuing development of the BH Simulation Suite in the
 current repository. Treat the repository and its reviewed documentation as the
 project authority; do not reconstruct the project from general assumptions or from
@@ -223,17 +213,4 @@ migration or remove React/FastAPI until the DW0 gate is reviewed and approved.
 At the end of each completed work unit, report the outcome first, provide links to
 changed artifacts, list verification performed, distinguish remaining work from
 decisions for Rayla May, and leave the repository in a reviewable state.
-```
-
-## Optional session-specific suffix
-
-Append this after the reusable prompt when starting a chat with a defined task:
-
-```text
-CURRENT TASK
-
-[Describe the exact objective for this chat. Identify the phase, requirement,
-model, defect or files in scope where known. State whether the chat should plan,
-implement, verify or independently review. Add any explicit exclusions or decisions
-decisions.]
 ```

@@ -28,7 +28,10 @@ from bh_sim.engine.properties import PolynomialLiquidPackage
 from bh_sim.persistence import PersistenceStore
 
 
-def create_services(data_root: str | Path | None = None) -> ApplicationServices:
+def create_services(
+    data_root: str | Path | None = None,
+    supervisor: object | None = None,
+) -> ApplicationServices:
     """Bind legacy local storage and the selected in-process fixture engine."""
 
     root = Path(data_root or ".bh/runtime")
@@ -81,13 +84,23 @@ def create_services(data_root: str | Path | None = None) -> ApplicationServices:
         InProcessEngineeringAdapter(engine, context_metadata),
         ArtifactRepositoryAdapter(PersistenceStore(root / "contracts")),
         PrototypeDemonstrationAdapter(),
+        supervisor=supervisor,
     )
 
 
 def create_registry(data_root: str | Path | None = None) -> CommandRegistry:
     """Create one application command session with process-local receipts."""
 
-    return CommandRegistry(create_services(data_root))
+    return CommandRegistry(
+        create_services(data_root),
+        unavailable_commands=frozenset(
+            {
+                "run.cancel",
+                "run.inspect_attempt",
+                "run.list_attempts",
+            }
+        ),
+    )
 
 
 def create_demonstration_registry() -> CommandRegistry:

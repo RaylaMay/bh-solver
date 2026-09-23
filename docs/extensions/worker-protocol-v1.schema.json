@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "bh-extension-worker-v1",
+  "title": "BH isolated extension worker message",
+  "oneOf": [
+    {"$ref": "#/$defs/request"},
+    {"$ref": "#/$defs/response"}
+  ],
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protocol", "kind", "requestId", "pluginId", "pluginVersion", "operation", "inputHashes"],
+      "properties": {
+        "protocol": {"const": "bh-extension-worker-v1"},
+        "kind": {"const": "execute"},
+        "requestId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "pluginId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "pluginVersion": {"type": "string", "minLength": 1, "maxLength": 64},
+        "operation": {"type": "string", "minLength": 1, "maxLength": 128},
+        "inputHashes": {"type": "array", "items": {"$ref": "#/$defs/hash"}, "maxItems": 1024}
+      }
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protocol", "kind", "requestId", "disposition", "outputHashes", "diagnostics"],
+      "properties": {
+        "protocol": {"const": "bh-extension-worker-v1"},
+        "kind": {"const": "outcome"},
+        "requestId": {"type": "string", "minLength": 1, "maxLength": 128},
+        "disposition": {"enum": ["COMPLETED", "REJECTED", "FAILED"]},
+        "outputHashes": {"type": "array", "items": {"$ref": "#/$defs/hash"}, "maxItems": 1024},
+        "diagnostics": {"type": "array", "items": {"type": "string", "maxLength": 1024}, "maxItems": 128}
+      }
+    }
+  }
+}

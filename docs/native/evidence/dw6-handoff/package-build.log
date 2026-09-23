@@ -1,0 +1,12 @@
+Building source distribution...
+  × Failed to build `<home>/Documents/ChatGPT/Bound Horizons Technical
+  │ Docs`
+  ├─▶ Failed to resolve requirements from `build-system.requires`
+  ├─▶ No solution found when resolving: `setuptools>=68`
+  ╰─▶ Because setuptools was not found in the cache and you require
+      setuptools>=68, we can conclude that your requirements are
+      unsatisfiable.
+
+      hint: Packages were unavailable because the network was disabled. When
+      the network is disabled, registry packages may only be read from the
+      cache.

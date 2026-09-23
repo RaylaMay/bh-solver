@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-23",
+  "status": "PASS",
+  "tested_source_files": 171,
+  "transferred_files": 192,
+  "original_head": "a0d3281aee909914cdf82a6f35ef4550f0b29604",
+  "source_project_commit_created": false,
+  "staged_changes": false,
+  "pushed": false,
+  "runtime_data": "untouched; .bh and .bound-horizons ignored",
+  "backup": ".bh/remediation-backup-2026-09-23/original-public-files.tar.gz",
+  "transfer_manifest": ".bh/remediation-backup-2026-09-23/transfer.json",
+  "verification": "Every transferred file matches the candidate; every tested source file matches the tested-source manifest. Historical baseline integrity and public links checked in target."
+}

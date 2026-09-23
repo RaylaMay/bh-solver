@@ -32,12 +32,17 @@ from bh_sim.boundary.contracts import (
     LastValidParameters,
     ObjectPresentationDto,
     OpenDraftParameters,
+    OverlaysDto,
+    PlotDefinitionDto,
     PreparedRevisionDto,
     QuantityDto,
+    ResultSelectionDto,
+    RunAttemptRecord,
     RunViewDto,
     StartRunParameters,
     ValidationDto,
     ValidationReceiptDto,
+    WorkbookDto,
 )
 from bh_sim.boundary.json_codec import boundary_from_json, boundary_json
 from bh_sim.composition import create_registry, create_services
@@ -373,11 +378,15 @@ class RecordingPorts:
             self.context = "context:B"
 
     def run(
-        self, prepared: PreparedRevisionDto, *, expected_context_hash: str | None = None
+        self,
+        prepared: PreparedRevisionDto,
+        *,
+        run_id: str | None = None,
+        expected_context_hash: str | None = None,
     ) -> CalculatedRunDto:
         self.calls.append("run")
         assert expected_context_hash == self.context
-        return CalculatedRunDto("{}", self.load_run("run:fake"))
+        return CalculatedRunDto("{}", self.load_run(run_id or "run:fake"))
 
     def save_run(self, result: CalculatedRunDto) -> None:
         self.calls.append("save_run")
@@ -399,6 +408,68 @@ class RecordingPorts:
 
     def latest_valid_run(self, case_id: str) -> RunViewDto | None:
         return None
+
+    def record_attempt(self, attempt: RunAttemptRecord) -> RunAttemptRecord:
+        return attempt
+
+    def load_attempt(self, attempt_id: str) -> RunAttemptRecord | None:
+        return None
+
+    def list_attempts(self, case_id: str | None = None) -> tuple[RunAttemptRecord, ...]:
+        return ()
+
+    def reconcile_startup_attempts(self) -> tuple[RunAttemptRecord, ...]:
+        return ()
+
+    def promote_staged_run(
+        self,
+        staged_path: str,
+        *,
+        expected_run_id: str | None = None,
+        expected_case_id: str | None = None,
+        expected_revision_id: str | None = None,
+        expected_hash: str | None = None,
+    ) -> RunViewDto:
+        return self.load_run(expected_run_id or "run:promoted")
+
+    def get_workbook(self, case_id: str, run_id: str | None = None) -> WorkbookDto:
+        return WorkbookDto(
+            case_id,
+            run_id or "run:fake",
+            "flow:main",
+            "CONVERGED",
+            "PASSED",
+            "VALID",
+            "EXTRAPOLATED",
+            (),
+            (),
+            (),
+        )
+
+    def get_overlays(self, case_id: str, run_id: str | None = None) -> OverlaysDto:
+        return OverlaysDto(
+            case_id,
+            run_id or "run:fake",
+            (),
+            (),
+            ResultSelectionDto(case_id, run_id, run_id, run_id, False),
+        )
+
+    def get_plot_data(
+        self,
+        case_id: str,
+        run_id: str | None = None,
+        plot_kind: str = "T_Q",
+        unit_id: str | None = None,
+    ) -> PlotDefinitionDto:
+        return PlotDefinitionDto(
+            plot_id=f"plot:{plot_kind}",
+            title=plot_kind,
+            x_label="x",
+            y_label="y",
+            plot_kind="T_Q",
+            series=(),
+        )
 
     def evaluate(self, name: str) -> DemonstrationReportDto:
         return DemonstrationReportDto("{}")

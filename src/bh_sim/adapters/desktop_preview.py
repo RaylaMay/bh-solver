@@ -8,17 +8,25 @@ DW4 work; the UI accepts only the neutral CommandGateway.
 from pathlib import Path
 
 from bh_sim.application.commands import CommandRegistry
+from bh_sim.application.history import HistoryService
+from bh_sim.application.pfd import PfdService
 from bh_sim.application.services import ApplicationServices, CommandRejected
 from bh_sim.boundary.contracts import (
     CalculatedRunDto,
     DemonstrationReportDto,
     DraftDto,
+    OverlaysDto,
+    PlotDefinitionDto,
     PreparedRevisionDto,
+    RunAttemptRecord,
     RunViewDto,
     ValidationDto,
+    WorkbookDto,
 )
 
 from .drafts import DraftRepository, DraftRepositoryAdapter
+from .history import JsonHistoryRepository
+from .pfd import ExistingQuantityAdapter, NativePfdRepository, reference_catalogue
 
 
 class UnavailablePreviewPorts:
@@ -40,7 +48,11 @@ class UnavailablePreviewPorts:
         raise self._unavailable()
 
     def run(
-        self, prepared: PreparedRevisionDto, *, expected_context_hash: str | None = None
+        self,
+        prepared: PreparedRevisionDto,
+        *,
+        run_id: str | None = None,
+        expected_context_hash: str | None = None,
     ) -> CalculatedRunDto:
         raise self._unavailable()
 
@@ -56,6 +68,44 @@ class UnavailablePreviewPorts:
     def latest_valid_run(self, case_id: str) -> RunViewDto | None:
         raise self._unavailable()
 
+    def record_attempt(self, attempt: RunAttemptRecord) -> RunAttemptRecord:
+        raise self._unavailable()
+
+    def load_attempt(self, attempt_id: str) -> RunAttemptRecord | None:
+        raise self._unavailable()
+
+    def list_attempts(self, case_id: str | None = None) -> tuple[RunAttemptRecord, ...]:
+        raise self._unavailable()
+
+    def reconcile_startup_attempts(self) -> tuple[RunAttemptRecord, ...]:
+        raise self._unavailable()
+
+    def promote_staged_run(
+        self,
+        staged_path: str,
+        *,
+        expected_run_id: str | None = None,
+        expected_case_id: str | None = None,
+        expected_revision_id: str | None = None,
+        expected_hash: str | None = None,
+    ) -> RunViewDto:
+        raise self._unavailable()
+
+    def get_workbook(self, case_id: str, run_id: str | None = None) -> WorkbookDto:
+        raise self._unavailable()
+
+    def get_overlays(self, case_id: str, run_id: str | None = None) -> OverlaysDto:
+        raise self._unavailable()
+
+    def get_plot_data(
+        self,
+        case_id: str,
+        run_id: str | None = None,
+        plot_kind: str = "T_Q",
+        unit_id: str | None = None,
+    ) -> PlotDefinitionDto:
+        raise self._unavailable()
+
     def evaluate(self, name: str) -> DemonstrationReportDto:
         raise self._unavailable()
 
@@ -69,16 +119,49 @@ def create_preview_gateway(data_root: Path) -> CommandRegistry:
         mock,
         mock,
     )
+    pfd = PfdService(
+        reference_catalogue(),
+        NativePfdRepository(data_root / "native-drafts"),
+        services.drafts,
+        ExistingQuantityAdapter(),
+    )
     return CommandRegistry(
         services,
+        pfd=pfd,
+        history=HistoryService(pfd, JsonHistoryRepository(data_root / "history")),
         unavailable_commands=frozenset(
             {
                 "draft.validate",
                 "run.start",
+                "run.cancel",
                 "run.inspect",
+                "run.inspect_attempt",
+                "run.list_attempts",
                 "run.select_last_valid",
                 "run.compare",
                 "demo.evaluate",
             }
         ),
+    )
+
+
+def create_supervised_gateway(
+    data_root: Path,
+    supervisor: object | None = None,
+) -> CommandRegistry:
+    """Bind real draft, persistence, and supervised solver commands for DW4."""
+    from bh_sim.composition import create_services
+
+    services = create_services(data_root=data_root, supervisor=supervisor)
+    pfd = PfdService(
+        reference_catalogue(),
+        NativePfdRepository(data_root / "native-drafts"),
+        services.drafts,
+        ExistingQuantityAdapter(),
+    )
+    return CommandRegistry(
+        services,
+        pfd=pfd,
+        history=HistoryService(pfd, JsonHistoryRepository(data_root / "history")),
+        unavailable_commands=frozenset({"demo.evaluate"}),
     )

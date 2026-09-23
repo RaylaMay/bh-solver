@@ -52,8 +52,10 @@ verification lifecycle in [docs/MODEL_LIFECYCLE.md](docs/MODEL_LIFECYCLE.md).
   shared actions and command palette, docking, themes and workspace preferences.
   The [DW3 editor](docs/native/DW3_PFD.md) adds typed-port connections, orthogonal
   routes, parameter editing, unique stream tags, undo/redo, settings/templates and
-  immutable native save/reopen. Calculation services remain explicitly unavailable
-  pending the worker stage. See [renderer measurements](docs/native/DW3_BENCHMARK.md)
+  immutable native save/reopen. The native worker/results implementation now supports
+  explicit Validate/Run/Cancel, workbooks and graphs; its bounded remediation and
+  remaining acceptance gates are recorded in the
+  [DW4/DW5 handoff](docs/native/DW4_DW5_REMEDIATION_2026-09-23.md). See [renderer measurements](docs/native/DW3_BENCHMARK.md)
   and the [scoped native walkthrough](docs/native/DW3_NATIVE_VERIFICATION.md).
 
 The older modules `thermo.py`, `stream.py`, `unit_ops.py`, `radiators.py`,

@@ -1,0 +1,111 @@
+{
+  "date": "2026-09-16",
+  "performer": "Codex (preparer self-checks, not independent human review)",
+  "checks": [
+    {
+      "check": "Acceptance collection / expected pre-DW6 red",
+      "command_or_method": ".venv/bin/python handoffs/dw6/freeze.py --candidate . --revision 1; run.py --candidate . --output <new-directory> --manifest-sha256 <recorded-digest>",
+      "exit": 1,
+      "result": "97 collected; 3 legacy passed; 94 explicit missing-capability failures; zero skips/xfails/collection errors; executed from separate reviewer copy",
+      "evidence": "release-r1/gate.json"
+    },
+    {
+      "check": "Verifier challenges",
+      "command_or_method": ".venv/bin/python handoffs/dw6/selftest.py --candidate .",
+      "exit": 0,
+      "result": "9 passed",
+      "evidence": "verifier-selftests-r1.log"
+    },
+    {
+      "check": "Python baseline",
+      "command_or_method": "QT_QPA_PLATFORM=offscreen .venv/bin/pytest -q",
+      "exit": 0,
+      "result": "173 passed; one upstream Starlette deprecation warning",
+      "evidence": "python-tests.log"
+    },
+    {
+      "check": "Ruff lint",
+      "command_or_method": ".venv/bin/ruff check src tests tools handoffs/dw6",
+      "exit": 0,
+      "result": "passed; final callable-guard edit also checked",
+      "evidence": "ruff-check-r1.log"
+    },
+    {
+      "check": "Ruff format",
+      "command_or_method": ".venv/bin/ruff format --check src tests tools handoffs/dw6",
+      "exit": 0,
+      "result": "passed; final callable-guard edit also checked",
+      "evidence": "ruff-format-r1.log"
+    },
+    {
+      "check": "Project types",
+      "command_or_method": ".venv/bin/pyright --pythonpath .venv/bin/python",
+      "exit": 0,
+      "result": "0 errors/warnings",
+      "evidence": "pyright-project.log"
+    },
+    {
+      "check": "Package types",
+      "command_or_method": ".venv/bin/pyright --pythonpath .venv/bin/python handoffs/dw6",
+      "exit": 0,
+      "result": "0 errors/warnings",
+      "evidence": "pyright-package.log"
+    },
+    {
+      "check": "Project authority/links",
+      "command_or_method": ".venv/bin/python tools/check_project.py",
+      "exit": 0,
+      "result": "184 historical baseline Git objects unchanged; final link count in final log",
+      "evidence": "project-check-final.log"
+    },
+    {
+      "check": "Diff whitespace",
+      "command_or_method": "git diff --check",
+      "exit": 0,
+      "result": "passed",
+      "evidence": "diff-check.log"
+    },
+    {
+      "check": "Browser tests",
+      "command_or_method": "cd web && npm test",
+      "exit": 0,
+      "result": "5 tests passed",
+      "evidence": "browser-tests.log"
+    },
+    {
+      "check": "Browser lint",
+      "command_or_method": "cd web && npm run lint",
+      "exit": 0,
+      "result": "passed",
+      "evidence": "browser-lint.log"
+    },
+    {
+      "check": "Browser build",
+      "command_or_method": "cd web && npm run build",
+      "exit": 0,
+      "result": "passed",
+      "evidence": "browser-build.log"
+    },
+    {
+      "check": "Python build",
+      "command_or_method": "Bundled Python -I: setuptools.build_meta.build_sdist(temp_output); extract sdist; build_wheel(temp_output)",
+      "exit": 0,
+      "result": "setuptools 84.0.0; source copy contains pyproject.toml, README.md, LICENSE, src/, tests/; generated metadata excluded; no network; artifacts hashed then discarded",
+      "evidence": "package-build-offline.log"
+    },
+    {
+      "check": "PDF syntax/text",
+      "command_or_method": "Bundled Python -I: pypdf.PdfReader(fixture, strict=True); pages[0].extract_text()",
+      "exit": 0,
+      "result": "One page each; exact synthetic text in text.pdf; empty text in scan.pdf",
+      "evidence": "pdf-fixtures.log"
+    }
+  ],
+  "not_performed": [
+    "DW6 implementation green run",
+    "macOS DW6 native witness",
+    "Live OpenAI request",
+    "Independent implementation review",
+    "Remote GitHub branch protection verification"
+  ]
+}

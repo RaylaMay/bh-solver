@@ -158,3 +158,67 @@ implemented; full worker/result parity remains DW4/DW5/DW9. CI is prepared local
 but has not been run on GitHub in this work unit. No release/migration gate is closed
 merely by these tests. Review [DW3 change record](native/DW3_CHANGE_RECORD.md) before
 starting the supervised worker stage.
+
+### DW3.1 UI foundation work unit — 2026-09-14
+
+Rayla May authorized a focused UI work unit before DW4. The native client now has a
+persistent Layers & Groups dock, a visible PFD action toolbar and a gated
+Flowsheet/Dynamics/Controls switcher. Presentation groups, engineering subsystems,
+visualization frames, future control graphs, workspace links and plugin manifests
+have versioned neutral contracts. A language-neutral isolated protocol and proposed
+C++ C ABI establish extension boundaries without loading code.
+
+The [DW3.1 change record](native/DW3_1_CHANGE_RECORD.md) and native animation report
+record the implementation and its measured macOS/arm64 limit. DW4/DW5 still own
+worker/result integration. M7/M9 still own numerical dynamics, controls and mature
+signal semantics. The 1-D propulsion concept remains a namespaced plugin hook until
+its later evidence and model programme is approved.
+
+### DW3.2 workstation/history work unit — 2026-09-14
+
+Rayla May authorized the [modular workstation and durable-history plan](native/DW3_2_WORKSTATION.md)
+before DW4. The desktop launcher now selects the contextual toolbar/ribbon shell,
+independent case tabs, persistent recovery/undo, named snapshots, alternatives,
+structural comparisons, command line and workspace templates. The
+[Appendix A change record](native/DW3_2_CHANGE_RECORD.md) records measured latency,
+migration/failure tests and remaining native accessibility limits. These local
+features do not complete worker, HAZOP, collaboration or release acceptance.
+
+### Following collaboration milestone
+
+Rayla May chose simultaneous BH editing over LAN/VPN as a separate following
+milestone. The [collaboration record](native/DW3_3_COLLABORATION.md) defines required
+behaviour and the protocol/failure-review gate. Network editing remains disabled;
+no hosting service or external project upload is implemented by DW3.2.
+
+### DW4 supervised solver worker — 2026-09-15
+
+[DW4 change record](native/DW4_CHANGE_RECORD.md) records the implemented framed IPC wire protocol, supervised child-process worker execution, cancellation, timeouts, crash containment, attempt persistence, and reconciliation. Palette drag-and-drop onto the PFD canvas is fully integrated with undo/redo journal atomicity.
+
+### DW5 workbooks, graph views, and draw-to-export acceptance — 2026-09-15
+
+[DW5 change record](native/DW5_CHANGE_RECORD.md) records the implemented Process Workbook dock (`WorkbookView`) with 4 uncollapsed status badges, First Law mass/energy balance closure verification, Second Law temperature profile constraints, live PFD canvas result overlays, unified 2D graph viewer (`GraphViewer`), non-modal floating comparison dialogs (`GraphDialog`), vector SVG and CSV exports with audit provenance headers, flowsheet modification staleness tracking, and complete draw-to-export acceptance (`test_dw5_acceptance.py`).
+
+## DW6 test-first handoff disposition — 2026-09-16
+
+Rayla May requested the [DW6 developer handoff](native/DW6_DEVELOPER_HANDOFF.md),
+with executable reviewer-controlled tests developed before implementation. She
+selected a usable text workspace, provider-neutral API/local-model interface with
+OpenAI first, explicit attachments and retained project audit, and bounded adaptive
+parameter exploration under ADR-012. This adds single-participant exploration to
+DW6; multi-participant HAZOP remains DW8 and scientific governance remains separate.
+
+The [specification](native/DW6_ACCEPTANCE_SPEC.md), isolated acceptance package and
+[preparation evidence](native/DW6_HANDOFF_RECORD.md) are handoff deliverables.
+They do not complete DW6. The current checkout still needs accepted DW4/DW5;
+production integration, passing frozen tests, ordinary checks, native/live-provider
+witness and implementation review are the later acceptance gate.
+
+## DW4/DW5 corrective work — 2026-09-23
+
+The [third review](native/DW4_DW5_THIRD_REVIEW_2026-09-16.md) rejected the previous
+blanket PASS claims. The [remediation record](native/DW4_DW5_REMEDIATION_2026-09-23.md)
+tracks the six fixes, follow-up review findings and fresh verification. Preserve the
+DW1 review batches and ADR-012/DW6 test-first package merged from the newer workspace.
+DW4/DW5 implementation and software remediation do not by themselves close native
+witness, process ownership/reconnect or full draw-to-export acceptance gates.

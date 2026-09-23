@@ -1,0 +1,394 @@
+{
+  "by_nodeid": {
+    "tests/test_audit_native.py::test_audit_reconstructs_submission_response_and_human_disposition": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_audit_native.py::test_audit_write_failure_prevents_provider_effect": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_audit_native.py::test_corrupt_canonical_audit_is_rejected_after_restart": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_audit_native.py::test_keyboard_proposal_decision_reaches_actual_history[apply]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_audit_native.py::test_keyboard_proposal_decision_reaches_actual_history[reject]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_audit_native.py::test_keyboard_send_is_responsive_during_provider_wait": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_audit_native.py::test_legacy_canonical_artifacts_keep_exact_bytes[case]": {
+      "outcome": "passed",
+      "reason": "Exact legacy canonical artifact compatibility"
+    },
+    "tests/test_audit_native.py::test_legacy_canonical_artifacts_keep_exact_bytes[revision]": {
+      "outcome": "passed",
+      "reason": "Exact legacy canonical artifact compatibility"
+    },
+    "tests/test_audit_native.py::test_legacy_canonical_artifacts_keep_exact_bytes[run]": {
+      "outcome": "passed",
+      "reason": "Exact legacy canonical artifact compatibility"
+    },
+    "tests/test_audit_native.py::test_native_composer_is_multiline_and_preserves_technical_tokens": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_audit_native.py::test_new_contracts_are_frozen_and_strictly_round_trip[AiBudget]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT: AiBudget"
+    },
+    "tests/test_audit_native.py::test_new_contracts_are_frozen_and_strictly_round_trip[AiProviderParameters]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT: AiProviderParameters"
+    },
+    "tests/test_audit_native.py::test_new_contracts_are_frozen_and_strictly_round_trip[AiSessionTarget]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT: AiSessionTarget"
+    },
+    "tests/test_audit_native.py::test_ordinary_entrypoint_calls_the_same_production_factory": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_PRODUCTION_FACTORY: desktop_launcher.create_workstation"
+    },
+    "tests/test_audit_native.py::test_persisted_profile_survives_actual_worker_artifacts_and_reopen[EXPLORATION]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_audit_native.py::test_persisted_profile_survives_actual_worker_artifacts_and_reopen[NARRATIVE]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_audit_native.py::test_persisted_profile_survives_actual_worker_artifacts_and_reopen[REVIEW]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_audit_native.py::test_preview_flushes_pending_inspector_edits": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_audit_native.py::test_process_crash_recovers_without_resend_or_run_replay[provider_dispatch]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_PRODUCTION_FACTORY: desktop_launcher.create_workstation"
+    },
+    "tests/test_audit_native.py::test_process_crash_recovers_without_resend_or_run_replay[worker_admission]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_PRODUCTION_FACTORY: desktop_launcher.create_workstation"
+    },
+    "tests/test_audit_native.py::test_reservation_and_approval_are_durable_before_provider_dispatch": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_audit_native.py::test_spellcheck_suggests_corrections_without_rewriting_text": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_ai_actor_cannot_approve_a_review_proposal": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_edit_invalidates_approval_and_retains_original_proposal": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_inconsistent_before_value_cannot_partially_apply_a_multi_change_proposal": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_injection_attachment_cannot_grant_tools_or_modify_baseline": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_known_artifact_contradiction_is_flagged_and_artifact_stays_authoritative": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_missing_or_cross_case_selection_is_rejected": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_narrative_profile_survives_restart_and_cannot_be_hidden": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_oversized_attachment_is_rejected_without_truncation": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_pdf_attachment_uses_local_text_or_reports_ocr_requirement[scan.pdf-False]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_pdf_attachment_uses_local_text_or_reports_ocr_requirement[text.pdf-True]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_preview_freezes_exact_attachment_and_selected_context": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_provider_cannot_smuggle_authority_or_unreviewed_fields[approved_by]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_provider_cannot_smuggle_authority_or_unreviewed_fields[command]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_provider_cannot_smuggle_authority_or_unreviewed_fields[status]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_provider_cannot_smuggle_authority_or_unreviewed_fields[undeclared_field]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_rejection_retains_proposal_without_editing_source": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_review_requires_approval_and_applies_exact_change_atomically": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_send_requires_explicit_provider_configuration": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_stale_approval_cannot_overwrite_a_new_source_head": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_stale_context_hash_is_rejected_before_transmission": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_tab_switch_cannot_replace_the_approved_source": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_authority_context.py::test_unknown_structured_claim_is_flagged_without_becoming_a_result": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_approved_budget_ceiling_cannot_be_raised[elapsed_seconds-301]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_approved_budget_ceiling_cannot_be_raised[iterations-6]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_approved_budget_ceiling_cannot_be_raised[participants-2]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_approved_budget_ceiling_cannot_be_raised[retries-1]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_approved_budget_ceiling_cannot_be_raised[runs-6]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_approved_budget_ceiling_cannot_be_raised[tokens-50001]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_approved_budget_ceiling_cannot_be_raised[tool_calls-21]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_cancel_discards_late_proposal_effects_and_remains_auditable": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_compatible_parameter_units_are_converted_before_bounds_check": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_deadline_admission_boundary[299-True]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_deadline_admission_boundary[300-False]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_deadline_prevents_a_late_response_from_starting_a_run": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_exact_tool_limit_allows_one_complete_sequence_then_stops": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_failed_scientific_trial_preserves_existing_last_valid_result": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_inclusive_parameter_bounds_are_accepted[400000]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_inclusive_parameter_bounds_are_accepted[700000]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_iteration_budget_counts_rejected_candidates_and_stops_at_five": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_lower_run_limit_stops_before_another_provider_iteration": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_plan_and_session_creation_do_not_run_or_send": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_plan_start_requires_exact_human_authorization[actor]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_plan_start_requires_exact_human_authorization[hash]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_real_worker_result_matches_hand_fixture_and_keeps_source_unchanged": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_run_budget_is_session_wide_and_attempt_ids_are_unique": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_source_edits_continue_snapshot_and_adoption_requires_fresh_review": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_subsequent_turn_receives_only_approved_session_feedback": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_token_limit_is_reserved_before_generation": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_token_usage_accumulates_across_turns": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_tool_budget_prevents_excess_requests": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_unapproved_changes_never_reach_the_worker[backend-PROVIDER_OUTPUT_INVALID]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_unapproved_changes_never_reach_the_worker[high-PARAMETER_OUT_OF_BOUNDS]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_unapproved_changes_never_reach_the_worker[low-PARAMETER_OUT_OF_BOUNDS]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_unapproved_changes_never_reach_the_worker[other_parameter-PARAMETER_OUT_OF_SCOPE]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_unapproved_changes_never_reach_the_worker[topology-PROVIDER_OUTPUT_INVALID]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_unapproved_changes_never_reach_the_worker[unit-INVALID_UNITS]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_exploration.py::test_worker_loss_is_retained_and_does_not_advance_original_result": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_duplicate_send_is_deduplicated_across_restart": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_http_failure_is_visible_and_never_retried[401]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_http_failure_is_visible_and_never_retried[429]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_http_failure_is_visible_and_never_retried[500]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_http_failure_is_visible_and_never_retried[503]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_incomplete_response_is_not_applied": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_key_storage_is_explicit_and_never_part_of_project_files[False]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_key_storage_is_explicit_and_never_part_of_project_files[True]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_keychain_failure_does_not_fall_back_to_plaintext": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_lost_provider_acknowledgement_keeps_reservation_and_never_replays": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_malformed_or_wrong_version_response_is_not_a_proposal[not json]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_malformed_or_wrong_version_response_is_not_a_proposal[{\"schema_version\":\"bh-ai-provider-output-v1\",\"x\":NaN}]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_malformed_or_wrong_version_response_is_not_a_proposal[{\"schema_version\":\"wrong\"}]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_malformed_or_wrong_version_response_is_not_a_proposal[{]": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_missing_usage_is_unknown_not_zero": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_provider_cannot_silently_substitute_a_model": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_real_adapter_uses_counting_strict_schema_and_no_remote_state": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    },
+    "tests/test_provider.py::test_refusal_has_no_proposal_or_run": {
+      "outcome": "failed",
+      "reason": "DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile"
+    }
+  },
+  "manifest_sha256": "c9eb72f084c00f4b820d7294b68f80ebdc0721f402ea9cfb5c65483f7ccca91a",
+  "note": "Observed release-r1 pre-DW6 outcomes; future candidates must pass every mandatory test. No pytest expected-failure exemptions."
+}

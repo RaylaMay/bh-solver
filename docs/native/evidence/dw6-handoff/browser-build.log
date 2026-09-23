@@ -1,0 +1,13 @@
+
+> bh-pfd@0.1.0 build
+> tsc -b && vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 1746 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.45 kB │ gzip:   0.29 kB
+dist/assets/index-BKLWnf4b.css   23.09 kB │ gzip:   4.89 kB
+dist/assets/index-cQLIpoVt.js   352.47 kB │ gzip: 113.48 kB
+✓ built in 1.03s

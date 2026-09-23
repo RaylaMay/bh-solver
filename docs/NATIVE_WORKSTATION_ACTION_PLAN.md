@@ -682,6 +682,25 @@ from worker/results acceptance, which remains at DW4/DW5/DW9. See the
 [change record](native/DW3_CHANGE_RECORD.md) and qualified
 [public baseline](native/PUBLIC_BASELINE_TRANSITION.md).
 
+### DW3.1 — UI layers, workspace navigation and extension contracts
+
+Rayla May authorized this focused work before DW4. The implementation adds the
+persistent Layers & Groups dock, common-action toolbar, visual stream groups,
+engineering subsystems, base styling, static direction indicators and
+artifact-gated animation infrastructure. It exposes Flowsheet, Dynamics and
+Controls navigation while keeping the latter two disabled with explicit M7/M9
+capability messages.
+
+Neutral contracts now cover linked workspace revisions, a general future control
+graph, typed visualization frames and extension manifests/provenance. Extension
+admission policy, an isolated-worker schema and a precompiled C++ C ABI header form
+the loader-independent foundation. The `domain-package` capability reserves a
+namespaced propulsion hook without adding scientific models.
+
+The [change record](native/DW3_1_CHANGE_RECORD.md) reports the native 50-equipment,
+30 fps measurement and remaining gates. DW4/DW5 must connect real run artifacts and
+telemetry. M7/M9 retain authority over dynamic and control engines.
+
 ### DW4 — Solver worker and resilient run control
 
 Deliverables:
@@ -1013,3 +1032,41 @@ traceable intent, assumptions, design rationale, changed files, tests, risks and
 unresolved decisions. Do not claim or expose hidden chain-of-thought; create concise,
 editable engineering rationale and evidence records instead.
 ```
+
+## DW3.2 disposition and following collaboration gate — 2026-09-14
+
+Rayla May approved the interface and persistent-history implementation plan after
+selecting compact controls with an optional ribbon, restorable snapshots, continuous
+local recovery, retained alternative histories and an in-app command line. ADR-011
+records the architecture extension. The [DW3.2 guide](native/DW3_2_WORKSTATION.md)
+defines the implemented surfaces and contracts; the
+[Appendix A record](native/DW3_2_CHANGE_RECORD.md) reports software evidence and limits.
+
+Rayla May also selected simultaneous BH editing on LAN/VPN as a separate following
+milestone. The [DW3.3 record](native/DW3_3_COLLABORATION.md) preserves that requirement
+and its protocol/failure-review gate. DW3.2 does not enable networking, concurrent
+selective undo, HAZOP execution or additional scientific engines. Existing DW4/DW5,
+M7/M9 and release gates retain their meaning.
+
+## DW6 scope amendment authorized by Rayla May — 2026-09-16
+
+Rayla May selected and requested implementation of a test-first DW6 handoff with
+single-participant bounded autonomous parameter exploration. ADR-012 records the
+narrow plan-level authorization for Validate/Run, isolation, feedback and hard
+limits. This extends DW6's earlier text-only proposal workflow while retaining
+DW8's multi-participant gate and all scientific-model gates.
+
+Deliver the [specification](native/DW6_ACCEPTANCE_SPEC.md),
+[developer handoff](native/DW6_DEVELOPER_HANDOFF.md) and reviewer-controlled tests
+before product implementation. OpenAI is the first adapter behind a provider-neutral
+interface; the user configures their provider/model and credentials explicitly.
+The current worker/results prerequisite remains unaccepted in this checkout.
+No test-package delivery marks native AI, bounded execution or release parity complete.
+
+## DW4/DW5 corrective verification — 2026-09-23
+
+The [remediation record](native/DW4_DW5_REMEDIATION_2026-09-23.md) and separate
+Standards/Spec review qualify the worker/results implementation. Existing witness,
+UI-crash/reconnection, platform and distribution gates retain their authority.
+No scientific equations, model approvals, AI implementation or browser retirement
+are included in this work unit.

@@ -1,0 +1,10 @@
+{
+  "method": "Replaced repository and home absolute path prefixes with <repository> and <home>; no diagnostic/result content removed.",
+  "files": [
+    "package-build.log",
+    "python-tests.log",
+    "package-build-bundled.log",
+    "pyright-package-authoring-2.log",
+    "browser-tests.log"
+  ]
+}

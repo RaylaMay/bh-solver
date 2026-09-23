@@ -1,0 +1,119 @@
+{
+  "record": "Documentation preparation verification only",
+  "verified_at": "2026-09-16T08:12:30.859485+09:30",
+  "environment": {
+    "python": "3.13.12",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "method": "Ad hoc Python standard-library checks: local Markdown links/anchors, balanced fences, whitespace, exact T001\u2013T080/R0\u2013R7 inventory, rework references, intake SHA-256 comparison and append-prefix reconciliation; Git HEAD/staged comparison and git diff --check. No product code imported, inspected or executed.",
+  "initial_check": {
+    "outcome": "FAILED, exit 1",
+    "reason": "Preservation assertion expected only docs/README.md to differ, but eleven additional documentation files changed concurrently. Changes investigated and retained; expectation explicitly revised, not treated as product evidence."
+  },
+  "checks": {
+    "links_fences_whitespace": {
+      "passed": true,
+      "links": 26,
+      "files": 3
+    },
+    "test_and_rework_inventory": {
+      "passed": true,
+      "test_families": 80,
+      "rework_units": 8
+    },
+    "preservation": {
+      "passed": true,
+      "unchanged_preexisting_files": 298,
+      "changed_files": {
+        "docs/ARCHITECTURE.md": {
+          "before_sha256": "c960cc789e085e959443d50039de2d3b2204188526f7a3c6263ffddb2a065215",
+          "after_sha256": "0c899b3940b2f2412bb9c06b0f45dea3e61735358599d0142fd51906ec2fa375"
+        },
+        "docs/CONTRACTS.md": {
+          "before_sha256": "88214652a1b8c286b81f9abf0f99c66b246c8b9696bb041b6ddb2a8bc8cccfbe",
+          "after_sha256": "3d009531327ad2427c4c1475a4ac2dfa1c71c71f8251c3c364e5824af1148c9b"
+        },
+        "docs/DECISIONS.md": {
+          "before_sha256": "70c10a63636adb1f5f8e44402cf0a97a26e019d53f554b97976c034b907c2439",
+          "after_sha256": "68da23fb45173b42aa112b45b9db627e86a71e010fc4f768b0976b38e9409b7e"
+        },
+        "docs/DEPENDENCY_REGISTER.md": {
+          "before_sha256": "91dc0241afd43e8914964f60627ad5f3595f3108d1eb369a40dd519fed70f141",
+          "after_sha256": "0ff008be082546a600c29f62cfb507ad6546f7f4d394caf62377af45085caaa5"
+        },
+        "docs/FAILURE_RECOVERY.md": {
+          "before_sha256": "4080f1ba89db4969037b317a9855e60d4efcc07e7a50ebf97add239e7863fca7",
+          "after_sha256": "320479eb60760ae9a405d15203dc0d53405c531b6b01873fa298349872c9a6fa"
+        },
+        "docs/MILESTONES.md": {
+          "before_sha256": "8de092600ff9e77d0f06423510304308648682a4a1644a0acaed36f88d65a343",
+          "after_sha256": "53f507909a0b225f3defec482881b885d86f439a8df968fbe80f6db34fdb3ddd"
+        },
+        "docs/NATIVE_WORKSTATION_ACTION_PLAN.md": {
+          "before_sha256": "df7f201028c8e248ed463208a0ecdce0c176c7730c2128e7bf2e01f218d42bbd",
+          "after_sha256": "6ee1096467376b8af802b19a8812514775863cb93658498ef47b36f404b9ac7a"
+        },
+        "docs/PFD_SPECIFICATION.md": {
+          "before_sha256": "62049cab862ad8173411607e868311c16db673156b0cbd8e1412d3d570ebde5d",
+          "after_sha256": "6ccfee56634078634111a6acf0ffd5bfb127992cbacfdd76feaab55d1469e7f9"
+        },
+        "docs/README.md": {
+          "before_sha256": "c3da302e7e8819cc7427fd3eedd0e6b914ae8832bea79ac56a4abb8704174da7",
+          "after_sha256": "7887c1b665320e9bb4c9f5f27ff01499a3fb105796784bad2777c14215ea34b4"
+        },
+        "docs/REQUIREMENTS_VERIFICATION.md": {
+          "before_sha256": "d047cdf316858ba3e24b754d7f88ffd5fad6386a105b39c5e33c5a86e54d0cbe",
+          "after_sha256": "8466c5d304776bd16a284d4ec21a0f8fc737c15f3add74f3b18194ace64bca02"
+        },
+        "docs/VOCABULARY.md": {
+          "before_sha256": "cc3ad8d85be704b1466cd38492f70a6163a2b054207d4997a89e5afb72dc9f07",
+          "after_sha256": "47c44cdc603beb63063eb4fca10246477cb8107d8df634bc22cdf665f38e6ef4"
+        },
+        "docs/native/DW6_ACCEPTANCE_SPEC.md": {
+          "before_sha256": "d2ebb519853a65925f34467ae9f0d5a57b114f6fab4a499ce9b9288ab6b44d74",
+          "after_sha256": "a4d084de1dfacf9f8dc7cd67d44f87b0d400051db0037bf878c1361b2c4596c5"
+        }
+      },
+      "original_prefix_preserved_after_removing_own_index_addition": [
+        "docs/ARCHITECTURE.md",
+        "docs/CONTRACTS.md",
+        "docs/DECISIONS.md",
+        "docs/DEPENDENCY_REGISTER.md",
+        "docs/FAILURE_RECOVERY.md",
+        "docs/MILESTONES.md",
+        "docs/NATIVE_WORKSTATION_ACTION_PLAN.md",
+        "docs/PFD_SPECIFICATION.md",
+        "docs/README.md",
+        "docs/REQUIREMENTS_VERIFICATION.md",
+        "docs/VOCABULARY.md"
+      ],
+      "own_preexisting_file_edit": "docs/README.md: six DW1 index lines only",
+      "concurrent_changes": "Other listed changes belong to concurrent DW6 documentation work; relevant governing diffs read and retained. DW6 acceptance spec references searched; no implementation claim."
+    },
+    "implementation_tests_fixtures_preserved": {
+      "passed": true,
+      "all_intake_hashes_unchanged": true
+    },
+    "git_diff_check": {
+      "passed": true,
+      "command": "git diff --check",
+      "exit_code": 0,
+      "output": "",
+      "head_and_staged_state_unchanged": true
+    }
+  },
+  "not_run": [
+    "Product tests and code review",
+    "Scientific calculations or V&V",
+    "Browser/native/worker execution",
+    "Product lint/type/build and project checker"
+  ],
+  "artifacts_sha256": {
+    "docs/native/DW1_REVIEW_TEST_BATCH.md": "d2d8062f3c14041e6bcab36793572d480ae623516cb92b5ee73d96ab26018f51",
+    "docs/native/DW1_REWORK_BATCH.md": "92c227b1cd444d906716cff289154424936ed36319f6fe53ee07ff403857070e",
+    "docs/native/DW1_REVIEW_PREPARATION_RECORD.md": "4d5b51233f382cfd977303aa4bde41ee414d419bd2a2bd1e64d152a1c8075439",
+    "docs/README.md": "7887c1b665320e9bb4c9f5f27ff01499a3fb105796784bad2777c14215ea34b4",
+    "docs/native/evidence/dw1-review-plan-2026-09-16/intake.json": "a2f721503ca1cc629a837c84286b54555a2f6512ebe37475365cb8cfd48055b6"
+  }
+}

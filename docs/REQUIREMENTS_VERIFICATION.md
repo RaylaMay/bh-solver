@@ -66,7 +66,10 @@ requirement is newly VERIFIED. See the
 | UIX-DIST-001 | Normal use needs no browser, terminal or manual server startup. | DW2 native developer launcher and macOS draft workflow witnessed without a terminal/server. Standalone packaging and clean-machine supported-platform workflow remain, DW9 | IMPLEMENTED |
 | UIX-CMD-001 | Buttons, menus, hotkeys, palette, AI and CLI share application commands. | DW1 shared policy; DW2 reuse/enablement tests plus native keyboard draft and unavailable Run palette witness pass. AI authority integration remains, DW6 | IMPLEMENTED |
 | UIX-PFD-001 | Native PFD satisfies browser parity and outstanding PFD requirements. | [DW3 editor](native/DW3_PFD.md), command/widget tests, measured 50-equipment raster target and scoped native witness. Worker/results, printing/export and full accessibility remain DW4/DW5/DW9. | IMPLEMENTED |
-| UIX-PERF-001 | Select rendering from representative measured workloads. | Rayla May-approved fixture/targets, latency/frame/correctness report on required OS/GPU classes, DW3 | PLANNED |
+| UIX-PERF-001 | Select rendering from representative measured workloads. | DW3 selected raster from approved interaction workloads. DW3.1 measured 300 animation frames on the 50-equipment Cocoa scene: p95 paint 4.00 ms, p99 4.81 ms, zero intervals over 50 ms and correctness passed. Windows/x86_64 and Linux remain platform gates. | IMPLEMENTED |
+| UIX-LAYER-001 | Users can manage colour-independent PFD layers and overlapping visual groups without changing engineering selection. | DW3.1 application/widget tests cover overlap, active halo, visibility, persistence, explicit member selection, patterns/tooltips and reduced motion; real result frames remain DW4/DW5. | IMPLEMENTED |
+| UIX-WORKSPACE-001 | Flowsheet, Dynamics and Controls use independently versioned linked documents and unavailable workspaces state their gate. | DW3.1 manifest/control fixtures and disabled native switcher with M7/M9 explanations; dynamic/control document repositories and engines remain M7/M9. | IMPLEMENTED |
+| UIX-EXT-001 | Extensions use versioned manifests, explicit execution tiers, permission admission and attributable unverified output. | DW3.1 golden manifest, policy rejection/crash/malformed-output tests, isolated protocol schema and proposed C ABI. Runtime loader, sandbox, signatures and SDK licence remain gated. | IMPLEMENTED |
 | UIX-RUN-001 | Runs execute in a supervised independent worker. | Admission, crash/cancel/timeout, persistence fault and no-replay fixtures, DW4 | PLANNED |
 | UIX-RUN-002 | Solver stepping and display refresh are independent. | Bounded queue tests and complete-artifact comparison with decimated display; binary format gate for dynamic arrays, DW4/M7 | PLANNED |
 | UIX-A11Y-001 | Essential operations are keyboard reachable and colour independent. | DW2 offscreen checks plus native macOS New/Open/Save, unsaved Cancel, panel focus and layout recovery witnessed; dynamic status values now exposed in AX. Full VoiceOver/list announcements, scaling and PFD/results actions remain, DW2/DW3/DW5 | IMPLEMENTED |
@@ -92,3 +95,58 @@ result overlays, compare, last-valid recovery, browser migration, accessibility 
 export gates are still open. P-02's accepted initial timing targets pass for the
 50-equipment raster reference, as scoped in the [benchmark](native/DW3_BENCHMARK.md).
 Passing software checks is not scientific model approval.
+
+## DW3.1 evidence disposition — 2026-09-14
+
+The [DW3.1 change record](native/DW3_1_CHANGE_RECORD.md) records layers/groups,
+workspace navigation and extension/control foundations. Focused automated checks
+cover presentation-vs-engineering hashing, old PFD envelope defaults, group overlap
+and deletion recovery, colour-independent status patterns, positive/reverse/zero/
+stale states, reduced motion, manifest/version/permission rejection, extension
+failure containment and fixed control/plugin fixtures.
+
+The native Cocoa animation probe passes Rayla May's initial p95 33 ms target for
+the 50-equipment reference scene. This evidence supports the current Mac renderer
+choice. It does not verify solver telemetry, complete trajectories, a plugin
+sandbox, numerical control behavior, propulsion physics or other platform classes.
+
+## DW3.2 implementation evidence — 2026-09-14
+
+| ID | Requirement | Evidence and remaining gate | Status |
+|---|---|---|---|
+| UIX-SHELL-002 | Contextual toolbar/optional ribbon, independent case tabs, accessible dock controls and workspace templates | DW3.2 widget tests and native layout captures; full assistive-technology witness and other platforms remain | IMPLEMENTED |
+| UIX-HISTORY-001 | Continuous local recovery, immutable versions/snapshots, retained alternatives and persistent undo/redo | History fault/migration/dedup tests, native widget checks and structural comparison; long-history paging and authenticated collaboration remain separate | IMPLEMENTED |
+| UIX-COMMAND-002 | In-app typed commands reuse GUI editing policy and confirmations | Closed-grammar, unit rejection, connected-delete, completion and command recall tests; arbitrary scripting excluded | IMPLEMENTED |
+| UIX-COLLAB-001 | Simultaneous BH editing over LAN/VPN with actor-specific conflict-safe undo | Following DW3.3 protocol/failure-review gate; network editing remains disabled | PLANNED |
+
+The [DW3.2 record](native/DW3_2_CHANGE_RECORD.md) separates native timing and widget
+checks from unverified OS assistive-technology behaviour. No global PFD, scientific,
+collaboration or release requirement becomes VERIFIED from these additions alone.
+
+## DW6 prepared acceptance package — 2026-09-16
+
+These bounded acceptance obligations refine existing IDs. Status remains PLANNED:
+initial red tests and verifier self-tests do not establish implemented behavior.
+The exact mandatory node inventory is frozen in the
+[reviewer package](../handoffs/dw6/README.md).
+
+| Existing requirements | Required acceptance evidence | Status |
+|---|---|---|
+| AI-001/003, UIX-AI-001 | Exact proposal approval, atomic application, profile propagation, Narrative non-promotion and forbidden mutation tests | PLANNED |
+| UIX-AI-001, UIX-AUDIT-001 | Explicit context/feedback, isolated bounded exploration, durable reservations and no-replay fault tests | PLANNED |
+| CORE-008/009/010, UIX-RUN-001 | Real child worker, artifact values/identity, four statuses and unchanged original last-valid selection | PLANNED |
+| UIX-CMD-001, UIX-A11Y-001 | Production launcher/shared commands, keyboard workflow, spelling, responsive UI and macOS witness | PLANNED |
+| UIX-ARCH-001/002, UIX-DOC-001 | Strict neutral types, legacy bytes, trusted package integrity, source identity and review record | PLANNED |
+
+Actual package checks and expected pre-DW6 failures are recorded in the
+[preparation record](native/DW6_HANDOFF_RECORD.md). Live-provider/native witness and
+implementation review remain mandatory before accepting the eventual candidate.
+
+## DW4/DW5 remediation evidence — 2026-09-23
+
+CORE-009/010, PFD-002/004/005, UIX-RUN-001, UIX-ARCH-001/002 and UIX-DOC-001 receive
+focused failure-path and real-child regression evidence in the
+[remediation record](native/DW4_DW5_REMEDIATION_2026-09-23.md).
+The six third-review findings are the bounded acceptance target. Full milestone
+status is not promoted to VERIFIED: native/VoiceOver witness, UI-crash reconnect
+ownership, hosted cross-platform CI and release acceptance remain separate gates.

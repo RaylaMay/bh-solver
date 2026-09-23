@@ -1,0 +1,6 @@
+REAL_WORKER_VALIDATE {"disposition": "COMPLETED", "diagnostics": []}
+REAL_WORKER_VALID True
+REAL_WORKER_RUN {"disposition": "COMPLETED", "diagnostics": []}
+PLOT_TEMPERATURES {"artifact_streams_K": [350.0, 354.9999999998363], "plot_samples_K": [350.0, 354.9999999998363]}
+ATTEMPT_IDENTITY {"attempt_run_id": "run:de48985b-b2ad-4a2d-b17d-fc558789d697", "artifact_run_id": "run:de48985b-b2ad-4a2d-b17d-fc558789d697", "lookup_by_attempt": {"disposition": "COMPLETED", "diagnostics": []}}
+MISSING_ARTIFACT {"run": {"disposition": "REJECTED", "diagnostics": [["PERSISTENCE_FAILED", "Promotion failed: staged artifact does not exist: /private/tmp/nonexistent-bh-review-result.json"]]}, "attempt_state": "FAILED", "persisted": false, "inspect": {"disposition": "REJECTED", "diagnostics": [["NOT_FOUND", "Requested identity was not found"]]}}

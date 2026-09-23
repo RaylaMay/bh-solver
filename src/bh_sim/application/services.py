@@ -2,28 +2,42 @@
 
 New Run requires a service-owned receipt for the exact engineering identity and
 execution context. Receipts live only for this service session; reopening the app
-requires validation. No worker admission, durable retry or cancellation is claimed.
+requires validation. Configured workers never fall back to local execution.
+Cancellation and publication share one terminal-disposition policy.
 """
 
 from __future__ import annotations
 
+from contextlib import suppress
+from dataclasses import replace
 from datetime import UTC, datetime
-from threading import RLock
+from threading import Event, RLock
+from typing import Any
 from uuid import uuid4
 
 from bh_sim.boundary.contracts import (
+    CalculatedRunDto,
     DemonstrationReportDto,
     DiagnosticDto,
     DraftDto,
     DraftListDto,
     MetricChangeDto,
+    OverlaysDto,
+    PlotDefinitionDto,
     PresentationDto,
+    ResultSelectionDto,
+    RunAttemptRecord,
     RunComparisonDto,
     RunExecutionDto,
+    RunJob,
     RunViewDto,
     StatusChangeDto,
     ValidationDto,
     ValidationReceiptDto,
+    WorkbookDto,
+    WorkerCancelledEvent,
+    WorkerCompletedEvent,
+    WorkerFailedEvent,
 )
 
 from .ports import (
@@ -62,13 +76,23 @@ class ApplicationServices:
         engineering: EngineeringPort,
         artifacts: ArtifactRepositoryPort,
         demonstrations: DemonstrationPort,
+        supervisor: Any | None = None,
     ) -> None:
         self.drafts = drafts
         self.engineering = engineering
         self.artifacts = artifacts
         self.demonstrations = demonstrations
+        self.supervisor = supervisor
         self._receipts: dict[str, ValidationReceiptDto] = {}
+        self._active_run_id: str | None = None
+        self._active_cancel_event: Event | None = None
         self._lock = RLock()
+        # Retain computed identities when storage is unavailable; never rerun to save.
+        self._unpersisted_runs: dict[str, CalculatedRunDto] = {}
+        self._pending_attempts: dict[str, RunAttemptRecord] = {}
+        if hasattr(self.artifacts, "reconcile_startup_attempts"):
+            with suppress(Exception):
+                self.artifacts.reconcile_startup_attempts()
 
     def save_draft(self, draft: DraftDto) -> DraftDto:
         """Save even incomplete drafts; repository decides immutable revision ID."""
@@ -111,11 +135,23 @@ class ApplicationServices:
             except (KeyError, TypeError, ValueError) as error:
                 raise CommandRejected("INVALID_DRAFT", str(error)) from error
             context = self.engineering.context_hash()
-            validation = self.engineering.validate(prepared)
-            if context != self.engineering.context_hash():
-                raise CommandRejected(
-                    "CONTEXT_CHANGED", "Execution context changed; validate again"
+            worker_session_id = None
+            if self._uses_worker():
+                assert self.supervisor is not None
+                resp = self.supervisor.validate(draft, prepared.engineering_hash, context)
+                validation = ValidationDto(
+                    valid=resp.valid,
+                    degrees_of_freedom=resp.dof,
+                    diagnostics=resp.diagnostics,
                 )
+                context = resp.context_hash
+                worker_session_id = getattr(self.supervisor, "session_id", None)
+            else:
+                validation = self.engineering.validate(prepared)
+                if context != self.engineering.context_hash():
+                    raise CommandRejected(
+                        "CONTEXT_CHANGED", "Execution context changed; validate again"
+                    )
             receipt = ValidationReceiptDto(
                 f"validation:{uuid4()}",
                 draft.draft_id,
@@ -124,6 +160,7 @@ class ApplicationServices:
                 prepared.engineering_hash,
                 context,
                 validation,
+                worker_session_id=worker_session_id,
             )
             self._receipts[receipt.receipt_id] = receipt
             return receipt
@@ -136,7 +173,17 @@ class ApplicationServices:
             if receipt is None:
                 raise CommandRejected("VALIDATION_REQUIRED", "Validate this draft in this session")
             prepared = self.engineering.prepare(draft)
-            context = self.engineering.context_hash()
+            is_supervised = self._uses_worker()
+            if is_supervised:
+                current_session_id = getattr(self.supervisor, "session_id", None)
+                if receipt.worker_session_id != current_session_id:
+                    raise CommandRejected(
+                        "STALE_VALIDATION",
+                        "Worker session expired; revalidation required",
+                    )
+            context = (
+                receipt.execution_context_hash if is_supervised else self.engineering.context_hash()
+            )
             if (
                 receipt.draft_id != draft.draft_id
                 or receipt.engineering_hash != prepared.engineering_hash
@@ -147,10 +194,39 @@ class ApplicationServices:
                 raise CommandRejected(
                     "VALIDATION_FAILED", "Resolve blocking validation diagnostics"
                 )
-            execution = self._execute(
-                draft, expected_hash=prepared.engineering_hash, expected_context=context
+
+        execution = self._execute(
+            draft,
+            expected_hash=prepared.engineering_hash,
+            expected_context=context,
+            expected_session=receipt.worker_session_id,
+        )
+        return execution.result
+
+    def _uses_worker(self) -> bool:
+        """Distinguish explicit local composition from a lost configured worker."""
+        if self.supervisor is None:
+            return False
+        if not self.supervisor.is_alive() or self.supervisor.session_id is None:
+            raise CommandRejected(
+                "WORKER_UNAVAILABLE", "Worker unavailable; restart it and validate again"
             )
-            return execution.result
+        return True
+
+    def _record_attempt(self, attempt: RunAttemptRecord) -> RunAttemptRecord:
+        """Retain a terminal audit record even if its durable write cannot complete."""
+        self._pending_attempts[attempt.attempt_id] = attempt
+        if hasattr(self.artifacts, "record_attempt"):
+            winner = self.artifacts.record_attempt(attempt)
+            self._pending_attempts.pop(attempt.attempt_id, None)
+            return winner
+        return attempt
+
+    def _cancelled_attempt(self, attempt: RunAttemptRecord) -> bool:
+        current = self._pending_attempts.get(attempt.attempt_id)
+        if current is None and hasattr(self.artifacts, "load_attempt"):
+            current = self.artifacts.load_attempt(attempt.attempt_id)
+        return current is not None and current.state == "CANCELLED"
 
     def _execute(
         self,
@@ -158,21 +234,236 @@ class ApplicationServices:
         *,
         expected_hash: str | None = None,
         expected_context: str | None = None,
+        expected_session: str | None = None,
     ) -> RunExecutionDto:
-        saved = self.drafts.save(draft)
-        prepared = self.engineering.prepare(saved)
-        if expected_hash is not None and prepared.engineering_hash != expected_hash:
-            raise CommandRejected(
-                "STALE_VALIDATION", "Saved engineering content differs from input"
+        with self._lock:
+            if self._active_run_id is not None:
+                raise CommandRejected("RUN_BUSY", "Another run is still executing")
+            is_supervised = self._uses_worker()
+            if is_supervised and expected_session is not None:
+                assert self.supervisor is not None
+                if self.supervisor.session_id != expected_session:
+                    raise CommandRejected("STALE_VALIDATION", "Worker changed; validate again")
+            saved = self.drafts.save(draft)
+            prepared = self.engineering.prepare(saved)
+            if expected_hash is not None and prepared.engineering_hash != expected_hash:
+                raise CommandRejected(
+                    "STALE_VALIDATION", "Saved engineering content differs from input"
+                )
+            if (
+                not is_supervised
+                and expected_context is not None
+                and self.engineering.context_hash() != expected_context
+            ):
+                raise CommandRejected("CONTEXT_CHANGED", "Execution context changed")
+            self.artifacts.save_inputs(prepared)
+            if (
+                not is_supervised
+                and expected_context is not None
+                and self.engineering.context_hash() != expected_context
+            ):
+                raise CommandRejected("CONTEXT_CHANGED", "Context changed during persistence")
+            attempt = RunAttemptRecord(
+                attempt_id=f"att:{uuid4()}",
+                run_id=f"run:{uuid4()}",
+                case_id=prepared.case_id,
+                engineering_hash=prepared.engineering_hash,
+                context_hash=expected_context or self.engineering.context_hash(),
+                state="ADMITTED",
+                admitted_at=datetime.now(UTC).isoformat(),
             )
-        if expected_context is not None and self.engineering.context_hash() != expected_context:
-            raise CommandRejected("CONTEXT_CHANGED", "Execution context changed before evaluation")
-        self.artifacts.save_inputs(prepared)
-        if expected_context is not None and self.engineering.context_hash() != expected_context:
-            raise CommandRejected("CONTEXT_CHANGED", "Execution context changed during persistence")
-        calculated = self.engineering.run(prepared, expected_context_hash=expected_context)
-        self.artifacts.save_run(calculated)
-        return RunExecutionDto(saved, prepared, calculated.view)
+            try:
+                self._record_attempt(attempt)
+            except Exception as error:
+                failed = replace(
+                    attempt,
+                    state="FAILED",
+                    terminal_at=datetime.now(UTC).isoformat(),
+                    failure_reason=f"Admission persistence failed: {type(error).__name__}",
+                )
+                # _record_attempt retains the failed record for inspection.
+                with suppress(Exception):
+                    self._record_attempt(failed)
+                raise CommandRejected(
+                    "PERSISTENCE_FAILED", f"Admission failed; no execution for {attempt.run_id}"
+                ) from error
+            self._active_run_id = attempt.run_id
+            cancellation = Event()
+            self._active_cancel_event = cancellation
+
+        artifact_hash: str | None = None
+        publishing = False
+        try:
+            with self._lock:
+                if self._cancelled_attempt(attempt):
+                    raise CommandRejected("RUN_CANCELLED", "Run was cancelled")
+                attempt = self._record_attempt(replace(attempt, state="RUNNING"))
+            # Evaluation must release the application lock so Cancel can win.
+            if is_supervised:
+                assert self.supervisor is not None
+                job = RunJob(
+                    job_id=f"job:{uuid4()}",
+                    run_id=attempt.run_id,
+                    case_id=prepared.case_id,
+                    revision_id=saved.revision,
+                    engineering_hash=prepared.engineering_hash,
+                    context_hash=attempt.context_hash,
+                    draft=saved,
+                )
+                terminal = self.supervisor.execute_job(
+                    job,
+                    cancellation_requested=cancellation.is_set,
+                )
+            else:
+                terminal = self.engineering.run(
+                    prepared,
+                    run_id=attempt.run_id,
+                    expected_context_hash=expected_context,
+                )
+
+            with self._lock:
+                # Publication and cancellation are serialized on both execution paths.
+                if self._cancelled_attempt(attempt):
+                    raise CommandRejected("RUN_CANCELLED", "Run was cancelled")
+                if isinstance(terminal, WorkerCancelledEvent):
+                    attempt = self._record_attempt(
+                        replace(
+                            attempt,
+                            state="CANCELLED",
+                            terminal_at=datetime.now(UTC).isoformat(),
+                            failure_reason="Run cancelled",
+                        )
+                    )
+                    raise CommandRejected("RUN_CANCELLED", "Run was cancelled")
+                if isinstance(terminal, WorkerFailedEvent):
+                    raise CommandRejected("RUN_FAILED", f"Run failed: {terminal.reason}")
+                publishing = True
+                if isinstance(terminal, WorkerCompletedEvent):
+                    artifact_hash = terminal.artifact_hash
+                    if not terminal.staged_path:
+                        raise ValueError("Worker completed without staged artifact path")
+                    view = self.artifacts.promote_staged_run(
+                        terminal.staged_path,
+                        expected_run_id=attempt.run_id,
+                        expected_case_id=attempt.case_id,
+                        expected_revision_id=prepared.revision_id,
+                        expected_hash=artifact_hash,
+                    )
+                elif isinstance(terminal, CalculatedRunDto):
+                    artifact_hash = terminal.view.artifact.content_hash
+                    self._unpersisted_runs[attempt.run_id] = terminal
+                    if (
+                        terminal.view.run_id != attempt.run_id
+                        or terminal.view.case_id != attempt.case_id
+                        or terminal.view.revision_id != prepared.revision_id
+                    ):
+                        raise ValueError("Calculated result does not match admitted identity")
+                    self.artifacts.save_run(terminal)
+                    view = terminal.view
+                else:
+                    raise ValueError("Unexpected execution disposition")
+                self._record_attempt(
+                    replace(
+                        attempt,
+                        state="COMPLETED",
+                        terminal_at=datetime.now(UTC).isoformat(),
+                        artifact_hash=artifact_hash,
+                        persisted=True,
+                    )
+                )
+                self._unpersisted_runs.pop(attempt.run_id, None)
+                return RunExecutionDto(saved, prepared, view)
+        except Exception as error:
+            with self._lock:
+                if self._cancelled_attempt(attempt):
+                    raise CommandRejected("RUN_CANCELLED", "Run was cancelled") from error
+                reason = "Result persistence failed" if publishing else "Run execution failed"
+                failed = replace(
+                    attempt,
+                    state="FAILED",
+                    terminal_at=datetime.now(UTC).isoformat(),
+                    failure_reason=f"{reason}: {type(error).__name__}",
+                    artifact_hash=artifact_hash,
+                    persisted=False,
+                )
+                try:
+                    self._record_attempt(failed)
+                except Exception as audit_error:
+                    raise CommandRejected(
+                        "PERSISTENCE_FAILED",
+                        f"{reason}; terminal audit retained in memory for {attempt.run_id}",
+                    ) from audit_error
+                if publishing:
+                    raise CommandRejected(
+                        "PERSISTENCE_FAILED", f"{reason}; reconcile {attempt.run_id} without rerun"
+                    ) from error
+                raise
+        finally:
+            with self._lock:
+                self._active_run_id = None
+                self._active_cancel_event = None
+
+    def cancel_run(self, run_id: str, reason: str = "User cancelled") -> RunAttemptRecord | None:
+        """Cancel an in-flight run."""
+        with self._lock:
+            target_run_id = run_id
+            if not target_run_id or target_run_id == "run:in-flight":
+                target_run_id = self._active_run_id or target_run_id
+            if hasattr(self.artifacts, "list_attempts"):
+                attempts = self.artifacts.list_attempts()
+                if not target_run_id or target_run_id == "run:in-flight":
+                    for att in reversed(attempts):
+                        if att.state in ("ADMITTED", "RUNNING"):
+                            target_run_id = att.run_id
+                            break
+                if target_run_id == self._active_run_id and self._active_cancel_event:
+                    self._active_cancel_event.set()
+                if (
+                    self.supervisor is not None
+                    and getattr(self.supervisor, "is_alive", lambda: False)()
+                    and target_run_id
+                    and target_run_id != "run:in-flight"
+                ):
+                    self.supervisor.cancel(target_run_id)
+                for att in attempts:
+                    if att.run_id == target_run_id and att.state in ("ADMITTED", "RUNNING"):
+                        updated = replace(
+                            att,
+                            state="CANCELLED",
+                            terminal_at=datetime.now(UTC).isoformat(),
+                            failure_reason=reason,
+                        )
+                        return self._record_attempt(updated)
+            elif (
+                self.supervisor is not None
+                and getattr(self.supervisor, "is_alive", lambda: False)()
+            ):
+                if target_run_id and target_run_id != "run:in-flight":
+                    self.supervisor.cancel(target_run_id)
+            return None
+
+    def inspect_attempt(self, attempt_id: str) -> RunAttemptRecord:
+        """Retrieve an operational attempt record by its ID."""
+        if not hasattr(self.artifacts, "load_attempt"):
+            raise CommandRejected("CAPABILITY_UNAVAILABLE", "Attempt persistence is unavailable")
+        record = self._pending_attempts.get(attempt_id) or self.artifacts.load_attempt(attempt_id)
+        if record is None:
+            raise KeyError(f"unknown attempt ID: {attempt_id}")
+        return record
+
+    def list_attempts(self, case_id: str | None = None) -> tuple[RunAttemptRecord, ...]:
+        """List operational attempt records for a case or all cases."""
+        if not hasattr(self.artifacts, "list_attempts"):
+            return ()
+        records = {item.attempt_id: item for item in self.artifacts.list_attempts(case_id)}
+        records.update(
+            {
+                key: item
+                for key, item in self._pending_attempts.items()
+                if case_id is None or item.case_id == case_id
+            }
+        )
+        return tuple(sorted(records.values(), key=lambda item: (item.admitted_at, item.attempt_id)))
 
     def _legacy_validate(self, draft: DraftDto) -> ValidationDto:
         """Retain HTTP v1alpha diagnostics/DOF behavior without issuing a receipt."""
@@ -189,8 +480,7 @@ class ApplicationServices:
         versioned HTTP migration; each explicit legacy POST is still a new attempt.
         """
 
-        with self._lock:
-            return self._execute(draft)
+        return self._execute(draft)
 
     def inspect_run(self, run_id: str) -> RunViewDto:
         """Load an immutable result, including failed attempts, without rerunning."""
@@ -241,6 +531,28 @@ class ApplicationServices:
             if old_units.get(unit) != new_units.get(unit)
         )
         return RunComparisonDto(before.artifact, after.artifact, metrics, tuple(statuses))
+
+    def inspect_workbook(self, case_id: str, run_id: str | None = None) -> WorkbookDto:
+        """Expose authoritative flowsheet stream, unit and balance workbooks."""
+        return self.artifacts.get_workbook(case_id, run_id)
+
+    def select_display_run(self, case_id: str, run_id: str | None = None) -> ResultSelectionDto:
+        """Select active display run and return selection and staleness status."""
+        return self.artifacts.get_overlays(case_id, run_id).selection
+
+    def get_overlays(self, case_id: str, run_id: str | None = None) -> OverlaysDto:
+        """Expose canvas result overlays for streams and equipment."""
+        return self.artifacts.get_overlays(case_id, run_id)
+
+    def get_plot_data(
+        self,
+        case_id: str,
+        run_id: str | None = None,
+        plot_kind: str = "T_Q",
+        unit_id: str | None = None,
+    ) -> PlotDefinitionDto:
+        """Extract plottable 2D series for process-wide or single-unit curves."""
+        return self.artifacts.get_plot_data(case_id, run_id, plot_kind, unit_id)
 
     def demonstrate(self, name: str) -> DemonstrationReportDto:
         """Execute only the retained explicit prototype demonstration use case."""

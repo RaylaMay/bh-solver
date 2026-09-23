@@ -69,3 +69,60 @@ absence of a pre-run manifest/worker lifecycle, non-atomic browser draft writes 
 no automatic index-rebuild path. The [parity inventory](native/BROWSER_PARITY.md)
 assigns these follow-up work; existing passing persistence tests do not establish
 crash recovery or cancellation support.
+
+## DW3.2 local history recovery
+
+- Publish and verify immutable checkpoint bytes before committing a journal event.
+  An interrupted publication leaves the previous head and every saved revision intact.
+- Reject stale mutation heads and concurrent publication collisions. Do not retry
+  an edit against a different base without an explicit user operation.
+- Reject corrupt/missing referenced checkpoints and gapped event chains. Keep the
+  original evidence; do not silently open an older head as though it were current.
+- A native revision may publish before its history acknowledgement fails. Retry Save
+  against the same content to acknowledge it; do not replay calculation or edit commands.
+- Restore committed editing history on restart. Uncommitted field keystrokes are not
+  promised durable. Restore personal layout independently of engineering checkpoints.
+- Require the separate DW3.3 gate before treating these local rules as network,
+  authenticated-session or shared-selective-undo recovery.
+
+## DW6 acceptance requirements — 2026-09-16
+
+The [DW6 specification](native/DW6_ACCEPTANCE_SPEC.md) requires durable context,
+approval, action identity and budget reservation before provider or worker effects.
+A failed audit write prevents dispatch. A lost acknowledgement retains an uncertain
+reservation; recovery reconciles evidence without sending again or replaying Run.
+Late responses cannot apply changes to a cancelled or interrupted session.
+
+Preserve each invalid candidate, failed run and four-status result. Provider/model
+mismatch, unknown usage, malformed output and missing capability fail visibly;
+zero automatic retries includes SDK/transport retries. A changed original draft
+leaves exploration on its captured snapshot; adoption requires new review.
+These are acceptance obligations, not claims that recovery is implemented.
+
+## DW4/DW5 remediation behavior — 2026-09-23
+
+- Manifest updates validate admission identity and the durable terminal winner,
+  fsync a temporary sibling, atomically replace JSON, then update SQLite. Failed
+  JSON publication does not commit the index. Retrying the same content repairs
+  an index failure after JSON publication; startup interruption uses this path too.
+- To recover an index already inconsistent from an older build, stop the application,
+  preserve the original index as evidence, create a fresh index and explicitly call
+  `PersistenceStore.rebuild_index_from_artifacts()`. The existing rebuild routine
+  does not clear an old populated index; do not describe that as a clean rebuild.
+- Worker loss is visible and never enables local fallback. Restart/reopen negotiates
+  a new worker; revalidate before a new explicit Run. Recovery does not replay work.
+- Ordinary cancellation has a configurable one-second grace by default, retaining
+  the earlier force-cancel value as an implementation choice. The control loop sets
+  the active job's event; the backend checks before/after evaluation. A backend still
+  running at the deadline is killed. Only a worker event at a reached boundary claims
+  cooperative cancellation. Timers belong to the job/process/session and are removed
+  at completion; unknown cancel IDs create no retained control state.
+- Admission/storage failures return `PERSISTENCE_FAILED`. If the terminal audit write
+  also fails, the failed record remains inspectable in service memory. In-process
+  result bytes/hash remain there too; worker-produced staged files remain on disk.
+  Do not rerun to retry a save. A failed or cancelled attempt cannot select last-valid.
+
+The [remediation record](native/DW4_DW5_REMEDIATION_2026-09-23.md) qualifies current
+checks. Surviving a UI crash with durable reconnect ownership remains an unresolved
+DW4-A acceptance obligation; intentional Quit still uses bounded supervisor stop.
+This change does not silently revise the earlier UI-crash survival requirement.

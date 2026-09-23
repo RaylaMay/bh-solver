@@ -122,7 +122,43 @@ identifies its LGPLv3 option; actual release notices/source/replacement obligati
 remain DW9. No commercially licensed library or new binary package was added.
 OpenGL visual acceptance was not established; [raster is selected](native/DW3_BENCHMARK.md).
 
+### DW3.1 layers and extension foundation
+
+DW3.1 adds no Python, JavaScript, Qt module or commercial dependency. The production
+canvas continues to use Qt Core/Gui/Widgets and the selected raster viewport. The
+30 fps probe uses the existing PySide6 environment and synthetic rendering values.
+
+The C++ SDK foundation is a header-only C ABI declaration under `sdk/cpp/`; BH does
+not bundle a compiler, C++ runtime or plugin loader. The JSON worker schema is a
+static protocol document and adds no validation library. Before third-party release,
+Rayla May must select the SDK's redistribution licence and DW9 must include it in the
+actual distribution inventory. Future isolated execution still requires a reviewed
+sandbox/process implementation; the schema alone creates no containment claim.
+
 GitHub Actions use official checkout/setup-python/setup-node actions and the existing
 locked Python and npm dependencies. They build and test; they do not publish,
 deploy, acquire signing credentials or approve the application licence. Hosted
 runner results remain unobserved until this local workflow is pushed and runs.
+
+## DW3.2 dependency disposition
+
+The workstation/history change adds no dependency. It uses the existing optional
+Qt/PySide installation and Python standard-library JSON, SHA-256 and atomic file
+publication. The ribbon uses Qt Widgets. The command line parses a closed grammar;
+it does not bundle a shell, compiler or scripting runtime. Native accessibility and
+cross-platform execution still require their own evidence. Networking dependencies
+remain undecided behind the following collaboration gate.
+
+## DW6 handoff dependency disposition — 2026-09-16
+
+The acceptance package uses the existing development Python/pytest, HTTPX from the
+existing API extra, and optional PySide6 desktop environment. This preparation
+adds no runtime dependency and changes no lockfile. Its tiny PDF fixtures contain
+only generated synthetic content; legacy JSON fixtures retain their provenance.
+
+The future OpenAI, local PDF extraction, spellcheck/dictionary and OS credential
+adapters require exact optional dependency/version and licence inventories at
+implementation. They must remain outside default kernel dependencies. Provider
+service retention and model capabilities are separate from SDK code licensing.
+The [specification](native/DW6_ACCEPTANCE_SPEC.md) links primary sources and freezes
+required behavior, without claiming that an unbuilt dependency payload is approved.

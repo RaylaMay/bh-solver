@@ -1,0 +1,1840 @@
+{
+  "schema": "bh-animation-benchmark-v1",
+  "authority": "synthetic presentation workload; not solver or scientific evidence",
+  "os": "26.4.1",
+  "architecture": "arm64",
+  "qt": "6.11.2",
+  "platform_plugin": "cocoa",
+  "equipment": 50,
+  "streams": 45,
+  "target_fps": 30,
+  "target_p95_paint_ms": 33.0,
+  "frames": 300,
+  "paint_ms": {
+    "median": 2.8897500596940517,
+    "p95": 4.001250024884939,
+    "p99": 4.8100840067490935,
+    "maximum": 6.397833931259811
+  },
+  "tick_to_paint_ms": {
+    "median": 4.5122085721232,
+    "p95": 6.434750044718385,
+    "p99": 7.379458053037524,
+    "maximum": 12.418708996847272
+  },
+  "dropped_frames_over_50ms": 0,
+  "cpu_seconds": 3.122897,
+  "elapsed_seconds": 10.244216292048804,
+  "peak_resident_bytes_macos": 208338944,
+  "acceptance": true,
+  "correctness": {
+    "source_artifact_visible": true,
+    "zero_flow_stationary": true,
+    "reverse_direction_retained": true,
+    "stale_pattern_retained": true,
+    "markers_bounded_to_paths": true
+  },
+  "raw_samples": [
+    {
+      "paint_ms": 2.137625007890165,
+      "tick_to_paint_ms": 12.418708996847272,
+      "frame_interval_ms": 646.5027920203283,
+      "paint_completed_at": 597220.34465925
+    },
+    {
+      "paint_ms": 2.26712494622916,
+      "tick_to_paint_ms": 3.5214999224990606,
+      "frame_interval_ms": 24.625665973871946,
+      "paint_completed_at": 597220.369284916
+    },
+    {
+      "paint_ms": 3.214417025446892,
+      "tick_to_paint_ms": 4.692999995313585,
+      "frame_interval_ms": 33.293292042799294,
+      "paint_completed_at": 597220.402578208
+    },
+    {
+      "paint_ms": 2.018583007156849,
+      "tick_to_paint_ms": 2.4995829444378614,
+      "frame_interval_ms": 29.334082966670394,
+      "paint_completed_at": 597220.431912291
+    },
+    {
+      "paint_ms": 2.3148750187829137,
+      "tick_to_paint_ms": 2.8406669152900577,
+      "frame_interval_ms": 33.09833398088813,
+      "paint_completed_at": 597220.465010625
+    },
+    {
+      "paint_ms": 2.2347080521285534,
+      "tick_to_paint_ms": 2.691666013561189,
+      "frame_interval_ms": 31.524791033007205,
+      "paint_completed_at": 597220.496535416
+    },
+    {
+      "paint_ms": 2.179790986701846,
+      "tick_to_paint_ms": 2.5784579338505864,
+      "frame_interval_ms": 31.565999961458147,
+      "paint_completed_at": 597220.528101416
+    },
+    {
+      "paint_ms": 2.4749580770730972,
+      "tick_to_paint_ms": 3.997416002675891,
+      "frame_interval_ms": 34.30537506937981,
+      "paint_completed_at": 597220.562406791
+    },
+    {
+      "paint_ms": 2.5432920083403587,
+      "tick_to_paint_ms": 2.9739580349996686,
+      "frame_interval_ms": 31.04254195932299,
+      "paint_completed_at": 597220.593449333
+    },
+    {
+      "paint_ms": 2.548875054344535,
+      "tick_to_paint_ms": 4.144667065702379,
+      "frame_interval_ms": 32.31237502768636,
+      "paint_completed_at": 597220.625761708
+    },
+    {
+      "paint_ms": 2.4016249226406217,
+      "tick_to_paint_ms": 3.0636669835075736,
+      "frame_interval_ms": 32.31054195202887,
+      "paint_completed_at": 597220.65807225
+    },
+    {
+      "paint_ms": 2.6688339421525598,
+      "tick_to_paint_ms": 3.107583965174854,
+      "frame_interval_ms": 30.395374982617795,
+      "paint_completed_at": 597220.688467625
+    },
+    {
+      "paint_ms": 2.3970420006662607,
+      "tick_to_paint_ms": 4.3131670681759715,
+      "frame_interval_ms": 33.59800006728619,
+      "paint_completed_at": 597220.722065625
+    },
+    {
+      "paint_ms": 2.426957944408059,
+      "tick_to_paint_ms": 3.974374965764582,
+      "frame_interval_ms": 31.980082974769175,
+      "paint_completed_at": 597220.754045708
+    },
+    {
+      "paint_ms": 2.4401660775765777,
+      "tick_to_paint_ms": 3.827083040960133,
+      "frame_interval_ms": 31.674458063207567,
+      "paint_completed_at": 597220.785720166
+    },
+    {
+      "paint_ms": 2.310250070877373,
+      "tick_to_paint_ms": 3.7251670146360993,
+      "frame_interval_ms": 32.0317919831723,
+      "paint_completed_at": 597220.817751958
+    },
+    {
+      "paint_ms": 2.9791250126436353,
+      "tick_to_paint_ms": 4.688415909186006,
+      "frame_interval_ms": 33.188332919962704,
+      "paint_completed_at": 597220.850940291
+    },
+    {
+      "paint_ms": 2.3905830457806587,
+      "tick_to_paint_ms": 2.784125041216612,
+      "frame_interval_ms": 29.413292068056762,
+      "paint_completed_at": 597220.880353583
+    },
+    {
+      "paint_ms": 2.3757079616189003,
+      "tick_to_paint_ms": 2.863124944269657,
+      "frame_interval_ms": 32.776957959868014,
+      "paint_completed_at": 597220.913130541
+    },
+    {
+      "paint_ms": 2.788208075799048,
+      "tick_to_paint_ms": 3.240291029214859,
+      "frame_interval_ms": 31.86950006056577,
+      "paint_completed_at": 597220.945000041
+    },
+    {
+      "paint_ms": 2.6195840910077095,
+      "tick_to_paint_ms": 4.029542091302574,
+      "frame_interval_ms": 33.092083991505206,
+      "paint_completed_at": 597220.978092125
+    },
+    {
+      "paint_ms": 2.632874995470047,
+      "tick_to_paint_ms": 4.329582909122109,
+      "frame_interval_ms": 32.75704092811793,
+      "paint_completed_at": 597221.010849166
+    },
+    {
+      "paint_ms": 2.4777500657364726,
+      "tick_to_paint_ms": 4.15074999909848,
+      "frame_interval_ms": 31.01887507364154,
+      "paint_completed_at": 597221.041868041
+    },
+    {
+      "paint_ms": 2.3223330499604344,
+      "tick_to_paint_ms": 3.9010830223560333,
+      "frame_interval_ms": 32.39791700616479,
+      "paint_completed_at": 597221.074265958
+    },
+    {
+      "paint_ms": 2.3037500213831663,
+      "tick_to_paint_ms": 3.814249997958541,
+      "frame_interval_ms": 32.39308297634125,
+      "paint_completed_at": 597221.106659041
+    },
+    {
+      "paint_ms": 2.3731659166514874,
+      "tick_to_paint_ms": 3.920749993994832,
+      "frame_interval_ms": 32.08637493662536,
+      "paint_completed_at": 597221.138745416
+    },
+    {
+      "paint_ms": 2.4679999332875013,
+      "tick_to_paint_ms": 4.047916969284415,
+      "frame_interval_ms": 32.024084008298814,
+      "paint_completed_at": 597221.1707695
+    },
+    {
+      "paint_ms": 2.5818749563768506,
+      "tick_to_paint_ms": 4.1143749840557575,
+      "frame_interval_ms": 31.849000020883977,
+      "paint_completed_at": 597221.2026185
+    },
+    {
+      "paint_ms": 2.041083062067628,
+      "tick_to_paint_ms": 3.6178750451654196,
+      "frame_interval_ms": 31.078958068974316,
+      "paint_completed_at": 597221.233697458
+    },
+    {
+      "paint_ms": 2.544332994148135,
+      "tick_to_paint_ms": 3.3426249865442514,
+      "frame_interval_ms": 32.865499961189926,
+      "paint_completed_at": 597221.266562958
+    },
+    {
+      "paint_ms": 3.3715839963406324,
+      "tick_to_paint_ms": 5.230209091678262,
+      "frame_interval_ms": 32.14866702910513,
+      "paint_completed_at": 597221.298711625
+    },
+    {
+      "paint_ms": 2.1482498850673437,
+      "tick_to_paint_ms": 2.579249907284975,
+      "frame_interval_ms": 31.02208289783448,
+      "paint_completed_at": 597221.329733708
+    },
+    {
+      "paint_ms": 2.668458968400955,
+      "tick_to_paint_ms": 3.361291950568557,
+      "frame_interval_ms": 31.655792030505836,
+      "paint_completed_at": 597221.3613895
+    },
+    {
+      "paint_ms": 2.25441693328321,
+      "tick_to_paint_ms": 2.6669169310480356,
+      "frame_interval_ms": 32.00433298479766,
+      "paint_completed_at": 597221.393393833
+    },
+    {
+      "paint_ms": 2.1458750125020742,
+      "tick_to_paint_ms": 3.346624900586903,
+      "frame_interval_ms": 31.88383299857378,
+      "paint_completed_at": 597221.425277666
+    },
+    {
+      "paint_ms": 4.787083016708493,
+      "tick_to_paint_ms": 7.379458053037524,
+      "frame_interval_ms": 37.066625081934035,
+      "paint_completed_at": 597221.462344291
+    },
+    {
+      "paint_ms": 2.40829202812165,
+      "tick_to_paint_ms": 5.937542067840695,
+      "frame_interval_ms": 28.990208986215293,
+      "paint_completed_at": 597221.4913345
+    },
+    {
+      "paint_ms": 4.8100840067490935,
+      "tick_to_paint_ms": 7.038959069177508,
+      "frame_interval_ms": 33.788500004448,
+      "paint_completed_at": 597221.525123
+    },
+    {
+      "paint_ms": 3.3489579800516367,
+      "tick_to_paint_ms": 6.270957994274795,
+      "frame_interval_ms": 31.187457963824272,
+      "paint_completed_at": 597221.556310458
+    },
+    {
+      "paint_ms": 3.3374999184161425,
+      "tick_to_paint_ms": 4.805958946235478,
+      "frame_interval_ms": 30.109541956335306,
+      "paint_completed_at": 597221.58642
+    },
+    {
+      "paint_ms": 2.817459055222571,
+      "tick_to_paint_ms": 4.517749999649823,
+      "frame_interval_ms": 31.983750057406723,
+      "paint_completed_at": 597221.61840375
+    },
+    {
+      "paint_ms": 2.2097498876973987,
+      "tick_to_paint_ms": 4.117957898415625,
+      "frame_interval_ms": 31.309915939345956,
+      "paint_completed_at": 597221.649713666
+    },
+    {
+      "paint_ms": 3.734583966434002,
+      "tick_to_paint_ms": 6.266542011871934,
+      "frame_interval_ms": 34.16270902380347,
+      "paint_completed_at": 597221.683876375
+    },
+    {
+      "paint_ms": 3.0540829757228494,
+      "tick_to_paint_ms": 5.0355419516563416,
+      "frame_interval_ms": 31.730332993902266,
+      "paint_completed_at": 597221.715606708
+    },
+    {
+      "paint_ms": 6.397833931259811,
+      "tick_to_paint_ms": 7.615334005095065,
+      "frame_interval_ms": 34.22954201232642,
+      "paint_completed_at": 597221.74983625
+    },
+    {
+      "paint_ms": 4.7030000714585185,
+      "tick_to_paint_ms": 6.815542001277208,
+      "frame_interval_ms": 31.66800003964454,
+      "paint_completed_at": 597221.78150425
+    },
+    {
+      "paint_ms": 2.244959003292024,
+      "tick_to_paint_ms": 2.7025840245187283,
+      "frame_interval_ms": 27.323500020429492,
+      "paint_completed_at": 597221.80882775
+    },
+    {
+      "paint_ms": 2.09145899862051,
+      "tick_to_paint_ms": 3.7361669819802046,
+      "frame_interval_ms": 33.330249949358404,
+      "paint_completed_at": 597221.842158
+    },
+    {
+      "paint_ms": 2.014208002947271,
+      "tick_to_paint_ms": 3.946125041693449,
+      "frame_interval_ms": 32.41566603537649,
+      "paint_completed_at": 597221.874573666
+    },
+    {
+      "paint_ms": 2.1171250846236944,
+      "tick_to_paint_ms": 3.6801249952986836,
+      "frame_interval_ms": 30.500459019094706,
+      "paint_completed_at": 597221.905074125
+    },
+    {
+      "paint_ms": 2.3503750562667847,
+      "tick_to_paint_ms": 3.641791990958154,
+      "frame_interval_ms": 31.933999969623983,
+      "paint_completed_at": 597221.937008125
+    },
+    {
+      "paint_ms": 2.122709061950445,
+      "tick_to_paint_ms": 3.6555000115185976,
+      "frame_interval_ms": 33.342250040732324,
+      "paint_completed_at": 597221.970350375
+    },
+    {
+      "paint_ms": 2.0706249633803964,
+      "tick_to_paint_ms": 3.6816250067204237,
+      "frame_interval_ms": 31.401624903082848,
+      "paint_completed_at": 597222.001752
+    },
+    {
+      "paint_ms": 3.218207973986864,
+      "tick_to_paint_ms": 4.789000027813017,
+      "frame_interval_ms": 33.093666075728834,
+      "paint_completed_at": 597222.034845666
+    },
+    {
+      "paint_ms": 2.2362909512594342,
+      "tick_to_paint_ms": 2.7307079872116446,
+      "frame_interval_ms": 29.105499968864024,
+      "paint_completed_at": 597222.063951166
+    },
+    {
+      "paint_ms": 2.2892500273883343,
+      "tick_to_paint_ms": 3.080083057284355,
+      "frame_interval_ms": 33.031417056918144,
+      "paint_completed_at": 597222.096982583
+    },
+    {
+      "paint_ms": 2.4882080033421516,
+      "tick_to_paint_ms": 3.9871250046417117,
+      "frame_interval_ms": 33.91762496903539,
+      "paint_completed_at": 597222.130900208
+    },
+    {
+      "paint_ms": 2.2425419883802533,
+      "tick_to_paint_ms": 2.700124983675778,
+      "frame_interval_ms": 29.118791921064258,
+      "paint_completed_at": 597222.160019
+    },
+    {
+      "paint_ms": 4.043749999254942,
+      "tick_to_paint_ms": 4.941083025187254,
+      "frame_interval_ms": 35.89945810381323,
+      "paint_completed_at": 597222.195918458
+    },
+    {
+      "paint_ms": 3.628915990702808,
+      "tick_to_paint_ms": 4.633249947801232,
+      "frame_interval_ms": 31.485082930885255,
+      "paint_completed_at": 597222.227403541
+    },
+    {
+      "paint_ms": 3.004457917995751,
+      "tick_to_paint_ms": 4.834749968722463,
+      "frame_interval_ms": 31.620291993021965,
+      "paint_completed_at": 597222.259023833
+    },
+    {
+      "paint_ms": 3.479416947811842,
+      "tick_to_paint_ms": 5.432958947494626,
+      "frame_interval_ms": 32.92416699696332,
+      "paint_completed_at": 597222.291948
+    },
+    {
+      "paint_ms": 2.883541979826987,
+      "tick_to_paint_ms": 5.595667054876685,
+      "frame_interval_ms": 31.754208030179143,
+      "paint_completed_at": 597222.323702208
+    },
+    {
+      "paint_ms": 2.24137504119426,
+      "tick_to_paint_ms": 4.329708986915648,
+      "frame_interval_ms": 30.65154200885445,
+      "paint_completed_at": 597222.35435375
+    },
+    {
+      "paint_ms": 3.4423330798745155,
+      "tick_to_paint_ms": 5.851666093803942,
+      "frame_interval_ms": 32.71441604010761,
+      "paint_completed_at": 597222.387068166
+    },
+    {
+      "paint_ms": 3.74383304733783,
+      "tick_to_paint_ms": 7.218042039312422,
+      "frame_interval_ms": 33.58204197138548,
+      "paint_completed_at": 597222.420650208
+    },
+    {
+      "paint_ms": 3.858584095723927,
+      "tick_to_paint_ms": 5.897834082134068,
+      "frame_interval_ms": 31.58804203849286,
+      "paint_completed_at": 597222.45223825
+    },
+    {
+      "paint_ms": 3.617333946749568,
+      "tick_to_paint_ms": 4.1705840267241,
+      "frame_interval_ms": 29.801499913446605,
+      "paint_completed_at": 597222.48203975
+    },
+    {
+      "paint_ms": 2.6597919641062617,
+      "tick_to_paint_ms": 4.143459023907781,
+      "frame_interval_ms": 32.372500048950315,
+      "paint_completed_at": 597222.51441225
+    },
+    {
+      "paint_ms": 2.286416944116354,
+      "tick_to_paint_ms": 2.8529169503599405,
+      "frame_interval_ms": 30.66358296200633,
+      "paint_completed_at": 597222.545075833
+    },
+    {
+      "paint_ms": 2.148041967302561,
+      "tick_to_paint_ms": 2.554957987740636,
+      "frame_interval_ms": 31.992875039577484,
+      "paint_completed_at": 597222.577068708
+    },
+    {
+      "paint_ms": 2.1384169813245535,
+      "tick_to_paint_ms": 2.5933750439435244,
+      "frame_interval_ms": 31.605166965164244,
+      "paint_completed_at": 597222.608673875
+    },
+    {
+      "paint_ms": 2.12004198692739,
+      "tick_to_paint_ms": 3.780666971579194,
+      "frame_interval_ms": 33.53587503079325,
+      "paint_completed_at": 597222.64220975
+    },
+    {
+      "paint_ms": 2.180791925638914,
+      "tick_to_paint_ms": 3.8582090055570006,
+      "frame_interval_ms": 31.83412493672222,
+      "paint_completed_at": 597222.674043875
+    },
+    {
+      "paint_ms": 2.2046250523999333,
+      "tick_to_paint_ms": 3.7723330315202475,
+      "frame_interval_ms": 32.38320804666728,
+      "paint_completed_at": 597222.706427083
+    },
+    {
+      "paint_ms": 2.1497500129044056,
+      "tick_to_paint_ms": 3.748540999367833,
+      "frame_interval_ms": 32.09195798262954,
+      "paint_completed_at": 597222.738519041
+    },
+    {
+      "paint_ms": 2.150916028767824,
+      "tick_to_paint_ms": 3.7357909604907036,
+      "frame_interval_ms": 31.558500020764768,
+      "paint_completed_at": 597222.770077541
+    },
+    {
+      "paint_ms": 2.6270000962540507,
+      "tick_to_paint_ms": 4.13170806132257,
+      "frame_interval_ms": 32.32691704761237,
+      "paint_completed_at": 597222.802404458
+    },
+    {
+      "paint_ms": 2.7115419507026672,
+      "tick_to_paint_ms": 4.519916954450309,
+      "frame_interval_ms": 32.24699990823865,
+      "paint_completed_at": 597222.834651458
+    },
+    {
+      "paint_ms": 2.6589579647406936,
+      "tick_to_paint_ms": 4.080665996298194,
+      "frame_interval_ms": 30.697082984261215,
+      "paint_completed_at": 597222.865348541
+    },
+    {
+      "paint_ms": 2.401125035248697,
+      "tick_to_paint_ms": 2.833042060956359,
+      "frame_interval_ms": 31.32254211232066,
+      "paint_completed_at": 597222.896671083
+    },
+    {
+      "paint_ms": 2.1108329528942704,
+      "tick_to_paint_ms": 2.699999953620136,
+      "frame_interval_ms": 32.74445794522762,
+      "paint_completed_at": 597222.929415541
+    },
+    {
+      "paint_ms": 2.0882500102743506,
+      "tick_to_paint_ms": 2.4642919888719916,
+      "frame_interval_ms": 31.40191698912531,
+      "paint_completed_at": 597222.960817458
+    },
+    {
+      "paint_ms": 2.1046249894425273,
+      "tick_to_paint_ms": 3.5358750028535724,
+      "frame_interval_ms": 33.29195803962648,
+      "paint_completed_at": 597222.994109416
+    },
+    {
+      "paint_ms": 2.002499997615814,
+      "tick_to_paint_ms": 3.4797079861164093,
+      "frame_interval_ms": 31.19441692251712,
+      "paint_completed_at": 597223.025303833
+    },
+    {
+      "paint_ms": 2.0272909896448255,
+      "tick_to_paint_ms": 3.582499921321869,
+      "frame_interval_ms": 31.94433299358934,
+      "paint_completed_at": 597223.057248166
+    },
+    {
+      "paint_ms": 2.3219999857246876,
+      "tick_to_paint_ms": 4.1727080242708325,
+      "frame_interval_ms": 33.1247920403257,
+      "paint_completed_at": 597223.090372958
+    },
+    {
+      "paint_ms": 2.9892500024288893,
+      "tick_to_paint_ms": 5.627417005598545,
+      "frame_interval_ms": 33.023125026375055,
+      "paint_completed_at": 597223.123396083
+    },
+    {
+      "paint_ms": 3.6352500319480896,
+      "tick_to_paint_ms": 6.426749983802438,
+      "frame_interval_ms": 33.08683296199888,
+      "paint_completed_at": 597223.156482916
+    },
+    {
+      "paint_ms": 2.596084028482437,
+      "tick_to_paint_ms": 4.617250058799982,
+      "frame_interval_ms": 30.563959036953747,
+      "paint_completed_at": 597223.187046875
+    },
+    {
+      "paint_ms": 3.4899169113487005,
+      "tick_to_paint_ms": 5.402624956332147,
+      "frame_interval_ms": 32.232207944616675,
+      "paint_completed_at": 597223.219279083
+    },
+    {
+      "paint_ms": 4.21354197897017,
+      "tick_to_paint_ms": 6.673416937701404,
+      "frame_interval_ms": 33.421500003896654,
+      "paint_completed_at": 597223.252700583
+    },
+    {
+      "paint_ms": 3.1282500131055713,
+      "tick_to_paint_ms": 3.9978750282898545,
+      "frame_interval_ms": 28.767292038537562,
+      "paint_completed_at": 597223.281467875
+    },
+    {
+      "paint_ms": 2.032209071330726,
+      "tick_to_paint_ms": 2.515000058338046,
+      "frame_interval_ms": 31.325250049121678,
+      "paint_completed_at": 597223.312793125
+    },
+    {
+      "paint_ms": 2.88604199886322,
+      "tick_to_paint_ms": 4.35387494508177,
+      "frame_interval_ms": 33.24099991004914,
+      "paint_completed_at": 597223.346034125
+    },
+    {
+      "paint_ms": 2.0467080175876617,
+      "tick_to_paint_ms": 2.4990829406306148,
+      "frame_interval_ms": 31.50045801885426,
+      "paint_completed_at": 597223.377534583
+    },
+    {
+      "paint_ms": 2.9544170247390866,
+      "tick_to_paint_ms": 4.6262090327218175,
+      "frame_interval_ms": 33.40116702020168,
+      "paint_completed_at": 597223.41093575
+    },
+    {
+      "paint_ms": 1.9596670754253864,
+      "tick_to_paint_ms": 3.458959050476551,
+      "frame_interval_ms": 31.233625020831823,
+      "paint_completed_at": 597223.442169375
+    },
+    {
+      "paint_ms": 1.964417053386569,
+      "tick_to_paint_ms": 3.368459059856832,
+      "frame_interval_ms": 31.340999994426966,
+      "paint_completed_at": 597223.473510375
+    },
+    {
+      "paint_ms": 2.0897919312119484,
+      "tick_to_paint_ms": 3.5878749331459403,
+      "frame_interval_ms": 32.48099994380027,
+      "paint_completed_at": 597223.505991375
+    },
+    {
+      "paint_ms": 2.065667067654431,
+      "tick_to_paint_ms": 4.003834095783532,
+      "frame_interval_ms": 31.96837508585304,
+      "paint_completed_at": 597223.53795975
+    },
+    {
+      "paint_ms": 2.08583299536258,
+      "tick_to_paint_ms": 3.543166909366846,
+      "frame_interval_ms": 32.027707900851965,
+      "paint_completed_at": 597223.569987458
+    },
+    {
+      "paint_ms": 2.144875004887581,
+      "tick_to_paint_ms": 4.2200409807264805,
+      "frame_interval_ms": 32.646458013914526,
+      "paint_completed_at": 597223.602633916
+    },
+    {
+      "paint_ms": 2.3867079289630055,
+      "tick_to_paint_ms": 3.5347079392522573,
+      "frame_interval_ms": 30.457417014986277,
+      "paint_completed_at": 597223.633091333
+    },
+    {
+      "paint_ms": 2.815915970131755,
+      "tick_to_paint_ms": 4.250750062055886,
+      "frame_interval_ms": 32.31295803561807,
+      "paint_completed_at": 597223.665404291
+    },
+    {
+      "paint_ms": 2.004917012527585,
+      "tick_to_paint_ms": 2.4109589867293835,
+      "frame_interval_ms": 30.828958959318697,
+      "paint_completed_at": 597223.69623325
+    },
+    {
+      "paint_ms": 2.0529580069705844,
+      "tick_to_paint_ms": 5.294790957123041,
+      "frame_interval_ms": 34.63166602887213,
+      "paint_completed_at": 597223.730864916
+    },
+    {
+      "paint_ms": 2.062374958768487,
+      "tick_to_paint_ms": 4.594624973833561,
+      "frame_interval_ms": 32.15624997392297,
+      "paint_completed_at": 597223.763021166
+    },
+    {
+      "paint_ms": 5.01133396755904,
+      "tick_to_paint_ms": 5.897084018215537,
+      "frame_interval_ms": 33.60583400353789,
+      "paint_completed_at": 597223.796627
+    },
+    {
+      "paint_ms": 3.070667036809027,
+      "tick_to_paint_ms": 4.941000021062791,
+      "frame_interval_ms": 31.091000069864094,
+      "paint_completed_at": 597223.827718
+    },
+    {
+      "paint_ms": 2.5371660012751818,
+      "tick_to_paint_ms": 4.493665997870266,
+      "frame_interval_ms": 31.51479095686227,
+      "paint_completed_at": 597223.859232791
+    },
+    {
+      "paint_ms": 2.330875024199486,
+      "tick_to_paint_ms": 3.771750023588538,
+      "frame_interval_ms": 30.652333982288837,
+      "paint_completed_at": 597223.889885125
+    },
+    {
+      "paint_ms": 1.9738329574465752,
+      "tick_to_paint_ms": 3.6587920039892197,
+      "frame_interval_ms": 31.860957969911397,
+      "paint_completed_at": 597223.921746083
+    },
+    {
+      "paint_ms": 2.2852919064462185,
+      "tick_to_paint_ms": 2.707832958549261,
+      "frame_interval_ms": 30.97600000910461,
+      "paint_completed_at": 597223.952722083
+    },
+    {
+      "paint_ms": 2.611874951981008,
+      "tick_to_paint_ms": 4.550458979792893,
+      "frame_interval_ms": 33.71879202313721,
+      "paint_completed_at": 597223.986440875
+    },
+    {
+      "paint_ms": 2.9833329608663917,
+      "tick_to_paint_ms": 5.11745794210583,
+      "frame_interval_ms": 32.75916597340256,
+      "paint_completed_at": 597224.019200041
+    },
+    {
+      "paint_ms": 2.492708037607372,
+      "tick_to_paint_ms": 4.510208033025265,
+      "frame_interval_ms": 31.331167090684175,
+      "paint_completed_at": 597224.050531208
+    },
+    {
+      "paint_ms": 3.0493749072775245,
+      "tick_to_paint_ms": 4.177124937996268,
+      "frame_interval_ms": 31.283499905839562,
+      "paint_completed_at": 597224.081814708
+    },
+    {
+      "paint_ms": 2.914584008976817,
+      "tick_to_paint_ms": 5.197959020733833,
+      "frame_interval_ms": 33.415542100556195,
+      "paint_completed_at": 597224.11523025
+    },
+    {
+      "paint_ms": 3.1969170086085796,
+      "tick_to_paint_ms": 3.7196249468252063,
+      "frame_interval_ms": 30.67270794417709,
+      "paint_completed_at": 597224.145902958
+    },
+    {
+      "paint_ms": 3.296416951343417,
+      "tick_to_paint_ms": 5.325083970092237,
+      "frame_interval_ms": 33.559917006641626,
+      "paint_completed_at": 597224.179462875
+    },
+    {
+      "paint_ms": 2.7314169565215707,
+      "tick_to_paint_ms": 3.5910839214920998,
+      "frame_interval_ms": 30.1981249358505,
+      "paint_completed_at": 597224.209661
+    },
+    {
+      "paint_ms": 1.9621249521151185,
+      "tick_to_paint_ms": 3.3206669613718987,
+      "frame_interval_ms": 32.2717500384897,
+      "paint_completed_at": 597224.24193275
+    },
+    {
+      "paint_ms": 2.1262919763103127,
+      "tick_to_paint_ms": 3.666208009235561,
+      "frame_interval_ms": 32.34583302401006,
+      "paint_completed_at": 597224.274278583
+    },
+    {
+      "paint_ms": 2.57875001989305,
+      "tick_to_paint_ms": 4.83341608196497,
+      "frame_interval_ms": 33.46720803529024,
+      "paint_completed_at": 597224.307745791
+    },
+    {
+      "paint_ms": 2.9644579626619816,
+      "tick_to_paint_ms": 5.870374967344105,
+      "frame_interval_ms": 31.48937493097037,
+      "paint_completed_at": 597224.339235166
+    },
+    {
+      "paint_ms": 3.6538339918479323,
+      "tick_to_paint_ms": 6.0733340214937925,
+      "frame_interval_ms": 33.16095902118832,
+      "paint_completed_at": 597224.372396125
+    },
+    {
+      "paint_ms": 2.9906670097261667,
+      "tick_to_paint_ms": 5.481791915372014,
+      "frame_interval_ms": 30.973957967944443,
+      "paint_completed_at": 597224.403370083
+    },
+    {
+      "paint_ms": 2.4859580444172025,
+      "tick_to_paint_ms": 4.4639999978244305,
+      "frame_interval_ms": 30.627708067186177,
+      "paint_completed_at": 597224.433997791
+    },
+    {
+      "paint_ms": 2.0812920993193984,
+      "tick_to_paint_ms": 2.5933340657502413,
+      "frame_interval_ms": 29.926709015853703,
+      "paint_completed_at": 597224.4639245
+    },
+    {
+      "paint_ms": 2.4353329790756106,
+      "tick_to_paint_ms": 2.9611249919980764,
+      "frame_interval_ms": 32.905332976952195,
+      "paint_completed_at": 597224.496829833
+    },
+    {
+      "paint_ms": 2.3354170843958855,
+      "tick_to_paint_ms": 3.9021670818328857,
+      "frame_interval_ms": 33.75075000803918,
+      "paint_completed_at": 597224.530580583
+    },
+    {
+      "paint_ms": 3.292209003120661,
+      "tick_to_paint_ms": 4.381124977953732,
+      "frame_interval_ms": 32.1695419261232,
+      "paint_completed_at": 597224.562750125
+    },
+    {
+      "paint_ms": 2.606709022074938,
+      "tick_to_paint_ms": 4.43545903544873,
+      "frame_interval_ms": 32.02112508006394,
+      "paint_completed_at": 597224.59477125
+    },
+    {
+      "paint_ms": 2.2617499344050884,
+      "tick_to_paint_ms": 2.707042032852769,
+      "frame_interval_ms": 29.84770794864744,
+      "paint_completed_at": 597224.624618958
+    },
+    {
+      "paint_ms": 2.011708915233612,
+      "tick_to_paint_ms": 3.79929190967232,
+      "frame_interval_ms": 33.39804196730256,
+      "paint_completed_at": 597224.658017
+    },
+    {
+      "paint_ms": 2.780916984193027,
+      "tick_to_paint_ms": 4.643292049877346,
+      "frame_interval_ms": 32.96087507624179,
+      "paint_completed_at": 597224.690977875
+    },
+    {
+      "paint_ms": 2.393667004071176,
+      "tick_to_paint_ms": 4.768791957758367,
+      "frame_interval_ms": 31.925124931149185,
+      "paint_completed_at": 597224.722903
+    },
+    {
+      "paint_ms": 3.5368750104680657,
+      "tick_to_paint_ms": 6.0159999411553144,
+      "frame_interval_ms": 32.99854102078825,
+      "paint_completed_at": 597224.755901541
+    },
+    {
+      "paint_ms": 3.357709036208689,
+      "tick_to_paint_ms": 5.242499988526106,
+      "frame_interval_ms": 31.53758402913809,
+      "paint_completed_at": 597224.787439125
+    },
+    {
+      "paint_ms": 3.2506660791113973,
+      "tick_to_paint_ms": 5.00050000846386,
+      "frame_interval_ms": 31.664291047491133,
+      "paint_completed_at": 597224.819103416
+    },
+    {
+      "paint_ms": 2.3117499658837914,
+      "tick_to_paint_ms": 3.046874888241291,
+      "frame_interval_ms": 29.294416890479624,
+      "paint_completed_at": 597224.848397833
+    },
+    {
+      "paint_ms": 2.0022919634357095,
+      "tick_to_paint_ms": 2.5130829308182,
+      "frame_interval_ms": 31.532375025562942,
+      "paint_completed_at": 597224.879930208
+    },
+    {
+      "paint_ms": 3.3467499306425452,
+      "tick_to_paint_ms": 5.545124993659556,
+      "frame_interval_ms": 36.00541700143367,
+      "paint_completed_at": 597224.915935625
+    },
+    {
+      "paint_ms": 4.199749906547368,
+      "tick_to_paint_ms": 5.081749986857176,
+      "frame_interval_ms": 31.33966599125415,
+      "paint_completed_at": 597224.947275291
+    },
+    {
+      "paint_ms": 2.0750410621985793,
+      "tick_to_paint_ms": 3.938166075386107,
+      "frame_interval_ms": 31.178625067695975,
+      "paint_completed_at": 597224.978453916
+    },
+    {
+      "paint_ms": 2.188832964748144,
+      "tick_to_paint_ms": 2.5982499355450273,
+      "frame_interval_ms": 30.338999931700528,
+      "paint_completed_at": 597225.008792916
+    },
+    {
+      "paint_ms": 3.0662500066682696,
+      "tick_to_paint_ms": 5.023707984946668,
+      "frame_interval_ms": 33.552167005836964,
+      "paint_completed_at": 597225.042345083
+    },
+    {
+      "paint_ms": 2.0496250363066792,
+      "tick_to_paint_ms": 3.441917011514306,
+      "frame_interval_ms": 31.73916705418378,
+      "paint_completed_at": 597225.07408425
+    },
+    {
+      "paint_ms": 1.9903330830857158,
+      "tick_to_paint_ms": 3.3086660550907254,
+      "frame_interval_ms": 31.9546660175547,
+      "paint_completed_at": 597225.106038916
+    },
+    {
+      "paint_ms": 3.389167017303407,
+      "tick_to_paint_ms": 6.353458040393889,
+      "frame_interval_ms": 33.70204195380211,
+      "paint_completed_at": 597225.139740958
+    },
+    {
+      "paint_ms": 3.443625057116151,
+      "tick_to_paint_ms": 5.398457986302674,
+      "frame_interval_ms": 31.77887503989041,
+      "paint_completed_at": 597225.171519833
+    },
+    {
+      "paint_ms": 2.4425829760730267,
+      "tick_to_paint_ms": 4.3373750522732735,
+      "frame_interval_ms": 30.663707992061973,
+      "paint_completed_at": 597225.202183541
+    },
+    {
+      "paint_ms": 2.0220839651301503,
+      "tick_to_paint_ms": 3.987250034697354,
+      "frame_interval_ms": 31.56195895280689,
+      "paint_completed_at": 597225.2337455
+    },
+    {
+      "paint_ms": 1.9874169956892729,
+      "tick_to_paint_ms": 3.1927500385791063,
+      "frame_interval_ms": 30.8197500417009,
+      "paint_completed_at": 597225.26456525
+    },
+    {
+      "paint_ms": 4.001250024884939,
+      "tick_to_paint_ms": 5.412916070781648,
+      "frame_interval_ms": 34.93766603060067,
+      "paint_completed_at": 597225.299502916
+    },
+    {
+      "paint_ms": 2.552666934207082,
+      "tick_to_paint_ms": 3.247041953727603,
+      "frame_interval_ms": 29.3167089112103,
+      "paint_completed_at": 597225.328819625
+    },
+    {
+      "paint_ms": 4.112667054869235,
+      "tick_to_paint_ms": 5.2132080309093,
+      "frame_interval_ms": 35.31533305067569,
+      "paint_completed_at": 597225.364134958
+    },
+    {
+      "paint_ms": 3.7981249624863267,
+      "tick_to_paint_ms": 4.405749961733818,
+      "frame_interval_ms": 30.69691697601229,
+      "paint_completed_at": 597225.394831875
+    },
+    {
+      "paint_ms": 3.84974991902709,
+      "tick_to_paint_ms": 4.446416976861656,
+      "frame_interval_ms": 31.808124971576035,
+      "paint_completed_at": 597225.42664
+    },
+    {
+      "paint_ms": 4.154667025431991,
+      "tick_to_paint_ms": 4.9551669508218765,
+      "frame_interval_ms": 33.36162504274398,
+      "paint_completed_at": 597225.460001625
+    },
+    {
+      "paint_ms": 3.808500012382865,
+      "tick_to_paint_ms": 4.60962497163564,
+      "frame_interval_ms": 31.065999995917082,
+      "paint_completed_at": 597225.491067625
+    },
+    {
+      "paint_ms": 3.61279200296849,
+      "tick_to_paint_ms": 4.332583048380911,
+      "frame_interval_ms": 31.41520801000297,
+      "paint_completed_at": 597225.522482833
+    },
+    {
+      "paint_ms": 4.231750033795834,
+      "tick_to_paint_ms": 4.924750071950257,
+      "frame_interval_ms": 32.48820803128183,
+      "paint_completed_at": 597225.554971041
+    },
+    {
+      "paint_ms": 3.9712919387966394,
+      "tick_to_paint_ms": 4.825999960303307,
+      "frame_interval_ms": 31.139708939008415,
+      "paint_completed_at": 597225.58611075
+    },
+    {
+      "paint_ms": 3.7849999498575926,
+      "tick_to_paint_ms": 4.425124963745475,
+      "frame_interval_ms": 31.917333020828664,
+      "paint_completed_at": 597225.618028083
+    },
+    {
+      "paint_ms": 3.4517920576035976,
+      "tick_to_paint_ms": 5.9321250300854445,
+      "frame_interval_ms": 33.89216703362763,
+      "paint_completed_at": 597225.65192025
+    },
+    {
+      "paint_ms": 3.981500049121678,
+      "tick_to_paint_ms": 4.6287080040201545,
+      "frame_interval_ms": 30.784707982093096,
+      "paint_completed_at": 597225.682704958
+    },
+    {
+      "paint_ms": 3.94854205660522,
+      "tick_to_paint_ms": 5.335042020305991,
+      "frame_interval_ms": 33.15466700587422,
+      "paint_completed_at": 597225.715859625
+    },
+    {
+      "paint_ms": 3.9837079821154475,
+      "tick_to_paint_ms": 7.135250023566186,
+      "frame_interval_ms": 33.568665967322886,
+      "paint_completed_at": 597225.749428291
+    },
+    {
+      "paint_ms": 3.040292067453265,
+      "tick_to_paint_ms": 3.7946250522509217,
+      "frame_interval_ms": 29.43433402106166,
+      "paint_completed_at": 597225.778862625
+    },
+    {
+      "paint_ms": 2.850458025932312,
+      "tick_to_paint_ms": 3.4546670503914356,
+      "frame_interval_ms": 31.703707994893193,
+      "paint_completed_at": 597225.810566333
+    },
+    {
+      "paint_ms": 3.3158340957015753,
+      "tick_to_paint_ms": 6.422500009648502,
+      "frame_interval_ms": 34.8271670518443,
+      "paint_completed_at": 597225.8453935
+    },
+    {
+      "paint_ms": 2.4689589627087116,
+      "tick_to_paint_ms": 4.65970893856138,
+      "frame_interval_ms": 29.59812490735203,
+      "paint_completed_at": 597225.874991625
+    },
+    {
+      "paint_ms": 2.773249987512827,
+      "tick_to_paint_ms": 5.044083925895393,
+      "frame_interval_ms": 32.910750014707446,
+      "paint_completed_at": 597225.907902375
+    },
+    {
+      "paint_ms": 2.8124169912189245,
+      "tick_to_paint_ms": 5.468458984978497,
+      "frame_interval_ms": 31.84837498702109,
+      "paint_completed_at": 597225.93975075
+    },
+    {
+      "paint_ms": 3.061958006583154,
+      "tick_to_paint_ms": 5.320125026628375,
+      "frame_interval_ms": 31.903708004392684,
+      "paint_completed_at": 597225.971654458
+    },
+    {
+      "paint_ms": 3.0007919995114207,
+      "tick_to_paint_ms": 5.585708073340356,
+      "frame_interval_ms": 31.997250043787062,
+      "paint_completed_at": 597226.003651708
+    },
+    {
+      "paint_ms": 4.016124992631376,
+      "tick_to_paint_ms": 6.036708015017211,
+      "frame_interval_ms": 31.79245803039521,
+      "paint_completed_at": 597226.035444166
+    },
+    {
+      "paint_ms": 3.3952079247683287,
+      "tick_to_paint_ms": 4.131582914851606,
+      "frame_interval_ms": 30.239166924729943,
+      "paint_completed_at": 597226.065683333
+    },
+    {
+      "paint_ms": 3.5630420316010714,
+      "tick_to_paint_ms": 4.293042002245784,
+      "frame_interval_ms": 32.65225002542138,
+      "paint_completed_at": 597226.098335583
+    },
+    {
+      "paint_ms": 5.173792014829814,
+      "tick_to_paint_ms": 7.870457950048149,
+      "frame_interval_ms": 36.5976250031963,
+      "paint_completed_at": 597226.134933208
+    },
+    {
+      "paint_ms": 2.8067079838365316,
+      "tick_to_paint_ms": 3.406791016459465,
+      "frame_interval_ms": 25.682708015665412,
+      "paint_completed_at": 597226.160615916
+    },
+    {
+      "paint_ms": 2.9114580247551203,
+      "tick_to_paint_ms": 4.083791049197316,
+      "frame_interval_ms": 32.77137503027916,
+      "paint_completed_at": 597226.193387291
+    },
+    {
+      "paint_ms": 3.2929169246926904,
+      "tick_to_paint_ms": 5.052916938439012,
+      "frame_interval_ms": 34.32641690596938,
+      "paint_completed_at": 597226.227713708
+    },
+    {
+      "paint_ms": 3.2478750217705965,
+      "tick_to_paint_ms": 6.116791977547109,
+      "frame_interval_ms": 32.56379207596183,
+      "paint_completed_at": 597226.2602775
+    },
+    {
+      "paint_ms": 3.0135000124573708,
+      "tick_to_paint_ms": 5.428583011962473,
+      "frame_interval_ms": 31.302207964472473,
+      "paint_completed_at": 597226.291579708
+    },
+    {
+      "paint_ms": 2.679458004422486,
+      "tick_to_paint_ms": 5.1810829900205135,
+      "frame_interval_ms": 31.57070802990347,
+      "paint_completed_at": 597226.323150416
+    },
+    {
+      "paint_ms": 2.826083917170763,
+      "tick_to_paint_ms": 5.503124906681478,
+      "frame_interval_ms": 32.412083935923874,
+      "paint_completed_at": 597226.3555625
+    },
+    {
+      "paint_ms": 3.5340419271960855,
+      "tick_to_paint_ms": 5.34920790232718,
+      "frame_interval_ms": 31.744832987897098,
+      "paint_completed_at": 597226.387307333
+    },
+    {
+      "paint_ms": 3.1125840032473207,
+      "tick_to_paint_ms": 5.619750008918345,
+      "frame_interval_ms": 32.83204208128154,
+      "paint_completed_at": 597226.420139375
+    },
+    {
+      "paint_ms": 3.512999974191189,
+      "tick_to_paint_ms": 4.198499955236912,
+      "frame_interval_ms": 30.432999948970973,
+      "paint_completed_at": 597226.450572375
+    },
+    {
+      "paint_ms": 3.4069170942530036,
+      "tick_to_paint_ms": 5.426625022664666,
+      "frame_interval_ms": 32.63262507971376,
+      "paint_completed_at": 597226.483205
+    },
+    {
+      "paint_ms": 3.1939169857650995,
+      "tick_to_paint_ms": 3.798666992224753,
+      "frame_interval_ms": 30.929999891668558,
+      "paint_completed_at": 597226.514135
+    },
+    {
+      "paint_ms": 2.7640829794108868,
+      "tick_to_paint_ms": 3.5042919917032123,
+      "frame_interval_ms": 31.59395803231746,
+      "paint_completed_at": 597226.545728958
+    },
+    {
+      "paint_ms": 3.13708302564919,
+      "tick_to_paint_ms": 4.089583060704172,
+      "frame_interval_ms": 31.67933307122439,
+      "paint_completed_at": 597226.577408291
+    },
+    {
+      "paint_ms": 2.9778750613331795,
+      "tick_to_paint_ms": 5.113916005939245,
+      "frame_interval_ms": 34.14862498175353,
+      "paint_completed_at": 597226.611556916
+    },
+    {
+      "paint_ms": 2.9068340081721544,
+      "tick_to_paint_ms": 4.777958965860307,
+      "frame_interval_ms": 32.059708959423006,
+      "paint_completed_at": 597226.643616625
+    },
+    {
+      "paint_ms": 3.3342920942232013,
+      "tick_to_paint_ms": 6.179791991598904,
+      "frame_interval_ms": 32.70125004928559,
+      "paint_completed_at": 597226.676317875
+    },
+    {
+      "paint_ms": 2.675333060324192,
+      "tick_to_paint_ms": 4.83054097276181,
+      "frame_interval_ms": 30.562040978111327,
+      "paint_completed_at": 597226.706879916
+    },
+    {
+      "paint_ms": 2.889125025831163,
+      "tick_to_paint_ms": 5.568415974266827,
+      "frame_interval_ms": 33.07999996468425,
+      "paint_completed_at": 597226.739959916
+    },
+    {
+      "paint_ms": 3.1850419472903013,
+      "tick_to_paint_ms": 5.72816701605916,
+      "frame_interval_ms": 32.166833989322186,
+      "paint_completed_at": 597226.77212675
+    },
+    {
+      "paint_ms": 3.2032079761847854,
+      "tick_to_paint_ms": 5.28791593387723,
+      "frame_interval_ms": 31.59391600638628,
+      "paint_completed_at": 597226.803720666
+    },
+    {
+      "paint_ms": 3.006375045515597,
+      "tick_to_paint_ms": 5.354249966330826,
+      "frame_interval_ms": 31.694459030404687,
+      "paint_completed_at": 597226.835415125
+    },
+    {
+      "paint_ms": 4.073958029039204,
+      "tick_to_paint_ms": 6.037208018824458,
+      "frame_interval_ms": 32.814832986332476,
+      "paint_completed_at": 597226.868229958
+    },
+    {
+      "paint_ms": 3.3144159242510796,
+      "tick_to_paint_ms": 3.8937500212341547,
+      "frame_interval_ms": 29.557332978583872,
+      "paint_completed_at": 597226.897787291
+    },
+    {
+      "paint_ms": 3.0272089643403888,
+      "tick_to_paint_ms": 3.648624988272786,
+      "frame_interval_ms": 31.42370900604874,
+      "paint_completed_at": 597226.929211
+    },
+    {
+      "paint_ms": 3.52508295327425,
+      "tick_to_paint_ms": 7.129166973754764,
+      "frame_interval_ms": 36.14533296786249,
+      "paint_completed_at": 597226.965356333
+    },
+    {
+      "paint_ms": 3.3604579512029886,
+      "tick_to_paint_ms": 4.847124917432666,
+      "frame_interval_ms": 29.99262500088662,
+      "paint_completed_at": 597226.995348958
+    },
+    {
+      "paint_ms": 2.8869580710306764,
+      "tick_to_paint_ms": 4.76554105989635,
+      "frame_interval_ms": 31.81883308570832,
+      "paint_completed_at": 597227.027167791
+    },
+    {
+      "paint_ms": 2.837292035110295,
+      "tick_to_paint_ms": 4.7829169780015945,
+      "frame_interval_ms": 32.08633395843208,
+      "paint_completed_at": 597227.059254125
+    },
+    {
+      "paint_ms": 2.790750004351139,
+      "tick_to_paint_ms": 4.807207966223359,
+      "frame_interval_ms": 32.26766595616937,
+      "paint_completed_at": 597227.091521791
+    },
+    {
+      "paint_ms": 2.8618340147659183,
+      "tick_to_paint_ms": 5.701125017367303,
+      "frame_interval_ms": 32.12933405302465,
+      "paint_completed_at": 597227.123651125
+    },
+    {
+      "paint_ms": 3.173000062815845,
+      "tick_to_paint_ms": 6.206999998539686,
+      "frame_interval_ms": 32.63633302412927,
+      "paint_completed_at": 597227.156287458
+    },
+    {
+      "paint_ms": 3.629250102676451,
+      "tick_to_paint_ms": 5.829541012644768,
+      "frame_interval_ms": 31.505333026871085,
+      "paint_completed_at": 597227.187792791
+    },
+    {
+      "paint_ms": 3.2348750391975045,
+      "tick_to_paint_ms": 4.5191250974312425,
+      "frame_interval_ms": 31.04416700080037,
+      "paint_completed_at": 597227.218836958
+    },
+    {
+      "paint_ms": 3.541999962180853,
+      "tick_to_paint_ms": 5.79654099419713,
+      "frame_interval_ms": 33.10558293014765,
+      "paint_completed_at": 597227.251942541
+    },
+    {
+      "paint_ms": 3.2567500602453947,
+      "tick_to_paint_ms": 3.84591706097126,
+      "frame_interval_ms": 29.184667044319212,
+      "paint_completed_at": 597227.281127208
+    },
+    {
+      "paint_ms": 3.136083949357271,
+      "tick_to_paint_ms": 3.8621670100837946,
+      "frame_interval_ms": 33.11754192691296,
+      "paint_completed_at": 597227.31424475
+    },
+    {
+      "paint_ms": 3.336625057272613,
+      "tick_to_paint_ms": 4.354125005193055,
+      "frame_interval_ms": 32.319541089236736,
+      "paint_completed_at": 597227.346564291
+    },
+    {
+      "paint_ms": 3.481333958916366,
+      "tick_to_paint_ms": 5.902249948121607,
+      "frame_interval_ms": 34.08720891457051,
+      "paint_completed_at": 597227.3806515
+    },
+    {
+      "paint_ms": 3.3341660164296627,
+      "tick_to_paint_ms": 6.235916051082313,
+      "frame_interval_ms": 32.495291088707745,
+      "paint_completed_at": 597227.413146791
+    },
+    {
+      "paint_ms": 3.12120805028826,
+      "tick_to_paint_ms": 5.350499995984137,
+      "frame_interval_ms": 30.83879197947681,
+      "paint_completed_at": 597227.443985583
+    },
+    {
+      "paint_ms": 2.9380840715020895,
+      "tick_to_paint_ms": 6.325084017589688,
+      "frame_interval_ms": 32.460917020216584,
+      "paint_completed_at": 597227.4764465
+    },
+    {
+      "paint_ms": 2.6594999944791198,
+      "tick_to_paint_ms": 5.144916940480471,
+      "frame_interval_ms": 29.98520794790238,
+      "paint_completed_at": 597227.506431708
+    },
+    {
+      "paint_ms": 2.454124973155558,
+      "tick_to_paint_ms": 4.8747919499874115,
+      "frame_interval_ms": 33.416416961699724,
+      "paint_completed_at": 597227.539848125
+    },
+    {
+      "paint_ms": 2.7062089648097754,
+      "tick_to_paint_ms": 5.164584028534591,
+      "frame_interval_ms": 31.63937502540648,
+      "paint_completed_at": 597227.5714875
+    },
+    {
+      "paint_ms": 3.0493339290842414,
+      "tick_to_paint_ms": 5.423084017820656,
+      "frame_interval_ms": 31.871624989435077,
+      "paint_completed_at": 597227.603359125
+    },
+    {
+      "paint_ms": 3.0722080264240503,
+      "tick_to_paint_ms": 5.410249927081168,
+      "frame_interval_ms": 31.74929099623114,
+      "paint_completed_at": 597227.635108416
+    },
+    {
+      "paint_ms": 3.067165962420404,
+      "tick_to_paint_ms": 3.6452909698709846,
+      "frame_interval_ms": 29.932499979622662,
+      "paint_completed_at": 597227.665040916
+    },
+    {
+      "paint_ms": 3.2487499993294477,
+      "tick_to_paint_ms": 3.932374995201826,
+      "frame_interval_ms": 32.83795900642872,
+      "paint_completed_at": 597227.697878875
+    },
+    {
+      "paint_ms": 3.9227079832926393,
+      "tick_to_paint_ms": 6.566499941982329,
+      "frame_interval_ms": 34.258291008882225,
+      "paint_completed_at": 597227.732137166
+    },
+    {
+      "paint_ms": 3.184583969414234,
+      "tick_to_paint_ms": 4.090292030014098,
+      "frame_interval_ms": 30.360084027051926,
+      "paint_completed_at": 597227.76249725
+    },
+    {
+      "paint_ms": 3.0552500393241644,
+      "tick_to_paint_ms": 4.054750083014369,
+      "frame_interval_ms": 30.84162506274879,
+      "paint_completed_at": 597227.793338875
+    },
+    {
+      "paint_ms": 2.7320829685777426,
+      "tick_to_paint_ms": 3.886791062541306,
+      "frame_interval_ms": 33.13866595271975,
+      "paint_completed_at": 597227.826477541
+    },
+    {
+      "paint_ms": 2.687457948923111,
+      "tick_to_paint_ms": 4.619999905116856,
+      "frame_interval_ms": 31.246791942976415,
+      "paint_completed_at": 597227.857724333
+    },
+    {
+      "paint_ms": 2.6477091014385223,
+      "tick_to_paint_ms": 4.514209111221135,
+      "frame_interval_ms": 32.92704210616648,
+      "paint_completed_at": 597227.890651375
+    },
+    {
+      "paint_ms": 2.9391669668257236,
+      "tick_to_paint_ms": 5.601375014521182,
+      "frame_interval_ms": 33.076582942157984,
+      "paint_completed_at": 597227.923727958
+    },
+    {
+      "paint_ms": 3.227666951715946,
+      "tick_to_paint_ms": 4.976833006367087,
+      "frame_interval_ms": 30.586124979890883,
+      "paint_completed_at": 597227.954314083
+    },
+    {
+      "paint_ms": 3.143457928672433,
+      "tick_to_paint_ms": 5.241916980594397,
+      "frame_interval_ms": 33.38024998083711,
+      "paint_completed_at": 597227.987694333
+    },
+    {
+      "paint_ms": 3.150958917103708,
+      "tick_to_paint_ms": 5.130209028720856,
+      "frame_interval_ms": 31.955917016603053,
+      "paint_completed_at": 597228.01965025
+    },
+    {
+      "paint_ms": 2.8379999566823244,
+      "tick_to_paint_ms": 5.091415951028466,
+      "frame_interval_ms": 30.90729098767042,
+      "paint_completed_at": 597228.050557541
+    },
+    {
+      "paint_ms": 3.1382919987663627,
+      "tick_to_paint_ms": 3.7568329134956002,
+      "frame_interval_ms": 30.425417004153132,
+      "paint_completed_at": 597228.080982958
+    },
+    {
+      "paint_ms": 3.5870830761268735,
+      "tick_to_paint_ms": 4.336583078838885,
+      "frame_interval_ms": 33.684708061628044,
+      "paint_completed_at": 597228.114667666
+    },
+    {
+      "paint_ms": 2.6510829338803887,
+      "tick_to_paint_ms": 4.583667032420635,
+      "frame_interval_ms": 32.12804195936769,
+      "paint_completed_at": 597228.146795708
+    },
+    {
+      "paint_ms": 3.044125041924417,
+      "tick_to_paint_ms": 3.6321660736575723,
+      "frame_interval_ms": 31.69133304618299,
+      "paint_completed_at": 597228.178487041
+    },
+    {
+      "paint_ms": 2.9940420063212514,
+      "tick_to_paint_ms": 3.6159170558676124,
+      "frame_interval_ms": 31.819666968658566,
+      "paint_completed_at": 597228.210306708
+    },
+    {
+      "paint_ms": 3.009375068359077,
+      "tick_to_paint_ms": 5.239500082097948,
+      "frame_interval_ms": 32.32062503229827,
+      "paint_completed_at": 597228.242627333
+    },
+    {
+      "paint_ms": 2.7648750692605972,
+      "tick_to_paint_ms": 4.806332988664508,
+      "frame_interval_ms": 32.29970799293369,
+      "paint_completed_at": 597228.274927041
+    },
+    {
+      "paint_ms": 2.6595420204102993,
+      "tick_to_paint_ms": 4.783250042237341,
+      "frame_interval_ms": 32.38670900464058,
+      "paint_completed_at": 597228.30731375
+    },
+    {
+      "paint_ms": 2.7217089664191008,
+      "tick_to_paint_ms": 5.449792020954192,
+      "frame_interval_ms": 32.65524993184954,
+      "paint_completed_at": 597228.339969
+    },
+    {
+      "paint_ms": 3.023833967745304,
+      "tick_to_paint_ms": 5.300916964188218,
+      "frame_interval_ms": 31.77600004710257,
+      "paint_completed_at": 597228.371745
+    },
+    {
+      "paint_ms": 3.214458003640175,
+      "tick_to_paint_ms": 5.805167020298541,
+      "frame_interval_ms": 32.0257080020383,
+      "paint_completed_at": 597228.403770708
+    },
+    {
+      "paint_ms": 2.8903750935569406,
+      "tick_to_paint_ms": 4.686625092290342,
+      "frame_interval_ms": 30.317042022943497,
+      "paint_completed_at": 597228.43408775
+    },
+    {
+      "paint_ms": 3.3624169882386923,
+      "tick_to_paint_ms": 4.054332966916263,
+      "frame_interval_ms": 32.25945797748864,
+      "paint_completed_at": 597228.466347208
+    },
+    {
+      "paint_ms": 3.8186670280992985,
+      "tick_to_paint_ms": 5.950459046289325,
+      "frame_interval_ms": 33.4176670294255,
+      "paint_completed_at": 597228.499764875
+    },
+    {
+      "paint_ms": 2.933416049927473,
+      "tick_to_paint_ms": 3.5503749968484044,
+      "frame_interval_ms": 29.349165968596935,
+      "paint_completed_at": 597228.529114041
+    },
+    {
+      "paint_ms": 2.8075420996174216,
+      "tick_to_paint_ms": 3.479875042103231,
+      "frame_interval_ms": 33.26608403585851,
+      "paint_completed_at": 597228.562380125
+    },
+    {
+      "paint_ms": 2.925707958638668,
+      "tick_to_paint_ms": 3.506417036987841,
+      "frame_interval_ms": 32.11120795458555,
+      "paint_completed_at": 597228.594491333
+    },
+    {
+      "paint_ms": 2.7785419952124357,
+      "tick_to_paint_ms": 5.0109169678762555,
+      "frame_interval_ms": 33.39116694405675,
+      "paint_completed_at": 597228.6278825
+    },
+    {
+      "paint_ms": 2.9944999841973186,
+      "tick_to_paint_ms": 5.073250038549304,
+      "frame_interval_ms": 32.219166052527726,
+      "paint_completed_at": 597228.660101666
+    },
+    {
+      "paint_ms": 2.798291970975697,
+      "tick_to_paint_ms": 5.400041933171451,
+      "frame_interval_ms": 32.13829197920859,
+      "paint_completed_at": 597228.692239958
+    },
+    {
+      "paint_ms": 2.728541032411158,
+      "tick_to_paint_ms": 5.648916005156934,
+      "frame_interval_ms": 31.547458027489483,
+      "paint_completed_at": 597228.723787416
+    },
+    {
+      "paint_ms": 2.991749905049801,
+      "tick_to_paint_ms": 5.839207908138633,
+      "frame_interval_ms": 32.09224995225668,
+      "paint_completed_at": 597228.755879666
+    },
+    {
+      "paint_ms": 3.304625046439469,
+      "tick_to_paint_ms": 5.208542104810476,
+      "frame_interval_ms": 31.514667090959847,
+      "paint_completed_at": 597228.787394333
+    },
+    {
+      "paint_ms": 4.61724994238466,
+      "tick_to_paint_ms": 6.834458908997476,
+      "frame_interval_ms": 32.79204189311713,
+      "paint_completed_at": 597228.820186375
+    },
+    {
+      "paint_ms": 2.7094590477645397,
+      "tick_to_paint_ms": 5.017249961383641,
+      "frame_interval_ms": 31.305500073358417,
+      "paint_completed_at": 597228.851491875
+    },
+    {
+      "paint_ms": 2.947583911009133,
+      "tick_to_paint_ms": 3.9529999485239387,
+      "frame_interval_ms": 29.91199993994087,
+      "paint_completed_at": 597228.881403875
+    },
+    {
+      "paint_ms": 3.8788749370723963,
+      "tick_to_paint_ms": 5.976666929200292,
+      "frame_interval_ms": 34.933208022266626,
+      "paint_completed_at": 597228.916337083
+    },
+    {
+      "paint_ms": 2.832541009411216,
+      "tick_to_paint_ms": 3.4843329340219498,
+      "frame_interval_ms": 29.37683300115168,
+      "paint_completed_at": 597228.945713916
+    },
+    {
+      "paint_ms": 3.8501250091940165,
+      "tick_to_paint_ms": 7.214582990854979,
+      "frame_interval_ms": 36.220917012542486,
+      "paint_completed_at": 597228.981934833
+    },
+    {
+      "paint_ms": 2.930999966338277,
+      "tick_to_paint_ms": 3.4909170353785157,
+      "frame_interval_ms": 28.03124999627471,
+      "paint_completed_at": 597229.009966083
+    },
+    {
+      "paint_ms": 3.185707959346473,
+      "tick_to_paint_ms": 6.295541999861598,
+      "frame_interval_ms": 34.58212502300739,
+      "paint_completed_at": 597229.044548208
+    },
+    {
+      "paint_ms": 2.7088329661637545,
+      "tick_to_paint_ms": 4.673041985370219,
+      "frame_interval_ms": 30.227249953895807,
+      "paint_completed_at": 597229.074775458
+    },
+    {
+      "paint_ms": 2.7648749528452754,
+      "tick_to_paint_ms": 4.958124947734177,
+      "frame_interval_ms": 31.51400003116578,
+      "paint_completed_at": 597229.106289458
+    },
+    {
+      "paint_ms": 2.9039999935775995,
+      "tick_to_paint_ms": 5.661207949742675,
+      "frame_interval_ms": 33.8020829949528,
+      "paint_completed_at": 597229.140091541
+    },
+    {
+      "paint_ms": 2.8776669641956687,
+      "tick_to_paint_ms": 5.712082958780229,
+      "frame_interval_ms": 32.10641699843109,
+      "paint_completed_at": 597229.172197958
+    },
+    {
+      "paint_ms": 3.153666970320046,
+      "tick_to_paint_ms": 4.978209035471082,
+      "frame_interval_ms": 30.4636670043692,
+      "paint_completed_at": 597229.202661625
+    },
+    {
+      "paint_ms": 3.009333973750472,
+      "tick_to_paint_ms": 4.0340840350836515,
+      "frame_interval_ms": 31.475124997086823,
+      "paint_completed_at": 597229.23413675
+    },
+    {
+      "paint_ms": 3.567459061741829,
+      "tick_to_paint_ms": 4.226625082083046,
+      "frame_interval_ms": 32.29212504811585,
+      "paint_completed_at": 597229.266428875
+    },
+    {
+      "paint_ms": 3.9395830826833844,
+      "tick_to_paint_ms": 6.0135830426588655,
+      "frame_interval_ms": 33.59691600780934,
+      "paint_completed_at": 597229.300025791
+    },
+    {
+      "paint_ms": 3.2497079810127616,
+      "tick_to_paint_ms": 3.8629169575870037,
+      "frame_interval_ms": 29.383291956037283,
+      "paint_completed_at": 597229.329409083
+    },
+    {
+      "paint_ms": 3.1342499423772097,
+      "tick_to_paint_ms": 4.191917018033564,
+      "frame_interval_ms": 32.94112498406321,
+      "paint_completed_at": 597229.362350208
+    },
+    {
+      "paint_ms": 3.261958947405219,
+      "tick_to_paint_ms": 4.3311669724062085,
+      "frame_interval_ms": 33.002041978761554,
+      "paint_completed_at": 597229.39535225
+    },
+    {
+      "paint_ms": 2.806709031574428,
+      "tick_to_paint_ms": 4.28458396345377,
+      "frame_interval_ms": 31.28400002606213,
+      "paint_completed_at": 597229.42663625
+    },
+    {
+      "paint_ms": 2.7090830262750387,
+      "tick_to_paint_ms": 4.707625019364059,
+      "frame_interval_ms": 32.265916001051664,
+      "paint_completed_at": 597229.458902166
+    },
+    {
+      "paint_ms": 2.6523330016061664,
+      "tick_to_paint_ms": 4.71300003118813,
+      "frame_interval_ms": 31.937416992150247,
+      "paint_completed_at": 597229.490839583
+    },
+    {
+      "paint_ms": 2.6020000223070383,
+      "tick_to_paint_ms": 5.388082936406136,
+      "frame_interval_ms": 32.77420799713582,
+      "paint_completed_at": 597229.523613791
+    },
+    {
+      "paint_ms": 2.849334036000073,
+      "tick_to_paint_ms": 5.478750099427998,
+      "frame_interval_ms": 31.909584067761898,
+      "paint_completed_at": 597229.555523375
+    },
+    {
+      "paint_ms": 3.093666979111731,
+      "tick_to_paint_ms": 4.8900420079007745,
+      "frame_interval_ms": 31.74283297266811,
+      "paint_completed_at": 597229.587266208
+    },
+    {
+      "paint_ms": 2.9620829736813903,
+      "tick_to_paint_ms": 5.3145409328863025,
+      "frame_interval_ms": 31.36758296750486,
+      "paint_completed_at": 597229.618633791
+    },
+    {
+      "paint_ms": 3.4666670253500342,
+      "tick_to_paint_ms": 4.103708080947399,
+      "frame_interval_ms": 31.529042054899037,
+      "paint_completed_at": 597229.650162833
+    },
+    {
+      "paint_ms": 3.359417081810534,
+      "tick_to_paint_ms": 5.3547919960692525,
+      "frame_interval_ms": 32.46662497986108,
+      "paint_completed_at": 597229.682629458
+    },
+    {
+      "paint_ms": 3.0537089332938194,
+      "tick_to_paint_ms": 3.607833990827203,
+      "frame_interval_ms": 31.29179193638265,
+      "paint_completed_at": 597229.71392125
+    },
+    {
+      "paint_ms": 3.0390830943360925,
+      "tick_to_paint_ms": 4.4804580975323915,
+      "frame_interval_ms": 32.82833308912814,
+      "paint_completed_at": 597229.746749583
+    },
+    {
+      "paint_ms": 3.1970000127330422,
+      "tick_to_paint_ms": 4.261207999661565,
+      "frame_interval_ms": 32.063999911770225,
+      "paint_completed_at": 597229.778813583
+    },
+    {
+      "paint_ms": 3.0957499984651804,
+      "tick_to_paint_ms": 4.164959071204066,
+      "frame_interval_ms": 32.174042076803744,
+      "paint_completed_at": 597229.810987625
+    },
+    {
+      "paint_ms": 3.3934590173885226,
+      "tick_to_paint_ms": 7.048749946989119,
+      "frame_interval_ms": 34.18712492566556,
+      "paint_completed_at": 597229.84517475
+    },
+    {
+      "paint_ms": 3.3500000135973096,
+      "tick_to_paint_ms": 6.476207985542715,
+      "frame_interval_ms": 31.456166063435376,
+      "paint_completed_at": 597229.876630916
+    },
+    {
+      "paint_ms": 2.9385420493781567,
+      "tick_to_paint_ms": 6.434750044718385,
+      "frame_interval_ms": 31.416459009051323,
+      "paint_completed_at": 597229.908047375
+    }
+  ],
+  "limitations": "Timer to CPU paint completion on one macOS/arm64 workstation. No compositor, GPU-load, energy, or physical input-to-photon claim."
+}

@@ -190,3 +190,73 @@ requires witnessed workflows and a tested rollback, not this ADR's acceptance.
 [2026-09-11 disposition by Rayla May](native/DW0_OWNER_DISPOSITION.md). This architecture
 approval does not mark unimplemented software requirements VERIFIED or approve
 scientific models, industrial use or an unbuilt distribution.
+
+## ADR-011 — Durable local editing history and modular workstation surfaces
+
+**Status:** ACCEPTED DIRECTION through Rayla May's DW3.2 implementation instruction,
+2026-09-14. This extends ADR-005, ADR-009 and ADR-010 without changing their accepted
+bodies or scientific authority. The [implementation guide](native/DW3_2_WORKSTATION.md)
+and [change record](native/DW3_2_CHANGE_RECORD.md) qualify implementation evidence.
+
+**Decision.** Application services own continuously durable logical-edit history,
+explicit immutable saves, named snapshots, retained alternatives and attributable
+undo/redo. Canonical JSON checkpoints and events remain authoritative; indexes
+remain rebuildable. The native UI owns personal navigation and contextual command
+surfaces, including an optional ribbon and a closed in-app command grammar. Existing
+scientific artifact schemas and hash meanings remain unchanged. Recovery reads
+stored state and never replays Run, validation, AI or extensions.
+
+**Rationale and alternatives.** Session-only undo cannot survive closure. Replacing
+older saves would erase audit evidence. An executable command replay would require
+old models/extensions and could repeat effects. Verified immutable checkpoints make
+recovery independent of those effects. Compact controls and optional dock/ribbon
+layouts expose common operations without consuming the flowsheet's working area.
+
+**Consequences.** Introduce independent versioned history contracts, migration/fault
+fixtures and checks against the current history head. Retain alternate paths; do not prune silently.
+Keep personal zoom, selection and temporary highlighting out of document undo.
+Measure storage plus native refresh latency. Live collaboration requires the
+separate [DW3.3 protocol and failure gate](native/DW3_3_COLLABORATION.md); local
+checkpoint reversal is not an implementation of concurrent selective undo.
+
+## ADR-012 — Human-authorized bounded AI exploration and independent acceptance tests
+
+**Status:** BEHAVIOR AUTHORIZED by Rayla May's DW6 planning selections and explicit
+implementation instruction, 2026-09-16. The prepared interface/test package is
+reviewable implementation input, not evidence of a delivered AI workspace.
+
+**Decision.** Extend ADR-007/010's explicit-action policy narrowly: a human may
+approve and start a plan specifying the immutable source, named existing parameter
+ranges, provider/model, feedback categories and hard budget. That action authorizes
+ordinary coordinator validation/run of isolated candidates within those bounds.
+It never authorizes baseline edits, model/case approval, topology/backend changes
+or replay after recovery. Each session gets distinct case/result identity. Adoption
+requires a new Review proposal against the current target and human approval.
+
+One participant, five candidate iterations, five admitted runs, 300 seconds,
+50,000 total input/output tokens, 20 application tool calls and zero automatic
+retries are the approved ceilings. The plan authorizes feedback of its own generated
+parameters, result summaries and diagnostics. Continue on the captured source if
+the original changes; label the mismatch and require fresh adoption review.
+
+**Rationale and alternatives.** Per-candidate human confirmation was considered;
+Rayla May selected adaptive parameter exploration inside an approved plan. Fixed
+scenario lists and topology-changing exploration were not selected. Isolated case
+identities prevent ordinary case-scoped last-valid selection from being advanced
+by exploration. Immutable local audit supports reconstruction after failures.
+
+**Acceptance decision.** Develop reviewer-controlled tests before developer
+implementation, freeze them in a separate package, and require passing tests plus
+implementation review and native/provider witness before integration. The rejected
+DW4/DW5 candidate demonstrated why passing supplied tests alone is insufficient.
+Test amendments need owner/reviewer disposition and a new recorded digest.
+
+**Consequences.** New neutral contracts, profile propagation, durable reservations,
+provider/context controls and real-worker tests are required. OpenAI is the first
+adapter behind an interface supporting future remote/local providers. API keys may
+use explicit OS credential storage; project audit retains submitted sessions.
+DW4/DW5 acceptance remains a prerequisite. Speech, multiple participants, new
+scientific models and industrial qualification remain outside DW6.
+
+See [the DW6 specification](native/DW6_ACCEPTANCE_SPEC.md) and
+[developer handoff](native/DW6_DEVELOPER_HANDOFF.md). Earlier ADR bodies are retained.

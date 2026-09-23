@@ -1,0 +1,1393 @@
+I001 [*] Import block is un-sorted or un-formatted
+  --> src/bh_sim/adapters/storage.py:7:1
+   |
+ 5 |   """
+ 6 |
+ 7 | / from __future__ import annotations
+ 8 | |
+ 9 | | import sqlite3
+10 | | from collections.abc import Callable
+11 | | from functools import wraps
+12 | | from pathlib import Path
+13 | | from typing import ParamSpec, TypeVar
+14 | |
+15 | | from bh_sim.boundary.contracts import (
+16 | |     CalculatedRunDto,
+17 | |     DiagnosticDto,
+18 | |     EquipmentResultOverlayDto,
+19 | |     EquipmentResultRowDto,
+20 | |     ExportProvenanceDto,
+21 | |     OverlaysDto,
+22 | |     PlotDefinitionDto,
+23 | |     ProcessBalanceDto,
+24 | |     PreparedRevisionDto,
+25 | |     ResultSelectionDto,
+26 | |     RunAttemptRecord,
+27 | |     RunViewDto,
+28 | |     SeriesDataPointDto,
+29 | |     SeriesDescriptorDto,
+30 | |     StreamPropertyDto,
+31 | |     StreamResultOverlayDto,
+32 | |     StreamResultRowDto,
+33 | |     WorkbookDto,
+34 | | )
+35 | | from bh_sim.core import (
+36 | |     CaseDefinition,
+37 | |     EnergyPortValue,
+38 | |     MaterialPortValue,
+39 | |     Quantity,
+40 | |     RunResult,
+41 | |     UnitEvaluation,
+42 | | )
+43 | | from bh_sim.core.json_codec import contract_digest, contract_from_json
+44 | | from bh_sim.persistence import PersistenceStore
+45 | |
+46 | | from .drafts import DraftRepository as DraftRepository
+47 | | from .drafts import DraftRepositoryAdapter as DraftRepositoryAdapter
+48 | | from .engineering import read_prepared_revision, run_to_view
+   | |____________________________________________________________^
+49 |
+50 |   _P = ParamSpec("_P")
+   |
+help: Organize imports
+   |
+22 |     PlotDefinitionDto,
+23 +     PreparedRevisionDto,
+24 |     ProcessBalanceDto,
+   -     PreparedRevisionDto,
+25 |     ResultSelectionDto,
+   |
+
+F401 [*] `bh_sim.boundary.contracts.ExportProvenanceDto` imported but unused
+  --> src/bh_sim/adapters/storage.py:20:5
+   |
+18 |     EquipmentResultOverlayDto,
+19 |     EquipmentResultRowDto,
+20 |     ExportProvenanceDto,
+   |     ^^^^^^^^^^^^^^^^^^^
+21 |     OverlaysDto,
+22 |     PlotDefinitionDto,
+   |
+help: Remove unused import: `bh_sim.boundary.contracts.ExportProvenanceDto`
+   |
+19 |     EquipmentResultRowDto,
+   -     ExportProvenanceDto,
+20 |     OverlaysDto,
+   |
+
+E501 Line too long (102 > 100)
+   --> src/bh_sim/adapters/storage.py:558:101
+    |
+556 |                 unit_id=None,
+557 |                 provenance_hash=contract_digest(run),
+558 |                 notes=f"Solver status: {run.solver_result.status.name} · {run.solver_result.message}",
+    |                                                                                                     ^^
+559 |             )
+    |
+
+B904 Within an `except` clause, raise exceptions with `raise ... from err` or `raise ... from None` to distinguish them from errors in exception handling
+   --> src/bh_sim/adapters/worker_supervisor.py:215:21
+    |
+213 |             except queue.Empty:
+214 |                 if not self.is_alive():
+215 |                     raise WorkerLostError(f"Worker died during execution of run {job.run_id}")
+    |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+216 |                 continue
+    |
+
+E501 Line too long (106 > 100)
+   --> src/bh_sim/adapters/worker_supervisor.py:228:101
+    |
+226 |                 elif self._on_diagnostic:
+227 |                     self._on_diagnostic(event)
+228 |             elif isinstance(event, (c.WorkerCompletedEvent, c.WorkerFailedEvent, c.WorkerCancelledEvent)):
+    |                                                                                                     ^^^^^^
+229 |                 with self._lock:
+230 |                     self._active_jobs.pop(job.run_id, None)
+    |
+
+SIM105 Use `contextlib.suppress(Exception)` instead of `try`-`except`-`pass`
+   --> src/bh_sim/adapters/worker_supervisor.py:245:13
+    |
+243 |                   return
+244 |               assert self._process is not None and self._process.stdin is not None
+245 | /             try:
+246 | |                 write_frame(
+247 | |                     self._process.stdin,
+248 | |                     c.CancelRunRequest(run_id=run_id, force_terminate=force),
+249 | |                 )
+250 | |             except Exception:
+251 | |                 pass
+    | |____________________^
+252 |               if force:
+253 |                   threading.Timer(1.0, self._force_kill_if_still_running).start()
+    |
+help: Replace `try`-`except`-`pass` with `with contextlib.suppress(Exception): ...`
+
+E501 Line too long (104 > 100)
+   --> src/bh_sim/adapters/worker_supervisor.py:284:101
+    |
+282 |                     q.put(msg)
+283 |             elif isinstance(msg, (c.RunAccepted, c.WorkerProgressEvent, c.WorkerDiagnosticEvent,
+284 |                                   c.WorkerCompletedEvent, c.WorkerFailedEvent, c.WorkerCancelledEvent)):
+    |                                                                                                     ^^^^
+285 |                 q = self._active_jobs.get(msg.run_id)
+286 |                 if q:
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> src/bh_sim/application/commands.py:3:1
+   |
+ 1 |   """Shared command registry and synchronous, session-local duplicate protection."""
+ 2 |
+ 3 | / from __future__ import annotations
+ 4 | |
+ 5 | | from threading import RLock
+ 6 | |
+ 7 | | from bh_sim.boundary import contracts as c
+ 8 | | from bh_sim.boundary.contracts import (
+ 9 | |     COMMAND_VERSION,
+10 | |     CommandData,
+11 | |     CommandEvent,
+12 | |     CommandOutcome,
+13 | |     CommandRequest,
+14 | |     CompareRunsParameters,
+15 | |     CreateDraftParameters,
+16 | |     CancelRunParameters,
+17 | |     DemonstrationParameters,
+18 | |     DiagnosticDto,
+19 | |     DraftParameters,
+20 | |     InspectAttemptParameters,
+21 | |     InspectRunParameters,
+22 | |     LastValidParameters,
+23 | |     ListAttemptsParameters,
+24 | |     ListDraftsParameters,
+25 | |     OpenDraftParameters,
+26 | |     StartRunParameters,
+27 | | )
+28 | | from bh_sim.boundary.json_codec import boundary_from_json, boundary_json
+29 | |
+30 | | from .history import HistoryService
+31 | | from .pfd import PfdService
+32 | | from .services import ApplicationServices, CommandRejected, DemonstrationService
+   | |________________________________________________________________________________^
+33 |
+34 |   _PFD_PARAMETERS = {
+   |
+help: Organize imports
+   |
+9  |     COMMAND_VERSION,
+10 +     CancelRunParameters,
+11 |     CommandData,
+--------------------------------------------------------------------------------
+16 |     CreateDraftParameters,
+   -     CancelRunParameters,
+17 |     DemonstrationParameters,
+   |
+
+F401 [*] `pathlib.Path` imported but unused
+  --> src/bh_sim/application/services.py:12:21
+   |
+10 | from dataclasses import replace
+11 | from datetime import UTC, datetime
+12 | from pathlib import Path
+   |                     ^^^^
+13 | from threading import RLock
+14 | from uuid import uuid4
+   |
+help: Remove unused import: `pathlib.Path`
+   |
+11 | from datetime import UTC, datetime
+   - from pathlib import Path
+12 | from threading import RLock
+   |
+
+F401 [*] `bh_sim.boundary.contracts.CalculatedRunDto` imported but unused
+  --> src/bh_sim/application/services.py:18:5
+   |
+16 | from bh_sim.boundary.contracts import (
+17 |     ArtifactReferenceDto,
+18 |     CalculatedRunDto,
+   |     ^^^^^^^^^^^^^^^^
+19 |     DemonstrationReportDto,
+20 |     DiagnosticDto,
+   |
+help: Remove unused import: `bh_sim.boundary.contracts.CalculatedRunDto`
+   |
+17 |     ArtifactReferenceDto,
+   -     CalculatedRunDto,
+18 |     DemonstrationReportDto,
+   |
+
+F821 Undefined name `Any`
+  --> src/bh_sim/application/services.py:78:21
+   |
+76 |         artifacts: ArtifactRepositoryPort,
+77 |         demonstrations: DemonstrationPort,
+78 |         supervisor: Any | None = None,
+   |                     ^^^
+79 |     ) -> None:
+80 |         self.drafts = drafts
+   |
+
+SIM105 Use `contextlib.suppress(Exception)` instead of `try`-`except`-`pass`
+  --> src/bh_sim/application/services.py:89:13
+   |
+87 |           self._lock = RLock()
+88 |           if hasattr(self.artifacts, "reconcile_startup_attempts"):
+89 | /             try:
+90 | |                 self.artifacts.reconcile_startup_attempts()
+91 | |             except Exception:
+92 | |                 pass
+   | |____________________^
+93 |
+94 |       def save_draft(self, draft: DraftDto) -> DraftDto:
+   |
+help: Replace `try`-`except`-`pass` with `with contextlib.suppress(Exception): ...`
+
+E501 Line too long (101 > 100)
+   --> src/bh_sim/application/services.py:135:101
+    |
+133 |                 raise CommandRejected("INVALID_DRAFT", str(error)) from error
+134 |             context = self.engineering.context_hash()
+135 |             if self.supervisor is not None and getattr(self.supervisor, "is_alive", lambda: False)():
+    |                                                                                                     ^
+136 |                 resp = self.supervisor.validate(draft, prepared.engineering_hash, context)
+137 |                 validation = ValidationDto(
+    |
+
+E501 Line too long (101 > 100)
+   --> src/bh_sim/application/services.py:224:101
+    |
+222 |                 self.artifacts.record_attempt(attempt)
+223 |
+224 |             if self.supervisor is not None and getattr(self.supervisor, "is_alive", lambda: False)():
+    |                                                                                                     ^
+225 |                 job = RunJob(
+226 |                     job_id=f"job:{uuid4()}",
+    |
+
+SIM105 Use `contextlib.suppress(Exception)` instead of `try`-`except`-`pass`
+   --> src/bh_sim/application/services.py:239:25
+    |
+237 |                       view = None
+238 |                       if terminal.staged_path and hasattr(self.artifacts, "promote_staged_run"):
+239 | /                         try:
+240 | |                             view = self.artifacts.promote_staged_run(terminal.staged_path)
+241 | |                         except Exception:
+242 | |                             pass
+    | |________________________________^
+243 |                       if view is None:
+244 |                           conv = terminal.convergence.upper()
+    |
+help: Replace `try`-`except`-`pass` with `with contextlib.suppress(Exception): ...`
+
+SIM114 [*] Combine `if` branches using logical `or` operator
+   --> src/bh_sim/application/services.py:245:25
+    |
+243 |                       if view is None:
+244 |                           conv = terminal.convergence.upper()
+245 | /                         if conv == "UNCONVERGED":
+246 | |                             conv = "FAILED"
+247 | |                         elif conv not in ("NOT_RUN", "CONVERGED", "FAILED"):
+248 | |                             conv = "FAILED"
+    | |___________________________________________^
+249 |                           view = RunViewDto(
+250 |                               run_id=terminal.run_id,
+    |
+help: Combine `if` branches
+    |
+244 |                         conv = terminal.convergence.upper()
+    -                         if conv == "UNCONVERGED":
+    -                             conv = "FAILED"
+    -                         elif conv not in ("NOT_RUN", "CONVERGED", "FAILED"):
+245 +                         if conv == "UNCONVERGED" or conv not in ("NOT_RUN", "CONVERGED", "FAILED"):
+246 |                             conv = "FAILED"
+    |
+
+E501 Line too long (113 > 100)
+   --> src/bh_sim/application/services.py:260:101
+    |
+258 |                             unit_results=(),
+259 |                             diagnostics=(),
+260 |                             artifact=ArtifactReferenceDto("kernel_run", terminal.run_id, terminal.artifact_hash),
+    |                                                                                                     ^^^^^^^^^^^^^
+261 |                         )
+262 |                     attempt = replace(
+    |
+
+E501 Line too long (102 > 100)
+   --> src/bh_sim/application/services.py:294:101
+    |
+292 |                 else:
+293 |                     raise CommandRejected(
+294 |                         "UNKNOWN_DISPOSITION", f"Unexpected terminal event: {type(terminal).__name__}"
+    |                                                                                                     ^^
+295 |                     )
+296 |             else:
+    |
+
+E501 Line too long (101 > 100)
+   --> src/bh_sim/application/services.py:329:101
+    |
+327 |         """Cancel an in-flight run."""
+328 |         with self._lock:
+329 |             if self.supervisor is not None and getattr(self.supervisor, "is_alive", lambda: False)():
+    |                                                                                                     ^
+330 |                 self.supervisor.cancel(run_id)
+331 |             if hasattr(self.artifacts, "list_attempts"):
+    |
+
+F401 [*] `io` imported but unused
+  --> src/bh_sim/boundary/worker_framing.py:10:8
+   |
+ 8 | from __future__ import annotations
+ 9 |
+10 | import io
+   |        ^^
+11 | import struct
+12 | from typing import BinaryIO
+   |
+help: Remove unused import: `io`
+   |
+9  |
+   - import io
+10 | import struct
+   |
+
+E501 Line too long (110 > 100)
+   --> src/bh_sim/persistence/store.py:236:101
+    |
+235 |     def index_attempt(self, attempt: RunAttemptRecord) -> None:
+236 |         """Persist or update an operational attempt, guarding immutable inputs and winning terminal states."""
+    |                                                                                                     ^^^^^^^^^^
+237 |         with self._session() as connection:
+238 |             row = connection.execute(
+    |
+
+E501 Line too long (105 > 100)
+   --> src/bh_sim/persistence/store.py:251:101
+    |
+249 |                 ):
+250 |                     raise ValueError(
+251 |                         f"Attempt ID {attempt.attempt_id} already exists with differing immutable inputs"
+    |                                                                                                     ^^^^^
+252 |                     )
+253 |                 existing_state = row[4]
+    |
+
+E501 Line too long (102 > 100)
+   --> src/bh_sim/persistence/store.py:254:101
+    |
+252 |                     )
+253 |                 existing_state = row[4]
+254 |                 if existing_state in ("COMPLETED", "FAILED", "CANCELLED", "INTERRUPTED", "TIMED_OUT"):
+    |                                                                                                     ^^
+255 |                     # One authoritative terminal disposition; do not overwrite terminal state with late messages.
+256 |                     if attempt.persisted and not row[5]:
+    |
+
+E501 Line too long (113 > 100)
+   --> src/bh_sim/persistence/store.py:255:101
+    |
+253 |                 existing_state = row[4]
+254 |                 if existing_state in ("COMPLETED", "FAILED", "CANCELLED", "INTERRUPTED", "TIMED_OUT"):
+255 |                     # One authoritative terminal disposition; do not overwrite terminal state with late messages.
+    |                                                                                                     ^^^^^^^^^^^^^
+256 |                     if attempt.persisted and not row[5]:
+257 |                         connection.execute(
+    |
+
+E501 Line too long (107 > 100)
+   --> src/bh_sim/persistence/store.py:264:101
+    |
+262 |                 connection.execute(
+263 |                     """UPDATE attempts SET
+264 |                            state = ?, terminal_at = ?, failure_reason = ?, artifact_hash = ?, persisted = ?
+    |                                                                                                     ^^^^^^^
+265 |                        WHERE attempt_id = ?""",
+266 |                     (
+    |
+
+E501 Line too long (107 > 100)
+   --> src/bh_sim/persistence/store.py:368:101
+    |
+366 |                    SET state = 'INTERRUPTED',
+367 |                        terminal_at = ?,
+368 |                        failure_reason = 'Process interrupted during application restart/loss of supervisor'
+    |                                                                                                     ^^^^^^^
+369 |                    WHERE state IN ('ADMITTED', 'RUNNING')""",
+370 |                 (reconciled_time,),
+    |
+
+F401 [*] `typing.TYPE_CHECKING` imported but unused
+  --> src/bh_sim/uix/graph_viewer.py:12:20
+   |
+10 | import csv
+11 | import math
+12 | from typing import TYPE_CHECKING
+   |                    ^^^^^^^^^^^^^
+13 |
+14 | from PySide6.QtCore import QPointF, QRectF, Qt, Signal
+   |
+help: Remove unused import: `typing.TYPE_CHECKING`
+   |
+11 | import math
+   - from typing import TYPE_CHECKING
+12 |
+   |
+
+F401 [*] `bh_sim.boundary.contracts.SeriesDescriptorDto` imported but unused
+  --> src/bh_sim/uix/graph_viewer.py:43:5
+   |
+41 |     PlotDefinitionDto,
+42 |     SeriesDataPointDto,
+43 |     SeriesDescriptorDto,
+   |     ^^^^^^^^^^^^^^^^^^^
+44 | )
+   |
+help: Remove unused import: `bh_sim.boundary.contracts.SeriesDescriptorDto`
+   |
+42 |     SeriesDataPointDto,
+   -     SeriesDescriptorDto,
+43 | )
+   |
+
+E501 Line too long (103 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:492:101
+    |
+490 |             f'<!-- Provenance Hash: {self.plot_def.provenance_hash or "None"} -->',
+491 |             f'<!-- Plot Kind: {self.plot_def.plot_kind} -->',
+492 |             f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
+    |                                                                                                     ^^^
+493 |             '<style>',
+494 |             '  .bg { fill: #14212A; }',
+    |
+
+E501 Line too long (108 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:498:101
+    |
+496 |             '  .grid { stroke: #23313D; stroke-width: 1; stroke-dasharray: 2,2; }',
+497 |             '  .axis-text { fill: #A0AEC0; font-family: sans-serif; font-size: 11px; }',
+498 |             '  .title-text { fill: #EDF3F5; font-family: sans-serif; font-size: 14px; font-weight: bold; }',
+    |                                                                                                     ^^^^^^^^
+499 |             '  .trace { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }',
+500 |             '</style>',
+    |
+
+E501 Line too long (103 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:499:101
+    |
+497 |             '  .axis-text { fill: #A0AEC0; font-family: sans-serif; font-size: 11px; }',
+498 |             '  .title-text { fill: #EDF3F5; font-family: sans-serif; font-size: 14px; font-weight: bold; }',
+499 |             '  .trace { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }',
+    |                                                                                                     ^^^
+500 |             '</style>',
+501 |             f'<rect width="{w}" height="{h}" class="bg"/>',
+    |
+
+E501 Line too long (109 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:502:101
+    |
+500 |             '</style>',
+501 |             f'<rect width="{w}" height="{h}" class="bg"/>',
+502 |             f'<rect x="{margin_left}" y="{margin_top}" width="{plot_w}" height="{plot_h}" class="plot-bg"/>',
+    |                                                                                                     ^^^^^^^^^
+503 |         ]
+    |
+
+E501 Line too long (104 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:510:101
+    |
+508 |             vx = min_x + (i / 5.0) * range_x
+509 |             svg_lines.append(
+510 |                 f'<line x1="{gx}" y1="{margin_top}" x2="{gx}" y2="{margin_top + plot_h}" class="grid"/>'
+    |                                                                                                     ^^^^
+511 |             )
+512 |             svg_lines.append(
+    |
+
+E501 Line too long (119 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:513:101
+    |
+511 |             )
+512 |             svg_lines.append(
+513 |                 f'<text x="{gx}" y="{margin_top + plot_h + 18}" text-anchor="middle" class="axis-text">{vx:.3g}</text>'
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^
+514 |             )
+    |
+
+E501 Line too long (106 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:520:101
+    |
+518 |             vy = min_y + (i / 5.0) * range_y
+519 |             svg_lines.append(
+520 |                 f'<line x1="{margin_left}" y1="{gy}" x2="{margin_left + plot_w}" y2="{gy}" class="grid"/>'
+    |                                                                                                     ^^^^^^
+521 |             )
+522 |             svg_lines.append(
+    |
+
+E501 Line too long (112 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:523:101
+    |
+521 |             )
+522 |             svg_lines.append(
+523 |                 f'<text x="{margin_left - 10}" y="{gy + 4}" text-anchor="end" class="axis-text">{vy:.3g}</text>'
+    |                                                                                                     ^^^^^^^^^^^^
+524 |             )
+    |
+
+E501 Line too long (135 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:528:101
+    |
+526 | …
+527 | …
+528 | …="{h - 15}" text-anchor="middle" class="title-text">{self.plot_def.x_label}</text>'
+    |                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+529 | …
+530 | …
+    |
+
+E501 Line too long (154 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:531:101
+    |
+529 | …
+530 | …
+531 | …ext-anchor="start" class="title-text">{self.plot_def.y_label} — {self.plot_def.title}</text>'
+    |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+532 | …
+    |
+
+E501 Line too long (156 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:539:101
+    |
+537 | …
+538 | …LETTE)]
+539 | …ne_style == "dashed" else (' stroke-dasharray="2,2"' if series.line_style == "dotted" else '')
+    |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+540 | …
+541 | …
+    |
+
+E501 Line too long (111 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:586:101
+    |
+584 |         self.source_badge = QLabel("Source: None")
+585 |         self.source_badge.setStyleSheet(
+586 |             "background-color: #23313D; color: #82D7CC; border-radius: 3px; padding: 2px 6px; font-size: 11px;"
+    |                                                                                                     ^^^^^^^^^^^
+587 |         )
+588 |         header_layout.addWidget(self.source_badge)
+    |
+
+E501 Line too long (109 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:594:101
+    |
+592 |         self.pinned_btn.setCheckable(True)
+593 |         self.pinned_btn.setChecked(True)
+594 |         self.pinned_btn.setToolTip("When pinned, plot retains its run data even if active selection changes")
+    |                                                                                                     ^^^^^^^^^
+595 |         header_layout.addWidget(self.pinned_btn)
+    |
+
+E501 Line too long (111 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:688:101
+    |
+686 |             try:
+687 |                 self.plot_canvas.export_csv(filename)
+688 |                 QMessageBox.information(self, "Export CSV", f"Successfully exported plot data to:\n{filename}")
+    |                                                                                                     ^^^^^^^^^^^
+689 |             except Exception as ex:
+690 |                 QMessageBox.critical(self, "Export CSV Error", f"Failed to export CSV: {ex}")
+    |
+
+E501 Line too long (111 > 100)
+   --> src/bh_sim/uix/graph_viewer.py:703:101
+    |
+701 |             try:
+702 |                 self.plot_canvas.export_svg(filename)
+703 |                 QMessageBox.information(self, "Export SVG", f"Successfully exported SVG image to:\n{filename}")
+    |                                                                                                     ^^^^^^^^^^^
+704 |             except Exception as ex:
+705 |                 QMessageBox.critical(self, "Export SVG Error", f"Failed to export SVG: {ex}")
+    |
+
+E501 Line too long (102 > 100)
+   --> src/bh_sim/uix/pfd_canvas.py:408:101
+    |
+406 |                     f"T = {f'{ov.temperature_k:.2f} K' if ov.temperature_k is not None else '-'}\n"
+407 |                     f"P = {f'{ov.pressure_pa:.1f} Pa' if ov.pressure_pa is not None else '-'}\n"
+408 |                     f"m = {f'{ov.mass_flow_kg_s:.4f} kg/s' if ov.mass_flow_kg_s is not None else '-'}"
+    |                                                                                                     ^^
+409 |                 )
+410 |                 badge.show()
+    |
+
+E501 Line too long (106 > 100)
+   --> src/bh_sim/uix/pfd_canvas.py:734:101
+    |
+733 |     def dragEnterEvent(self, event: QDragEnterEvent) -> None:
+734 |         if not self.document or not event.mimeData().hasFormat("application/vnd.bh.equipment-model+json"):
+    |                                                                                                     ^^^^^^
+735 |             event.ignore()
+736 |             return
+    |
+
+E501 Line too long (101 > 100)
+   --> src/bh_sim/uix/window.py:260:101
+    |
+258 |             add("run.cancel", "Cancel", self.cancel_current_run, QKeySequence("Ctrl+K"))
+259 |         else:
+260 |             reason = "Solver connection is unavailable in this preview; no calculation is performed."
+    |                                                                                                     ^
+261 |             for identifier, title in (
+262 |                 ("draft.validate", "Validate"),
+    |
+
+SIM102 Use a single `if` statement instead of nested `if` statements
+   --> src/bh_sim/uix/window.py:471:9
+    |
+469 |           if self.current is None:
+470 |               return False
+471 | /         if self.last_receipt is None or self.last_receipt.draft_id != self.current.draft_id:
+472 | |             if not self.validate_current():
+    | |___________________________________________^
+473 |                   return False
+474 |           if self.last_receipt is None or not self.last_receipt.validation.valid:
+    |
+help: Combine `if` statements using `and`
+
+E501 Line too long (115 > 100)
+  --> src/bh_sim/uix/workbook_view.py:54:101
+   |
+52 |         for badge in (self.badge_conv, self.badge_clos, self.badge_phys, self.badge_corr):
+53 |             badge.setStyleSheet(
+54 |                 "background-color: #23313D; color: #EDF3F5; border-radius: 3px; padding: 2px 6px; font-size: 11px;"
+   |                                                                                                     ^^^^^^^^^^^^^^^
+55 |             )
+56 |             header_layout.addWidget(badge)
+   |
+
+E501 Line too long (101 > 100)
+   --> src/bh_sim/uix/workbook_view.py:149:101
+    |
+147 |         self.run_label.setText(f"Run: {workbook.run_id}")
+148 |
+149 |         def style_status(badge: QLabel, text: str, ok_val: str, warn_val: str | None = None) -> None:
+    |                                                                                                     ^
+150 |             badge.setText(text)
+151 |             val = text.split(":")[-1].strip().upper()
+    |
+
+E501 Line too long (119 > 100)
+   --> src/bh_sim/uix/workbook_view.py:153:101
+    |
+151 |             val = text.split(":")[-1].strip().upper()
+152 |             if val == ok_val:
+153 |                 badge.setStyleSheet("background-color: #2D5A43; color: #A8E6CF; border-radius: 3px; padding: 2px 6px;")
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^
+154 |             elif warn_val and val == warn_val:
+155 |                 badge.setStyleSheet("background-color: #614D24; color: #FFEAA7; border-radius: 3px; padding: 2px 6px;")
+    |
+
+E501 Line too long (119 > 100)
+   --> src/bh_sim/uix/workbook_view.py:155:101
+    |
+153 |                 badge.setStyleSheet("background-color: #2D5A43; color: #A8E6CF; border-radius: 3px; padding: 2px 6px;")
+154 |             elif warn_val and val == warn_val:
+155 |                 badge.setStyleSheet("background-color: #614D24; color: #FFEAA7; border-radius: 3px; padding: 2px 6px;")
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^
+156 |             elif val in ("FAILED", "INVALID"):
+157 |                 badge.setStyleSheet("background-color: #632C2C; color: #FFB8B8; border-radius: 3px; padding: 2px 6px;")
+    |
+
+E501 Line too long (119 > 100)
+   --> src/bh_sim/uix/workbook_view.py:157:101
+    |
+155 |                 badge.setStyleSheet("background-color: #614D24; color: #FFEAA7; border-radius: 3px; padding: 2px 6px;")
+156 |             elif val in ("FAILED", "INVALID"):
+157 |                 badge.setStyleSheet("background-color: #632C2C; color: #FFB8B8; border-radius: 3px; padding: 2px 6px;")
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^
+158 |             else:
+159 |                 badge.setStyleSheet("background-color: #23313D; color: #EDF3F5; border-radius: 3px; padding: 2px 6px;")
+    |
+
+E501 Line too long (119 > 100)
+   --> src/bh_sim/uix/workbook_view.py:159:101
+    |
+157 |                 badge.setStyleSheet("background-color: #632C2C; color: #FFB8B8; border-radius: 3px; padding: 2px 6px;")
+158 |             else:
+159 |                 badge.setStyleSheet("background-color: #23313D; color: #EDF3F5; border-radius: 3px; padding: 2px 6px;")
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^
+160 |
+161 |         style_status(self.badge_conv, f"Conv: {workbook.convergence}", "CONVERGED")
+    |
+
+E501 Line too long (101 > 100)
+   --> src/bh_sim/uix/workbook_view.py:163:101
+    |
+161 |         style_status(self.badge_conv, f"Conv: {workbook.convergence}", "CONVERGED")
+162 |         style_status(self.badge_clos, f"Clos: {workbook.closure}", "PASSED")
+163 |         style_status(self.badge_phys, f"Phys: {workbook.physical_validity}", "VALID", "EXTRAPOLATED")
+    |                                                                                                     ^
+164 |         style_status(self.badge_corr, f"Corr: {workbook.correlation_validity}", "VALID", "EXTRAPOLATED")
+    |
+
+E501 Line too long (104 > 100)
+   --> src/bh_sim/uix/workbook_view.py:164:101
+    |
+162 |         style_status(self.badge_clos, f"Clos: {workbook.closure}", "PASSED")
+163 |         style_status(self.badge_phys, f"Phys: {workbook.physical_validity}", "VALID", "EXTRAPOLATED")
+164 |         style_status(self.badge_corr, f"Corr: {workbook.correlation_validity}", "VALID", "EXTRAPOLATED")
+    |                                                                                                     ^^^^
+165 |
+166 |         stale = is_stale or (workbook.selection is not None and workbook.selection.is_stale)
+    |
+
+E501 Line too long (116 > 100)
+   --> src/bh_sim/uix/workstation_editor.py:180:101
+    |
+178 |         self._build_comparison()
+179 |         self.activity_dock.setWindowTitle("Diagnostics")
+180 |         for dock in (self.workbook_dock, self.graph_dock, self.history_dock, self.commands_dock, self.compare_dock):
+    |                                                                                                     ^^^^^^^^^^^^^^^^
+181 |             self.addDockWidget(Qt.DockWidgetArea.BottomDockWidgetArea, dock)
+182 |             self.tabifyDockWidget(self.activity_dock, dock)
+    |
+
+E501 Line too long (105 > 100)
+   --> src/bh_sim/uix/workstation_editor.py:218:101
+    |
+216 |         inspector_layout.addWidget(self.advanced_details)
+217 |         self.plot_button = QPushButton("Plot Object…")
+218 |         self.plot_button.setToolTip("Plot T-Q, residual or spatial profile for the selected unit/stream")
+    |                                                                                                     ^^^^^
+219 |         self.plot_button.clicked.connect(self._on_inspector_plot_clicked)
+220 |         inspector_layout.addWidget(self.plot_button)
+    |
+
+E501 Line too long (114 > 100)
+   --> src/bh_sim/uix/workstation_editor.py:235:101
+    |
+233 |             ),
+234 |             ("view.compare", "Compare versions", self.show_compare),
+235 |             ("view.workbook", "Workbooks", lambda: self.focus_panel(self.workbook_dock, self.workbook_view.tabs)),
+    |                                                                                                     ^^^^^^^^^^^^^^
+236 |             ("view.graph", "Graphs", lambda: self.focus_panel(self.graph_dock, self.graph_viewer.plot_canvas)),
+237 |             ("graph.open_window", "Open graph in window", self.open_graph_window),
+    |
+
+E501 Line too long (111 > 100)
+   --> src/bh_sim/uix/workstation_editor.py:236:101
+    |
+234 |             ("view.compare", "Compare versions", self.show_compare),
+235 |             ("view.workbook", "Workbooks", lambda: self.focus_panel(self.workbook_dock, self.workbook_view.tabs)),
+236 |             ("view.graph", "Graphs", lambda: self.focus_panel(self.graph_dock, self.graph_viewer.plot_canvas)),
+    |                                                                                                     ^^^^^^^^^^^
+237 |             ("graph.open_window", "Open graph in window", self.open_graph_window),
+238 |             ("result.overlays_toggle", "Toggle canvas overlays", self.toggle_canvas_overlays),
+    |
+
+E501 Line too long (106 > 100)
+   --> src/bh_sim/uix/workstation_editor.py:318:101
+    |
+316 |             ("Edit", ("pfd.rename", "pfd.delete", "pfd.undo", "pfd.redo", "pfd.settings")),
+317 |             ("View", ("pfd.fit", "pfd.zoom_reset", "pfd.layers", "view.commands", "view.history")),
+318 |             ("Review", ("view.compare", "history.snapshot", "draft.validate", "run.start", "run.cancel")),
+    |                                                                                                     ^^^^^^
+319 |         ):
+320 |             panel = QWidget()
+    |
+
+E501 Line too long (116 > 100)
+    --> src/bh_sim/uix/workstation_editor.py:1033:101
+     |
+1031 |             dock.show()
+1032 |         self.navigator_dock.raise_()
+1033 |         for dock in (self.workbook_dock, self.graph_dock, self.history_dock, self.commands_dock, self.compare_dock):
+     |                                                                                                     ^^^^^^^^^^^^^^^^
+1034 |             dock.setFloating(False)
+1035 |             self.addDockWidget(Qt.DockWidgetArea.BottomDockWidgetArea, dock)
+     |
+
+E501 Line too long (114 > 100)
+    --> src/bh_sim/uix/workstation_editor.py:1439:101
+     |
+1437 |         self.session.selected_run_id = run_id
+1438 |
+1439 |         outcome_wb = self.execute("workbook.inspect", c.InspectWorkbookParameters(case_id=case_id, run_id=run_id))
+     |                                                                                                     ^^^^^^^^^^^^^^
+1440 |         if outcome_wb.disposition == "COMPLETED" and isinstance(outcome_wb.data, c.WorkbookDto):
+1441 |             self.session.workbook = outcome_wb.data
+     |
+
+E501 Line too long (109 > 100)
+    --> src/bh_sim/uix/workstation_editor.py:1444:101
+     |
+1442 |             self.workbook_view.set_workbook(outcome_wb.data, is_stale=self.dirty)
+1443 |
+1444 |         outcome_ov = self.execute("result.overlays", c.GetOverlaysParameters(case_id=case_id, run_id=run_id))
+     |                                                                                                     ^^^^^^^^^
+1445 |         if outcome_ov.disposition == "COMPLETED" and isinstance(outcome_ov.data, c.OverlaysDto):
+1446 |             self.session.overlays = outcome_ov.data
+     |
+
+E501 Line too long (101 > 100)
+    --> src/bh_sim/uix/workstation_editor.py:1489:101
+     |
+1487 |         self._floating_graphs.append(dialog)
+1488 |         dialog.finished.connect(
+1489 |             lambda: self._floating_graphs.remove(dialog) if dialog in self._floating_graphs else None
+     |                                                                                                     ^
+1490 |         )
+1491 |         return dialog
+     |
+
+UP035 [*] Import from `collections.abc` instead: `Callable`
+  --> src/bh_sim/worker/entry.py:17:1
+   |
+15 | from datetime import UTC, datetime
+16 | from pathlib import Path
+17 | from typing import Any, BinaryIO, Callable
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+18 |
+19 | from bh_sim.boundary import contracts as c
+   |
+help: Import from `collections.abc`
+   |
+16 | from pathlib import Path
+   - from typing import Any, BinaryIO, Callable
+17 + from typing import Any, BinaryIO
+18 + from collections.abc import Callable
+19 |
+   |
+
+E501 Line too long (118 > 100)
+   --> src/bh_sim/worker/entry.py:224:101
+    |
+222 |                     raw_json = canonical_json(calculated.result)
+223 |                     artifact_hash = contract_digest(calculated.result)
+224 |                     conv = getattr(calculated.result.convergence, "value", str(calculated.result.convergence)).lower()
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^
+225 |                     clos = getattr(calculated.result.closure, "value", str(calculated.result.closure)).lower()
+226 |                     phys = getattr(calculated.result.physical_validity, "value", str(calculated.result.physical_validity)).lower()
+    |
+
+E501 Line too long (110 > 100)
+   --> src/bh_sim/worker/entry.py:225:101
+    |
+223 | …     artifact_hash = contract_digest(calculated.result)
+224 | …     conv = getattr(calculated.result.convergence, "value", str(calculated.result.convergence)).lower()
+225 | …     clos = getattr(calculated.result.closure, "value", str(calculated.result.closure)).lower()
+    |                                                                                       ^^^^^^^^^^
+226 | …     phys = getattr(calculated.result.physical_validity, "value", str(calculated.result.physical_validity)).lower()
+227 | …     corr = getattr(calculated.result.correlation_validity, "value", str(calculated.result.correlation_validity)).lower()
+    |
+
+E501 Line too long (130 > 100)
+   --> src/bh_sim/worker/entry.py:226:101
+    |
+224 | …     conv = getattr(calculated.result.convergence, "value", str(calculated.result.convergence)).lower()
+225 | …     clos = getattr(calculated.result.closure, "value", str(calculated.result.closure)).lower()
+226 | …     phys = getattr(calculated.result.physical_validity, "value", str(calculated.result.physical_validity)).lower()
+    |                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+227 | …     corr = getattr(calculated.result.correlation_validity, "value", str(calculated.result.correlation_validity)).lower()
+    |
+
+E501 Line too long (136 > 100)
+   --> src/bh_sim/worker/entry.py:227:101
+    |
+225 | …         clos = getattr(calculated.result.closure, "value", str(calculated.result.closure)).lower()
+226 | …         phys = getattr(calculated.result.physical_validity, "value", str(calculated.result.physical_validity)).lower()
+227 | …         corr = getattr(calculated.result.correlation_validity, "value", str(calculated.result.correlation_validity)).lower()
+    |                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+228 | …
+229 | …     staged_dir = Path(".bh/runtime/staged")
+    |
+
+E501 Line too long (115 > 100)
+  --> tests/fixtures/mock_worker_entry.py:36:101
+   |
+34 |             from bh_sim.engine import AcyclicRunEngine, PropertyRegistry, reference_model_catalog
+35 |
+36 |             engine = AcyclicRunEngine(reference_model_catalog(), PropertyRegistry((reference_property_package(),)))
+   |                                                                                                     ^^^^^^^^^^^^^^^
+37 |             adapter = InProcessEngineeringAdapter(engine, lambda e: "mock")
+38 |             return adapter.prepare(draft)
+   |
+
+E501 Line too long (103 > 100)
+  --> tests/fixtures/mock_worker_entry.py:54:101
+   |
+52 |         return c.ValidationDto(valid=True, degrees_of_freedom=0, diagnostics=())
+53 |
+54 |     def run(self, prepared: c.PreparedRevisionDto, expected_context_hash: str | None = None) -> object:
+   |                                                                                                     ^^^
+55 |         RunResultMock = namedtuple("RunResultMock", ["convergence", "closure", "physical_validity", "correlation_validity"])
+56 |         StatusMock = namedtuple("StatusMock", ["value"])
+   |
+
+E501 Line too long (124 > 100)
+  --> tests/fixtures/mock_worker_entry.py:55:101
+   |
+54 |     def run(self, prepared: c.PreparedRevisionDto, expected_context_hash: str | None = None) -> object:
+55 |         RunResultMock = namedtuple("RunResultMock", ["convergence", "closure", "physical_validity", "correlation_validity"])
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^
+56 |         StatusMock = namedtuple("StatusMock", ["value"])
+57 |         CalculatedMock = namedtuple("CalculatedMock", ["run_id", "result"])
+   |
+
+F401 [*] `bh_sim.boundary.contracts.CreateDraftParameters` imported but unused
+  --> tests/test_dw4_command_integration.py:14:5
+   |
+12 |     CancelRunParameters,
+13 |     CommandRequest,
+14 |     CreateDraftParameters,
+   |     ^^^^^^^^^^^^^^^^^^^^^
+15 |     DraftParameters,
+16 |     InspectAttemptParameters,
+   |
+help: Remove unused import: `bh_sim.boundary.contracts.CreateDraftParameters`
+   |
+13 |     CommandRequest,
+   -     CreateDraftParameters,
+14 |     DraftParameters,
+   |
+
+F401 [*] `bh_sim.uix.workspace.WorkspaceSettings` imported but unused
+  --> tests/test_dw4_command_integration.py:21:34
+   |
+19 |     StartRunParameters,
+20 | )
+21 | from bh_sim.uix.workspace import WorkspaceSettings
+   |                                  ^^^^^^^^^^^^^^^^^
+22 | from bh_sim.uix.workstation_editor import WorkstationEditor
+   |
+help: Remove unused import: `bh_sim.uix.workspace.WorkspaceSettings`
+   |
+20 | )
+   - from bh_sim.uix.workspace import WorkspaceSettings
+21 | from bh_sim.uix.workstation_editor import WorkstationEditor
+   |
+
+F401 [*] `bh_sim.uix.workstation_editor.WorkstationEditor` imported but unused
+  --> tests/test_dw4_command_integration.py:22:43
+   |
+20 | )
+21 | from bh_sim.uix.workspace import WorkspaceSettings
+22 | from bh_sim.uix.workstation_editor import WorkstationEditor
+   |                                           ^^^^^^^^^^^^^^^^^
+help: Remove unused import: `bh_sim.uix.workstation_editor.WorkstationEditor`
+   |
+21 | from bh_sim.uix.workspace import WorkspaceSettings
+   - from bh_sim.uix.workstation_editor import WorkstationEditor
+22 |
+   |
+
+E501 Line too long (103 > 100)
+  --> tests/test_dw4_command_integration.py:77:101
+   |
+76 |             # 1. Validate
+77 |             val_req = CommandRequest("draft.validate", "req:val:1", "engineer", DraftParameters(draft))
+   |                                                                                                     ^^^
+78 |             val_outcome = gateway.dispatch(val_req)
+79 |             self.assertEqual(val_outcome.disposition, "COMPLETED")
+   |
+
+E501 Line too long (121 > 100)
+  --> tests/test_dw4_command_integration.py:85:101
+   |
+84 |             # 2. Run
+85 |             run_req = CommandRequest("run.start", "req:run:1", "engineer", StartRunParameters(draft, receipt.receipt_id))
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^
+86 |             run_outcome = gateway.dispatch(run_req)
+87 |             self.assertEqual(run_outcome.disposition, "COMPLETED")
+   |
+
+E501 Line too long (138 > 100)
+  --> tests/test_dw4_command_integration.py:94:101
+   |
+93 | …
+94 | …ttempts", "req:att:list", "engineer", ListAttemptsParameters(case_id=draft.draft_id))
+   |                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+95 | …att_req)
+96 | …tion, "COMPLETED")
+   |
+
+E501 Line too long (135 > 100)
+   --> tests/test_dw4_command_integration.py:104:101
+    |
+103 | …
+104 | …ct_attempt", "req:att:1", "engineer", InspectAttemptParameters(attempt.attempt_id))
+    |                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+105 | …_att_req)
+106 | …ition, "COMPLETED")
+    |
+
+E501 Line too long (123 > 100)
+   --> tests/test_dw4_command_integration.py:110:101
+    |
+109 |             # 5. Inspect Run
+110 |             insp_run_req = CommandRequest("run.inspect", "req:run:insp", "engineer", InspectRunParameters(run_view.run_id))
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^
+111 |             insp_run_outcome = gateway.dispatch(insp_run_req)
+112 |             self.assertEqual(insp_run_outcome.disposition, "COMPLETED")
+    |
+
+E501 Line too long (103 > 100)
+   --> tests/test_dw4_command_integration.py:120:101
+    |
+118 |             draft = make_sample_draft("RadiatorLoop")
+119 |
+120 |             val_req = CommandRequest("draft.validate", "req:val:1", "engineer", DraftParameters(draft))
+    |                                                                                                     ^^^
+121 |             val_outcome = gateway.dispatch(val_req)
+122 |             receipt = val_outcome.data
+    |
+
+E501 Line too long (112 > 100)
+   --> tests/test_dw4_command_integration.py:142:101
+    |
+140 |             # Attempt to run with stale receipt
+141 |             stale_run_req = CommandRequest(
+142 |                 "run.start", "req:run:stale", "engineer", StartRunParameters(modified_draft, receipt.receipt_id)
+    |                                                                                                     ^^^^^^^^^^^^
+143 |             )
+144 |             outcome = gateway.dispatch(stale_run_req)
+    |
+
+E501 Line too long (145 > 100)
+   --> tests/test_dw4_command_integration.py:164:101
+    |
+162 | …
+163 | …
+164 | …q:can:1", "engineer", CancelRunParameters(run_id="run:cancel:1", reason="User stopped"))
+    |                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+165 | …
+166 | …TED")
+    |
+
+E501 Line too long (109 > 100)
+   --> tests/test_dw4_command_integration.py:185:101
+    |
+184 |                 # Validate over child process
+185 |                 val_req = CommandRequest("draft.validate", "req:spv:val", "engineer", DraftParameters(draft))
+    |                                                                                                     ^^^^^^^^^
+186 |                 val_outcome = gateway.dispatch(val_req)
+187 |                 self.assertEqual(val_outcome.disposition, "COMPLETED")
+    |
+
+E501 Line too long (127 > 100)
+   --> tests/test_dw4_command_integration.py:192:101
+    |
+191 |                 # Run over child process
+192 |                 run_req = CommandRequest("run.start", "req:spv:run", "engineer", StartRunParameters(draft, receipt.receipt_id))
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+193 |                 run_outcome = gateway.dispatch(run_req)
+194 |                 self.assertEqual(run_outcome.disposition, "COMPLETED")
+    |
+
+E501 Line too long (114 > 100)
+   --> tests/test_dw4_command_integration.py:211:101
+    |
+209 |             draft = make_sample_draft("UndoIsolationLoop")
+210 |
+211 |             val_outcome = gateway.dispatch(CommandRequest("draft.validate", "r:v", "eng", DraftParameters(draft)))
+    |                                                                                                     ^^^^^^^^^^^^^^
+212 |             receipt = val_outcome.data
+213 |             run_outcome = gateway.dispatch(CommandRequest("run.start", "r:r", "eng", StartRunParameters(draft, receipt.receipt_id)))
+    |
+
+E501 Line too long (132 > 100)
+   --> tests/test_dw4_command_integration.py:213:101
+    |
+211 |             val_outcome = gateway.dispatch(CommandRequest("draft.validate", "r:v", "eng", DraftParameters(draft)))
+212 |             receipt = val_outcome.data
+213 |             run_outcome = gateway.dispatch(CommandRequest("run.start", "r:r", "eng", StartRunParameters(draft, receipt.receipt_id)))
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+214 |             self.assertEqual(run_outcome.disposition, "COMPLETED")
+    |
+
+F401 [*] `bh_sim.boundary.contracts` imported but unused
+  --> tests/test_dw5_acceptance.py:30:42
+   |
+29 | from bh_sim.adapters.desktop_preview import create_supervised_gateway
+30 | from bh_sim.boundary import contracts as c
+   |                                          ^
+31 | from bh_sim.uix.workspace import WorkspaceSettings
+32 | from bh_sim.uix.workstation_editor import WorkstationEditor
+   |
+help: Remove unused import: `bh_sim.boundary.contracts`
+   |
+29 | from bh_sim.adapters.desktop_preview import create_supervised_gateway
+   - from bh_sim.boundary import contracts as c
+30 | from bh_sim.uix.workspace import WorkspaceSettings
+   |
+
+E501 Line too long (101 > 100)
+  --> tests/test_dw5_acceptance.py:75:101
+   |
+74 |     # 4. Validate and Run
+75 |     assert studio.validate_current(), "Validation must succeed for fully configured heater flowsheet"
+   |                                                                                                     ^
+76 |     assert studio.run_current(), "Supervised solver run must execute and converge"
+77 |     assert studio.last_run_view is not None
+   |
+
+E501 Line too long (101 > 100)
+  --> tests/test_dw5_acceptance.py:92:101
+   |
+90 |     inlet = wb.streams[0]
+91 |     outlet = wb.streams[1]
+92 |     assert inlet.mass_flow_kg_s is not None and pytest.approx(inlet.mass_flow_kg_s, abs=1e-3) == 12.5
+   |                                                                                                     ^
+93 |     assert inlet.temperature_k is not None and pytest.approx(inlet.temperature_k, abs=1e-2) == 360.0
+94 |     assert outlet.temperature_k is not None and outlet.temperature_k > inlet.temperature_k
+   |
+
+F401 [*] `PySide6.QtCore.QPointF` imported but unused
+  --> tests/test_graph_viewer.py:14:28
+   |
+12 | pytest.importorskip("PySide6")
+13 |
+14 | from PySide6.QtCore import QPointF, Qt
+   |                            ^^^^^^^
+15 | from PySide6.QtWidgets import QApplication
+   |
+help: Remove unused import
+   |
+13 |
+   - from PySide6.QtCore import QPointF, Qt
+14 | from PySide6.QtWidgets import QApplication
+   |
+
+F401 [*] `PySide6.QtCore.Qt` imported but unused
+  --> tests/test_graph_viewer.py:14:37
+   |
+12 | pytest.importorskip("PySide6")
+13 |
+14 | from PySide6.QtCore import QPointF, Qt
+   |                                     ^^
+15 | from PySide6.QtWidgets import QApplication
+   |
+help: Remove unused import
+   |
+13 |
+   - from PySide6.QtCore import QPointF, Qt
+14 | from PySide6.QtWidgets import QApplication
+   |
+
+E501 Line too long (110 > 100)
+  --> tests/test_graph_viewer.py:89:101
+   |
+87 |     assert plot_rect.top() < screen_pt.y() < plot_rect.bottom()
+88 |
+89 |     rev_x, rev_y = widget._screen_to_data(screen_pt.x(), screen_pt.y(), min_x, max_x, min_y, max_y, plot_rect)
+   |                                                                                                     ^^^^^^^^^^
+90 |     assert pytest.approx(rev_x, abs=1e-3) == 25000.0
+91 |     assert pytest.approx(rev_y, abs=1e-3) == 350.0
+   |
+
+E501 Line too long (108 > 100)
+   --> tests/test_graph_viewer.py:124:101
+    |
+123 |         # Verify column headers and data rows
+124 |         lines = [line.strip() for line in content.splitlines() if line.strip() and not line.startswith("#")]
+    |                                                                                                     ^^^^^^^^
+125 |         assert len(lines) >= 4  # Header + 3 data points
+126 |         header = lines[0]
+    |
+
+E501 Line too long (101 > 100)
+  --> tests/test_pfd_drag_drop.py:50:101
+   |
+50 | def test_equipment_palette_populates_items(qapp: QApplication, catalogue: c.PfdCatalogueDto) -> None:
+   |                                                                                                     ^
+51 |     palette = EquipmentPaletteList(catalogue)
+52 |     assert palette.count() == 2
+   |
+
+E501 Line too long (106 > 100)
+  --> tests/test_pfd_drag_drop.py:70:101
+   |
+68 |     canvas.edit_requested.connect(emitted_edits.append)
+69 |
+70 |     payload = json.dumps({"model_id": "heater", "title": "Duty heater", "version": "1.0"}).encode("utf-8")
+   |                                                                                                     ^^^^^^
+71 |     mime = QMimeData()
+72 |     mime.setData("application/vnd.bh.equipment-model+json", payload)
+   |
+
+E501 Line too long (101 > 100)
+   --> tests/test_pfd_drag_drop.py:144:101
+    |
+142 |     assert canvas.placement_preview is not None
+143 |
+144 |     key_event = QKeyEvent(QKeyEvent.Type.KeyPress, Qt.Key.Key_Escape, Qt.KeyboardModifier.NoModifier)
+    |                                                                                                     ^
+145 |     canvas.keyPressEvent(key_event)
+146 |     assert canvas.placement_preview is None
+    |
+
+F401 [*] `bh_sim.boundary.contracts.SelectDisplayRunParameters` imported but unused
+  --> tests/test_workbook_results.py:16:5
+   |
+14 |     InspectWorkbookParameters,
+15 |     PlotDataParameters,
+16 |     SelectDisplayRunParameters,
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+17 |     StartRunParameters,
+18 | )
+   |
+help: Remove unused import: `bh_sim.boundary.contracts.SelectDisplayRunParameters`
+   |
+15 |     PlotDataParameters,
+   -     SelectDisplayRunParameters,
+16 |     StartRunParameters,
+   |
+
+E501 Line too long (103 > 100)
+   --> tests/test_workbook_results.py:109:101
+    |
+108 |             # Validate
+109 |             val_req = CommandRequest("draft.validate", "req-1", "test-actor", c.DraftParameters(draft))
+    |                                                                                                     ^^^
+110 |             val_out = gateway.dispatch(val_req)
+111 |             self.assertEqual(val_out.disposition, "COMPLETED")
+    |
+
+E501 Line too long (119 > 100)
+   --> tests/test_workbook_results.py:116:101
+    |
+115 |             # Run
+116 |             run_req = CommandRequest("run.start", "req-2", "test-actor", StartRunParameters(draft, receipt.receipt_id))
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^
+117 |             run_out = gateway.dispatch(run_req)
+118 |             self.assertEqual(run_out.disposition, "COMPLETED")
+    |
+
+E501 Line too long (102 > 100)
+   --> tests/test_workbook_results.py:192:101
+    |
+191 |             run_out = gateway.dispatch(
+192 |                 CommandRequest("run.start", "r-2", "a", StartRunParameters(draft, receipt.receipt_id))
+    |                                                                                                     ^^
+193 |             )
+194 |             run_view = run_out.data
+    |
+
+E501 Line too long (102 > 100)
+   --> tests/test_workbook_results.py:240:101
+    |
+239 |             run_out = gateway.dispatch(
+240 |                 CommandRequest("run.start", "r-2", "a", StartRunParameters(draft, receipt.receipt_id))
+    |                                                                                                     ^^
+241 |             )
+242 |             run_view = run_out.data
+    |
+
+E501 Line too long (120 > 100)
+   --> tests/test_workbook_results.py:251:101
+    |
+249 |                     "r-3",
+250 |                     "a",
+251 |                     PlotDataParameters(case_id=draft.draft_id, run_id=run_view.run_id, plot_kind="T_Q", unit_id="u:hx"),
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^
+252 |                 )
+253 |             )
+    |
+
+E501 Line too long (121 > 100)
+   --> tests/test_workbook_results.py:281:101
+    |
+279 |                     "r-4",
+280 |                     "a",
+281 |                     PlotDataParameters(case_id=draft.draft_id, run_id=run_view.run_id, plot_kind="RESIDUAL_CONVERGENCE"),
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^
+282 |                 )
+283 |             )
+    |
+
+E501 Line too long (102 > 100)
+   --> tests/test_workbook_results.py:302:101
+    |
+301 |             run_out = gateway.dispatch(
+302 |                 CommandRequest("run.start", "r-2", "a", StartRunParameters(draft, receipt.receipt_id))
+    |                                                                                                     ^^
+303 |             )
+304 |             run_view = run_out.data
+    |
+
+E501 Line too long (105 > 100)
+   --> tests/test_workbook_results.py:328:101
+    |
+326 |             self.assertIn(statuses["convergence"], ("CONVERGED", "FAILED", "NOT_RUN"))
+327 |             self.assertIn(statuses["closure"], ("PASSED", "FAILED", "NOT_CHECKED"))
+328 |             self.assertIn(statuses["physical_validity"], ("VALID", "EXTRAPOLATED", "INVALID", "UNKNOWN"))
+    |                                                                                                     ^^^^^
+329 |             self.assertIn(statuses["correlation_validity"], ("VALID", "EXTRAPOLATED", "INVALID", "UNKNOWN"))
+    |
+
+E501 Line too long (108 > 100)
+   --> tests/test_workbook_results.py:329:101
+    |
+327 |             self.assertIn(statuses["closure"], ("PASSED", "FAILED", "NOT_CHECKED"))
+328 |             self.assertIn(statuses["physical_validity"], ("VALID", "EXTRAPOLATED", "INVALID", "UNKNOWN"))
+329 |             self.assertIn(statuses["correlation_validity"], ("VALID", "EXTRAPOLATED", "INVALID", "UNKNOWN"))
+    |                                                                                                     ^^^^^^^^
+330 |
+331 |     def test_deleted_or_missing_elements_graceful(self) -> None:
+    |
+
+F401 [*] `time` imported but unused
+  --> tests/test_worker_supervisor.py:8:8
+   |
+ 6 | import sys
+ 7 | import threading
+ 8 | import time
+   |        ^^^^
+ 9 |
+10 | import pytest
+   |
+help: Remove unused import: `time`
+  |
+7 | import threading
+  - import time
+8 |
+  |
+
+E501 Line too long (103 > 100)
+  --> tests/test_worker_supervisor.py:46:101
+   |
+44 |         return c.ValidationDto(valid=True, degrees_of_freedom=0, diagnostics=())
+45 |
+46 |     def run(self, prepared: c.PreparedRevisionDto, expected_context_hash: str | None = None) -> object:
+   |                                                                                                     ^^^
+47 |         from collections import namedtuple
+   |
+
+E501 Line too long (124 > 100)
+  --> tests/test_worker_supervisor.py:49:101
+   |
+47 |         from collections import namedtuple
+48 |
+49 |         RunResultMock = namedtuple("RunResultMock", ["convergence", "closure", "physical_validity", "correlation_validity"])
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^
+50 |         StatusMock = namedtuple("StatusMock", ["value"])
+51 |         CalculatedMock = namedtuple("CalculatedMock", ["run_id", "result"])
+   |
+
+E501 Line too long (101 > 100)
+  --> tests/test_worker_supervisor.py:71:101
+   |
+69 |     # We will run worker in a thread
+70 |     def worker_thread_target() -> None:
+71 |         run_worker_loop(supervisor_to_worker, worker_to_supervisor, adapter_factory=DummyMockAdapter)
+   |                                                                                                     ^
+72 |
+73 |     # Pre-populate supervisor input for worker:
+   |
+
+Found 111 errors.
+[*] 18 fixable with the `--fix` option (3 hidden fixes can be enabled with the `--unsafe-fixes` option).

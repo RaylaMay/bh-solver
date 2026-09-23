@@ -1,0 +1,17 @@
+{
+  "changed_existing_files": [
+    "docs/ARCHITECTURE.md",
+    "docs/CONTRACTS.md",
+    "docs/DECISIONS.md",
+    "docs/DEPENDENCY_REGISTER.md",
+    "docs/FAILURE_RECOVERY.md",
+    "docs/MILESTONES.md",
+    "docs/NATIVE_WORKSTATION_ACTION_PLAN.md",
+    "docs/PFD_SPECIFICATION.md",
+    "docs/README.md",
+    "docs/REQUIREMENTS_VERIFICATION.md",
+    "docs/VOCABULARY.md"
+  ],
+  "missing_existing_files": [],
+  "scope": "Compared every public intake file after all work; additions are listed in the handoff record."
+}

@@ -1,0 +1,14 @@
+test_actual_pytest_skip_and_xfail_are_not_accepted (__main__.GateChallenges.test_actual_pytest_skip_and_xfail_are_not_accepted) ... ok
+test_candidate_pytest_configuration_cannot_hide_external_tests (__main__.GateChallenges.test_candidate_pytest_configuration_cannot_hide_external_tests) ... ok
+test_manifest_and_suite_tampering_are_rejected (__main__.GateChallenges.test_manifest_and_suite_tampering_are_rejected) ... ok
+test_zero_exit_cannot_hide_skip_xfail_or_missing_test (__main__.GateChallenges.test_zero_exit_cannot_hide_skip_xfail_or_missing_test) ... ok
+test_artifact_and_chain_challenge (__main__.OracleChallenges.test_artifact_and_chain_challenge) ... ok
+test_authority_challenge (__main__.OracleChallenges.test_authority_challenge) ... ok
+test_budget_challenge (__main__.OracleChallenges.test_budget_challenge) ... ok
+test_isolation_challenge (__main__.OracleChallenges.test_isolation_challenge) ... ok
+test_nonfinite_canonical_data_is_rejected (__main__.OracleChallenges.test_nonfinite_canonical_data_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.161s
+
+OK

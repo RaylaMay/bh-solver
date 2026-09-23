@@ -1,0 +1,33 @@
+Standards rereview of b431630b245b46ec6aad4dfd8d5afb27d86e0ba4
+Read-only candidate; all mutations occurred in tempfile.TemporaryDirectory outside candidate.
+Runtime: <project-root>/.venv/bin/python with PYTHONPATH=src:tests
+
+Terminal manifest winner:
+- record RunAttemptRecord att:1 as COMPLETED/persisted=True, then same identity FAILED/failure_reason=late
+- live index COMPLETED; manifest FAILED
+- delete temporary index.sqlite3, create PersistenceStore, rebuild_index_from_artifacts
+- rebuilt index FAILED
+
+Rejected identity corrupts durable evidence:
+- record att:1/run:1 ADMITTED, then att:1/run:other ADMITTED
+- second record rejected by index with ValueError
+- rebuild after deleting temporary index changes admitted identity to run:other
+
+Absent completion path:
+- create_services; validate make_heater_draft; inject supervisor returning WorkerCompletedEvent with empty staged_path
+- start_run returns result; attempt COMPLETED, persisted=True; stored runs 0
+
+Wrong source revision accepted:
+- run heater fixture r1 (350 K source) normally
+- change source to 370 K and validate; next job is revision 2
+- injected supervisor returns canonical r1 RunResult with new job.run_id and same case_id, correct recomputed artifact hash
+- start_run accepts result revision:Review:1 and marks COMPLETED
+- returned stream temperatures 350 and 354.9999999998363 K
+
+Protocol version:
+- feed WorkerSupervisor._reader_loop a correctly framed WorkerCompletedEvent for active run/session, sequence 1, protocol_version=unsupported-v99
+- event arrives in active-job queue unchanged; unsupported version not rejected
+
+Resolved ordinary paths:
+- normal in-process heater attempt ID equals result ID
+- heater graph plots 350 and 354.9999999998363 K

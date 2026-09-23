@@ -1,0 +1,7 @@
+qt.qpa.fonts: Populating font family aliases took 21 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost. 
+{"probe": "explicit_validation", "before": null, "run_enabled": false, "run_return": false, "after": null}
+Traceback (most recent call last):
+  File "/private$REVIEW_CANDIDATE/docs/native/evidence/dw4-dw5-rereview-2026-09-16/spec-ui-probes.py", line 52, in <module>
+    record("stale_receipt", same_receipt=window.last_receipt.receipt_id == receipt_id,
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'receipt_id'

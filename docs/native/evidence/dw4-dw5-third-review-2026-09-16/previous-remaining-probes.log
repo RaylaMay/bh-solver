@@ -1,0 +1,3 @@
+TERMINAL_REBUILD {"indexed_before_rebuild": "COMPLETED", "manifest": "COMPLETED", "indexed_after_rebuild": "COMPLETED"}
+EMPTY_STAGE {"disposition": "REJECTED", "attempt_state": "FAILED", "persisted": false, "inspect": "REJECTED"}
+WORKER_RESTART_RECEIPT {"worker_session_changed": true, "old_receipt_run_disposition": "REJECTED", "diagnostics": ["Worker session expired; revalidation required"]}

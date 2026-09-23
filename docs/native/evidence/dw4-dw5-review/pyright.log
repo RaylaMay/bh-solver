@@ -1,0 +1,674 @@
+<review-root>/candidate/src/bh_sim/adapters/desktop_preview.py
+  <review-root>/candidate/src/bh_sim/adapters/desktop_preview.py:73:9 - error: Argument of type "UnavailablePreviewPorts" cannot be assigned to parameter "artifacts" of type "ArtifactRepositoryPort" in function "__init__"
+    "UnavailablePreviewPorts" is incompatible with protocol "ArtifactRepositoryPort"
+      "record_attempt" is not present
+      "load_attempt" is not present
+      "list_attempts" is not present
+      "promote_staged_run" is not present
+      "get_workbook" is not present
+      "get_overlays" is not present
+      "get_plot_data" is not present (reportArgumentType)
+<review-root>/candidate/src/bh_sim/adapters/storage.py
+  <review-root>/candidate/src/bh_sim/adapters/storage.py:350:29 - error: Argument of type "str" cannot be assigned to parameter "severity" of type "Literal['info', 'warning', 'error']" in function "__init__"
+    Type "str" is not assignable to type "Literal['info', 'warning', 'error']"
+      "str" is not assignable to type "Literal['info']"
+      "str" is not assignable to type "Literal['warning']"
+      "str" is not assignable to type "Literal['error']" (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/adapters/storage.py:476:17 - error: Argument of type "str" cannot be assigned to parameter "severity" of type "Literal['info', 'warning', 'error']" in function "__init__"
+    Type "str" is not assignable to type "Literal['info', 'warning', 'error']"
+      "str" is not assignable to type "Literal['info']"
+      "str" is not assignable to type "Literal['warning']"
+      "str" is not assignable to type "Literal['error']" (reportArgumentType)
+<review-root>/candidate/src/bh_sim/adapters/worker_supervisor.py
+  <review-root>/candidate/src/bh_sim/adapters/worker_supervisor.py:115:29 - error: Argument of type "IO[Any]" cannot be assigned to parameter "stream" of type "BinaryIO" in function "write_frame"
+    "IO[Any]" is not assignable to "BinaryIO" (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/adapters/worker_supervisor.py:131:33 - error: Argument of type "IO[Any]" cannot be assigned to parameter "stream" of type "BinaryIO" in function "write_frame"
+    "IO[Any]" is not assignable to "BinaryIO" (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/adapters/worker_supervisor.py:165:25 - error: Argument of type "IO[Any]" cannot be assigned to parameter "stream" of type "BinaryIO" in function "write_frame"
+    "IO[Any]" is not assignable to "BinaryIO" (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/adapters/worker_supervisor.py:194:25 - error: Argument of type "IO[Any]" cannot be assigned to parameter "stream" of type "BinaryIO" in function "write_frame"
+    "IO[Any]" is not assignable to "BinaryIO" (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/adapters/worker_supervisor.py:247:21 - error: Argument of type "IO[Any]" cannot be assigned to parameter "stream" of type "BinaryIO" in function "write_frame"
+    "IO[Any]" is not assignable to "BinaryIO" (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/adapters/worker_supervisor.py:266:34 - error: Argument of type "IO[Any]" cannot be assigned to parameter "stream" of type "BinaryIO" in function "read_frame"
+    "IO[Any]" is not assignable to "BinaryIO" (reportArgumentType)
+<review-root>/candidate/src/bh_sim/application/services.py
+  <review-root>/candidate/src/bh_sim/application/services.py:78:21 - error: "Any" is not defined (reportUndefinedVariable)
+  <review-root>/candidate/src/bh_sim/application/services.py:90:32 - error: Cannot access attribute "reconcile_startup_attempts" for class "ArtifactRepositoryPort"
+    Attribute "reconcile_startup_attempts" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/src/bh_sim/application/services.py:255:37 - error: Argument of type "LiteralString" cannot be assigned to parameter "closure" of type "Literal['NOT_CHECKED', 'PASSED', 'FAILED']" in function "__init__"
+    Type "LiteralString" is not assignable to type "Literal['NOT_CHECKED', 'PASSED', 'FAILED']"
+      "str" is not assignable to "Literal['NOT_CHECKED']"
+      "str" is not assignable to "Literal['PASSED']"
+      "str" is not assignable to "Literal['FAILED']" (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/application/services.py:256:47 - error: Argument of type "LiteralString" cannot be assigned to parameter "physical_validity" of type "Literal['VALID', 'EXTRAPOLATED', 'INVALID', 'UNKNOWN']" in function "__init__"
+    Type "LiteralString" is not assignable to type "Literal['VALID', 'EXTRAPOLATED', 'INVALID', 'UNKNOWN']"
+      "str" is not assignable to "Literal['VALID']"
+      "str" is not assignable to "Literal['EXTRAPOLATED']"
+      "str" is not assignable to "Literal['INVALID']"
+      "str" is not assignable to "Literal['UNKNOWN']" (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/application/services.py:257:50 - error: Argument of type "LiteralString" cannot be assigned to parameter "correlation_validity" of type "Literal['VALID', 'EXTRAPOLATED', 'INVALID', 'UNKNOWN']" in function "__init__"
+    Type "LiteralString" is not assignable to type "Literal['VALID', 'EXTRAPOLATED', 'INVALID', 'UNKNOWN']"
+      "str" is not assignable to "Literal['VALID']"
+      "str" is not assignable to "Literal['EXTRAPOLATED']"
+      "str" is not assignable to "Literal['INVALID']"
+      "str" is not assignable to "Literal['UNKNOWN']" (reportArgumentType)
+<review-root>/candidate/src/bh_sim/uix/pfd_canvas.py
+  <review-root>/candidate/src/bh_sim/uix/pfd_canvas.py:738:16 - error: Argument of type "QByteArray" cannot be assigned to parameter "obj" of type "Sized" in function "len"
+    "QByteArray" is incompatible with protocol "Sized"
+      "__len__" is not present (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/uix/pfd_canvas.py:742:40 - error: Argument of type "QByteArray" cannot be assigned to parameter "o" of type "Iterable[SupportsIndex] | SupportsIndex | SupportsBytes | ReadableBuffer" in function "__new__"
+    Type "QByteArray" is not assignable to type "Iterable[SupportsIndex] | SupportsIndex | SupportsBytes | ReadableBuffer"
+      "QByteArray" is incompatible with protocol "Iterable[SupportsIndex]"
+        "__iter__" is not present
+      "QByteArray" is incompatible with protocol "SupportsIndex"
+        "__index__" is not present
+      "QByteArray" is incompatible with protocol "SupportsBytes"
+        "__bytes__" is not present
+      "QByteArray" is incompatible with protocol "Buffer"
+    ... (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/uix/pfd_canvas.py:742:40 - error: Argument of type "QByteArray" cannot be assigned to parameter "o" of type "Iterable[SupportsIndex] | SupportsIndex | SupportsBytes | ReadableBuffer" in function "__new__"
+    Type "QByteArray" is not assignable to type "Iterable[SupportsIndex] | SupportsIndex | SupportsBytes | ReadableBuffer"
+      "QByteArray" is incompatible with protocol "Iterable[SupportsIndex]"
+        "__iter__" is not present
+      "QByteArray" is incompatible with protocol "SupportsIndex"
+        "__index__" is not present
+      "QByteArray" is incompatible with protocol "SupportsBytes"
+        "__bytes__" is not present
+      "QByteArray" is incompatible with protocol "Buffer" (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/uix/pfd_canvas.py:775:40 - error: Argument of type "QByteArray" cannot be assigned to parameter "o" of type "Iterable[SupportsIndex] | SupportsIndex | SupportsBytes | ReadableBuffer" in function "__new__"
+    Type "QByteArray" is not assignable to type "Iterable[SupportsIndex] | SupportsIndex | SupportsBytes | ReadableBuffer"
+      "QByteArray" is incompatible with protocol "Iterable[SupportsIndex]"
+        "__iter__" is not present
+      "QByteArray" is incompatible with protocol "SupportsIndex"
+        "__index__" is not present
+      "QByteArray" is incompatible with protocol "SupportsBytes"
+        "__bytes__" is not present
+      "QByteArray" is incompatible with protocol "Buffer"
+    ... (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/uix/pfd_canvas.py:775:40 - error: Argument of type "QByteArray" cannot be assigned to parameter "o" of type "Iterable[SupportsIndex] | SupportsIndex | SupportsBytes | ReadableBuffer" in function "__new__"
+    Type "QByteArray" is not assignable to type "Iterable[SupportsIndex] | SupportsIndex | SupportsBytes | ReadableBuffer"
+      "QByteArray" is incompatible with protocol "Iterable[SupportsIndex]"
+        "__iter__" is not present
+      "QByteArray" is incompatible with protocol "SupportsIndex"
+        "__index__" is not present
+      "QByteArray" is incompatible with protocol "SupportsBytes"
+        "__bytes__" is not present
+      "QByteArray" is incompatible with protocol "Buffer" (reportArgumentType)
+<review-root>/candidate/src/bh_sim/uix/workstation_editor.py
+  <review-root>/candidate/src/bh_sim/uix/workstation_editor.py:751:43 - error: "visual_groups" is not a known attribute of "None" (reportOptionalMemberAccess)
+<review-root>/candidate/src/bh_sim/worker/entry.py
+  <review-root>/candidate/src/bh_sim/worker/entry.py:44:40 - error: Cannot access attribute "version" for class "PropertyPackage"
+    Attribute "version" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/src/bh_sim/worker/entry.py:45:80 - error: Cannot access attribute "_liquids" for class "PropertyPackage"
+    Attribute "_liquids" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/src/bh_sim/worker/entry.py:243:37 - error: Argument of type "Any | str" cannot be assigned to parameter "convergence" of type "Literal['converged', 'unconverged', 'failed', 'unknown']" in function "__init__"
+    Type "Any | str" is not assignable to type "Literal['converged', 'unconverged', 'failed', 'unknown']"
+      Type "str" is not assignable to type "Literal['converged', 'unconverged', 'failed', 'unknown']"
+        "str" is not assignable to type "Literal['converged']"
+        "str" is not assignable to type "Literal['unconverged']"
+        "str" is not assignable to type "Literal['failed']"
+        "str" is not assignable to type "Literal['unknown']" (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/worker/entry.py:244:33 - error: Argument of type "Any | str" cannot be assigned to parameter "closure" of type "Literal['passed', 'failed', 'unknown']" in function "__init__"
+    Type "Any | str" is not assignable to type "Literal['passed', 'failed', 'unknown']"
+      Type "str" is not assignable to type "Literal['passed', 'failed', 'unknown']"
+        "str" is not assignable to type "Literal['passed']"
+        "str" is not assignable to type "Literal['failed']"
+        "str" is not assignable to type "Literal['unknown']" (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/worker/entry.py:245:43 - error: Argument of type "Any | str" cannot be assigned to parameter "physical_validity" of type "Literal['valid', 'invalid', 'unknown']" in function "__init__"
+    Type "Any | str" is not assignable to type "Literal['valid', 'invalid', 'unknown']"
+      Type "str" is not assignable to type "Literal['valid', 'invalid', 'unknown']"
+        "str" is not assignable to type "Literal['valid']"
+        "str" is not assignable to type "Literal['invalid']"
+        "str" is not assignable to type "Literal['unknown']" (reportArgumentType)
+  <review-root>/candidate/src/bh_sim/worker/entry.py:246:46 - error: Argument of type "Any | str" cannot be assigned to parameter "correlation_validity" of type "Literal['valid', 'extrapolated', 'invalid', 'unknown']" in function "__init__"
+    Type "Any | str" is not assignable to type "Literal['valid', 'extrapolated', 'invalid', 'unknown']"
+      Type "str" is not assignable to type "Literal['valid', 'extrapolated', 'invalid', 'unknown']"
+        "str" is not assignable to type "Literal['valid']"
+        "str" is not assignable to type "Literal['extrapolated']"
+        "str" is not assignable to type "Literal['invalid']"
+        "str" is not assignable to type "Literal['unknown']" (reportArgumentType)
+<review-root>/candidate/tests/test_application.py
+  <review-root>/candidate/tests/test_application.py:409:50 - error: Argument of type "RecordingPorts" cannot be assigned to parameter "artifacts" of type "ArtifactRepositoryPort" in function "__init__"
+    "RecordingPorts" is incompatible with protocol "ArtifactRepositoryPort"
+      "record_attempt" is not present
+      "load_attempt" is not present
+      "list_attempts" is not present
+      "promote_staged_run" is not present
+      "get_workbook" is not present
+      "get_overlays" is not present
+      "get_plot_data" is not present (reportArgumentType)
+  <review-root>/candidate/tests/test_application.py:440:66 - error: Argument of type "RecordingPorts" cannot be assigned to parameter "artifacts" of type "ArtifactRepositoryPort" in function "__init__"
+    "RecordingPorts" is incompatible with protocol "ArtifactRepositoryPort"
+      "record_attempt" is not present
+      "load_attempt" is not present
+      "list_attempts" is not present
+      "promote_staged_run" is not present
+      "get_workbook" is not present
+      "get_overlays" is not present
+      "get_plot_data" is not present (reportArgumentType)
+<review-root>/candidate/tests/test_attempt_persistence.py
+  <review-root>/candidate/tests/test_attempt_persistence.py:68:38 - error: "state" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_attempt_persistence.py:69:38 - error: "persisted" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_attempt_persistence.py:82:38 - error: "state" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_attempt_persistence.py:98:38 - error: "state" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_attempt_persistence.py:99:38 - error: "artifact_hash" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_attempt_persistence.py:100:37 - error: "persisted" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_attempt_persistence.py:162:38 - error: "state" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_attempt_persistence.py:163:38 - error: "failure_reason" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_attempt_persistence.py:208:41 - error: "state" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_attempt_persistence.py:209:45 - error: "terminal_at" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_attempt_persistence.py:210:73 - error: Argument of type "str | None" cannot be assigned to parameter "container" of type "Iterable[Any] | Container[Any]" in function "assertIn"
+    Type "str | None" is not assignable to type "Iterable[Any] | Container[Any]"
+      Type "None" is not assignable to type "Iterable[Any] | Container[Any]"
+        "None" is incompatible with protocol "Iterable[Any]"
+          "__iter__" is not present
+        "None" is incompatible with protocol "Container[Any]"
+          "__contains__" is not present (reportArgumentType)
+  <review-root>/candidate/tests/test_attempt_persistence.py:210:80 - error: "failure_reason" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_attempt_persistence.py:214:38 - error: "state" is not a known attribute of "None" (reportOptionalMemberAccess)
+<review-root>/candidate/tests/test_dw4_command_integration.py
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "DraftDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "DraftListDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "RunViewDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "RunComparisonDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "DemonstrationReportDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "PfdDocumentDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "PfdCatalogueDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "QuantityDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "HistoryState"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "HistoryComparison"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "RunAttemptRecord"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "WorkbookDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "OverlaysDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "ResultSelectionDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: Cannot access attribute "validation" for class "PlotDefinitionDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:82:37 - error: "validation" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "DraftDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "DraftListDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "RunViewDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "RunComparisonDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "DemonstrationReportDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "PfdDocumentDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "PfdCatalogueDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "QuantityDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "HistoryState"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "HistoryComparison"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "RunAttemptRecord"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "WorkbookDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "OverlaysDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "ResultSelectionDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: Cannot access attribute "receipt_id" for class "PlotDefinitionDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:85:110 - error: "receipt_id" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: Cannot access attribute "convergence" for class "DraftDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: Cannot access attribute "convergence" for class "DraftListDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: Cannot access attribute "convergence" for class "ValidationReceiptDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: Cannot access attribute "convergence" for class "RunComparisonDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: Cannot access attribute "convergence" for class "DemonstrationReportDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: Cannot access attribute "convergence" for class "PfdDocumentDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: Cannot access attribute "convergence" for class "PfdCatalogueDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: Cannot access attribute "convergence" for class "QuantityDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: Cannot access attribute "convergence" for class "HistoryState"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: Cannot access attribute "convergence" for class "HistoryComparison"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: Cannot access attribute "convergence" for class "RunAttemptRecord"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: Cannot access attribute "convergence" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: Cannot access attribute "convergence" for class "OverlaysDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: Cannot access attribute "convergence" for class "PlotDefinitionDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:90:39 - error: "convergence" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: Cannot access attribute "closure" for class "DraftDto"
+    Attribute "closure" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: Cannot access attribute "closure" for class "DraftListDto"
+    Attribute "closure" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: Cannot access attribute "closure" for class "ValidationReceiptDto"
+    Attribute "closure" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: Cannot access attribute "closure" for class "RunComparisonDto"
+    Attribute "closure" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: Cannot access attribute "closure" for class "DemonstrationReportDto"
+    Attribute "closure" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: Cannot access attribute "closure" for class "PfdDocumentDto"
+    Attribute "closure" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: Cannot access attribute "closure" for class "PfdCatalogueDto"
+    Attribute "closure" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: Cannot access attribute "closure" for class "QuantityDto"
+    Attribute "closure" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: Cannot access attribute "closure" for class "HistoryState"
+    Attribute "closure" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: Cannot access attribute "closure" for class "HistoryComparison"
+    Attribute "closure" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: Cannot access attribute "closure" for class "RunAttemptRecord"
+    Attribute "closure" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: Cannot access attribute "closure" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "closure" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: Cannot access attribute "closure" for class "OverlaysDto"
+    Attribute "closure" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: Cannot access attribute "closure" for class "PlotDefinitionDto"
+    Attribute "closure" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:91:39 - error: "closure" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:98:34 - error: Argument of type "CommandData" cannot be assigned to parameter "obj" of type "Sized" in function "len"
+    Type "CommandData" is not assignable to type "Sized"
+      "DemonstrationReportDto" is incompatible with protocol "Sized"
+        "__len__" is not present (reportArgumentType)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "DraftDto" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "DraftListDto" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "ValidationReceiptDto" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "RunViewDto" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "RunComparisonDto" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "DemonstrationReportDto" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "PfdDocumentDto" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "PfdCatalogueDto" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "QuantityDto" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "HistoryState" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "HistoryComparison" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "RunAttemptRecord" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "WorkbookDto" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "OverlaysDto" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "ResultSelectionDto" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: "__getitem__" method not defined on type "PlotDefinitionDto" (reportIndexIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:99:23 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "DraftDto"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "DraftListDto"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "ValidationReceiptDto"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "RunViewDto"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "RunComparisonDto"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "DemonstrationReportDto"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "PfdDocumentDto"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "PfdCatalogueDto"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "QuantityDto"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "HistoryState"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "HistoryComparison"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "WorkbookDto"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "OverlaysDto"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "ResultSelectionDto"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: Cannot access attribute "attempt_id" for class "PlotDefinitionDto"
+    Attribute "attempt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:107:52 - error: "attempt_id" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:110:107 - error: Argument of type "Unknown | str | None" cannot be assigned to parameter "run_id" of type "str" in function "__init__"
+    Type "Unknown | str | None" is not assignable to type "str"
+      "None" is not assignable to "str" (reportArgumentType)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:110:116 - error: Cannot access attribute "run_id" for class "DraftDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:110:116 - error: Cannot access attribute "run_id" for class "DraftListDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:110:116 - error: Cannot access attribute "run_id" for class "ValidationReceiptDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:110:116 - error: Cannot access attribute "run_id" for class "RunComparisonDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:110:116 - error: Cannot access attribute "run_id" for class "DemonstrationReportDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:110:116 - error: Cannot access attribute "run_id" for class "PfdDocumentDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:110:116 - error: Cannot access attribute "run_id" for class "PfdCatalogueDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:110:116 - error: Cannot access attribute "run_id" for class "QuantityDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:110:116 - error: Cannot access attribute "run_id" for class "HistoryState"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:110:116 - error: Cannot access attribute "run_id" for class "HistoryComparison"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:110:116 - error: Cannot access attribute "run_id" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:110:116 - error: Cannot access attribute "run_id" for class "ResultSelectionDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:110:116 - error: "run_id" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:52 - error: Cannot access attribute "run_id" for class "DraftDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:52 - error: Cannot access attribute "run_id" for class "DraftListDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:52 - error: Cannot access attribute "run_id" for class "ValidationReceiptDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:52 - error: Cannot access attribute "run_id" for class "RunComparisonDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:52 - error: Cannot access attribute "run_id" for class "DemonstrationReportDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:52 - error: Cannot access attribute "run_id" for class "PfdDocumentDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:52 - error: Cannot access attribute "run_id" for class "PfdCatalogueDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:52 - error: Cannot access attribute "run_id" for class "QuantityDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:52 - error: Cannot access attribute "run_id" for class "HistoryState"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:52 - error: Cannot access attribute "run_id" for class "HistoryComparison"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:52 - error: Cannot access attribute "run_id" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:52 - error: Cannot access attribute "run_id" for class "ResultSelectionDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:52 - error: "run_id" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:69 - error: Cannot access attribute "run_id" for class "DraftDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:69 - error: Cannot access attribute "run_id" for class "DraftListDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:69 - error: Cannot access attribute "run_id" for class "ValidationReceiptDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:69 - error: Cannot access attribute "run_id" for class "RunComparisonDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:69 - error: Cannot access attribute "run_id" for class "DemonstrationReportDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:69 - error: Cannot access attribute "run_id" for class "PfdDocumentDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:69 - error: Cannot access attribute "run_id" for class "PfdCatalogueDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:69 - error: Cannot access attribute "run_id" for class "QuantityDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:69 - error: Cannot access attribute "run_id" for class "HistoryState"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:69 - error: Cannot access attribute "run_id" for class "HistoryComparison"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:69 - error: Cannot access attribute "run_id" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:69 - error: Cannot access attribute "run_id" for class "ResultSelectionDto"
+    Attribute "run_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:113:69 - error: "run_id" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "DraftDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "DraftListDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "RunViewDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "RunComparisonDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "DemonstrationReportDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "PfdDocumentDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "PfdCatalogueDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "QuantityDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "HistoryState"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "HistoryComparison"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "RunAttemptRecord"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "WorkbookDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "OverlaysDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "ResultSelectionDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: Cannot access attribute "receipt_id" for class "PlotDefinitionDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:142:102 - error: "receipt_id" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:162:22 - error: Cannot access attribute "artifacts" for class "DemonstrationService"
+    Attribute "artifacts" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "DraftDto"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "DraftListDto"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "ValidationReceiptDto"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "RunViewDto"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "RunComparisonDto"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "DemonstrationReportDto"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "PfdDocumentDto"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "PfdCatalogueDto"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "QuantityDto"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "HistoryState"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "HistoryComparison"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "WorkbookDto"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "OverlaysDto"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "ResultSelectionDto"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: Cannot access attribute "state" for class "PlotDefinitionDto"
+    Attribute "state" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:168:44 - error: "state" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "DraftDto"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "DraftListDto"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "ValidationReceiptDto"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "RunViewDto"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "RunComparisonDto"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "DemonstrationReportDto"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "PfdDocumentDto"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "PfdCatalogueDto"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "QuantityDto"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "HistoryState"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "HistoryComparison"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "WorkbookDto"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "OverlaysDto"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "ResultSelectionDto"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: Cannot access attribute "failure_reason" for class "PlotDefinitionDto"
+    Attribute "failure_reason" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:169:44 - error: "failure_reason" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "DraftDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "DraftListDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "RunViewDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "RunComparisonDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "DemonstrationReportDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "PfdDocumentDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "PfdCatalogueDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "QuantityDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "HistoryState"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "HistoryComparison"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "RunAttemptRecord"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "WorkbookDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "OverlaysDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "ResultSelectionDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: Cannot access attribute "validation" for class "PlotDefinitionDto"
+    Attribute "validation" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:189:41 - error: "validation" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "DraftDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "DraftListDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "RunViewDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "RunComparisonDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "DemonstrationReportDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "PfdDocumentDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "PfdCatalogueDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "QuantityDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "HistoryState"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "HistoryComparison"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "RunAttemptRecord"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "WorkbookDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "OverlaysDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "ResultSelectionDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: Cannot access attribute "receipt_id" for class "PlotDefinitionDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:192:116 - error: "receipt_id" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: Cannot access attribute "convergence" for class "DraftDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: Cannot access attribute "convergence" for class "DraftListDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: Cannot access attribute "convergence" for class "ValidationReceiptDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: Cannot access attribute "convergence" for class "RunComparisonDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: Cannot access attribute "convergence" for class "DemonstrationReportDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: Cannot access attribute "convergence" for class "PfdDocumentDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: Cannot access attribute "convergence" for class "PfdCatalogueDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: Cannot access attribute "convergence" for class "QuantityDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: Cannot access attribute "convergence" for class "HistoryState"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: Cannot access attribute "convergence" for class "HistoryComparison"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: Cannot access attribute "convergence" for class "RunAttemptRecord"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: Cannot access attribute "convergence" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: Cannot access attribute "convergence" for class "OverlaysDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: Cannot access attribute "convergence" for class "PlotDefinitionDto"
+    Attribute "convergence" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:196:43 - error: "convergence" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:199:45 - error: Cannot access attribute "list_attempts" for class "DemonstrationService"
+    Attribute "list_attempts" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "DraftDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "DraftListDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "RunViewDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "RunComparisonDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "DemonstrationReportDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "PfdDocumentDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "PfdCatalogueDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "QuantityDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "HistoryState"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "HistoryComparison"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "RunAttemptRecord"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "tuple[RunAttemptRecord, ...]"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "WorkbookDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "OverlaysDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "ResultSelectionDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: Cannot access attribute "receipt_id" for class "PlotDefinitionDto"
+    Attribute "receipt_id" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:213:120 - error: "receipt_id" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:216:48 - error: Cannot access attribute "list_attempts" for class "DemonstrationService"
+    Attribute "list_attempts" is unknown (reportAttributeAccessIssue)
+  <review-root>/candidate/tests/test_dw4_command_integration.py:225:47 - error: Cannot access attribute "list_attempts" for class "DemonstrationService"
+    Attribute "list_attempts" is unknown (reportAttributeAccessIssue)
+<review-root>/candidate/tests/test_graph_viewer.py
+  <review-root>/candidate/tests/test_graph_viewer.py:23:12 - error: Type "QCoreApplication | QApplication" is not assignable to return type "QApplication"
+    Type "QCoreApplication | QApplication" is not assignable to type "QApplication"
+      "QCoreApplication" is not assignable to "QApplication" (reportReturnType)
+  <review-root>/candidate/tests/test_graph_viewer.py:85:84 - error: Argument of type "QRect" cannot be assigned to parameter "plot_rect" of type "QRectF" in function "_data_to_screen"
+    "QRect" is not assignable to "QRectF" (reportArgumentType)
+  <review-root>/candidate/tests/test_graph_viewer.py:89:101 - error: Argument of type "QRect" cannot be assigned to parameter "plot_rect" of type "QRectF" in function "_screen_to_data"
+    "QRect" is not assignable to "QRectF" (reportArgumentType)
+<review-root>/candidate/tests/test_pfd_drag_drop.py
+  <review-root>/candidate/tests/test_pfd_drag_drop.py:23:12 - error: Type "QCoreApplication | QApplication" is not assignable to return type "QApplication"
+    Type "QCoreApplication | QApplication" is not assignable to type "QApplication"
+      "QCoreApplication" is not assignable to "QApplication" (reportReturnType)
+305 errors, 0 warnings, 0 informations

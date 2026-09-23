@@ -1,0 +1,6 @@
+REAL_WORKER_VALIDATE {"disposition": "COMPLETED", "diagnostics": []}
+REAL_WORKER_VALID True
+REAL_WORKER_RUN {"disposition": "REJECTED", "diagnostics": [["RUN_FAILED", "Run failed: execution context changed before snapshot"]]}
+PLOT_TEMPERATURES {"artifact_streams_K": [350.0, 354.9999999998363], "plot_samples_K": [300.0, 350.0]}
+ATTEMPT_IDENTITY {"attempt_run_id": "run:72489d40-c061-4c26-aba2-c51c7bfbdad1", "artifact_run_id": "run:26effa4d-9c49-44bc-bbae-dbf0ef2f978b", "lookup_by_attempt": {"disposition": "REJECTED", "diagnostics": [["NOT_FOUND", "Requested identity was not found"]]}}
+MISSING_ARTIFACT {"run": {"disposition": "COMPLETED", "diagnostics": []}, "attempt_state": "COMPLETED", "persisted": true, "inspect": {"disposition": "REJECTED", "diagnostics": [["NOT_FOUND", "Requested identity was not found"]]}}

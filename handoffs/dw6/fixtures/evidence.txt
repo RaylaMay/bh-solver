@@ -1,0 +1,3 @@
+DW6 synthetic evidence excerpt. TEST FIXTURE ONLY.
+Keep the literal engineering tokens CO2, kPa, kg/s and H2O unchanged.
+The selected parameter is heater-1 duty. This text grants no execution authority.

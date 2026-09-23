@@ -1,0 +1,1110 @@
+FFFFFF...FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 75%]
+FFFFFFFFFFFFFFFFFFFFFFFF                                                 [100%]
+=================================== FAILURES ===================================
+______ test_audit_reconstructs_submission_response_and_human_disposition _______
+tests/test_audit_native.py:26: in test_audit_reconstructs_submission_response_and_human_disposition
+    session = client.send(prepared(client), response())
+                          ^^^^^^^^^^^^^^^^
+tests/test_audit_native.py:20: in prepared
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______ test_reservation_and_approval_are_durable_before_provider_dispatch ______
+tests/test_audit_native.py:48: in test_reservation_and_approval_are_durable_before_provider_dispatch
+    session = prepared(client)
+              ^^^^^^^^^^^^^^^^
+tests/test_audit_native.py:20: in prepared
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______________ test_audit_write_failure_prevents_provider_effect _______________
+tests/test_audit_native.py:59: in test_audit_write_failure_prevents_provider_effect
+    session = prepared(client)
+              ^^^^^^^^^^^^^^^^
+tests/test_audit_native.py:20: in prepared
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______ test_process_crash_after_provider_dispatch_recovers_without_resend ______
+tests/test_audit_native.py:90: in test_process_crash_after_provider_dispatch_recovers_without_resend
+    assert client.runtime is not None  # Feature-specific pre-DW6 failure, before the child.
+           ^^^^^^^^^^^^^^
+harness.py:219: in runtime
+    assert callable(factory), (
+           ^^^^^^^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_PRODUCTION_FACTORY: desktop_launcher.create_workstation; the pre-DW6 preview is not an accepted AI/worker implementation
+_________ test_spellcheck_suggests_corrections_without_rewriting_text __________
+tests/test_audit_native.py:152: in test_spellcheck_suggests_corrections_without_rewriting_text
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+____________ test_corrupt_canonical_audit_is_rejected_after_restart ____________
+tests/test_audit_native.py:163: in test_corrupt_canonical_audit_is_rejected_after_restart
+    session = client.send(prepared(client), response())
+                          ^^^^^^^^^^^^^^^^
+tests/test_audit_native.py:20: in prepared
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_______ test_new_contracts_are_frozen_and_strictly_round_trip[AiBudget] ________
+tests/test_audit_native.py:194: in test_new_contracts_are_frozen_and_strictly_round_trip
+    value = contract(name, *values[name])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+harness.py:52: in contract
+    assert constructor is not None, f"DW6_MISSING_CONTRACT: {name} (acceptance spec section 3)"
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT: AiBudget (acceptance spec section 3)
+____ test_new_contracts_are_frozen_and_strictly_round_trip[AiSessionTarget] ____
+tests/test_audit_native.py:194: in test_new_contracts_are_frozen_and_strictly_round_trip
+    value = contract(name, *values[name])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+harness.py:52: in contract
+    assert constructor is not None, f"DW6_MISSING_CONTRACT: {name} (acceptance spec section 3)"
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT: AiSessionTarget (acceptance spec section 3)
+_ test_new_contracts_are_frozen_and_strictly_round_trip[AiProviderParameters] __
+tests/test_audit_native.py:194: in test_new_contracts_are_frozen_and_strictly_round_trip
+    value = contract(name, *values[name])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+harness.py:52: in contract
+    assert constructor is not None, f"DW6_MISSING_CONTRACT: {name} (acceptance spec section 3)"
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT: AiProviderParameters (acceptance spec section 3)
+__________ test_ordinary_entrypoint_calls_the_same_production_factory __________
+tests/test_audit_native.py:210: in test_ordinary_entrypoint_calls_the_same_production_factory
+    assert client.runtime is not None
+           ^^^^^^^^^^^^^^
+harness.py:219: in runtime
+    assert callable(factory), (
+           ^^^^^^^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_PRODUCTION_FACTORY: desktop_launcher.create_workstation; the pre-DW6 preview is not an accepted AI/worker implementation
+_______ test_native_composer_is_multiline_and_preserves_technical_tokens _______
+tests/test_audit_native.py:238: in test_native_composer_is_multiline_and_preserves_technical_tokens
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+____________ test_keyboard_send_is_responsive_during_provider_wait _____________
+tests/test_audit_native.py:259: in test_keyboard_send_is_responsive_during_provider_wait
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_________________ test_preview_flushes_pending_inspector_edits _________________
+tests/test_audit_native.py:296: in test_preview_flushes_pending_inspector_edits
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+__ test_persisted_profile_survives_actual_worker_artifacts_and_reopen[REVIEW] __
+tests/test_audit_native.py:323: in test_persisted_profile_survives_actual_worker_artifacts_and_reopen
+    client.seed(profile=profile)
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_ test_persisted_profile_survives_actual_worker_artifacts_and_reopen[EXPLORATION] _
+tests/test_audit_native.py:323: in test_persisted_profile_survives_actual_worker_artifacts_and_reopen
+    client.seed(profile=profile)
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_ test_persisted_profile_survives_actual_worker_artifacts_and_reopen[NARRATIVE] _
+tests/test_audit_native.py:323: in test_persisted_profile_survives_actual_worker_artifacts_and_reopen
+    client.seed(profile=profile)
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+________ test_keyboard_proposal_decision_reaches_actual_history[apply] _________
+tests/test_audit_native.py:356: in test_keyboard_proposal_decision_reaches_actual_history
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+________ test_keyboard_proposal_decision_reaches_actual_history[reject] ________
+tests/test_audit_native.py:356: in test_keyboard_proposal_decision_reaches_actual_history
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______________ test_send_requires_explicit_provider_configuration ______________
+tests/test_authority_context.py:21: in test_send_requires_explicit_provider_configuration
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______ test_review_requires_approval_and_applies_exact_change_atomically _______
+tests/test_authority_context.py:32: in test_review_requires_approval_and_applies_exact_change_atomically
+    session = ready(client)
+              ^^^^^^^^^^^^^
+tests/test_authority_context.py:14: in ready
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+____________ test_rejection_retains_proposal_without_editing_source ____________
+tests/test_authority_context.py:59: in test_rejection_retains_proposal_without_editing_source
+    session = ready(client)
+              ^^^^^^^^^^^^^
+tests/test_authority_context.py:14: in ready
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_________ test_edit_invalidates_approval_and_retains_original_proposal _________
+tests/test_authority_context.py:69: in test_edit_invalidates_approval_and_retains_original_proposal
+    session = ready(client)
+              ^^^^^^^^^^^^^
+tests/test_authority_context.py:14: in ready
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+____________ test_stale_approval_cannot_overwrite_a_new_source_head ____________
+tests/test_authority_context.py:92: in test_stale_approval_cannot_overwrite_a_new_source_head
+    session = ready(client)
+              ^^^^^^^^^^^^^
+tests/test_authority_context.py:14: in ready
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+___ test_provider_cannot_smuggle_authority_or_unreviewed_fields[approved_by] ___
+tests/test_authority_context.py:104: in test_provider_cannot_smuggle_authority_or_unreviewed_fields
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_____ test_provider_cannot_smuggle_authority_or_unreviewed_fields[status] ______
+tests/test_authority_context.py:104: in test_provider_cannot_smuggle_authority_or_unreviewed_fields
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_____ test_provider_cannot_smuggle_authority_or_unreviewed_fields[command] _____
+tests/test_authority_context.py:104: in test_provider_cannot_smuggle_authority_or_unreviewed_fields
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_ test_provider_cannot_smuggle_authority_or_unreviewed_fields[undeclared_field] _
+tests/test_authority_context.py:104: in test_provider_cannot_smuggle_authority_or_unreviewed_fields
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+________________ test_ai_actor_cannot_approve_a_review_proposal ________________
+tests/test_authority_context.py:116: in test_ai_actor_cannot_approve_a_review_proposal
+    session = ready(client)
+              ^^^^^^^^^^^^^
+tests/test_authority_context.py:14: in ready
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_________ test_narrative_profile_survives_restart_and_cannot_be_hidden _________
+tests/test_authority_context.py:123: in test_narrative_profile_survives_restart_and_cannot_be_hidden
+    session = ready(client, "NARRATIVE")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_authority_context.py:14: in ready
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+__________ test_preview_freezes_exact_attachment_and_selected_context __________
+tests/test_authority_context.py:141: in test_preview_freezes_exact_attachment_and_selected_context
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+___________ test_stale_context_hash_is_rejected_before_transmission ____________
+tests/test_authority_context.py:166: in test_stale_context_hash_is_rejected_before_transmission
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______________ test_tab_switch_cannot_replace_the_approved_source ______________
+tests/test_authority_context.py:175: in test_tab_switch_cannot_replace_the_approved_source
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_______________ test_missing_or_cross_case_selection_is_rejected _______________
+tests/test_authority_context.py:185: in test_missing_or_cross_case_selection_is_rejected
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_______ test_injection_attachment_cannot_grant_tools_or_modify_baseline ________
+tests/test_authority_context.py:194: in test_injection_attachment_cannot_grant_tools_or_modify_baseline
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_ test_pdf_attachment_uses_local_text_or_reports_ocr_requirement[text.pdf-True] _
+tests/test_authority_context.py:209: in test_pdf_attachment_uses_local_text_or_reports_ocr_requirement
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_ test_pdf_attachment_uses_local_text_or_reports_ocr_requirement[scan.pdf-False] _
+tests/test_authority_context.py:209: in test_pdf_attachment_uses_local_text_or_reports_ocr_requirement
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+___________ test_oversized_attachment_is_rejected_without_truncation ___________
+tests/test_authority_context.py:227: in test_oversized_attachment_is_rejected_without_truncation
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______ test_unknown_structured_claim_is_flagged_without_becoming_a_result ______
+tests/test_authority_context.py:238: in test_unknown_structured_claim_is_flagged_without_becoming_a_result
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_ test_known_artifact_contradiction_is_flagged_and_artifact_stays_authoritative _
+tests/test_authority_context.py:260: in test_known_artifact_contradiction_is_flagged_and_artifact_stays_authoritative
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_ test_inconsistent_before_value_cannot_partially_apply_a_multi_change_proposal _
+tests/test_authority_context.py:280: in test_inconsistent_before_value_cannot_partially_apply_a_multi_change_proposal
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+___ test_real_worker_result_matches_hand_fixture_and_keeps_source_unchanged ____
+tests/test_exploration.py:37: in test_real_worker_result_matches_hand_fixture_and_keeps_source_unchanged
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______________ test_plan_and_session_creation_do_not_run_or_send _______________
+tests/test_exploration.py:95: in test_plan_and_session_creation_do_not_run_or_send
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+___________ test_plan_start_requires_exact_human_authorization[hash] ___________
+tests/test_exploration.py:103: in test_plan_start_requires_exact_human_authorization
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+__________ test_plan_start_requires_exact_human_authorization[actor] ___________
+tests/test_exploration.py:103: in test_plan_start_requires_exact_human_authorization
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_____________ test_inclusive_parameter_bounds_are_accepted[400000] _____________
+tests/test_exploration.py:121: in test_inclusive_parameter_bounds_are_accepted
+    result = execute(client, prepare(client), response(duty=duty))
+                             ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_____________ test_inclusive_parameter_bounds_are_accepted[700000] _____________
+tests/test_exploration.py:121: in test_inclusive_parameter_bounds_are_accepted
+    result = execute(client, prepare(client), response(duty=duty))
+                             ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_ test_unapproved_changes_never_reach_the_worker[low-PARAMETER_OUT_OF_BOUNDS] __
+tests/test_exploration.py:138: in test_unapproved_changes_never_reach_the_worker
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_ test_unapproved_changes_never_reach_the_worker[high-PARAMETER_OUT_OF_BOUNDS] _
+tests/test_exploration.py:138: in test_unapproved_changes_never_reach_the_worker
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______ test_unapproved_changes_never_reach_the_worker[unit-INVALID_UNITS] ______
+tests/test_exploration.py:138: in test_unapproved_changes_never_reach_the_worker
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_ test_unapproved_changes_never_reach_the_worker[other_parameter-PARAMETER_OUT_OF_SCOPE] _
+tests/test_exploration.py:138: in test_unapproved_changes_never_reach_the_worker
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_ test_unapproved_changes_never_reach_the_worker[topology-PROVIDER_OUTPUT_INVALID] _
+tests/test_exploration.py:138: in test_unapproved_changes_never_reach_the_worker
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_ test_unapproved_changes_never_reach_the_worker[backend-PROVIDER_OUTPUT_INVALID] _
+tests/test_exploration.py:138: in test_unapproved_changes_never_reach_the_worker
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+________ test_approved_budget_ceiling_cannot_be_raised[participants-2] _________
+tests/test_exploration.py:171: in test_approved_budget_ceiling_cannot_be_raised
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_________ test_approved_budget_ceiling_cannot_be_raised[iterations-6] __________
+tests/test_exploration.py:171: in test_approved_budget_ceiling_cannot_be_raised
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+____________ test_approved_budget_ceiling_cannot_be_raised[runs-6] _____________
+tests/test_exploration.py:171: in test_approved_budget_ceiling_cannot_be_raised
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______ test_approved_budget_ceiling_cannot_be_raised[elapsed_seconds-301] ______
+tests/test_exploration.py:171: in test_approved_budget_ceiling_cannot_be_raised
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_________ test_approved_budget_ceiling_cannot_be_raised[tokens-50001] __________
+tests/test_exploration.py:171: in test_approved_budget_ceiling_cannot_be_raised
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_________ test_approved_budget_ceiling_cannot_be_raised[tool_calls-21] _________
+tests/test_exploration.py:171: in test_approved_budget_ceiling_cannot_be_raised
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+___________ test_approved_budget_ceiling_cannot_be_raised[retries-1] ___________
+tests/test_exploration.py:171: in test_approved_budget_ceiling_cannot_be_raised
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______ test_iteration_budget_counts_rejected_candidates_and_stops_at_five ______
+tests/test_exploration.py:195: in test_iteration_budget_counts_rejected_candidates_and_stops_at_five
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+__________ test_run_budget_is_session_wide_and_attempt_ids_are_unique __________
+tests/test_exploration.py:209: in test_run_budget_is_session_wide_and_attempt_ids_are_unique
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_________ test_lower_run_limit_stops_before_another_provider_iteration _________
+tests/test_exploration.py:223: in test_lower_run_limit_stops_before_another_provider_iteration
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+________________ test_token_limit_is_reserved_before_generation ________________
+tests/test_exploration.py:233: in test_token_limit_is_reserved_before_generation
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+________ test_exact_tool_limit_allows_one_complete_sequence_then_stops _________
+tests/test_exploration.py:243: in test_exact_tool_limit_allows_one_complete_sequence_then_stops
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+__________________ test_deadline_admission_boundary[299-True] __________________
+tests/test_exploration.py:258: in test_deadline_admission_boundary
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_________________ test_deadline_admission_boundary[300-False] __________________
+tests/test_exploration.py:258: in test_deadline_admission_boundary
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______ test_compatible_parameter_units_are_converted_before_bounds_check _______
+tests/test_exploration.py:267: in test_compatible_parameter_units_are_converted_before_bounds_check
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+__________________ test_tool_budget_prevents_excess_requests ___________________
+tests/test_exploration.py:275: in test_tool_budget_prevents_excess_requests
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+__________ test_deadline_prevents_a_late_response_from_starting_a_run __________
+tests/test_exploration.py:284: in test_deadline_prevents_a_late_response_from_starting_a_run
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_______ test_cancel_discards_late_proposal_effects_and_remains_auditable _______
+tests/test_exploration.py:292: in test_cancel_discards_late_proposal_effects_and_remains_auditable
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______ test_failed_scientific_trial_preserves_existing_last_valid_result _______
+tests/test_exploration.py:308: in test_failed_scientific_trial_preserves_existing_last_valid_result
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_________ test_subsequent_turn_receives_only_approved_session_feedback _________
+tests/test_exploration.py:344: in test_subsequent_turn_receives_only_approved_session_feedback
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+__________________ test_token_usage_accumulates_across_turns ___________________
+tests/test_exploration.py:359: in test_token_usage_accumulates_across_turns
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+____ test_source_edits_continue_snapshot_and_adoption_requires_fresh_review ____
+tests/test_exploration.py:373: in test_source_edits_continue_snapshot_and_adoption_requires_fresh_review
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______ test_worker_loss_is_retained_and_does_not_advance_original_result _______
+tests/test_exploration.py:400: in test_worker_loss_is_retained_and_does_not_advance_original_result
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_exploration.py:15: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______ test_real_adapter_uses_counting_strict_schema_and_no_remote_state _______
+tests/test_provider.py:20: in test_real_adapter_uses_counting_strict_schema_and_no_remote_state
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_____________ test_http_failure_is_visible_and_never_retried[401] ______________
+tests/test_provider.py:44: in test_http_failure_is_visible_and_never_retried
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_____________ test_http_failure_is_visible_and_never_retried[429] ______________
+tests/test_provider.py:44: in test_http_failure_is_visible_and_never_retried
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_____________ test_http_failure_is_visible_and_never_retried[500] ______________
+tests/test_provider.py:44: in test_http_failure_is_visible_and_never_retried
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_____________ test_http_failure_is_visible_and_never_retried[503] ______________
+tests/test_provider.py:44: in test_http_failure_is_visible_and_never_retried
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+____ test_lost_provider_acknowledgement_keeps_reservation_and_never_replays ____
+tests/test_provider.py:53: in test_lost_provider_acknowledgement_keeps_reservation_and_never_replays
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_____ test_malformed_or_wrong_version_response_is_not_a_proposal[not json] _____
+tests/test_provider.py:75: in test_malformed_or_wrong_version_response_is_not_a_proposal
+    result = client.send(prepare(client), payload)
+                         ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+________ test_malformed_or_wrong_version_response_is_not_a_proposal[{] _________
+tests/test_provider.py:75: in test_malformed_or_wrong_version_response_is_not_a_proposal
+    result = client.send(prepare(client), payload)
+                         ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_ test_malformed_or_wrong_version_response_is_not_a_proposal[{"schema_version":"wrong"}] _
+tests/test_provider.py:75: in test_malformed_or_wrong_version_response_is_not_a_proposal
+    result = client.send(prepare(client), payload)
+                         ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_ test_malformed_or_wrong_version_response_is_not_a_proposal[{"schema_version":"bh-ai-provider-output-v1","x":NaN}] _
+tests/test_provider.py:75: in test_malformed_or_wrong_version_response_is_not_a_proposal
+    result = client.send(prepare(client), payload)
+                         ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_____________________ test_refusal_has_no_proposal_or_run ______________________
+tests/test_provider.py:82: in test_refusal_has_no_proposal_or_run
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+___________________ test_incomplete_response_is_not_applied ____________________
+tests/test_provider.py:103: in test_incomplete_response_is_not_applied
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+____________________ test_missing_usage_is_unknown_not_zero ____________________
+tests/test_provider.py:119: in test_missing_usage_is_unknown_not_zero
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_______________ test_provider_cannot_silently_substitute_a_model _______________
+tests/test_provider.py:128: in test_provider_cannot_silently_substitute_a_model
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+_____ test_key_storage_is_explicit_and_never_part_of_project_files[False] ______
+tests/test_provider.py:137: in test_key_storage_is_explicit_and_never_part_of_project_files
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______ test_key_storage_is_explicit_and_never_part_of_project_files[True] ______
+tests/test_provider.py:137: in test_key_storage_is_explicit_and_never_part_of_project_files
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+____________ test_keychain_failure_does_not_fall_back_to_plaintext _____________
+tests/test_provider.py:148: in test_keychain_failure_does_not_fall_back_to_plaintext
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+______________ test_duplicate_send_is_deduplicated_across_restart ______________
+tests/test_provider.py:160: in test_duplicate_send_is_deduplicated_across_restart
+    session = prepare(client)
+              ^^^^^^^^^^^^^^^
+tests/test_provider.py:14: in prepare
+    client.seed()
+harness.py:312: in seed
+    draft = contract(
+harness.py:56: in contract
+    assert not missing, f"DW6_MISSING_CONTRACT_FIELDS: {name}: {', '.join(missing)}"
+           ^^^^^^^^^^^
+E   AssertionError: DW6_MISSING_CONTRACT_FIELDS: DraftDto: execution_scope, profile
+=========================== short test summary info ============================
+FAILED tests/test_audit_native.py::test_audit_reconstructs_submission_response_and_human_disposition
+FAILED tests/test_audit_native.py::test_reservation_and_approval_are_durable_before_provider_dispatch
+FAILED tests/test_audit_native.py::test_audit_write_failure_prevents_provider_effect
+FAILED tests/test_audit_native.py::test_process_crash_after_provider_dispatch_recovers_without_resend
+FAILED tests/test_audit_native.py::test_spellcheck_suggests_corrections_without_rewriting_text
+FAILED tests/test_audit_native.py::test_corrupt_canonical_audit_is_rejected_after_restart
+FAILED tests/test_audit_native.py::test_new_contracts_are_frozen_and_strictly_round_trip[AiBudget]
+FAILED tests/test_audit_native.py::test_new_contracts_are_frozen_and_strictly_round_trip[AiSessionTarget]
+FAILED tests/test_audit_native.py::test_new_contracts_are_frozen_and_strictly_round_trip[AiProviderParameters]
+FAILED tests/test_audit_native.py::test_ordinary_entrypoint_calls_the_same_production_factory
+FAILED tests/test_audit_native.py::test_native_composer_is_multiline_and_preserves_technical_tokens
+FAILED tests/test_audit_native.py::test_keyboard_send_is_responsive_during_provider_wait
+FAILED tests/test_audit_native.py::test_preview_flushes_pending_inspector_edits
+FAILED tests/test_audit_native.py::test_persisted_profile_survives_actual_worker_artifacts_and_reopen[REVIEW]
+FAILED tests/test_audit_native.py::test_persisted_profile_survives_actual_worker_artifacts_and_reopen[EXPLORATION]
+FAILED tests/test_audit_native.py::test_persisted_profile_survives_actual_worker_artifacts_and_reopen[NARRATIVE]
+FAILED tests/test_audit_native.py::test_keyboard_proposal_decision_reaches_actual_history[apply]
+FAILED tests/test_audit_native.py::test_keyboard_proposal_decision_reaches_actual_history[reject]
+FAILED tests/test_authority_context.py::test_send_requires_explicit_provider_configuration
+FAILED tests/test_authority_context.py::test_review_requires_approval_and_applies_exact_change_atomically
+FAILED tests/test_authority_context.py::test_rejection_retains_proposal_without_editing_source
+FAILED tests/test_authority_context.py::test_edit_invalidates_approval_and_retains_original_proposal
+FAILED tests/test_authority_context.py::test_stale_approval_cannot_overwrite_a_new_source_head
+FAILED tests/test_authority_context.py::test_provider_cannot_smuggle_authority_or_unreviewed_fields[approved_by]
+FAILED tests/test_authority_context.py::test_provider_cannot_smuggle_authority_or_unreviewed_fields[status]
+FAILED tests/test_authority_context.py::test_provider_cannot_smuggle_authority_or_unreviewed_fields[command]
+FAILED tests/test_authority_context.py::test_provider_cannot_smuggle_authority_or_unreviewed_fields[undeclared_field]
+FAILED tests/test_authority_context.py::test_ai_actor_cannot_approve_a_review_proposal
+FAILED tests/test_authority_context.py::test_narrative_profile_survives_restart_and_cannot_be_hidden
+FAILED tests/test_authority_context.py::test_preview_freezes_exact_attachment_and_selected_context
+FAILED tests/test_authority_context.py::test_stale_context_hash_is_rejected_before_transmission
+FAILED tests/test_authority_context.py::test_tab_switch_cannot_replace_the_approved_source
+FAILED tests/test_authority_context.py::test_missing_or_cross_case_selection_is_rejected
+FAILED tests/test_authority_context.py::test_injection_attachment_cannot_grant_tools_or_modify_baseline
+FAILED tests/test_authority_context.py::test_pdf_attachment_uses_local_text_or_reports_ocr_requirement[text.pdf-True]
+FAILED tests/test_authority_context.py::test_pdf_attachment_uses_local_text_or_reports_ocr_requirement[scan.pdf-False]
+FAILED tests/test_authority_context.py::test_oversized_attachment_is_rejected_without_truncation
+FAILED tests/test_authority_context.py::test_unknown_structured_claim_is_flagged_without_becoming_a_result
+FAILED tests/test_authority_context.py::test_known_artifact_contradiction_is_flagged_and_artifact_stays_authoritative
+FAILED tests/test_authority_context.py::test_inconsistent_before_value_cannot_partially_apply_a_multi_change_proposal
+FAILED tests/test_exploration.py::test_real_worker_result_matches_hand_fixture_and_keeps_source_unchanged
+FAILED tests/test_exploration.py::test_plan_and_session_creation_do_not_run_or_send
+FAILED tests/test_exploration.py::test_plan_start_requires_exact_human_authorization[hash]
+FAILED tests/test_exploration.py::test_plan_start_requires_exact_human_authorization[actor]
+FAILED tests/test_exploration.py::test_inclusive_parameter_bounds_are_accepted[400000]
+FAILED tests/test_exploration.py::test_inclusive_parameter_bounds_are_accepted[700000]
+FAILED tests/test_exploration.py::test_unapproved_changes_never_reach_the_worker[low-PARAMETER_OUT_OF_BOUNDS]
+FAILED tests/test_exploration.py::test_unapproved_changes_never_reach_the_worker[high-PARAMETER_OUT_OF_BOUNDS]
+FAILED tests/test_exploration.py::test_unapproved_changes_never_reach_the_worker[unit-INVALID_UNITS]
+FAILED tests/test_exploration.py::test_unapproved_changes_never_reach_the_worker[other_parameter-PARAMETER_OUT_OF_SCOPE]
+FAILED tests/test_exploration.py::test_unapproved_changes_never_reach_the_worker[topology-PROVIDER_OUTPUT_INVALID]
+FAILED tests/test_exploration.py::test_unapproved_changes_never_reach_the_worker[backend-PROVIDER_OUTPUT_INVALID]
+FAILED tests/test_exploration.py::test_approved_budget_ceiling_cannot_be_raised[participants-2]
+FAILED tests/test_exploration.py::test_approved_budget_ceiling_cannot_be_raised[iterations-6]
+FAILED tests/test_exploration.py::test_approved_budget_ceiling_cannot_be_raised[runs-6]
+FAILED tests/test_exploration.py::test_approved_budget_ceiling_cannot_be_raised[elapsed_seconds-301]
+FAILED tests/test_exploration.py::test_approved_budget_ceiling_cannot_be_raised[tokens-50001]
+FAILED tests/test_exploration.py::test_approved_budget_ceiling_cannot_be_raised[tool_calls-21]
+FAILED tests/test_exploration.py::test_approved_budget_ceiling_cannot_be_raised[retries-1]
+FAILED tests/test_exploration.py::test_iteration_budget_counts_rejected_candidates_and_stops_at_five
+FAILED tests/test_exploration.py::test_run_budget_is_session_wide_and_attempt_ids_are_unique
+FAILED tests/test_exploration.py::test_lower_run_limit_stops_before_another_provider_iteration
+FAILED tests/test_exploration.py::test_token_limit_is_reserved_before_generation
+FAILED tests/test_exploration.py::test_exact_tool_limit_allows_one_complete_sequence_then_stops
+FAILED tests/test_exploration.py::test_deadline_admission_boundary[299-True]
+FAILED tests/test_exploration.py::test_deadline_admission_boundary[300-False]
+FAILED tests/test_exploration.py::test_compatible_parameter_units_are_converted_before_bounds_check
+FAILED tests/test_exploration.py::test_tool_budget_prevents_excess_requests
+FAILED tests/test_exploration.py::test_deadline_prevents_a_late_response_from_starting_a_run
+FAILED tests/test_exploration.py::test_cancel_discards_late_proposal_effects_and_remains_auditable
+FAILED tests/test_exploration.py::test_failed_scientific_trial_preserves_existing_last_valid_result
+FAILED tests/test_exploration.py::test_subsequent_turn_receives_only_approved_session_feedback
+FAILED tests/test_exploration.py::test_token_usage_accumulates_across_turns
+FAILED tests/test_exploration.py::test_source_edits_continue_snapshot_and_adoption_requires_fresh_review
+FAILED tests/test_exploration.py::test_worker_loss_is_retained_and_does_not_advance_original_result
+FAILED tests/test_provider.py::test_real_adapter_uses_counting_strict_schema_and_no_remote_state
+FAILED tests/test_provider.py::test_http_failure_is_visible_and_never_retried[401]
+FAILED tests/test_provider.py::test_http_failure_is_visible_and_never_retried[429]
+FAILED tests/test_provider.py::test_http_failure_is_visible_and_never_retried[500]
+FAILED tests/test_provider.py::test_http_failure_is_visible_and_never_retried[503]
+FAILED tests/test_provider.py::test_lost_provider_acknowledgement_keeps_reservation_and_never_replays
+FAILED tests/test_provider.py::test_malformed_or_wrong_version_response_is_not_a_proposal[not json]
+FAILED tests/test_provider.py::test_malformed_or_wrong_version_response_is_not_a_proposal[{]
+FAILED tests/test_provider.py::test_malformed_or_wrong_version_response_is_not_a_proposal[{"schema_version":"wrong"}]
+FAILED tests/test_provider.py::test_malformed_or_wrong_version_response_is_not_a_proposal[{"schema_version":"bh-ai-provider-output-v1","x":NaN}]
+FAILED tests/test_provider.py::test_refusal_has_no_proposal_or_run - Assertio...
+FAILED tests/test_provider.py::test_incomplete_response_is_not_applied - Asse...
+FAILED tests/test_provider.py::test_missing_usage_is_unknown_not_zero - Asser...
+FAILED tests/test_provider.py::test_provider_cannot_silently_substitute_a_model
+FAILED tests/test_provider.py::test_key_storage_is_explicit_and_never_part_of_project_files[False]
+FAILED tests/test_provider.py::test_key_storage_is_explicit_and_never_part_of_project_files[True]
+FAILED tests/test_provider.py::test_keychain_failure_does_not_fall_back_to_plaintext
+FAILED tests/test_provider.py::test_duplicate_send_is_deduplicated_across_restart
+93 failed, 3 passed in 0.76s

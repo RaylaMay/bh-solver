@@ -28,9 +28,10 @@ def main() -> None:
             "(uv sync --extra desktop)."
         ) from error
 
-    from bh_sim.adapters.desktop_preview import create_preview_gateway
-    from bh_sim.uix.window import WorkstationWindow
+    from bh_sim.adapters.desktop_preview import create_supervised_gateway
+    from bh_sim.adapters.worker_supervisor import WorkerSupervisor
     from bh_sim.uix.workspace import WorkspaceSettings
+    from bh_sim.uix.workstation_editor import WorkstationEditor
 
     app = QApplication(sys.argv[:1])
     app.setApplicationName("BH solver")
@@ -39,8 +40,13 @@ def main() -> None:
     root = args.data_root or Path(
         QStandardPaths.writableLocation(QStandardPaths.StandardLocation.AppLocalDataLocation)
     )
-    window = WorkstationWindow(
-        create_preview_gateway(root), WorkspaceSettings(root / "workspace.ini")
+    supervisor = WorkerSupervisor()
+    supervisor.start()
+    app.aboutToQuit.connect(supervisor.stop)
+
+    window = WorkstationEditor(
+        create_supervised_gateway(root, supervisor=supervisor),
+        WorkspaceSettings(root / "workspace.ini"),
     )
     window.show()
     raise SystemExit(app.exec())

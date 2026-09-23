@@ -27,7 +27,7 @@ from bh_sim.boundary.contracts import (
     UnitResultDto,
     ValidationDto,
 )
-from bh_sim.core import DraftRevision, RunResult
+from bh_sim.core import DraftRevision, RunResult, StableId
 from bh_sim.core.json_codec import canonical_json, contract_digest, contract_from_json
 from bh_sim.engine import AcyclicRunEngine
 
@@ -207,6 +207,7 @@ class InProcessEngineeringAdapter:
         self,
         prepared: PreparedRevisionDto,
         *,
+        run_id: str | None = None,
         expected_context_hash: str | None = None,
     ) -> CalculatedRunDto:
         """Execute existing equations; repository acknowledgment is a separate step."""
@@ -218,5 +219,9 @@ class InProcessEngineeringAdapter:
             engine = deepcopy(self.engine)
             if self._hash_engine(engine) != expected_context_hash:
                 raise ValueError("execution context changed before snapshot")
-        result = engine.run(revision.case, revision_id=revision.revision_id)
+        result = engine.run(
+            revision.case,
+            revision_id=revision.revision_id,
+            run_id=cast(StableId, run_id) if run_id else None,
+        )
         return CalculatedRunDto(canonical_json(result), run_to_view(result))

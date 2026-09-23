@@ -1,0 +1,15 @@
+
+> bh-pfd@0.1.0 test
+> vitest run
+
+
+ RUN  v2.1.9 <repository>/web
+
+ ✓ src/api/client.test.ts (3 tests) 9ms
+ ✓ src/validation.test.ts (2 tests) 2ms
+
+ Test Files  2 passed (2)
+      Tests  5 passed (5)
+   Start at  08:18:01
+   Duration  951ms (transform 66ms, setup 232ms, collect 123ms, tests 12ms, environment 1.01s, prepare 118ms)
+

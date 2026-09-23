@@ -11,9 +11,13 @@ from bh_sim.boundary.contracts import (
     DemonstrationReportDto,
     DraftDto,
     DraftSummaryDto,
+    OverlaysDto,
+    PlotDefinitionDto,
     PreparedRevisionDto,
+    RunAttemptRecord,
     RunViewDto,
     ValidationDto,
+    WorkbookDto,
 )
 
 
@@ -40,6 +44,7 @@ class EngineeringPort(Protocol):
         self,
         prepared: PreparedRevisionDto,
         *,
+        run_id: str | None = None,
         expected_context_hash: str | None = None,
     ) -> CalculatedRunDto: ...
 
@@ -54,6 +59,34 @@ class ArtifactRepositoryPort(Protocol):
     def load_run(self, run_id: str) -> RunViewDto: ...
 
     def latest_valid_run(self, case_id: str) -> RunViewDto | None: ...
+
+    def record_attempt(self, attempt: RunAttemptRecord) -> RunAttemptRecord: ...
+
+    def load_attempt(self, attempt_id: str) -> RunAttemptRecord | None: ...
+    def list_attempts(self, case_id: str | None = None) -> tuple[RunAttemptRecord, ...]: ...
+    def reconcile_startup_attempts(self) -> tuple[RunAttemptRecord, ...]: ...
+
+    def promote_staged_run(
+        self,
+        staged_path: str,
+        *,
+        expected_run_id: str | None = None,
+        expected_case_id: str | None = None,
+        expected_revision_id: str | None = None,
+        expected_hash: str | None = None,
+    ) -> RunViewDto: ...
+
+    def get_workbook(self, case_id: str, run_id: str | None = None) -> WorkbookDto: ...
+
+    def get_overlays(self, case_id: str, run_id: str | None = None) -> OverlaysDto: ...
+
+    def get_plot_data(
+        self,
+        case_id: str,
+        run_id: str | None = None,
+        plot_kind: str = "T_Q",
+        unit_id: str | None = None,
+    ) -> PlotDefinitionDto: ...
 
 
 class DemonstrationPort(Protocol):

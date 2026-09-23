@@ -70,6 +70,8 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 include = ["src", "tests"]
 pythonVersion = "3.11"
 typeCheckingMode = "standard"
+venvPath = "."
+venv = ".venv"
 
 [dependency-groups]
 dev = [

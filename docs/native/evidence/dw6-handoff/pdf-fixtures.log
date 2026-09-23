@@ -1,0 +1,3 @@
+pypdf 6.10.0 strict=True
+text.pdf pages= 1 text= 'DW6 synthetic PDF - TEST FIXTURE ONLY'
+scan.pdf pages= 1 text= ''

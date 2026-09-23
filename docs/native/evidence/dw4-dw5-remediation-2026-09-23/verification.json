@@ -1,0 +1,110 @@
+{
+  "date": "2026-09-23",
+  "review_baseline": "81cb8a239a3cb8b6ddb4d69c97d8876b8fdfa68c",
+  "tested_source_commit": "d8bad6ef39c706cb1f964f59bddacd0ffbf95815",
+  "scope": "Software verification, not scientific V&V or release approval",
+  "checks": [
+    {
+      "command": "PYTHONPATH=src QT_QPA_PLATFORM=offscreen .venv/bin/python -m pytest -q",
+      "exit_code": 0,
+      "outcome": "228 passed; one upstream Starlette deprecation warning; 42.17 seconds",
+      "log": "pytest.log"
+    },
+    {
+      "command": "PYTHONPATH=src QT_QPA_PLATFORM=offscreen .venv/bin/python -m pytest tests/test_dw45_remediation.py tests/test_dw5_acceptance.py tests/test_dw4_command_integration.py tests/test_worker_supervisor.py -q",
+      "exit_code": 0,
+      "outcome": "29 passed; 9.37 seconds",
+      "log": "focused.log"
+    },
+    {
+      "command": "PYTHONPATH=src .venv/bin/pyright --pythonpath .venv/bin/python",
+      "exit_code": 0,
+      "outcome": "0 errors, warnings, informations",
+      "log": "pyright.log"
+    },
+    {
+      "command": ".venv/bin/ruff check --no-cache src tests tools",
+      "exit_code": 0,
+      "outcome": "All checks passed"
+    },
+    {
+      "command": ".venv/bin/ruff format --check --no-cache src tests tools",
+      "exit_code": 0,
+      "outcome": "114 files already formatted"
+    },
+    {
+      "command": ".venv/bin/python tools/check_project.py",
+      "exit_code": 0,
+      "outcome": "184 baseline Git objects unchanged; 464 public file links before final evidence links"
+    },
+    {
+      "command": "npm test && npm run lint && npm run build",
+      "cwd": "web",
+      "exit_code": 0,
+      "outcome": "5 tests; eslint passed; TypeScript/Vite production build passed",
+      "scope": "Frontend bytes unchanged through final backend fixes"
+    },
+    {
+      "command": "uv build --offline --out-dir <review-workspace>/dist",
+      "exit_code": 0,
+      "outcome": "sdist and wheel built using existing cache; no downloads",
+      "log": "package-build.log"
+    },
+    {
+      "command": "git diff --check 81cb8a239a3cb8b6ddb4d69c97d8876b8fdfa68c...HEAD",
+      "exit_code": 2,
+      "outcome": "Only preserved imported historical evidence whitespace and frozen text.pdf cross-reference syntax; do not alter original artifact bytes"
+    },
+    {
+      "command": "git diff --check 81cb8a239a3cb8b6ddb4d69c97d8876b8fdfa68c...HEAD -- . ':!docs/native/evidence/' ':!handoffs/dw6/fixtures/*.pdf'",
+      "exit_code": 0,
+      "outcome": "Product source, tests, current docs and other files clean"
+    },
+    {
+      "command": "git ls-remote origin HEAD refs/heads/main",
+      "exit_code": 0,
+      "outcome": "Both a0d3281aee909914cdf82a6f35ef4550f0b29604"
+    },
+    {
+      "command": "git push --dry-run origin HEAD:refs/heads/codex/dw4-dw5-remediation",
+      "exit_code": 0,
+      "outcome": "Write access accepted; no branch was created; used unchanged source-project HEAD"
+    }
+  ],
+  "initial_failures": [
+    "Move test fixture used an invalid tuple; fixed test input to CanvasPointDto.",
+    "Test supervisor did not yet accept additive cancellation callback; corrected double.",
+    "Busy test expected cooperative cancellation at the kill deadline; separated busy rejection from cancellation timing tests.",
+    "First Vitest run passed tests but failed cache write through read-only dependency symlink; rerun with writable dependency copy passed.",
+    "First offline uv build blocked on existing cache access; approved retry passed."
+  ],
+  "not_run": [
+    "Native Cocoa/VoiceOver witness",
+    "Cross-platform runtime checks",
+    "Hosted GitHub CI",
+    "PFD-plus-graph benchmarks",
+    "DW6 acceptance (pre-implementation suite, out of scope)",
+    "Scientific independent V&V (no model change)"
+  ],
+  "logs": "Incidental local paths normalized; source identities and numeric outcomes retained",
+  "github_account": "RaylaMay",
+  "upstream_ci_v7_refs": {
+    "actions/checkout": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "actions/setup-python": "5fda3b95a4ea91299a34e894583c3862153e4b97",
+    "actions/setup-node": "820762786026740c76f36085b0efc47a31fe5020"
+  },
+  "frozen_dw6_zip_sha256": "de1ed9135d281e52dff4a21324c43e9cc808e0262dddf1354716d13595f75515",
+  "package_artifacts": {
+    "bh_sim-0.1.0.tar.gz": "28078239b0ad73df490c09e1ef6424fb6a6fe5db5e2b386a9e0287179a93d6f8",
+    "bh_sim-0.1.0-py3-none-any.whl": "b07c0a1fb717e8ddd7031967fda4108506498bf0863a2e168660408da358dbe2",
+    ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+  },
+  "independent_review": {
+    "status": "PASS",
+    "standards_findings": 0,
+    "spec_findings": 0,
+    "report": "review-final.md",
+    "reviewed_commit": "d8bad6ef39c706cb1f964f59bddacd0ffbf95815",
+    "independent_tests": 25
+  }
+}

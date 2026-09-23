@@ -108,3 +108,23 @@ selection remain explicitly unavailable pending DW4/DW5. Therefore UIX-PFD-001 a
 full PFD-002/004/005 native parity are not marked VERIFIED by this work. Production
 packaging, printing/export acceptance, VoiceOver, Windows/Linux hardware and
 minimum-OS testing remain separate gates. No browser implementation is removed.
+
+## DW3.1 visible interaction additions
+
+The common Select, Connect, Rename, Delete, Undo/Redo, Fit, zoom, Layers/Groups and
+Settings actions now remain visible in a compact PFD toolbar. A persistent
+**Layers & Groups** dock sits with Navigator and Equipment. It separates base
+appearance, overlapping visual stream groups, engineering subsystems, unavailable
+result layers and motion controls. A visual-group click highlights members without
+changing selection; **Select members** performs the explicit editing selection.
+
+Base stream colour, labels, line style/width and animation preferences persist with
+the PFD. The existing local settings template continues to carry the synchronized
+base stream colour. The canvas shows static direction arrows before results exist.
+Only an attributable visualization frame enables markers and a source/scale legend.
+Manual and operating-system reduced-motion preferences pause moving markers.
+
+Flowsheet is enabled in the workspace switch. Dynamics and Controls remain disabled
+and name their missing M7/M9 capabilities. Review the separate
+[DW3.1 record](DW3_1_CHANGE_RECORD.md) for contracts, extension policy and benchmark
+scope.

@@ -5,6 +5,7 @@ no engineering equations, graph algorithms, unit conversion or storage adapter.
 The current preview advertises draft commands only; no synthetic results appear.
 """
 
+import threading
 from datetime import datetime
 from uuid import uuid4
 
@@ -40,6 +41,7 @@ from PySide6.QtWidgets import (
 )
 
 from bh_sim.boundary.contracts import (
+    CancelRunParameters,
     CommandOutcome,
     CommandParameters,
     CommandRequest,
@@ -49,6 +51,9 @@ from bh_sim.boundary.contracts import (
     DraftParameters,
     ListDraftsParameters,
     OpenDraftParameters,
+    RunViewDto,
+    StartRunParameters,
+    ValidationReceiptDto,
 )
 from bh_sim.boundary.ports import CommandGateway
 
@@ -76,6 +81,9 @@ class WorkstationWindow(QMainWindow):
         self.current: DraftDto | None = None
         self.dirty = False
         self.last_outcome: CommandOutcome | None = None
+        self.last_receipt: ValidationReceiptDto | None = None
+        self.last_run_view: RunViewDto | None = None
+        self.active_run_id: str | None = None
         self.theme, self.compact = settings.appearance()
         self.setObjectName("bh-workstation")
         self.setWindowTitle("BH solver")
@@ -91,12 +99,16 @@ class WorkstationWindow(QMainWindow):
         self.restore_default_layout()
         self.workspace.restore(self)
         self._keep_on_screen()
-        for error in self.action_registry.restore(settings.shortcuts()):
+        for error in self.restore_shortcut_preferences():
             self.note("Shortcut preference not restored: " + error)
         self.apply_appearance()
         self.refresh_catalog()
         self.refresh()
         self.note("Workspace ready. Solver connection is unavailable in this preview.")
+
+    def restore_shortcut_preferences(self) -> tuple[str, ...]:
+        """Restore bindings after this window's actions have been registered."""
+        return self.action_registry.restore(self.workspace.shortcuts())
 
     def _build_centre(self) -> None:
         self.pages = QStackedWidget()
@@ -240,10 +252,22 @@ class WorkstationWindow(QMainWindow):
             quit_shortcut = QKeySequence("Ctrl+Q")
         add("app.quit", "&Quit BH", self.close, quit_shortcut)
         self.action_registry.actions["app.quit"].setMenuRole(QAction.MenuRole.QuitRole)
-        reason = "Solver connection is unavailable in this preview; no calculation is performed."
-        for identifier, title in (("draft.validate", "Validate"), ("run.start", "Run")):
-            action = add(identifier, title, lambda: None, reason=reason)
-            action.setEnabled(False)
+        can_solve = "draft.validate" in getattr(self.gateway, "command_names", ())
+        if can_solve:
+            add("draft.validate", "Validate", self.validate_current, QKeySequence("Ctrl+B"))
+            add("run.start", "Run", self.run_current, QKeySequence("Ctrl+R"))
+            add("run.cancel", "Cancel", self.cancel_current_run, QKeySequence("Ctrl+K"))
+        else:
+            reason = (
+                "Solver connection is unavailable in this preview; no calculation is performed."
+            )
+            for identifier, title in (
+                ("draft.validate", "Validate"),
+                ("run.start", "Run"),
+                ("run.cancel", "Cancel"),
+            ):
+                action = add(identifier, title, lambda: None, reason=reason)
+                action.setEnabled(False)
         add("commands.palette", "&Commands…", self.show_palette, QKeySequence("Ctrl+Shift+P"))
         add("commands.shortcuts", "Keyboard &shortcuts…", self.show_shortcuts)
         add("workspace.restore", "Restore default &layout", self.restore_default_layout)
@@ -272,6 +296,7 @@ class WorkstationWindow(QMainWindow):
     def _build_menus_toolbar(self) -> None:
         menus = {
             "&File": ("draft.create", "draft.open", "draft.save", "draft.close", "app.quit"),
+            "&Solver": ("draft.validate", "run.start", "run.cancel"),
             "&View": (
                 "view.navigator",
                 "view.inspector",
@@ -303,6 +328,7 @@ class WorkstationWindow(QMainWindow):
         toolbar.addSeparator()
         toolbar.addAction(self.action_registry.actions["draft.validate"])
         toolbar.addAction(self.action_registry.actions["run.start"])
+        toolbar.addAction(self.action_registry.actions["run.cancel"])
         spacer = QWidget()
         spacer.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
         toolbar.addWidget(spacer)
@@ -325,7 +351,7 @@ class WorkstationWindow(QMainWindow):
     def execute(self, name: str, parameters: CommandParameters) -> CommandOutcome:
         """Issue one attributable request and keep command rejection visible."""
         outcome = self.gateway.dispatch(
-            CommandRequest(name, f"ui:{uuid4()}", "local-user", parameters)
+            CommandRequest(name, f"ui:{uuid4()}", self.workspace.actor_id(), parameters)
         )
         self.last_outcome = outcome
         if outcome.disposition == "REJECTED":
@@ -342,6 +368,7 @@ class WorkstationWindow(QMainWindow):
         outcome = self.execute("draft.create", CreateDraftParameters(name))
         if outcome.disposition == "COMPLETED" and isinstance(outcome.data, DraftDto):
             self.current, self.dirty = outcome.data, True
+            self.last_receipt = None
             self.note("Created draft " + name + ". Save explicitly to retain it.")
             self.refresh()
             return True
@@ -361,10 +388,15 @@ class WorkstationWindow(QMainWindow):
         outcome = self.execute("draft.open", OpenDraftParameters(draft_id))
         if outcome.disposition == "COMPLETED" and isinstance(outcome.data, DraftDto):
             self.current, self.dirty = outcome.data, False
+            self.last_receipt = None
             self.note(f"Opened {draft_id}, revision {outcome.data.revision}.")
             self.refresh()
             return True
         return False
+
+    def flush_input_edits(self) -> bool:
+        """Flush pending input edits before validation or run; overridden by subclasses."""
+        return True
 
     def _open_dialog(self) -> None:
         outcome = self.execute("draft.list", ListDraftsParameters())
@@ -414,6 +446,127 @@ class WorkstationWindow(QMainWindow):
             self.refresh()
             return True
         return False
+
+    def validate_current(self) -> bool:
+        """Compile current inputs without saving, updating validation badge and readiness."""
+        if not self.flush_input_edits():
+            return False
+        if self.current is None:
+            return False
+        outcome = self.execute("draft.validate", DraftParameters(self.current))
+        if outcome.disposition == "COMPLETED" and isinstance(outcome.data, ValidationReceiptDto):
+            self.last_receipt = outcome.data
+            if outcome.data.validation.valid:
+                dof = outcome.data.validation.degrees_of_freedom
+                msg = f"Validated · DOF: {dof} · Ready to run"
+                self.scientific_status.setText(msg)
+                self.note(f"Validation successful (DOF: {dof}).")
+            else:
+                diag_count = len(outcome.data.validation.diagnostics)
+                first_msg = (
+                    outcome.data.validation.diagnostics[0].message
+                    if diag_count
+                    else "Validation failed"
+                )
+                msg = f"Validation failed ({diag_count} issues) · {first_msg}"
+                self.scientific_status.setText(msg)
+                self.note(f"Validation failed: {first_msg}")
+            self.refresh()
+            return outcome.data.validation.valid
+        return False
+
+    def has_valid_receipt(self) -> bool:
+        """Validate presence, draft match, and engineering identity of last receipt."""
+        if (
+            self.last_receipt is None
+            or self.current is None
+            or self.last_receipt.draft_id != self.current.draft_id
+            or not self.last_receipt.validation.valid
+        ):
+            return False
+        return self._check_receipt_engineering_identity()
+
+    def _check_receipt_engineering_identity(self) -> bool:
+        """Hook for subclasses to verify engineering content hash against last receipt."""
+        return True
+
+    def run_current(self) -> bool:
+        """Execute solver on validated draft; records attempt and retains last-valid results."""
+        if not self.flush_input_edits():
+            return False
+        if self.current is None:
+            return False
+        if not self.has_valid_receipt():
+            self.note("Validation required before running flowsheet.")
+            return False
+
+        self.active_run_id = "run:in-flight"
+        self.scientific_status.setText("Solving in child worker process…")
+        self.refresh()
+
+        outcome_box: list[CommandOutcome] = []
+        assert self.last_receipt is not None
+        request = CommandRequest(
+            "run.start",
+            f"ui:{uuid4()}",
+            self.workspace.actor_id(),
+            StartRunParameters(self.current, self.last_receipt.receipt_id),
+        )
+
+        def _worker() -> None:
+            res = self.gateway.dispatch(request)
+            outcome_box.append(res)
+
+        thread = threading.Thread(target=_worker, daemon=True, name="WorkstationRunThread")
+        thread.start()
+        while thread.is_alive():
+            app = QApplication.instance()
+            if app is not None:
+                app.processEvents()
+            thread.join(timeout=0.02)
+
+        self.active_run_id = None
+        outcome = outcome_box[0] if outcome_box else None
+        self.last_outcome = outcome
+        if (
+            outcome is not None
+            and outcome.disposition == "COMPLETED"
+            and isinstance(outcome.data, RunViewDto)
+        ):
+            self.last_run_view = outcome.data
+            status_text = (
+                f"Run: {outcome.data.run_id} | "
+                f"Convergence: {outcome.data.convergence.lower()} | "
+                f"Closure: {outcome.data.closure.lower()} | "
+                f"Physical: {outcome.data.physical_validity.lower()} | "
+                f"Correlation: {outcome.data.correlation_validity.lower()}"
+            )
+            self.scientific_status.setText(status_text)
+            self.note(f"Run completed successfully: {outcome.data.convergence.lower()}.")
+            self.refresh()
+            return True
+        elif outcome is not None and outcome.disposition == "REJECTED":
+            message = "; ".join(f"{item.code}: {item.message}" for item in outcome.diagnostics)
+            self.scientific_status.setText(f"Run failed · {message}")
+            self.note(f"Run failed: {message}")
+            self.activity_dock.show()
+            self.statusBar().showMessage(message, 15000)
+            self.refresh()
+            return False
+        self.refresh()
+        return False
+
+    def cancel_current_run(self) -> bool:
+        """Cancel an in-flight solver execution."""
+        run_id = self.active_run_id or ""
+        outcome = self.execute(
+            "run.cancel",
+            CancelRunParameters(run_id=run_id, reason="User cancelled from workstation"),
+        )
+        self.active_run_id = None
+        self.note("Cancellation requested.")
+        self.refresh()
+        return outcome.disposition == "COMPLETED"
 
     def _confirm_discard(self) -> bool:
         if not self.dirty:
@@ -477,6 +630,24 @@ class WorkstationWindow(QMainWindow):
             self.current is not None and self.dirty and "draft.save" in self.gateway.command_names
         )
         self.action_registry.actions["draft.close"].setEnabled(self.current is not None)
+
+        can_validate = "draft.validate" in self.gateway.command_names
+        can_run = "run.start" in self.gateway.command_names
+        can_cancel = "run.cancel" in self.gateway.command_names
+        valid_receipt = self.has_valid_receipt()
+        if "draft.validate" in self.action_registry.actions:
+            self.action_registry.actions["draft.validate"].setEnabled(
+                can_validate and self.current is not None and not bool(self.active_run_id)
+            )
+        if "run.start" in self.action_registry.actions:
+            self.action_registry.actions["run.start"].setEnabled(
+                can_run and valid_receipt and not bool(self.active_run_id)
+            )
+        if "run.cancel" in self.action_registry.actions:
+            self.action_registry.actions["run.cancel"].setEnabled(
+                can_cancel and bool(self.active_run_id)
+            )
+
         self.welcome_new.setEnabled(self.action_registry.actions["draft.create"].isEnabled())
         self.welcome_open.setEnabled(self.action_registry.actions["draft.open"].isEnabled())
         self.pages.setCurrentIndex(0 if self.current is None else 1)
@@ -486,11 +657,15 @@ class WorkstationWindow(QMainWindow):
             self.save_status.setText("No draft selected")
             self.selection_title.setText("No draft selected")
             self.selection_details.setText("Open or create a draft to inspect it.")
+            self.last_receipt = None
+            self.last_run_view = None
+            self.scientific_status.setText(
+                "Not validated  |  Convergence: not run  |  Closure: not checked  |  "
+                "Physical: unknown  |  Correlation: unknown"
+            )
             return
         draft = self.current
-        self.setWindowTitle(
-            f"{draft.draft_id}{' • Unsaved' if self.dirty else ''} — BH solver"
-        )
+        self.setWindowTitle(f"{draft.draft_id}{' • Unsaved' if self.dirty else ''} — BH solver")
         self.draft_title.setText(draft.draft_id)
         state = "Unsaved draft" if self.dirty else f"Saved locally · Revision {draft.revision}"
         self.draft_state.setText(state + "  /  Review profile")

@@ -1,0 +1,3 @@
+qt.qpa.fonts: Populating font family aliases took 21 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost. 
+PENDING_INSPECTOR_AND_EVENT_LOOP {"requested_duty_W": 125000, "draft_duty_after_run_W": 75000.0, "run_success": true, "elapsed_s": 0.367, "timer_callbacks_during_run": 0, "pending_inputs_after_run": 0}
+TIMER_CALLBACKS_AFTER_EVENT_PROCESSING 1

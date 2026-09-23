@@ -1,0 +1,4 @@
+<repository>/handoffs/dw6/harness.py
+  <repository>/handoffs/dw6/harness.py:57:12 - error: Object of type "DataclassInstance" is not callable
+    Attribute "__call__" is unknown (reportCallIssue)
+1 error, 0 warnings, 0 informations

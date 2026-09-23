@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from PySide6.QtGui import QColor, QPalette
 from PySide6.QtWidgets import QApplication
 
-DESIGN_VERSION = 1
+DESIGN_VERSION = 2
 
 
 @dataclass(frozen=True)
@@ -49,6 +49,7 @@ def apply_design(app: QApplication, theme_name: str, compact: bool) -> None:
         (QPalette.ColorRole.Base, theme.canvas),
         (QPalette.ColorRole.AlternateBase, theme.raised),
         (QPalette.ColorRole.Text, theme.text),
+        (QPalette.ColorRole.PlaceholderText, theme.muted),
         (QPalette.ColorRole.WindowText, theme.text),
         (QPalette.ColorRole.Button, theme.raised),
         (QPalette.ColorRole.ButtonText, theme.text),
@@ -63,7 +64,7 @@ def apply_design(app: QApplication, theme_name: str, compact: bool) -> None:
     app.setStyleSheet(f"""
         QWidget {{ font-size: 13px; }}
         QMainWindow, QDialog {{ background: {theme.panel}; }}
-        QToolBar {{ spacing: 8px; padding: 9px; border-bottom: 1px solid {theme.border}; }}
+        QToolBar {{ spacing: 4px; padding: 4px; border-bottom: 1px solid {theme.border}; }}
         QToolButton, QPushButton {{ min-height: {target}px; padding: 2px 12px;
             border: 1px solid {theme.border}; border-radius: 5px; background: {theme.raised}; }}
         QPushButton#primary {{ background: {theme.accent}; color: {theme.selected_text}; }}
@@ -77,7 +78,7 @@ def apply_design(app: QApplication, theme_name: str, compact: bool) -> None:
         QTreeWidget::item, QListWidget::item {{ min-height: {target}px; padding: 2px 4px; }}
         QHeaderView::section {{ padding: 8px; background: {theme.raised}; border: 0;
             border-bottom: 1px solid {theme.border}; }}
-        QDockWidget::title {{ padding: 9px; background: {theme.raised}; }}
+        QDockWidget::title {{ padding: 6px; background: {theme.raised}; }}
         QStatusBar {{ border-top: 1px solid {theme.border}; padding: 4px; }}
         QLabel#eyebrow {{ color: {theme.accent}; font-weight: 600; letter-spacing: 2px; }}
         QLabel#title {{ font-size: 27px; font-weight: 600; }}

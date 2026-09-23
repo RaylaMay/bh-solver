@@ -1,0 +1,20 @@
+{
+  "accepted": false,
+  "candidate_tree_sha256": "0cffe3ff6ed2821c6e30374c0c4813a0b1a37d68d349e20c5505c4c44f6ecff4",
+  "counts": {
+    "failed": 93,
+    "passed": 3,
+    "skipped": 0,
+    "xfail-or-xpass": 0
+  },
+  "manifest_sha256": "11021f46510a18fbf363381708c14f4f313c440b2e02d5a1e0435416d81bd865",
+  "note": "Software suite only; native/provider witness and review remain separate gates.",
+  "platform": "Darwin/arm64",
+  "python": "3.13.12",
+  "reasons": [
+    "pytest/process did not complete successfully",
+    "mandatory tests failed, skipped, xfailed, or did not execute"
+  ],
+  "required_tests": 96,
+  "schema_version": "bh-dw6-gate-result-v1"
+}

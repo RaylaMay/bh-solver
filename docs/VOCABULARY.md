@@ -63,3 +63,17 @@ persisted contract or certify a capability.
 | Run lifecycle state | Queued/accepted/running/terminal execution state, separate from convergence, closure and validity. |
 | Transcript-first | Record/transcribe/edit workflow whose text is sent to an AI participant only by explicit user action. |
 | Parity baseline | Observed browser behaviour plus separately recorded requirement gaps; defects are not desired native behaviour. |
+
+## DW6 accepted interaction vocabulary — 2026-09-16
+
+These terms record Rayla May's selected behavior; implementation remains gated.
+
+| Term | Meaning |
+|---|---|
+| AI session | Attributable questions, approved context, participant responses, decisions and bounded work belonging to one recorded interaction. |
+| Context snapshot | Immutable, explicitly selected information whose exact content the user reviewed for submission. |
+| Exploration plan | A human-authorized source snapshot, parameter ranges, provider/model, feedback scope and resource budget. It is not case or model approval. |
+| Exploration candidate | One parameter trial derived from the captured source, with its own revision and retained outcome. |
+| Budget reservation | Capacity committed before an action; unknown consumption remains reserved until reconciled. |
+| Human disposition | Attributable approval, edit, rejection, deferral or flagging of a particular contribution. |
+| Adoption proposal | A fresh Review ChangeSet against the current target, derived from an exploration candidate and retaining its provenance. |

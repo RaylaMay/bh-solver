@@ -54,12 +54,14 @@ class AcyclicRunEngine:
         case: CaseDefinition,
         *,
         revision_id: StableId | None = None,
+        run_id: StableId | None = None,
     ) -> RunResult:
+        resolved_run_id = run_id or new_stable_id("run")
         validation = self.validate(case, revision_id=revision_id)
         created_at = datetime.now(UTC).isoformat()
         if not validation.valid:
             return RunResult(
-                run_id=new_stable_id("run"),
+                run_id=resolved_run_id,
                 case_id=case.case_id,
                 revision_id=revision_id,
                 compiled_id=validation.compiled.compiled_id,
@@ -124,7 +126,7 @@ class AcyclicRunEngine:
         except Exception as error:
             diagnostics.append(Diagnostic("unit-evaluation-failed", str(error), "error"))
             return RunResult(
-                run_id=new_stable_id("run"),
+                run_id=resolved_run_id,
                 case_id=case.case_id,
                 revision_id=revision_id,
                 compiled_id=validation.compiled.compiled_id,
@@ -230,7 +232,7 @@ class AcyclicRunEngine:
         )
         validity = _worst_validity(tuple(item.validity for item in evaluations))
         return RunResult(
-            run_id=new_stable_id("run"),
+            run_id=resolved_run_id,
             case_id=case.case_id,
             revision_id=revision_id,
             compiled_id=validation.compiled.compiled_id,

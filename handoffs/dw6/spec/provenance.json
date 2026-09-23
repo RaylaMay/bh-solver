@@ -1,0 +1,12 @@
+{
+  "DW6_ACCEPTANCE_SPEC.md": {
+    "source": "docs/native/DW6_ACCEPTANCE_SPEC.md",
+    "source_sha256": "fd630afa61d809683ef2fa7ef9f97a38eb5c91814e9806ea5b4caea95070e9d4",
+    "transformation": "Added snapshot comment; external repository Markdown links rendered as literal references. Contract text unchanged."
+  },
+  "DW6_DEVELOPER_HANDOFF.md": {
+    "source": "docs/native/DW6_DEVELOPER_HANDOFF.md",
+    "source_sha256": "fd8b3d798b8a79411b6509abfec0718410f39ac00676517da34c78676d67280c",
+    "transformation": "Added snapshot comment; external repository Markdown links rendered as literal references. Contract text unchanged."
+  }
+}
